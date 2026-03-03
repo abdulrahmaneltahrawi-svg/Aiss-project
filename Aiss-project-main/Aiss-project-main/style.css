@@ -1,0 +1,183 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #235287;
+  font-family: 'tajawal', sans-serif;
+}
+
+header img {
+  width: 300px;
+}
+/*heder color*/
+a {
+  color: black;
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+  background-color: white;
+  
+}
+
+header button {
+  padding: 10px 12px;
+  background: linear-gradient(#e4293a, #e429397e);
+  border-radius: 15px;
+  padding: 15px 20px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+header button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.btn-cont img {
+  width: 15px;
+}
+.btn-cont span {
+  font-weight: bold;
+}
+
+header ul {
+  display: flex;
+  list-style: none;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+header ul li {
+  margin-right: 25px;
+  border: 1px solid black;
+  padding: 5px 0px;
+}
+
+header ul li a {
+  padding: 6px 10px;
+}
+
+header ul li a:hover {
+  background: linear-gradient(#e4293a, #e429397e);
+  color: black;
+}
+
+.hero-section{
+  background: url("imge/download.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  align-items: right;
+  color: black;
+  
+  border: 2px white solid;
+  padding: 40px 0px;
+}
+
+.hero-section .content{
+ width: 50%;
+ padding: 80px 60px;
+ background-color: 20px;
+ 
+}
+
+.hero-section h1{
+ font-size: 42px;
+ color: #e4293a;
+ margin-bottom: 20px;
+}
+
+.hero-section p{
+ font-size: 16px;
+ line-height: 1.9;
+ color: #000;
+}
+
+footer .container{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px 20px;
+  background-color: #ececec;
+  color: #7a7a7a;
+
+}
+
+.footer-content{
+  flex: 1;
+  max-width: 250px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.footer-content h3{
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  border-bottom: 2px solid wheat;
+  display:inline-block;
+  padding-bottom: 5px;
+
+}
+
+.footer-content ul{
+  list-style: none;
+  padding: 0;
+}
+
+.footer-content ul li{
+  margin-bottom: 10px;
+}
+
+.footer-content ul li a{
+  color: white;
+  text-decoration: none;
+  transition: 0.3;
+}
+
+.footer-content ul li a:hover{
+  color: red;
+  
+}
+
+.footer-content img{
+  width: 30px;
+  margin: 0 10px;
+  transition: transform 0.3;
+}
+.footer-content img:hover{
+  transform: scale(1.2);
+}
+
+
+
+.bottom-bar{
+    background:white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 50px;
+}
+
+.bottom-bar p{
+    color: #000;
+    margin: 0;
+    font-size: 16px;
+    padding: 7px;
+}
+
+
+
+
+
+
