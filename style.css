@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -111,6 +112,51 @@ header ul li a:hover {
 }
 
 
+.magazine{
+  display: flex;
+  flex-direction: row;
+}
+.magazine-cont{
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  
+}
+
+.magazine-cont h1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.magazine-cont p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+.magazine-cont button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e4293a;
+  color: whitesmoke;
+  padding: 20px;
+  border-radius: 25px;
+  
+}
+.magazine-cont button img{
+  width: 15px;
+  
+}
+.magazine-cards{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
 
 
 footer .container{
@@ -196,5 +242,14 @@ footer .container{
 
 
 
+@media (max-width: 768px){
+  header{
+    padding: 10px;
+  }
 
+  footer .footer-content{
+    flex-direction: column;
+    gap: 30px;
+  }
+}
 
