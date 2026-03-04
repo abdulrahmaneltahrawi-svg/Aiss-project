@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="imge/maidsafe.png" />
     <title>المعهد العربي لعلوم السلامة</title>
+    <link rel="stylesheet" href="swiper-bundle.min.css">
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,16 +19,26 @@
     <header>
       <img src="imge/Screenshot 2026-03-01 135807.png" alt="logo" />
 
+      <div class="search-img"><img src="imge/loupe.png" alt="search"></div>
+
+      <div class="shop-img"><img src="imge/shopping-cart.png" alt="search"></div>
+
       <button class="btn-cont">
         <img src="imge/profile.png" alt="btn-logo" />
         <span>تسجيل/ دخول</span>
       </button>
+      
+      
+  
       <ul>
         <li><a href="index.html">الرئيسية</a></li>
-        <li><a href="#">المجلات</a></li>
+        <li><a href="magazine.html">المجلات</a></li>
+        <li><a href="#">المدونات</a></li>
         <li><a href="#">كتيبات السلامة</a></li>
         <li><a href="#">الاكواد و المعايير</a></li>
         <li><a href="#">الأحداث</a></li>
+        <li><a href="#">المتجر</a></li>
+
       </ul>
     </header>
     <section class="hero-section">
@@ -46,38 +57,33 @@
       </div>
     </section>
 
-    <section class="magazine">
-      <div class="magazine-cont">
-        <div class="magazine-hero">
-          <h1>مجلات السلامة</h1>
-          <p>اكتسب المهارات والخبرات اللازمة في مجالات الإطفاء، الإنقاذ، السلامة، والأمن الصناعي مع أكاديمية العرب.</p>
-          <button class="more-btn">اكتشف المزيد
-            <img src="imge/right-up_8885287.png" alt="">
-          </button>
-        </div>
+    <div class="slide-container">
+      <div class="slide-content">
+        <div class="card-wrapper">
+          <div class="card">
+            <div class="image-content">
+              <span class="overlay"></span>
 
-        <div class="magazine-card">
-          <div class="magazine1">
-            <img src="imge/Screenshot 2026-03-03 112725.png" alt="magazine-pic">
-            <h3>اسم المجله</h3>
-            <button class="read-btn"></button>
-          </div>
-          <div class="magazine2">
-            <img src="imge/Screenshot 2026-03-03 112725.png" alt="magazine-pic">
-            <h3>اسم المجله</h3>
-            <button class="read-btn"></button>
-          </div>
-          <div class="magazine3">
-            <img src="imge/Screenshot 2026-03-03 112725.png" alt="magazine-pic">
-            <h3>اسم المجله</h3>
-            <button class="read-btn"></button>
+              <div class="card-image">
+                <img src="imge/Screenshot 2026-03-03 112725.png" alt="" class="card-img">
+              </div>
+            </div>
+            <div class="card-content">
+              <h2 class="name">مجلة السلامة العربية</h2>
+              <p class="description">العدد60-يناير2026</p>
+
+              <button class="button">عرض التفاصيل</button>
+            </div>
           </div>
         </div>
-
-
       </div>
-    </section>
 
+    </div>
+
+   
+
+
+     
   
   
 
@@ -95,11 +101,13 @@
         <div class="footer-content">
           <h3>روابط سريعة</h3>
           <ul class="list">
-            <li><a href="index.html">الرئيسية</a></li>
-            <li><a href="">عنا</a></li>
-            <li><a href="">الخدمات</a></li>
-            <li><a href="">المجلات</a></li>
-            <li><a href="">تواصل</a></li>
+            <li><a href="">النشرات الاخبارية</a></li>
+            <li><a href="">الشهادات</a></li>
+            <li><a href="">الوظائف</a></li>
+            <li><a href="">العضويات</a></li>
+            <li><a href="">اتصل بنا</a></li>
+            <li><a href="">عن المعهد</a></li>
+            <li><a href="">الاستفسارات</a></li>
           </ul>
         </div>
         <div class="footer-content">
@@ -161,7 +169,9 @@
       </div>
       <div class="bottom-bar">
         <p>المعهد العربي لعلوم السلامة 2026 © جميع الحقوق محفوظة</p>
+        <p> <a href="#">الشروط و الأحكام</a> | <a href="#">سياسة الخصوصية </a></p>
       </div>
+    
     </footer>
 
     <script src="script.js"></script>
