@@ -87,7 +87,6 @@ header {
   width: 20px;
   height: auto;
   vertical-align: text-bottom;
-  
 }
 
 .divider {
@@ -159,7 +158,7 @@ header button:hover {
   scale: calc(1.1);
 }
 
-/*الهيدر*/
+/*الرئيسية*/
 
 header ul {
   display: flex;
@@ -180,12 +179,15 @@ header ul li a:hover {
   color: #e4293a;
 }
 
+/*قسم صفحة العرض*/
+
 .hero-section {
   background: url("imge/بروفايلات_page-0001.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   height: 600px;
+  width: 100%;
   display: flex;
   justify-content: right;
   align-items: right;
@@ -309,11 +311,12 @@ footer .container {
 .footer-content img {
   width: 25px;
   height: auto;
-  vertical-align:auto;
+  vertical-align: auto;
 }
 .footer-content img:hover {
   transform: scale(1.2);
 }
+/*قسم سياسة الخصوصية*/
 
 .bottom-bar {
   background: white;
@@ -339,22 +342,33 @@ footer .container {
   color: #7a7a7a;
 }
 
-
-.bottom-bar p img{
- width: 20px;
- height: auto;
- vertical-align: middle;
+.bottom-bar p img {
+  width: 20px;
+  height: auto;
+  vertical-align: middle;
 }
 
-/**/
+/*صفحة الشهادات*/
 
-@media (max-width: 768px) {
+.search-input {
+  padding: 10px;
+}
+
+.search-btn {
+  padding: 10px;
+}
+/*قسم المجلات*/
+
+.hero-section-m img {
+  width: 100%;
+}
+
+/*قسم تحسين المقاسات*/
+
+@media (max-width: 600px) {
   header {
-    padding: 10px;
-  }
-
-  footer .footer-content {
     flex-direction: column;
-    gap: 30px;
+    height: auto;
+    padding: 10px;
   }
 }
