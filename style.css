@@ -220,6 +220,7 @@ header ul li a:hover {
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .card1 {
   width: 325px;
   background-color: #f1f1f1;
@@ -237,6 +238,7 @@ header ul li a:hover {
 .class-content1 {
   padding: 16px;
 }
+
 .class-content1 {
   font-size: 15x;
   margin-bottom: 8px;
@@ -284,6 +286,7 @@ footer .container {
   display: inline-block;
   padding-bottom: 5px;
 }
+
 .footer-content a {
   color: #7a7a7a;
 }
@@ -313,9 +316,11 @@ footer .container {
   height: auto;
   vertical-align: auto;
 }
+
 .footer-content img:hover {
   transform: scale(1.2);
 }
+
 /*قسم سياسة الخصوصية*/
 
 .bottom-bar {
@@ -357,10 +362,20 @@ footer .container {
 .search-btn {
   padding: 10px;
 }
+
 /*قسم المجلات*/
+
+.hero-section-m {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+
+}
 
 .hero-section-m img {
   width: 100%;
+  height: auto;
+  margin-top: -200px;
 }
 
 /*قسم تحسين المقاسات*/
