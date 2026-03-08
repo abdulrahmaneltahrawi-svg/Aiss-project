@@ -1,5 +1,3 @@
-
-
 const openBtn = document.getElementById('openModel');
 const model = document.getElementById('loginModel');
 const closeBtn = document.getElementById('closeModel');
@@ -23,6 +21,8 @@ window.onclick = function (event) {
 
 };
 
+//كروت المجلات
+
 const magazines = [
     { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1325.jpeg", link: "#" },
     { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1327.jpeg", link: "#" },
@@ -31,7 +31,8 @@ const magazines = [
     { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1325.jpeg", link: "#" },
     { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1327.jpeg", link: "#" },
     { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1328.jpeg", link: "#" },
-    { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1328.jpeg", link: "#" }
+    { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1328.jpeg", link: "#" },
+    { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1328.jpeg", link: "#" },
 ];
 
 const grid = document.getElementById('magazines-grid');
@@ -48,3 +49,22 @@ magazines.forEach(mag => {
     </div>
     `;
 });
+
+//كروت المدونات
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
