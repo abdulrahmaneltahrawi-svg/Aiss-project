@@ -30,7 +30,7 @@ header {
   background-color: white;
 }
 
-/* زر تسجيل الدخول*/
+/* تصميم صفحة تسجيل الدخول*/
 
 .model-overlay {
   display: none;
@@ -120,6 +120,8 @@ header {
   color: #999;
   margin-top: 14px;
 }
+
+/* تصميم زر تسجيل الدخول*/
 
 header button {
   padding: 10px 12px;
@@ -267,13 +269,14 @@ header ul li a:hover {
   border-radius: 10px;
   border: 1px solid black;
   transition: all .3s ease-in-out;
+  
 }
 
 .class-content1 .btn1:hover {
   color: rgb(247, 245, 245);
 }
 /*احدث اصدارات المدونات*/
-.magazine-new1 {
+.blogs-new {
   display: flex;
   justify-content: center;
   font-size: 25px;
@@ -404,12 +407,30 @@ footer .container {
 
 /*صفحة الشهادات*/
 
+.search-class{
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+  gap: 5px;
+}
+
 .search-input {
   padding: 10px;
+  border-radius: 30px;
+  
 }
 
 .search-btn {
   padding: 10px;
+  border-radius: 15px;
+  
+}
+
+.search-btn:hover{
+  cursor: pointer;
+  color: rgb(112, 112, 112);
+  
+  
 }
 
 /*قسم المجلات*/
