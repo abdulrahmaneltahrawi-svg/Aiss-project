@@ -139,6 +139,7 @@ header button:hover {
 .btn-cont img {
   width: 15px;
 }
+/*زر البحث*/
 
 .search-img img {
   width: 25px;
@@ -150,6 +151,16 @@ header button:hover {
   scale: calc(1.1);
 }
 
+.hide-search{
+  display: none;
+}
+
+.show-search{
+  display: block;
+}
+
+
+/*زر التسوق*/
 .shop-img img {
   width: 25px;
 }
@@ -191,7 +202,7 @@ header ul li a:hover {
   width: 100%;
   display: flex;
   justify-content: right;
-  align-items: right;
+  
   color: black;
   border: 2px white solid;
   padding: 150px 0px;
@@ -232,16 +243,17 @@ header ul li a:hover {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 40px;
+  padding: 40px; 
 }
 
 .card1 {
-  width: 325px;
+  width: 310px;
   background-color: #f1f1f1;
   border-radius: 30px;
   overflow: hidden;
   box-shadow: 0px 2p 4px rgba(0, 0, 0, 0.2);
   margin: 20px;
+  
 }
 
 .card1 img {
@@ -250,27 +262,32 @@ header ul li a:hover {
 }
 
 .class-content1 {
-  padding: 16px;
-}
-
-.class-content1 {
+  padding: 20px;
   font-size: 15x;
   margin-bottom: 8px;
 }
 
+.class-content1 h3 {
+  font-family: inherit;
+  font-size: inherit;
+  
+}
+
+
 .class-content1 .btn1 {
-  display: inline-block;
+  display:inline-block;
   padding: 15px 35px;
   background: linear-gradient(#e4293a, #e429397e);
-  text-decoration: none;
   color: black;
   font-size: 15px;
   font-weight: bold;
+  text-align: center;
   border-radius: 10px;
   border: 1px solid black;
   transition: all .3s ease-in-out;
-  
 }
+
+
 
 .class-content1 .btn1:hover {
   color: rgb(247, 245, 245);
@@ -400,9 +417,9 @@ footer .container {
 }
 
 .bottom-bar p img {
-  width: 20px;
+  width: 30px;
   height: auto;
-  vertical-align: middle;
+  margin-bottom: -10px;
 }
 
 /*صفحة الشهادات*/

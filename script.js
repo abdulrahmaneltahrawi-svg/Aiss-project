@@ -33,6 +33,8 @@ const magazines = [
     { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1328.jpeg", link: "#" },
     { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1328.jpeg", link: "#" },
     { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1328.jpeg", link: "#" },
+    { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1328.jpeg", link: "#" }
+
 ];
 
 const grid = document.getElementById('magazines-grid');
@@ -50,7 +52,19 @@ magazines.forEach(mag => {
     `;
 });
 
+//قسم البحث
+const searchBtn = document.getElementById('search-btn1');
+const searchInput =document.getElementById('search-input1');
+
+searchBtn.addEventListener('click',() => {
+searchInput.classList.toggle('show-search');
+
+});
+
 //كروت المدونات
+
+
+
 
 
 
