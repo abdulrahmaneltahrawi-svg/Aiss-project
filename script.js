@@ -35,12 +35,19 @@ const magazines = [
     { title: "السلامة العربية", date: "العدد54-يوليو2025", img: "المجلات/issue10.jpg", link: "#" },
     { title: "السلامة العربية", date: "العدد53-يونيو2025", img: "المجلات/issue10.jpg", link: "#" }
 ];
+const blogs = [
+    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "imge/IMG_1325.jpeg", link: "#" },
+    { title: "السلامة العربية", date: "العدد61-فبراير2026", img: "المجلات/IMG_1326.jpeg", link: "#" },
+    { title: "السلامة العربية", date: "العدد60-يناير2026", img: "imge/IMG_1327.jpeg", link: "#" }
+];
 
-const grid = document.getElementById('magazines-grid');
 
-if (grid) {
+
+const myGrid = document.getElementById('magazines-grid');
+
+if (myGrid) {
     magazines.forEach(mag => {
-        grid.innerHTML += `
+        myGrid.innerHTML += `
             <div class="card1">
                 <img src="${mag.img}"/>
                 <div class="class-content1">
@@ -52,6 +59,23 @@ if (grid) {
     });
 }
 
+const blogGrid = document.getElementById('blogs-grid');
+
+if (blogGrid) {
+    blogs.forEach(blog => {
+        blogGrid.innerHTML += `
+            <div class="card1">
+                <img src="${blog.img}"/>
+                <div class="class-content1">
+                    <h3>${blog.title}</h3>
+                    <p>${blog.date}</p>
+                    <a href="${blog.link}" class="btn1">عرض المجلة</a>
+                </div>
+            </div>`;
+    });
+}
+
+
 //قسم البحث
 const searchBtn = document.getElementById('search-btn1');
 const searchInput =document.getElementById('search-input1');
@@ -61,40 +85,8 @@ searchInput.classList.toggle('show-search');
 
 });
 
-//كروت المدونات
-const magazines1=[
-    {img:"المدونات/Screenshot 2026-03-10 115131.png", title:"dfa",issue:"33", link:""},
-    {img:"المدونات/Screenshot 2026-03-10 115131.png", title:"dsa",issue:"333", link:""},
-    {img:"المدونات/Screenshot 2026-03-10 115131.png", title:"adf",issue:"33", link:""}
-   
-];
 
-function displayMazines(){
-    const container=document.querySelector('card-container1');
-    
-    container.innerHTML ="";
-    
-    magazines1.forEach(item => {
-        const card =`
-        <div class="card1">
-        <img src="${item.img}"
-        alt="${item.title}">
-            <div class="class-content1">
-                <h3>${item.title}</h3>
-                <p>${item.issue}</p>
-                <a href="${item.link}" class="btn1">عرض المجلة</a>
-                </div>
-            </div>
-            `;
-            container.innerHTML += card;
 
-        
-    });
-
-    
-}
-
-displayMazines();
 
 
 
