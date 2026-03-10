@@ -36,9 +36,9 @@ const magazines = [
     { title: "السلامة العربية", date: "العدد53-يونيو2025", img: "المجلات/issue10.jpg", link: "#" }
 ];
 const blogs = [
-    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "imge/IMG_1325.jpeg", link: "#" },
-    { title: "السلامة العربية", date: "العدد61-فبراير2026", img: "المجلات/IMG_1326.jpeg", link: "#" },
-    { title: "السلامة العربية", date: "العدد60-يناير2026", img: "imge/IMG_1327.jpeg", link: "#" }
+    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "المدونات/issue-file-3-proposed-strategies-for-involving-women-in-safety-management-1.jpg", link: "#" },
+    { title: "السلامة العربية", date: "العدد61-فبراير2026", img: "المدونات/issue-file-2-challenges-facing-women-in-safety-management-1.jpg", link: "#" },
+    { title: "السلامة العربية", date: "العدد60-يناير2026", img: "المدونات/Issue-File-1_-The-Role-of-Women-in-Safety-Management-1.jpg", link: "#" }
 ];
 
 

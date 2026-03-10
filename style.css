@@ -204,10 +204,11 @@ header ul li a:hover {
   width: 100%;
   display: flex;
   justify-content: right;
+  padding: 30px;
   
   color: black;
   border: 2px white solid;
-  padding: 150px 0px;
+  
 }
 
 .hero-section .content {
