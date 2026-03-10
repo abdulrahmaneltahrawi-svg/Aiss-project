@@ -157,6 +157,7 @@ header button:hover {
 
 .show-search{
   display: block;
+  padding: 10px;
 }
 
 
@@ -230,11 +231,12 @@ header ul li a:hover {
   justify-content: center;
   font-size: 25px;
   margin-top: -70px;
+  gap: 5px;
   font-weight: bold;
 }
 .news {
   color: #e4293a;
-  gap: 10px;
+  gap: 5px;
 }
 
 /*قسم الكروت*/
@@ -301,6 +303,7 @@ header ul li a:hover {
   font-weight: bold;
   background-color: white;
   padding: 30px;
+  gap: 5px;
 }
 
 /*احدث اصدارات المجلة و المدونات (زر)*/
@@ -398,7 +401,7 @@ footer .container {
   justify-content: space-between;
   text-align: right;
   padding: 10px 0;
-  margin-top: 50px;
+
 }
 
 .bottom-bar p {
@@ -451,6 +454,21 @@ footer .container {
 }
 
 /*قسم المجلات*/
+.magazine-1{
+  display: flex;
+  font-size: 25px;
+  justify-content: center;
+  padding: 20px 20px;
+  gap: 5px;
+  font-weight: bold;
+  background-color:white;
+  margin-top: -10px;
+  
+  
+}
+.magazine-11{
+  color: #e4293a;
+}
 
 .hero-section-m {
   width: 100%;
