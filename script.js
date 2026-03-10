@@ -33,24 +33,24 @@ const magazines = [
     { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1328.jpeg", link: "#" },
     { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1328.jpeg", link: "#" },
     { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1328.jpeg", link: "#" },
-    { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "imge/IMG_1328.jpeg", link: "#" }
-
 ];
 
 const grid = document.getElementById('magazines-grid');
 
-magazines.forEach(mag => {
-    grid.innerHTML += `
-    <div class="card1">
-        <img src="${mag.img}"/>
-        <div class="class-content1">
-            <h3>${mag.title}</h3>
-            <p>${mag.date}</p>
-            <a href="${mag.link}" class="btn1">عرض التفاصيل</a>
-        </div>
-    </div>
-    `;
-});
+// تأكد أن العنصر موجود أولاً
+if (grid) {
+    magazines.forEach(mag => {
+        grid.innerHTML += `
+            <div class="card1">
+                <img src="${mag.img}"/>
+                <div class="class-content1">
+                    <h3>${mag.title}</h3>
+                    <p>${mag.date}</p>
+                    <a href="${mag.link}" class="btn1">عرض التفاصيل</a>
+                </div>
+            </div>`;
+    });
+}
 
 //قسم البحث
 const searchBtn = document.getElementById('search-btn1');
@@ -62,6 +62,7 @@ searchInput.classList.toggle('show-search');
 });
 
 //كروت المدونات
+
 
 
 
