@@ -35,11 +35,7 @@ const magazines = [
     { title: "السلامة العربية", date: "العدد54-يوليو2025", img: "المجلات/Issue-54-July-2025.jpg", link: "#" },
     { title: "السلامة العربية", date: "العدد53-يونيو2025", img: "المجلات/issue-53-june-2025.jpg", link: "#" }
 ];
-const blogs = [
-    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "المدونات/issue-file-3-proposed-strategies-for-involving-women-in-safety-management-1.jpg", link: "#" },
-    { title: "السلامة العربية", date: "العدد61-فبراير2026", img: "المدونات/issue-file-2-challenges-facing-women-in-safety-management-1.jpg", link: "#" },
-    { title: "السلامة العربية", date: "العدد60-يناير2026", img: "المدونات/Issue-File-1_-The-Role-of-Women-in-Safety-Management-1.jpg", link: "#" }
-];
+
 
 const manulas = [
     { title: "السلامة العربية", date: "العدد62-مارس2026", img: "manuals/Occupational-Safety-and-Health-Equations.jpg", link: "#" },
@@ -79,21 +75,7 @@ if (myGrid) {
     });
 }
 
-const blogGrid = document.getElementById('blogs-grid');
 
-if (blogGrid) {
-    blogs.forEach(blog => {
-        blogGrid.innerHTML += `
-            <div class="card1">
-                <img src="${blog.img}"/>
-                <div class="class-content1">
-                    <h3>${blog.title}</h3>
-                    <p>${blog.date}</p>
-                    <a href="${blog.link}" class="btn1">عرض المجلة</a>
-                </div>
-            </div>`;
-    });
-}
 
 const manulasGrid = document.getElementById('manuals-grid');
 

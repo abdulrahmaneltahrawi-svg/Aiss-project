@@ -80,6 +80,25 @@
 
     <div id="blogs-grid" class="card-container1"></div>
 
+    <script src="data.js"></script>
+    <script>
+      const grid = document.getElementById('blogs-grid');
+
+      myCards.forEach(item => {
+        grid.innerHTML += `
+        <div class="card1">
+          <img src="${item.image}">
+          <div class="class-content1">
+            <h3>${item.title}</h3>
+            <a href ="views.html?id=${item.id}" class="btn1">عرض التفاصيل</a>
+          </div>
+        </div>
+
+        `;
+        
+      });
+    </script>
+
     <!--قسم سياسة الخصوصية-->
 
 
