@@ -24,37 +24,37 @@ window.onclick = function (event) {
 //كروت المجلات
 
 const magazines = [
-    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "المجلات/IMG_1325.jpeg", link: "https://heyzine.com/flip-book/babb82a018.html" },
-    { title: "السلامة العربية", date: "العدد61-فبراير2026", img: "المجلات/IMG_1326.jpeg", link: "#" },
-    { title: "السلامة العربية", date: "العدد60-يناير2026", img: "المجلات/IMG_1327.jpeg", link: "#" },
-    { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "المجلات/IMG_1328.jpeg", link: "#" },
-    { title: "السلامة العربية", date: "العدد58-نوفمبر2025", img: "المجلات/غلاف.png", link: "#" },
-    { title: "السلامة العربية", date: "العدد57-أكتوبر2025", img: "المجلات/Issue-57-October-2025.jpg", link: "#" },
-    { title: "السلامة العربية", date: "العدد56-سبتمبر2025", img: "المجلات/Issue-56-September-2025 copy.jpg", link: "#" },
-    { title: "السلامة العربية", date: "العدد55-أغسطس2025", img: "المجلات/Issue-55-August-2025.jpg", link: "#" },
-    { title: "السلامة العربية", date: "العدد54-يوليو2025", img: "المجلات/Issue-54-July-2025.jpg", link: "#" },
-    { title: "السلامة العربية", date: "العدد53-يونيو2025", img: "المجلات/issue-53-june-2025.jpg", link: "#" }
+    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "assets/magazine/IMG_1325.jpeg", link: "https://heyzine.com/flip-book/babb82a018.html" },
+    { title: "السلامة العربية", date: "العدد61-فبراير2026", img: "assets/magazine/IMG_1326.jpeg", link: "#" },
+    { title: "السلامة العربية", date: "العدد60-يناير2026", img: "assets/magazine/IMG_1327.jpeg", link: "#" },
+    { title: "السلامة العربية", date: "العدد59-ديسمبر 2025", img: "assets/magazine/IMG_1328.jpeg", link: "#" },
+    { title: "السلامة العربية", date: "العدد58-نوفمبر2025", img: "assets/magazine/غلاف.png", link: "#" },
+    { title: "السلامة العربية", date: "العدد57-أكتوبر2025", img: "assets/magazine/Issue-57-October-2025.jpg", link: "#" },
+    { title: "السلامة العربية", date: "العدد56-سبتمبر2025", img: "assets/magazine/Issue-56-September-2025 copy.jpg", link: "#" },
+    { title: "السلامة العربية", date: "العدد55-أغسطس2025", img: "assets/magazine/Issue-55-August-2025.jpg", link: "#" },
+    { title: "السلامة العربية", date: "العدد54-يوليو2025", img: "assets/magazine/Issue-54-July-2025.jpg", link: "#" },
+    { title: "السلامة العربية", date: "العدد53-يونيو2025", img: "assets/magazine/issue-53-june-2025.jpg", link: "#" }
 ];
 
 
 const manulas = [
-    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "manuals/Occupational-Safety-and-Health-Equations.jpg", link: "#" },
-    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "manuals/WhatsApp-Image-2025-08-23-at-12.41.51-PM.jpg", link: "#" },
-    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "manuals/Unsung-heroes.jpg", link: "#" },
+    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "assets/manuals/Occupational-Safety-and-Health-Equations.jpg", link: "#" },
+    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "assets/manuals/WhatsApp-Image-2025-08-23-at-12.41.51-PM.jpg", link: "#" },
+    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "assets/manuals/Unsung-heroes.jpg", link: "#" },
     
   
 ];
 
 const codes = [
-   { title: "السلامة العربية", date: "العدد62-مارس2026", img: "codes/covered-and-open-mall-buildings2.jpg", link: "#" },
-    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "codes/sprinkle-upwards2.jpg", link: "#" },
-    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "codes/rental-plan20.png", link: "#" },
+   { title: "السلامة العربية", date: "العدد62-مارس2026", img: "assets/codes/covered-and-open-mall-buildings2.jpg", link: "#" },
+    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "assets/codes/sprinkle-upwards2.jpg", link: "#" },
+    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "assets/codes/rental-plan20.png", link: "#" },
 ];
 
 const events = [
-   { title: "السلامة العربية", date: "العدد62-مارس2026", img: "events/مسابقة-4.png", link: "#" },
-    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "events/مؤتمر-2024.png", link: "#" },
-    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "events/مسابقة-3.png", link: "#" },
+   { title: "السلامة العربية", date: "العدد62-مارس2026", img: "assets/events/مسابقة-4.png", link: "#" },
+    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "assets/events/مؤتمر-2024.png", link: "#" },
+    { title: "السلامة العربية", date: "العدد62-مارس2026", img: "assets/events/مسابقة-3.png", link: "#" },
 ];
 
 

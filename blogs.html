@@ -72,19 +72,26 @@
       </ul>
     </header>
 
+    <section class="hero-section-m">
+      <img src="imge/0004.jpg" alt="" />
+      
+      
+
+
+    </section>
+
     <!--قسم الكروت-->
     <div class="magazine-1">
-      <p >  المدونات</p>  
-
+      <p>المدونات</p>
     </div>
 
     <div id="blogs-grid" class="card-container1"></div>
 
     <script src="data.js"></script>
     <script>
-      const grid = document.getElementById('blogs-grid');
+      const grid = document.getElementById("blogs-grid");
 
-      myCards.forEach(item => {
+      myCards.forEach((item) => {
         grid.innerHTML += `
         <div class="card1">
           <img src="${item.image}">
@@ -95,21 +102,26 @@
         </div>
 
         `;
-        
       });
     </script>
 
     <!--قسم سياسة الخصوصية-->
 
-
-
     <footer>
-        <div class="container">
+      <div class="container">
         <div class="footer-content">
           <h3>بيانات التواصل</h3>
-          <a href="mailto:?subject=Check%20this%20https://aiss.co/"><p>Email:aiss@aiss.co</p></a>
-          <a href="https://wa.me/+971568305900"><p>Number:+971 56 830 5900</p></a>
-         <a href="https://maps.app.goo.gl/AS11VhiknLbc2a1r5"><p>Adress:Dubai, United Arab Emirates <img src="icons/location.png" /></p></a> 
+          <a href="mailto:?subject=Check%20this%20https://aiss.co/"
+            ><p>Email:aiss@aiss.co</p></a
+          >
+          <a href="https://wa.me/+971568305900"
+            ><p>Number:+971 56 830 5900</p></a
+          >
+          <a href="https://maps.app.goo.gl/AS11VhiknLbc2a1r5"
+            ><p>
+              Adress:Dubai, United Arab Emirates
+              <img src="icons/location.png" /></p
+          ></a>
         </div>
 
         <div class="footer-content">
