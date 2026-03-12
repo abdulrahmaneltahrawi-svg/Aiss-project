@@ -194,7 +194,7 @@ header ul li a:hover {
 /*قسم صفحة العرض*/
 
 .hero-section {
-  background: url("imge/بروفايلات_page-0001.jpg");
+  background: url("assets/imge/بروفايلات_page-0001.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

@@ -1,25 +1,3 @@
-const openBtn = document.getElementById('openModel');
-const model = document.getElementById('loginModel');
-const closeBtn = document.getElementById('closeModel');
-
-if (openBtn) {
-    openBtn.onclick = function () {
-        model.style.display = 'flex';
-    };
-}
-
-if (closeModel) {
-    closeModel.onclick = function () {
-        model.style.display = 'none';
-    };
-}
-
-window.onclick = function (event) {
-    if (event.target === model) {
-        model.style.display = 'none';
-    }
-
-};
 
 //كروت المجلات
 
@@ -126,25 +104,38 @@ if (eventGrid) {
 }
 
 
-//قسم البحث
-const searchBtn = document.getElementById('search-btn1');
-const searchInput =document.getElementById('search-input1');
+async function loadLayout() {
+    try{
+        const response =await fetch('header.html');
+        const data =await response.text();
+        document.getElementById('header-placeholder').innerHTML =data;
+        activateHeader();
+    } catch (err) {
+        console.error('فشل تحميل الهيدر', err);
+    }
+}
+function activateHeader(){
+    const openBtn =document.getElementById('openModel');
+    const closeBtn =document.getElementById('closeModel');
+    const loginModel =document.getElementById('loginModel');
+    const searchBtn =document.getElementById('search-btn1');
+    const searchInput =document.getElementById('search-input1');
+    if(openBtn&& loginModel){
+        openBtn.onclick =() => loginModel.style.display ='flex';
+    }
+    if(openBtn&& loginModel){
+        closeBtn.onclick =() => loginModel.style.display ='none';
+    }
+    if(searchBtn&& searchInput){
+        searchBtn.onclick =() => { searchInput.classList.toggle('hide-search');
+            
+        };
+    }
 
-searchBtn.addEventListener('click',() => {
-searchInput.classList.toggle('show-search');
+} 
 
-});
+document.addEventListener('DOMContentLoaded', loadLayout);
 
-
-
-//استدعاء الرأس
-
-
-fetch('header.html')
-.then(response => response.text())
-.then(data => {
-    document.getElementById('header-pl')
-});
 
 
 
