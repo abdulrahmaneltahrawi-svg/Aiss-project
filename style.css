@@ -77,7 +77,6 @@ header {
   background: #fff;
   font-weight: 500;
   cursor: pointer;
-  
 }
 
 .social-button button:hover {
@@ -152,15 +151,14 @@ header button:hover {
   scale: calc(1.1);
 }
 
-.hide-search{
+.hide-search {
   display: none;
 }
 
-.show-search{
+.show-search {
   display: block;
   padding: 10px;
 }
-
 
 /*زر التسوق*/
 .shop-img img {
@@ -206,17 +204,15 @@ header ul li a:hover {
   justify-content: right;
   padding-top: 50px;
   color: black;
-  border: 2px solid white ;
-  
+  border: 2px solid white;
 }
 
 .hero-section-m {
-  padding-top: 200px ;
+  padding-top: 200px;
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
   height: auto;
- 
 }
 
 .hero-section .content {
@@ -237,7 +233,7 @@ header ul li a:hover {
 }
 /*عرض الكتيبات*/
 
-.iframe iframe{
+.iframe iframe {
   padding: 50px 0;
 }
 
@@ -261,11 +257,11 @@ header ul li a:hover {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 40px; 
+  padding: 40px;
 }
 
 .card1 {
-  width: 310px;
+  width: 280px;
   background-color: #f1f1f1;
   border-radius: 30px;
   overflow: hidden;
@@ -274,14 +270,9 @@ header ul li a:hover {
   position: relative;
   overflow: hidden;
   z-index: 1;
-  
- 
-  
-  
 }
 
-
-.card1:hover{
+.card1:hover {
   transform: scale(1.03);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
@@ -302,12 +293,10 @@ header ul li a:hover {
 .class-content1 h3 {
   font-family: inherit;
   font-size: inherit;
-  
 }
 
-
 .class-content1 .btn1 {
-  display:inline-block;
+  display: inline-block;
   padding: 15px 35px;
   background: linear-gradient(#e4293a, #e429397e);
   color: black;
@@ -316,11 +305,9 @@ header ul li a:hover {
   text-align: center;
   border-radius: 10px;
   border: 1px solid black;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   margin-top: 20px;
 }
-
-
 
 .class-content1 .btn1:hover {
   color: rgb(247, 245, 245);
@@ -361,7 +348,6 @@ header ul li a:hover {
 .magazine-new-btn button:hover {
   cursor: pointer;
   color: gray;
-  
 }
 
 /*قسم الاخير*/
@@ -432,7 +418,6 @@ footer .container {
   justify-content: space-between;
   text-align: right;
   padding: 10px 0;
-
 }
 
 .bottom-bar p {
@@ -458,7 +443,7 @@ footer .container {
 
 /*صفحة الشهادات*/
 
-.search-class{
+.search-class {
   display: flex;
   justify-content: center;
   padding: 100px;
@@ -468,41 +453,32 @@ footer .container {
 .search-input {
   padding: 10px;
   border-radius: 30px;
-  
 }
 
 .search-btn {
   padding: 10px;
   border-radius: 15px;
-  
 }
 
-.search-btn:hover{
+.search-btn:hover {
   cursor: pointer;
   color: rgb(112, 112, 112);
-  
-  
 }
 
 /*قسم المجلات*/
-.magazine-1{
+.magazine-1 {
   display: flex;
   font-size: 25px;
   justify-content: center;
   padding: 20px 20px;
   gap: 5px;
   font-weight: bold;
-  background-color:white;
+  background-color: white;
   margin-top: -10px;
-
-  
-  
 }
-.magazine-11{
+.magazine-11 {
   color: #e4293a;
 }
-
-
 
 .hero-section-m {
   width: 100%;
@@ -516,7 +492,7 @@ footer .container {
   margin-top: -200px;
 }
 /*المدونات*/
-.container h1{
+.container h1 {
   padding-top: 60px;
   padding-bottom: 20px;
 }
