@@ -106,12 +106,17 @@ if (eventGrid) {
 
 async function loadLayout() {
     try{
-        const response =await fetch('header.html');
-        const data =await response.text();
-        document.getElementById('header-placeholder').innerHTML =data;
+        const headerRes =await fetch('header.html');
+        const headerData =await headerRes.text();
+        document.getElementById('header-placeholder').innerHTML =headerData;
+
+        const footerRes =await fetch('footer.html');
+        const footerData =await footerRes.text();
+        document.getElementById('footer-placeholder').innerHTML =footerData;
+
         activateHeader();
-    } catch (err) {
-        console.error('فشل تحميل الهيدر', err);
+    } catch (error) {
+        console.error('فشل التحميل ', err);
     }
 }
 function activateHeader(){
@@ -135,7 +140,6 @@ function activateHeader(){
 } 
 
 document.addEventListener('DOMContentLoaded', loadLayout);
-
 
 
 
