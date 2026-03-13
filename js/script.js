@@ -38,19 +38,35 @@ const events = [
 
 
 const myGrid = document.getElementById('magazines-grid');
+const homeGrid = document.getElementById('home-magazines-grid'); 
+
 
 if (myGrid) {
     magazines.forEach(mag => {
-        myGrid.innerHTML += `
-            <div class="card1">
-                <img src="${mag.img}"/>
-                <div class="class-content1">
-                    <h3>${mag.title}</h3>
-                    <p>${mag.date}</p>
-                    <a href="${mag.link}" class="btn1">عرض المجلة</a>
-                </div>
-            </div>`;
+        myGrid.innerHTML += createCardHTML(mag);
     });
+}
+
+
+if (homeGrid) {
+   
+    const limitedMagazines = magazines.slice(0, 4); 
+    limitedMagazines.forEach(mag => {
+        homeGrid.innerHTML += createCardHTML(mag);
+    });
+}
+
+
+function createCardHTML(mag) {
+    return `
+        <div class="card1">
+            <img src="${mag.img}"/>
+            <div class="class-content1">
+                <h3>${mag.title}</h3>
+                <p>${mag.date}</p>
+                <a href="${mag.link}" class="btn1">عرض المجلة</a>
+            </div>
+        </div>`;
 }
 
 
