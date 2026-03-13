@@ -33,9 +33,10 @@
         if(selectedCard){
             document.getElementById('title-placeholder').innerText =selectedCard.title;
             document.getElementById('image-placeholder').src = selectedCard.image;
-            document.getElementById('description-placeholder').innerText = selectedCard.description;
+            document.getElementById('description-placeholder').innerHTML = selectedCard.description;
         }
     </script>
+    
     
     
 <div id="header-placeholder"></div>

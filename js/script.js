@@ -1,5 +1,5 @@
 
-//كروت المجلات
+//كروت 
 
 const magazines = [
     { title: "السلامة العربية", date: "العدد62-مارس2026", img: "assets/magazine/IMG_1325.jpeg", link: "https://heyzine.com/flip-book/babb82a018.html" },
@@ -103,7 +103,7 @@ if (eventGrid) {
     });
 }
 
-
+//استدعاء المكونات
 async function loadLayout() {
     try{
         const headerRes =await fetch('components/header.html');
