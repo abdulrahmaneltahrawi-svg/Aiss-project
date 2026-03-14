@@ -63,20 +63,20 @@
 
     <script src="js/data.js"></script>
     <script>
-      const grid = document.getElementById("blogs-grid");
+    const grid = document.getElementById("blogs-grid");
 
-      myCards.forEach((item) => {
-        grid.innerHTML += `
-        <div class="card1">
-          <img src="${item.image}">
-          <div class="class-content1">
-            <h3>${item.title}</h3>
-            <a href ="views.html?id=${item.id}" class="btn1">عرض التفاصيل</a>
-          </div>
-        </div>
-
-        `;
-      });
+myCards.slice(0,4).forEach((item) => {
+  grid.innerHTML += `
+  <div class="card1">
+      <img src="${item.image}">
+      <div class="class-content1">
+      <h3>${item.title}</h3>
+      <a href="views.html?id=${item.id}" class="btn1">عرض التفاصيل</a>
+      </div>
+  </div>
+  `;
+});
+      
     </script>
 
     <!--احدث اصدارات المدونات(زر)-->

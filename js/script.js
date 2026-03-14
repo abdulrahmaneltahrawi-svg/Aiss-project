@@ -13,6 +13,7 @@ const magazines = [
     { title: "مجلة السلامة العربية", date: "العدد 53 - يونيو 2025", img: "assets/magazine/issue-53-june-2025.jpg", link: "#" }
 ];
 
+
 const manulas = [
     { title: "معادلات السلامة والصحة المهنية", date: "كتيب تعليمي", img: "assets/manuals/Occupational-Safety-and-Health-Equations.jpg", link: "#" },
     { title: "كتيب السلامة", date: "إصدار خاص", img: "assets/manuals/WhatsApp-Image-2025-08-23-at-12.41.51-PM.jpg", link: "#" },
@@ -57,6 +58,7 @@ if (homeGrid) {
     magazines.slice(0, 4).forEach(mag => { homeGrid.innerHTML += createCardHTML(mag, "عرض المجلة"); });
 }
 
+
 // الكتيبات
 const manulasGrid = document.getElementById('manuals-grid');
 if (manulasGrid) {
@@ -72,7 +74,7 @@ if (codesGrid) {
 // الأحداث
 const eventGrid = document.getElementById('events-grid');
 if (eventGrid) {
-    events.forEach(eve => { eventGrid.innerHTML += createCardHTML(eve, "عرض التفاصيل"); });
+    events.forEach(eve => { eventGrid.innerHTML += createCardHTML(eve, "عرض الحدث"); });
 }
 
 // ===== تحميل المكونات =====
@@ -133,27 +135,7 @@ function activateHeader() {
 document.addEventListener('DOMContentLoaded', loadLayout);
 
 
-// ===== بطاقات المدونات في الرئيسية (4 كروت فقط) =====
-function renderHomeBlogsGrid() {
-    const homeBlogsGrid = document.getElementById('home-blogs-grid');
-    if (!homeBlogsGrid) return;
-    if (typeof myCards === 'undefined') return;
-
-    homeBlogsGrid.innerHTML = '';
-    myCards.slice(0, 4).forEach((item) => {
-        homeBlogsGrid.innerHTML += `
-            <div class="card1">
-                <img src="${item.image}" alt="${item.title}">
-                <div class="class-content1">
-                    <h3>${item.title}</h3>
-                    <a href="views.html?id=${item.id}" class="btn1">عرض التفاصيل ←</a>
-                </div>
-            </div>`;
-    });
-}
-
-// تشغيل بعد تحميل كل شيء
-window.addEventListener('load', renderHomeBlogsGrid);
+    
 
 
 
