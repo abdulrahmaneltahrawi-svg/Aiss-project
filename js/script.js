@@ -32,11 +32,6 @@ const events = [
     { title: "مسابقة السلامة 2023", date: "فعالية 2023", img: "assets/events/مسابقة-3.png", link: "#" },
 ];
 
-//المتجر
-    const store = [
-    { title: "شهادة مدرب معتمد", date: "735 د.إ", img: "assets/store&memberships/0011.jpg", link: "assets/store&memberships/0011.jpg" },
-    { title: " شهادة مركز معتمد", date: " 1,469 د.إ", img: "assets/store&memberships/0012.jpg", link: "assets/store&memberships/0012.jpg" },
-];
 
 // ===== بناء الكروت =====
 
@@ -84,12 +79,6 @@ if (eventGrid) {
 }
 
 
-
-//المتجر
-const myGrid5 = document.getElementById('store-grid');
-if (myGrid5) {
-    store.forEach(str => { myGrid5.innerHTML += createCardHTML(str, "اضافة الى السلة "); });
-}
 
 // ===== تحميل المكونات =====
 
@@ -150,6 +139,8 @@ document.addEventListener('DOMContentLoaded', loadLayout);
 
 
     
+
+
 
 
 

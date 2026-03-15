@@ -7,24 +7,9 @@
 </head>
 <body>
 
-    <div class="container0">
-        <h1></h1>
-        <img id="image-placeholder" src="">
+<div id="cart-items-container">
     </div>
-
-
-    <script src="js/books.js"></script>
-    <script>
-     const params1=new URLSearchParams(window.location.search);
-     const idCard =params1.get('id')
-
-     const selectedCard1 =mybook.find(a=> a.id ==idCard);
-
-     if(selectedCard1){
-        document.getElementById('title-placeholder').innerHTML=selectedCard1.title;
-        document.getElementById('image-placeholder').src=selectedCard1.image;
-     }
-    </script>
+<div id="total-price"></div>
     
 </body>
 </html>

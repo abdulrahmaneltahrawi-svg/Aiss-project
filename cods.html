@@ -33,7 +33,35 @@
 
     <div id="codes-grid" class="card-container1"></div>
 
-    <!--قسم سياسة الخصوصية-->
+<script>
+async function loadCodes() {
+    const grid = document.getElementById("codes-grid");
+    if (!grid) return;
+
+    try {
+        const response = await fetch('cleaned-posts (1).json');
+        const data = await response.json();
+
+        grid.innerHTML = ""; // تنظيف الحاوية قبل الإضافة
+
+        data.forEach((item, index) => {
+            grid.innerHTML += `
+                <div class="card1">
+                    <img src="${item.image}">
+                    <div class="class-content1">
+                        <h3>${item.title}</h3>
+                        <a href="views.html?id=${index}&source=codes" class="btn1">عرض التفاصيل</a>
+                    </div>
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.error("خطأ في جلب البيانات:", error);
+    }
+}
+document.addEventListener('DOMContentLoaded', loadCodes);
+</script>
+    
 
 
 

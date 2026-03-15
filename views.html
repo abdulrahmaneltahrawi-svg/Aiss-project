@@ -34,6 +34,8 @@
         display: block;
         margin: auto;
         max-width: 400px;
+        
+        
       }
 
       #description-placeholder {
@@ -41,6 +43,12 @@
         line-height: 1.8;
         margin-top: 20px;
       }
+
+          #description-placeholder img {
+    display: none !important;
+
+      }
+
 
       .back {
         background: white;
@@ -60,7 +68,7 @@
     <div id="header-placeholder"></div>
     <div class="container0">
       <h1 id="title-placeholder"></h1>
-      <img id="image-placeholder" src="" />
+      <img id="image-placeholder" src=""  />
       <p id="description-placeholder"></p>
       <br />
       <a href="blogs.html"
@@ -70,20 +78,36 @@
 
     <script src="js/data.js"></script>
     <script>
-      const params = new URLSearchParams(window.location.search);
-      const cardId = params.get("id");
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+const source = params.get("source"); // التحقق من مصدر البيانات
 
-      const selectedCard = myCards.find((c) => c.id == cardId);
+async function loadDynamicContent() {
+    let data;
 
-      if (selectedCard) {
-        document.getElementById("title-placeholder").innerText =
-          selectedCard.title;
-        document.getElementById("image-placeholder").src = selectedCard.image;
-        document.getElementById("description-placeholder").innerHTML =
-          selectedCard.description;
-      }
+    if (source === 'codes') {
+        // إذا كان المصدر "codes" نجلب البيانات من ملف الجيسون
+        const response = await fetch('cleaned-posts (1).json');
+        data = await response.json();
+    } else {
+        // إذا لم يكن، نستخدم مصفوفة المدونات الموجودة في js/data.js
+        data = myCards; 
+    }
+
+    const item = data[id];
+
+    if (item) {
+        document.getElementById("title-placeholder").innerText = item.title;
+        document.getElementById("image-placeholder").src = item.image;
+        // عرض المحتوى سواء كان اسمه content أو description
+        document.getElementById("description-placeholder").innerHTML = item.content || item.description;
+    }
+}
+
+loadDynamicContent();
     </script>
 
+   
     <div id="footer-placeholder"></div>
 
     <script src="js/script.js"></script>
