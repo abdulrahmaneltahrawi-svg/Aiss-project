@@ -231,11 +231,7 @@ header ul li a:hover {
   line-height: 1.9;
   color: #000;
 }
-/*عرض الكتيبات*/
 
-.iframe iframe {
-  padding: 50px 0;
-}
 
 /*قسم احدث المجلات*/
 .magazine-new {

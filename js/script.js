@@ -1,10 +1,10 @@
 // ===== بيانات الكروت =====
 
 const magazines = [
-    { title: "مجلة السلامة العربية", date: "العدد 62 - مارس 2026", img: "assets/magazine/IMG_1325.jpeg", link: "https://heyzine.com/flip-book/babb82a018.html" },
-    { title: "مجلة السلامة العربية", date: "العدد 61 - فبراير 2026", img: "assets/magazine/IMG_1326.jpeg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "العدد 60 - يناير 2026", img: "assets/magazine/IMG_1327.jpeg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "العدد 59 - ديسمبر 2025", img: "assets/magazine/IMG_1328.jpeg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد 62 - مارس 2026", img: "assets/magazine/IMG_1325.jpeg", link: "https://publuu.com/flip-book/1071783/2386715" },
+    { title: "مجلة السلامة العربية", date: "العدد 61 - فبراير 2026", img: "assets/magazine/IMG_1326.jpeg", link: "https://publuu.com/flip-book/1071783/2391520" },
+    { title: "مجلة السلامة العربية", date: "العدد 60 - يناير 2026", img: "assets/magazine/IMG_1327.jpeg", link: "https://publuu.com/flip-book/1071783/2386468#" },
+    { title: "مجلة السلامة العربية", date: "العدد 59 - ديسمبر 2025", img: "assets/magazine/IMG_1328.jpeg", link: "https://publuu.com/flip-book/1071783/2391521" },
     { title: "مجلة السلامة العربية", date: "العدد 58 - نوفمبر 2025", img: "assets/magazine/غلاف.png", link: "#" },
     { title: "مجلة السلامة العربية", date: "العدد 57 - أكتوبر 2025", img: "assets/magazine/Issue-57-October-2025.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "العدد 56 - سبتمبر 2025", img: "assets/magazine/Issue-56-September-2025 copy.jpg", link: "#" },
@@ -15,9 +15,9 @@ const magazines = [
 
 
 const manulas = [
-    { title: "معادلات السلامة والصحة المهنية", date: "كتيب تعليمي", img: "assets/manuals/Occupational-Safety-and-Health-Equations.jpg", link: "#" },
-    { title: "كتيب السلامة", date: "إصدار خاص", img: "assets/manuals/WhatsApp-Image-2025-08-23-at-12.41.51-PM.jpg", link: "#" },
-    { title: "أبطال لا يُذكرون", date: "كتيب توعوي", img: "assets/manuals/Unsung-heroes.jpg", link: "#" },
+    { title: "معادلات السلامة والصحة المهنية", date: "كتيب تعليمي", img: "assets/manuals/Occupational-Safety-and-Health-Equations.jpg", link: "https://publuu.com/flip-book/1071783/2391531" },
+    { title: "كتيب السلامة", date: "إصدار خاص", img: "assets/manuals/WhatsApp-Image-2025-08-23-at-12.41.51-PM.jpg", link: "https://publuu.com/flip-book/1071783/2391532" },
+    { title: "أبطال لا يُذكرون", date: "كتيب توعوي", img: "assets/manuals/Unsung-heroes.jpg", link: "https://publuu.com/flip-book/1071783/2386659" },
 ];
 
 const codes = [
@@ -30,6 +30,12 @@ const events = [
     { title: "مسابقة السلامة", date: "فعالية 2024", img: "assets/events/مسابقة-4.png", link: "#" },
     { title: "مؤتمر السلامة العربي", date: "مؤتمر 2024", img: "assets/events/مؤتمر-2024.png", link: "#" },
     { title: "مسابقة السلامة 2023", date: "فعالية 2023", img: "assets/events/مسابقة-3.png", link: "#" },
+];
+
+//المتجر
+    const store = [
+    { title: "شهادة مدرب معتمد", date: "735 د.إ", img: "assets/store&memberships/0011.jpg", link: "assets/store&memberships/0011.jpg" },
+    { title: " شهادة مركز معتمد", date: " 1,469 د.إ", img: "assets/store&memberships/0012.jpg", link: "assets/store&memberships/0012.jpg" },
 ];
 
 // ===== بناء الكروت =====
@@ -75,6 +81,14 @@ if (codesGrid) {
 const eventGrid = document.getElementById('events-grid');
 if (eventGrid) {
     events.forEach(eve => { eventGrid.innerHTML += createCardHTML(eve, "عرض الحدث"); });
+}
+
+
+
+//المتجر
+const myGrid5 = document.getElementById('store-grid');
+if (myGrid5) {
+    store.forEach(str => { myGrid5.innerHTML += createCardHTML(str, "اضافة الى السلة "); });
 }
 
 // ===== تحميل المكونات =====
