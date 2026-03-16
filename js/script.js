@@ -21,7 +21,7 @@ const manulas = [
 ];
 
 
-const events = [
+const homeEvents = [
     { title: "مسابقة السلامة", date: "فعالية 2024", img: "assets/events/مسابقة-4.png", link: "#" },
     { title: "مؤتمر السلامة العربي", date: "مؤتمر 2024", img: "assets/events/مؤتمر-2024.png", link: "#" },
     { title: "مسابقة السلامة 2023", date: "فعالية 2023", img: "assets/events/مسابقة-3.png", link: "#" },
@@ -37,7 +37,7 @@ function createCardHTML(item, btnText = "عرض المجلة") {
             <div class="class-content1">
                 <h3>${item.title}</h3>
                 <p>${item.date}</p>
-                <a href="${item.link}" class="btn1">${btnText} ←</a>
+                <a href="${item.link}" class="btn1" target="_blank" rel="noopener noreferrer">${btnText} ←</a>
             </div>
         </div>`;
 }
@@ -67,7 +67,7 @@ if (manulasGrid) {
 // الأحداث
 const eventGrid = document.getElementById('events-grid');
 if (eventGrid) {
-    events.forEach(eve => { eventGrid.innerHTML += createCardHTML(eve, "عرض الحدث"); });
+    homeEvents.forEach(eve => { eventGrid.innerHTML += createCardHTML(eve, "عرض الحدث"); });
 }
 
 
@@ -85,10 +85,20 @@ async function loadLayout() {
         document.getElementById('footer-placeholder').innerHTML = footerData;
 
         activateHeader();
+        updateCartBadgeCount();
         markActiveNav();
     } catch (error) {
         console.error('فشل التحميل:', error);
     }
+}
+
+function updateCartBadgeCount() {
+    const badge = document.getElementById('cart-count');
+    if (!badge) return;
+
+    const cart = JSON.parse(localStorage.getItem('myCart')) || [];
+    badge.innerText = cart.length;
+    badge.style.display = cart.length > 0 ? 'flex' : 'none';
 }
 
 function markActiveNav() {
@@ -107,6 +117,8 @@ function activateHeader() {
     const loginModel = document.getElementById('loginModel');
     const searchBtn = document.getElementById('search-btn1');
     const searchInput = document.getElementById('search-input1');
+    const menuToggle = document.getElementById('menu-toggle');
+    const headerNav = document.getElementById('header-nav');
 
     if (openBtn && loginModel) {
         openBtn.onclick = () => loginModel.style.display = 'flex';
@@ -125,9 +137,20 @@ function activateHeader() {
             searchInput.classList.toggle('show-search');
         };
     }
+
+    if (menuToggle && headerNav) {
+        menuToggle.onclick = () => {
+            const isOpen = headerNav.classList.toggle('is-open');
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+        };
+    }
 }
 
 document.addEventListener('DOMContentLoaded', loadLayout);
+
+window.addEventListener('storage', (e) => {
+    if (e.key === 'myCart') updateCartBadgeCount();
+});
 
 
     
