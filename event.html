@@ -17,30 +17,42 @@
   </head>
   <body>
     <div id="header-placeholder"></div>
-<!--قسم صفحة العرص-->
-  <section class="hero-section-m">
+    <!--قسم صفحة العرص-->
+    <section class="hero-section-m">
       <img src="imge/0004.jpg" alt="" />
-      
-      
-
-
     </section>
 
     <!--قسم الكروت-->
     <div class="magazine-1">
-      <p>الأحداث</p>  
-
+      <p>الأحداث</p>
     </div>
 
     <div id="events-grid" class="card-container1"></div>
+
+    <script src="js/books.js"></script>
+
+    <script>
+      const Egrid = document.getElementById("events-grid");
+
+      Mybooks.forEach((item) => {
+        Egrid.innerHTML += `
+          <div class="card1">
+            <img src="${item.image}">
+            <div class="class-content1">
+              <h3>${item.title}</h3>
+              <a href ="views.html?id=${item.id}" class="btn1">عرض التفاصيل</a>
+             </div>
+           </div>
+        
+        `;
+      });
+    </script>
 
     <script></script>
 
     <!--قسم سياسة الخصوصية-->
 
-
-
-  <!-- القسم الاخير-->
+    <!-- القسم الاخير-->
 
     <div id="footer-placeholder"></div>
     <script src="js/script.js"></script>
