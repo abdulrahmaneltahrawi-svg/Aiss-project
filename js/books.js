@@ -1,5 +1,8 @@
-const mybooks =[
-    {image:"assets/imge/Screenshot 2026-03-08 130715.png"}
+const Mybooks =[
+     
+ 
+    {image:"assets/events/مسابقة-4.png"},
+    {image:"assets/events/مسابقة-3.png"},
 
 ];
 

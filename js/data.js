@@ -1,6 +1,6 @@
 const myCards = [
   {
-    id: 1,
+    id: 0,
     title: "الصفحة الاخيرة 62",
     image:
       "assets/blogs/integrated-strategies-for-womens-participation-in-safety-management-towards-a-leading-arab-model-1.png",
@@ -40,7 +40,7 @@ const myCards = [
   },
 
   {
-    id: 2,
+    id: 1,
     title: "3 – تقنيات الكشف المبكر، أنظمة الإطفاء، والتدريب الوقائي",
     image:
       "assets/blogs/3-early-detection-techniques-fire-suppression-systems-and-preventative-training-1.png",
@@ -63,7 +63,7 @@ const myCards = [
     `,
   },
   {
-    id: 3,
+    id: 2,
     title: "13- برنامج iRAP خارطة طريق لعالَم بلا طرق عالية الخطورة",
     image:
       "assets/blogs/13-the-irap-program-a-roadmap-to-a-world-without-high-risk-roads-1.png",
@@ -86,7 +86,7 @@ const myCards = [
     `,
   },
   {
-    id: 4,
+    id: 3,
     title:
       "الضوضاء في بيئة العمل: الخطر الصامت الذي لا يُرى ولا يُسمع إلا بعد فوات الأوان",
     image:
@@ -119,7 +119,7 @@ const myCards = [
     `,
   },
   {
-    id: 5,
+    id: 4,
     title:
       "ملف العدد (3): الاستراتيجيات المقترحة لإشراك المرأة في إدارة السلام",
     image:

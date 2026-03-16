@@ -20,11 +20,6 @@ const manulas = [
     { title: "أبطال لا يُذكرون", date: "كتيب توعوي", img: "assets/manuals/Unsung-heroes.jpg", link: "https://publuu.com/flip-book/1071783/2386659" },
 ];
 
-const codes = [
-    { title: "مباني المولات المغطاة والمفتوحة", date: "كود السلامة", img: "assets/codes/covered-and-open-mall-buildings2.jpg", link: "#" },
-    { title: "رشاشات المياه للأعلى", date: "معيار الحماية", img: "assets/codes/sprinkle-upwards2.jpg", link: "#" },
-    { title: "مخطط الإيجار", date: "كود البناء", img: "assets/codes/rental-plan20.png", link: "#" },
-];
 
 const events = [
     { title: "مسابقة السلامة", date: "فعالية 2024", img: "assets/events/مسابقة-4.png", link: "#" },
@@ -67,10 +62,7 @@ if (manulasGrid) {
 }
 
 // الأكواد
-const codesGrid = document.getElementById('codes-grid');
-if (codesGrid) {
-    codes.forEach(cod => { codesGrid.innerHTML += createCardHTML(cod, "عرض الكود"); });
-}
+
 
 // الأحداث
 const eventGrid = document.getElementById('events-grid');
