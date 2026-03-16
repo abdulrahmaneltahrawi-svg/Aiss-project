@@ -384,6 +384,60 @@ header ul li a:hover {
 .class-content1 .btn1:hover {
   color: rgb(247, 245, 245);
 }
+
+/* كروت السلة */
+.cart-item {
+  width: min(900px, 100%);
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  direction: rtl;
+}
+
+.cart-item__media img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+.cart-item__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-item__title {
+  font-size: 16px;
+  margin-bottom: 6px;
+  color: #111;
+}
+
+.cart-item__price {
+  font-size: 14px;
+  color: #666;
+}
+
+.cart-remove-btn {
+  background: rgba(228, 41, 58, 0.1);
+  color: #e4293a;
+  border: 1px solid rgba(228, 41, 58, 0.25);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cart-remove-btn:hover {
+  background: rgba(228, 41, 58, 0.16);
+}
 /*احدث اصدارات المدونات*/
 .blogs-new {
   display: flex;
