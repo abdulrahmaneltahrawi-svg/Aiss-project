@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/icons/logo.png" />
+    <title>العضويات-المعهد العربي لعلوم السلامة</title>
+    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+
+    <style>
+    .body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    .membership-container{
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+       
+    }
+
+    .card{
+        background-color: whitesmoke;
+        width: 320px;
+        border-radius: 1px solid #ededed;
+        text-align: center;
+        padding-bottom: 30px;
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+    }
+    .card:hover{
+        transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  z-index: 10;
+
+    }
+
+   
+
+    .card-title{
+        color:#333;
+        font-size: 1.2rem;
+        margin: 20px 0;
+    }
+
+    .price-box{
+        background-color: #d32f2f;
+        color: white;
+        font-size: 2.5rem;
+        font-weight: bold;
+        padding: 5px 0;
+        margin-bottom: 20px;
+    }
+
+    .features{
+        list-style: none;
+        padding: 0;
+        margin: 0 20px 30px 20px;
+        min-height: 180px;
+    }
+
+    .features li{
+        padding: 10px 0;
+        border-bottom: 1px solid #ccc;
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    .features li:last-child{
+        border-bottom: none;
+
+    }
+
+    .cta-button{
+        background: #d32f2f;
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3;
+    }
+
+    .cta-button:hover{
+        background-color: #b71c1c;
+    }
+
+
+
+    </style>
+
+<div id="header-placeholder"></div>
+ <div class="magazine-1">
+      <p>العضويات </p>  
+
+    </div>
+
+
+
+    
+    <div class="membership-container">
+      <div class="card">
+        <h2 class="card-title"> عضوية الشركات</h2>
+          <div class="price-box">367.29</div>
+          <ul class="features">
+            <li>التعليق على المدونات</li>
+            <li>مشاهدة و تحميل المجلة</li>
+            <li>اضافة وظائف جديدة</li>
+            <li>الاضافة الى دليل الشركات</li>
+          </ul>
+          <button class="cta-button">احصل على عضويتك</button>
+        </h2>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">عضوية مشارك</h2>
+          <div class="price-box">55.55</div>
+          <ul class="features">
+            <li>التعليق على المدونات</li>
+            <li>مشاهدة و تحميل المجلة</li>
+            <li>التقدم على الوئاظف المتاحة</li>
+          </ul>
+          <button class="cta-button">عضويتك</button>
+        </h2>
+      </div>
+    
+
+    <div class="card">
+        <h2 class="card-title"> عضوية خبير</h2>
+          <div class="price-box">91.82</div>
+          <ul class="features">
+            <li>التعليق على المدونات</li>
+            <li>نشر مدونة بعد الموافقة من الادارة </li>
+            <li>مشاهدة و تحميل المجلة</li>
+            <li>التقدم على الوظائف المتاحة</li>
+          </ul>
+          <button class="cta-button">احصل على عضويتك</button>
+    </div>
+
+    
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
