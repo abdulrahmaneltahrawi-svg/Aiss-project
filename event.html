@@ -16,18 +16,6 @@
     />
   </head>
   <body>
-          <style>
-      .logo-text{
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%,-65%);
-        color: red;
-        font-weight: bold;
-        font-size: 70px;
-      }
-    </style>
-    
-  <body>
     <div id="header-placeholder"></div>
    <!--قسم صفحة العرض-->
 
@@ -44,18 +32,18 @@
 
     <div id="events-grid" class="card-container1"></div>
 
-    <script src="js/books.js"></script>
+    <script src="js/events.js"></script>
 
     <script>
       const Egrid = document.getElementById("events-grid");
 
-      Mybooks.forEach((item) => {
+      events.forEach((item) => {
         Egrid.innerHTML += `
           <div class="card1">
-            <img src="${item.image}">
+            <img src="${item.image}" alt="${item.title}">
             <div class="class-content1">
               <h3>${item.title}</h3>
-              <a href ="views.html?id=${item.id}" class="btn1">عرض التفاصيل</a>
+              <a href ="views.html?id=${item.id}&source=events" class="btn1">عرض التفاصيل</a>
              </div>
            </div>
         

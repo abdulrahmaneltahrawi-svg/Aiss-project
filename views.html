@@ -14,55 +14,6 @@
 
     <!--css الكود-->
 
-    <style>
-      .container0 {
-        width: 90%;
-        height: 20%;
-        margin: auto;
-        background-color: whitesmoke;
-        padding: 30px;
-      }
-
-      #title-placeholder {
-        color: #e4293a;
-        text-align: center;
-        margin-top: 80px;
-        padding: 20px;
-      }
-
-      #image-placeholder {
-        display: block;
-        margin: auto;
-        max-width: 400px;
-        
-        
-      }
-
-      #description-placeholder {
-        text-align: right;
-        line-height: 1.8;
-        margin-top: 20px;
-      }
-
-          #description-placeholder img {
-    display: none !important;
-
-      }
-
-
-      .back {
-        background: white;
-        padding: 15px 20px;
-        border-radius: 25px;
-        margin-bottom: 16px;
-        font-weight: bold;
-      }
-
-      .container0 button:hover {
-        cursor: pointer;
-        color: gray;
-      }
-    </style>
   </head>
   <body>
     <div id="header-placeholder"></div>
@@ -71,12 +22,11 @@
       <img id="image-placeholder" src=""  />
       <p id="description-placeholder"></p>
       <br />
-      <a href="blogs.html"
-        ><button class="back">العوده للصفحه السابقة</button></a
-      >
+      <a id="back-link" href="blogs.html"><button class="back">العوده للصفحه السابقة</button></a>
     </div>
 
     <script src="js/data.js"></script>
+    <script src="js/events.js"></script>
     <script>
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
@@ -89,9 +39,17 @@ async function loadDynamicContent() {
         // إذا كان المصدر "codes" نجلب البيانات من ملف الجيسون
         const response = await fetch('cleaned-posts (1).json');
         data = await response.json();
+        const backLink = document.getElementById('back-link');
+        if (backLink) backLink.href = 'cods.html';
+    } else if (source === 'events') {
+        data = events;
+        const backLink = document.getElementById('back-link');
+        if (backLink) backLink.href = 'event.html';
     } else {
         // إذا لم يكن، نستخدم مصفوفة المدونات الموجودة في js/data.js
         data = myCards; 
+        const backLink = document.getElementById('back-link');
+        if (backLink) backLink.href = 'blogs.html';
        
     }
     

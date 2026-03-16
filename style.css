@@ -8,6 +8,60 @@ body {
   font-family: "tajawal", sans-serif;
 }
 
+.page-content {
+  padding-top: 110px;
+}
+
+/* نص العنوان فوق صورة الهيرو */
+.logo-text {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -65%);
+  color: red;
+  font-weight: bold;
+  font-size: 70px;
+}
+
+/* صفحة التفاصيل */
+.container0 {
+  width: 90%;
+  margin: 120px auto 40px;
+  background-color: whitesmoke;
+  padding: 30px;
+  border-radius: 16px;
+}
+
+#title-placeholder {
+  color: #e4293a;
+  text-align: center;
+  padding: 20px;
+}
+
+#image-placeholder {
+  display: block;
+  margin: 0 auto;
+  max-width: 400px;
+  width: 100%;
+}
+
+#description-placeholder {
+  text-align: right;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+
+#description-placeholder img {
+  display: none !important;
+}
+
+.back {
+  background: white;
+  padding: 15px 20px;
+  border-radius: 25px;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
 header img {
   width: 300px;
 }
@@ -29,6 +83,38 @@ header {
   align-items: center;
   background-color: white;
   z-index: 9999;
+}
+
+/* زر الهامبرغر */
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.header-nav ul {
+  display: flex;
+  list-style: none;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.header-nav ul li {
+  margin-right: 10px;
+}
+
+.header-nav ul li a {
+  padding: 6px 10px;
+}
+
+.header-nav ul li a:hover,
+.header-nav ul li a.active {
+  color: #e4293a;
 }
 
 /* تصميم صفحة تسجيل الدخول*/
@@ -238,25 +324,6 @@ header button:hover {
 .close-popup { cursor: pointer; float: right; font-size: 20px; }
 /*الهيدر*/
 
-header ul {
-  display: flex;
-  list-style: none;
-  font-size: 13px;
-  font-weight: bold;
-}
-
-header ul li {
-  margin-right: 10px;
-}
-
-header ul li a {
-  padding: 6px 10px;
-}
-
-header ul li a:hover {
-  color: #e4293a;
-}
-
 /*قسم صفحة العرض*/
 
 .hero-section {
@@ -420,8 +487,9 @@ header ul li a:hover {
 }
 
 .cart-item__price {
-  font-size: 14px;
-  color: #666;
+  font-size: 16px;
+  color: #e4293a;
+  font-weight: 800;
 }
 
 .cart-remove-btn {
@@ -437,6 +505,35 @@ header ul li a:hover {
 
 .cart-remove-btn:hover {
   background: rgba(228, 41, 58, 0.16);
+}
+
+.cart-summary {
+  width: min(900px, 100%);
+  margin: 0 auto 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 40px;
+}
+
+#cart-total {
+  color: #111;
+  font-weight: 800;
+}
+
+.cart-checkout-btn {
+  background: #e4293a;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: 800;
+  border: none;
+  display: inline-block;
+}
+
+.cart-checkout-btn:hover {
+  filter: brightness(0.95);
 }
 /*احدث اصدارات المدونات*/
 .blogs-new {
@@ -627,8 +724,101 @@ footer .container {
 
 @media (max-width: 600px) {
   header {
+    justify-content: space-between;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  header img {
+    width: 180px;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-img,
+  #search-input1,
+  .shop-img,
+  .btn-cont {
+    margin: 0;
+  }
+
+  .header-nav {
+    position: fixed;
+    top: 70px;
+    right: 12px;
+    left: 12px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    padding: 12px;
+    display: none;
+    z-index: 9998;
+  }
+
+  .header-nav.is-open {
+    display: block;
+  }
+
+  .header-nav ul {
     flex-direction: column;
-    height: auto;
-    padding: 10px;
+    gap: 8px;
+  }
+
+  .header-nav ul li {
+    margin-right: 0;
+  }
+
+  .header-nav ul li a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.03);
+  }
+
+  .hero-section-m img {
+    margin-top: 0;
+  }
+
+  .cart-popup {
+    left: 12px;
+    right: 12px;
+    width: auto;
+  }
+
+  .page-content {
+    padding-top: 120px;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-summary {
+    padding: 0 16px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cart-checkout-btn {
+    text-align: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .checkout-container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px 16px;
+  }
+
+  .input-group {
+    flex-direction: column;
+    gap: 0;
   }
 }

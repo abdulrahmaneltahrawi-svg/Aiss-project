@@ -70,9 +70,13 @@
 
   <div id="header-placeholder"></div>
 
-  <div id="cart-items" class="card-container1"></div>
+  <main class="page-content">
+    <div id="cart-items" class="card-container1"></div>
 
-  <h3 id="cart-total"></h3>
+    <div class="cart-summary">
+      <h3 id="cart-total"></h3>
+      <a href="checkout.html" class="cart-checkout-btn">إتمام الطلب</a>
+    </div>
 
   <div class="empty-cart-container" id="empty-cart">
     <div class="empty-cart-content">
@@ -90,6 +94,7 @@
       <a href="store.html" class="return-shop-btn">العودة للمتجر</a>
     </div>
   </div>
+  </main>
   
 <script>
 let cart = JSON.parse(localStorage.getItem("myCart")) || [];
@@ -121,11 +126,15 @@ function renderCart() {
     cartContainer.style.display = "none";
     cartContainer.innerHTML = "";
     if (totalEl) totalEl.innerText = "";
+    const summary = document.querySelector('.cart-summary');
+    if (summary) summary.style.display = 'none';
     return;
   }
 
   emptyCartEl.style.display = "none";
   cartContainer.style.display = "flex";
+  const summary = document.querySelector('.cart-summary');
+  if (summary) summary.style.display = 'flex';
 
   cartContainer.innerHTML = cart
     .map((item, idx) => `

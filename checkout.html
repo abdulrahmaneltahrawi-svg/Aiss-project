@@ -164,20 +164,7 @@ textarea { border-radius: 15px; height: 120px; }
                         <th>المنتج</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="price">735 د.إ</td>
-                        <td>شهادة مدرب معتمد × 1</td>
-                    </tr>
-                    <tr class="subtotal">
-                        <td class="price">735 د.إ</td>
-                        <td>المجموع</td>
-                    </tr>
-                    <tr class="total">
-                        <td class="price red-text">735 د.إ</td>
-                        <td>الإجمالي</td>
-                    </tr>
-                </tbody>
+                <tbody id="order-items"></tbody>
             </table>
 
             <div class="payment-box">
@@ -188,9 +175,78 @@ textarea { border-radius: 15px; height: 120px; }
             </div>
 
             <p class="terms-text">
-                سيتم استخدام بياناتك الشخصية لدعم تجربتك عبر هذا الموقع، ولإدارة الوصول إلى حسابك، ولأغراض أخرى موضحة في <a href="#">
-    
+                سيتم استخدام بياناتك الشخصية لدعم تجربتك عبر هذا الموقع، ولإدارة الوصول إلى حسابك، ولأغراض أخرى موضحة في
+                <a href="page.html?key=privacy">سياسة الخصوصية</a>.
+            </p>
 
-                    <script src="js/script.js"></script>
+            <button class="pay-btn" id="pay-btn" type="button">تأكيد وإتمام الطلب</button>
+        </div>
+    </div>
+</div>
+
+<script>
+  function formatPrice(value) {
+    const n = Number(value);
+    if (Number.isFinite(n)) return `${n} د.ا`;
+    return value ? `${value} د.ا` : "";
+  }
+
+  function calcTotal(items) {
+    return items.reduce((sum, it) => sum + (Number(it.price) || 0), 0);
+  }
+
+  function renderOrderSummary() {
+    const cart = JSON.parse(localStorage.getItem("myCart")) || [];
+    const tbody = document.getElementById("order-items");
+    if (!tbody) return;
+
+    if (cart.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td class="price">0 د.ا</td>
+          <td>لا توجد منتجات</td>
+        </tr>
+        <tr class="total">
+          <td class="price red-text">0 د.ا</td>
+          <td>الإجمالي</td>
+        </tr>
+      `;
+      return;
+    }
+
+    const total = calcTotal(cart);
+    tbody.innerHTML =
+      cart
+        .map((item) => `
+          <tr>
+            <td class="price">${formatPrice(item.price)}</td>
+            <td>${item.title || ""} × 1</td>
+          </tr>
+        `)
+        .join("") +
+      `
+        <tr class="subtotal">
+          <td class="price">${formatPrice(total)}</td>
+          <td>المجموع</td>
+        </tr>
+        <tr class="total">
+          <td class="price red-text">${formatPrice(total)}</td>
+          <td>الإجمالي</td>
+        </tr>
+      `;
+  }
+
+  renderOrderSummary();
+
+  const payBtn = document.getElementById("pay-btn");
+  if (payBtn) {
+    payBtn.addEventListener("click", () => {
+      window.location.href = "check.html";
+    });
+  }
+</script>
+
+<div id="footer-placeholder"></div>
+<script src="js/script.js"></script>
 </body>
 </html>
