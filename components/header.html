@@ -1,28 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-
-    <header>
+<header>
     <img src="assets/icons/لوجو الهيدر.png" alt="logo" />
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="فتح القائمة" aria-expanded="false">
+      ☰
+    </button>
 
     <div id="search-btn1" class="search-img">
         <img src="assets/icons/loupe.png" alt="search" />
     </div>
     <input type="text" id="search-input1" class="hide-search" placeholder="ابحث عن ما تريد...">
 
-<a href="view-cart.html">
-   <div class="shop-img" style="position: relative;">
-    <img src="assets/icons/shopping-cart.png" alt="cart" />
-    <span id="cart-count" class="cart-badge">0</span>
-</div>
-</a>
+    <a href="view-cart.html" aria-label="سلة المشتريات">
+      <div class="shop-img" style="position: relative;">
+        <img src="assets/icons/shopping-cart.png" alt="cart" />
+        <span id="cart-count" class="cart-badge">0</span>
+      </div>
+    </a>
 
     <button class="btn-cont" id="openModel">
         <img src="assets/icons/profile.png" alt="btn-logo" />
@@ -54,17 +47,15 @@
         </div>
     </div>
 
-    <ul>
-        <li><a href="index.html">الرئيسية</a></li>
-        <li><a href="magazine.html">المجلات</a></li>
-        <li><a href="blogs.html">المدونات</a></li>
-        <li><a href="manuals.html">كتيبات السلامة</a></li>
-        <li><a href="cods.html">الأكواد والمعايير</a></li>
-        <li><a href="event.html">الأحداث</a></li>
-        <li><a href="store.html">المتجر</a></li>
-    </ul>
+    <nav class="header-nav" id="header-nav">
+      <ul>
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="magazine.html">المجلات</a></li>
+          <li><a href="blogs.html">المدونات</a></li>
+          <li><a href="manuals.html">كتيبات السلامة</a></li>
+          <li><a href="cods.html">الأكواد والمعايير</a></li>
+          <li><a href="event.html">الأحداث</a></li>
+          <li><a href="store.html">المتجر</a></li>
+      </ul>
+    </nav>
 </header>
-
-<script src="js/script.js"></script>
-</body>
-</html>
