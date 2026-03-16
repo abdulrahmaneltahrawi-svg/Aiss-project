@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>سلة المشتريات</title>
+    <link rel="stylesheet" href="style.css"> </head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+<body>
+    <style>.empty-cart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px;
+    background-color: #fff;
+    text-align: center;
+    direction: rtl; 
+}
+
+.empty-cart-content {
+    max-width: 600px;
+}
+
+.cart-icon-wrapper {
+    margin-bottom: 30px;
+    opacity: 0.2; 
+}
+
+.cart-icon-wrapper img {
+    width: 120px;
+    height: auto;
+}
+
+/* العنوان الرئيسي */
+.empty-cart-title {
+    font-size: 2rem;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* النص الوصفي */
+.empty-cart-text {
+    font-size: 1rem;
+    color: #777;
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+
+
+.return-shop-btn {
+    display: inline-block;
+    background-color: #d32f2f;
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.return-shop-btn:hover {
+    background-color: #b71c1c;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}</style>
+
+
+  <div id="header-placeholder"></div>
+  <div class="empty-cart-container">
+    <div class="empty-cart-content">
+        <div class="cart-icon-wrapper">
+            <img src="cart-empty-icon.png" alt="سلة فارغة">
+        </div>
+
+        <h2 class="empty-cart-title">سلة مشترياتك فارغة حالياً.</h2>
+        
+        <p class="empty-cart-text">
+            قبل متابعة عملية الدفع، يجب عليك إضافة بعض المنتجات إلى سلة التسوق الخاصة بك.<br>
+            ستجد الكثير من المنتجات المثيرة للاهتمام على صفحة "المتجر" الخاصة بنا.
+        </p>
+
+        <a href="store.html" class="return-shop-btn">العودة للمتجر</a>
+    </div>
+</div>
+  
+<div id="footer-placeholder"></div>
+
+
+
+    <script src="js/script.js"></script>
+
+
+</body>
+</html>

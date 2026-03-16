@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إتمام الطلب</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      
+.checkout-container {
+    display: flex;
+    margin-top: 50px;
+    flex-direction: row-reverse; 
+    gap: 50px;
+    padding: 50px 10%;
+    background-color: whitesmoke;
+    direction: rtl;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.section-title {
+    color: #d32f2f; 
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+
+.billing-details { flex: 2; }
+.input-group { display: flex; gap: 30px; }
+.field { margin-bottom: 20px; flex: 1; }
+
+.field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 25px; 
+    background: #fff;
+    outline: none;
+}
+
+textarea { border-radius: 15px; height: 120px; }
+
+
+.order-sidebar { flex: 1; }
+.order-card {
+    border: 1px solid #f0f0f0;
+    padding: 30px;
+    background: #fdfdfd;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-radius: 8px;
+}
+
+.order-title { text-align: center; color: #d32f2f; margin-bottom: 20px; }
+
+.order-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+.order-table th, .order-table td {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    text-align: right;
+    font-size: 0.9rem;
+}
+
+.price { text-align: left !important; font-weight: bold; }
+.red-text { color: #d32f2f; font-size: 1.3rem; }
+
+
+.pay-btn {
+    width: 100%;
+    background-color: #d32f2f;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.pay-btn:hover { background-color: #b71c1c; }
+
+.payment-instruction {
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #eee;
+    font-size: 0.8rem;
+    margin: 10px 0;
+}
+
+.terms-text { font-size: 0.75rem; color: #777; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="aiss-checkout-wrapper">
+        
+    </div>
+
+    <div id="header-placeholder"></div>
+<div class="checkout-container">
+    <div class="billing-details">
+        <h3 class="section-title">تفاصيل الفاتورة</h3>
+        <form>
+            <div class="input-group">
+                <div class="field">
+                    <label>اسم العائلة *</label>
+                    <input type="text" required>
+                </div>
+                <div class="field">
+                    <label>الاسم الأول *</label>
+                    <input type="text" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>اسم الشركة (اختياري)</label>
+                <input type="text">
+            </div>
+
+            <div class="field">
+                <label>الدولة / المنطقة *</label>
+                <select>
+                    <option>الإمارات العربية المتحدة</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>الجوال *</label>
+                <input type="tel" required>
+            </div>
+
+            <div class="field">
+                <label>البريد الإلكتروني *</label>
+                <input type="email" required>
+            </div>
+
+            <h3 class="section-title">معلومات إضافية</h3>
+            <div class="field">
+                <label>ملاحظات الطلب (اختياري)</label>
+                <textarea placeholder="ملاحظات حول الطلب، مثال: ملحوظة خاصة بتسليم الطلب."></textarea>
+            </div>
+        </form>
+    </div>
+
+    <div class="order-sidebar">
+        <div class="order-card">
+            <h3 class="order-title">طلبك</h3>
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>المجموع</th>
+                        <th>المنتج</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="price">735 د.إ</td>
+                        <td>شهادة مدرب معتمد × 1</td>
+                    </tr>
+                    <tr class="subtotal">
+                        <td class="price">735 د.إ</td>
+                        <td>المجموع</td>
+                    </tr>
+                    <tr class="total">
+                        <td class="price red-text">735 د.إ</td>
+                        <td>الإجمالي</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="payment-box">
+                <p>بطاقة الائتمان أو الخصم</p>
+                <div class="payment-instruction">
+                    ادفع باستخدام بطاقة الائتمان أو الخصم عبر المعهد العربي لعلوم السلامة
+                </div>
+            </div>
+
+            <p class="terms-text">
+                سيتم استخدام بياناتك الشخصية لدعم تجربتك عبر هذا الموقع، ولإدارة الوصول إلى حسابك، ولأغراض أخرى موضحة في <a href="#">
+    
+
+                    <script src="js/script.js"></script>
+</body>
+</html>

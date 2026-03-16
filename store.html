@@ -28,9 +28,10 @@
         </div>
         <hr>
         <div class="popup-footer">
-            <button class="btn-view-cart">عرض السلة</button>
-            <button class="btn-checkout">إتمام الطلب</button>
-        </div>
+    <button class="btn-view-cart" onclick="window.location.href='view-cart.html'">عرض السلة</button>
+    
+    <button class="btn-checkout" onclick="window.location.href='checkout.html'">إتمام الطلب</button>
+</div>
     </div>
 </div>
 
@@ -75,37 +76,32 @@ if (myGrid5) {
 }
 
 
-let count = 0; 
+
+let cart = JSON.parse(localStorage.getItem('myCart')) || [];
 
 function addToCart(item) {
-   
     let itemData = item;
     if (typeof item === 'string') {
         itemData = JSON.parse(item);
     }
 
-   
-    count++;
+ 
+    cart.push(itemData);
+    localStorage.setItem('myCart', JSON.stringify(cart));
+
     const cartBadge = document.getElementById('cart-count');
     if (cartBadge) {
-        cartBadge.innerText = count;
+        cartBadge.innerText = cart.length;
     }
 
-   
+  
     const popup = document.getElementById('cart-popup');
-    const popupTitle = document.getElementById('popup-title');
-    const popupImg = document.getElementById('popup-img');
-    const popupPrice = document.getElementById('popup-price');
-
     if (popup) {
-        popupTitle.innerText = itemData.title;
-        popupImg.src = itemData.img;
-        popupPrice.innerText = itemData.date; 
+        document.getElementById('popup-title').innerText = itemData.title;
+        document.getElementById('popup-img').src = itemData.img;
+        document.getElementById('popup-price').innerText = itemData.date;
 
-        
         popup.classList.remove('hidden');
-
-       
         setTimeout(() => {
             popup.classList.add('hidden');
         }, 3000);
