@@ -21,11 +21,6 @@ const manulas = [
 ];
 
 
-const homeEvents = [
-    { title: "مسابقة السلامة", date: "فعالية 2024", img: "assets/events/مسابقة-4.png", link: "#" },
-    { title: "مؤتمر السلامة العربي", date: "مؤتمر 2024", img: "assets/events/مؤتمر-2024.png", link: "#" },
-    { title: "مسابقة السلامة 2023", date: "فعالية 2023", img: "assets/events/مسابقة-3.png", link: "#" },
-];
 
 
 // ===== بناء الكروت =====
@@ -61,14 +56,6 @@ if (manulasGrid) {
     manulas.forEach(man => { manulasGrid.innerHTML += createCardHTML(man, "عرض الكتيب"); });
 }
 
-// الأكواد
-
-
-// الأحداث
-const eventGrid = document.getElementById('events-grid');
-if (eventGrid) {
-    homeEvents.forEach(eve => { eventGrid.innerHTML += createCardHTML(eve, "عرض الحدث"); });
-}
 
 
 
