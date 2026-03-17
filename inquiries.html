@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/icons/logo.png" />
+    <title>الاستفسارات - المعهد العربي لعلوم السلامة</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      .inq-wrap {
+        width: min(1100px, 92%);
+        margin: 130px auto 40px;
+        background: #fff;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      }
+      .inq-title {
+        text-align: center;
+        color: #e4293a;
+        font-weight: 900;
+        font-size: 28px;
+        margin-bottom: 18px;
+      }
+      .inq-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .inq-grid input, .inq-grid textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 16px;
+        border: 1px solid rgba(0,0,0,0.12);
+        outline: none;
+      }
+      .inq-grid textarea {
+        grid-column: 1 / -1;
+        min-height: 160px;
+        resize: vertical;
+      }
+      .inq-actions {
+        margin-top: 14px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .inq-actions button {
+        background: #e4293a;
+        color: #fff;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 14px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+      @media (max-width: 600px) {
+        .inq-wrap { margin-top: 140px; padding: 16px; }
+        .inq-title { font-size: 22px; }
+        .inq-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+
+    <main class="page-content">
+      <div class="inq-wrap">
+        <div class="inq-title">نحن هنا للرد على جميع استفساراتكم</div>
+        <form id="inq-form">
+          <div class="inq-grid">
+            <input id="inq-name" placeholder="الاسم" required />
+            <input id="inq-email" type="email" placeholder="البريد الإلكتروني" required />
+            <input id="inq-org" placeholder="اسم الجهة" />
+            <input id="inq-phone" placeholder="رقم التلفون" />
+            <textarea id="inq-msg" placeholder="استفسارك" required></textarea>
+          </div>
+          <div class="inq-actions">
+            <button type="submit">إرسال الاستفسار</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      const form = document.getElementById("inq-form");
+      if (form) {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const name = document.getElementById("inq-name")?.value || "";
+          const email = document.getElementById("inq-email")?.value || "";
+          const org = document.getElementById("inq-org")?.value || "";
+          const phone = document.getElementById("inq-phone")?.value || "";
+          const msg = document.getElementById("inq-msg")?.value || "";
+
+          const subject = encodeURIComponent("استفسار من موقع AISS");
+          const body = encodeURIComponent(
+            `الاسم: ${name}\nالبريد: ${email}\nاسم الجهة: ${org}\nالجوال: ${phone}\n\nالرسالة:\n${msg}`
+          );
+          window.location.href = `mailto:aiss@aiss.co?subject=${subject}&body=${body}`;
+        });
+      }
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
+

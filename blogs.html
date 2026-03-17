@@ -25,9 +25,12 @@
       <div class="logo-text"><p>المدونات</p></div>
     </div>
     
-    <!--قسم الكروت-->
-    <div class="magazine-1">
-      <p>المدونات</p>
+
+    <div class="blogs-filter">
+      <label for="blog-category">التصنيف:</label>
+      <select id="blog-category">
+        <option value="all">الكل</option>
+      </select>
     </div>
 
     <div id="blogs-grid" class="card-container1"></div>
@@ -35,19 +38,52 @@
     <script src="js/data.js"></script>
     <script>
       const grid = document.getElementById("blogs-grid");
+      const categorySelect = document.getElementById("blog-category");
+      const params = new URLSearchParams(window.location.search);
+      const initialCat = params.get("cat");
 
-      myCards.forEach((item) => {
-        grid.innerHTML += `
-        <div class="card1">
-          <img src="${item.image}">
-          <div class="class-content1">
-            <h3>${item.title}</h3>
-            <a href ="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
+      function getCategory(item) {
+        return item.category || "محتويات عامة";
+      }
+
+      function render(items) {
+        grid.innerHTML = "";
+        items.forEach((item) => {
+          grid.innerHTML += `
+          <div class="card1">
+            <img src="${item.image}">
+            <div class="class-content1">
+              <h3>${item.title}</h3>
+              <a href ="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
+            </div>
           </div>
-        </div>
+          `;
+        });
+      }
 
-        `;
-      });
+      function initCategories() {
+        if (!categorySelect) return;
+        const cats = ["محتويات علمية", "مقالات الخبراء", "المجلة"];
+        cats.forEach((c) => {
+          const opt = document.createElement("option");
+          opt.value = c;
+          opt.textContent = c;
+          categorySelect.appendChild(opt);
+        });
+      }
+
+      function applyFilter() {
+        const val = categorySelect ? categorySelect.value : "all";
+        if (val === "all") return render(myCards);
+        return render(myCards.filter((it) => getCategory(it) === val));
+      }
+
+      initCategories();
+      if (initialCat && categorySelect) {
+        categorySelect.value = initialCat;
+      }
+      applyFilter();
+      if (categorySelect) categorySelect.addEventListener("change", applyFilter);
       
     </script>
 

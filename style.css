@@ -75,6 +75,44 @@ header {
   z-index: 9999;
 }
 
+/* منيو المدونات (submenu) */
+.header-nav .has-submenu {
+  position: relative;
+}
+
+.header-nav .submenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 190px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  padding: 8px;
+  display: none;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.header-nav .submenu li {
+  margin-right: 0;
+}
+
+.header-nav .submenu a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.header-nav .submenu a:hover {
+  background: rgba(228, 41, 58, 0.10);
+  color: #e4293a;
+}
+
+.header-nav .has-submenu:hover .submenu {
+  display: block;
+}
+
 /* زر الهامبرغر */
 .menu-toggle {
   display: none;
@@ -371,6 +409,8 @@ header button:hover {
   color: #e4293a;
   font-weight: bold;
   font-size: 70px;
+  text-align: center;
+  width: 95%;
 }
 
 
@@ -590,6 +630,12 @@ footer .container {
   padding: 40px 20px;
   background-color: #ececec;
   color: #7a7a7a;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+footer {
+  background-color: #ececec;
 }
 
 .footer-content {
@@ -722,6 +768,31 @@ footer .container {
   height: auto;
   margin-top: -200px;
 }
+
+/* تصنيف المدونات */
+.blogs-filter {
+  width: min(1100px, 92%);
+  margin: 20px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  background: #fff;
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.blogs-filter label {
+  font-weight: 800;
+  color: #111;
+}
+
+.blogs-filter select {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #fff;
+}
 /*المدونات*/
 .container h1 {
   padding-top: 60px;
@@ -815,6 +886,20 @@ footer .container {
 
   .cart-checkout-btn {
     text-align: center;
+  }
+
+  .header-nav .submenu {
+    position: static;
+    display: block;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+  }
+
+  .logo-text {
+    font-size: 34px;
+    transform: translate(-50%, -50%);
+    line-height: 1.2;
   }
 }
 

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/icons/logo.png" />
+    <title>عرض - المعهد العربي لعلوم السلامة</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      .flip-wrap {
+        width: min(1200px, 95%);
+        margin: 120px auto 40px;
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      }
+      .flip-top {
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+      }
+      .flip-top h1 {
+        font-size: 16px;
+        color: #111;
+        font-weight: 900;
+      }
+      .flip-top a {
+        display: inline-block;
+        padding: 10px 14px;
+        border-radius: 12px;
+        background: rgba(228,41,58,0.12);
+        color: #e4293a;
+        font-weight: 900;
+      }
+      .flip-frame {
+        width: 100%;
+        height: min(85vh, 900px);
+        border: 0;
+        display: block;
+      }
+      .flip-empty {
+        padding: 30px;
+        color: #444;
+        line-height: 1.9;
+      }
+      @media (max-width: 600px) {
+        .flip-wrap { margin-top: 140px; }
+        .flip-top { flex-direction: column; align-items: stretch; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+
+    <main class="page-content">
+      <div class="flip-wrap">
+        <div class="flip-top">
+          <h1 id="flip-title">عرض</h1>
+          <a id="flip-back" href="magazine.html">رجوع</a>
+        </div>
+        <div id="flip-body"></div>
+      </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const title = params.get("title") || "عرض";
+      const src = params.get("src") || "";
+      const back = params.get("back") || "magazine.html";
+
+      const titleEl = document.getElementById("flip-title");
+      const backEl = document.getElementById("flip-back");
+      const bodyEl = document.getElementById("flip-body");
+
+      if (titleEl) titleEl.innerText = title;
+      if (backEl) backEl.href = back;
+
+      if (!src || src === "#") {
+        if (bodyEl) {
+          bodyEl.innerHTML = `<div class="flip-empty">هذا الإصدار غير مرفوع بعد. يمكنك تحديث الرابط لاحقًا.</div>`;
+        }
+      } else {
+        if (bodyEl) {
+          bodyEl.innerHTML = `<iframe class="flip-frame" src="${src}" scrolling="no" frameborder="0" allow="clipboard-write; autoplay; fullscreen" allowfullscreen="allowfullscreen"></iframe>`;
+        }
+      }
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
