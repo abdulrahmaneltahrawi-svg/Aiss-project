@@ -8,17 +8,14 @@
     <link rel="stylesheet" href="style.css" />
     <!--تعريف للخط-->
     <link
-      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet"/>
   </head>
 
   <body>
     <div id="header-placeholder"></div>
 
-
     <!--قسم صفحة العرض-->
+
     <section class="hero-section">
       <div class="content">
         <span>مرحبا بك في</span>
@@ -36,55 +33,59 @@
       </div>
     </section>
 
+<!---------------------------------------------------------------------------------------------------------------->
+
     <!--قسم المجلات-->
 
-    <div class="magazine-new">
-      <p><p class="news">أحدث </p> اصدارات المجلات </p>  
+    <div class="magazine-new"> <p><p class="news">أحدث </p> اصدارات المجلات </p> </div>
 
+    <!--كود استدعاء المجلة-->
+
+    <div id="home-magazines-grid" class="card-container1"></div>
+
+    <!--احدث اصدارات المجلة(زر)-->
+
+    <div class="magazine-new-btn">
+    <a href="magazine.html"><button>عرض المزيد</button></a>
     </div>
 
- <div id="home-magazines-grid" class="card-container1"></div>
-      <!--احدث اصدارات المجلة(زر)-->
-      <div class="magazine-new-btn">
-        <a href="magazine.html"><button>عرض المزيد</button></a>
 
-    </div>
+    <!----------------------------------------------------------------------------------------------------------->
 
     <!--قسم المدونات-->
 
       <div class="blogs-new">
       <p><p class="news">أحدث </p> اصدارات المدونات </p>  
-
     </div>
 
-   
-
+    <!--كود استدعاء المدونة-->
 
     <div id="blogs-grid" class="card-container1"></div>
 
     <script src="js/data.js"></script>
+
     <script>
     const grid = document.getElementById("blogs-grid");
 
-myCards.slice(0,4).forEach((item) => {
-  grid.innerHTML += `
-  <div class="card1">
-      <img src="${item.image}">
-      <div class="class-content1">
-      <h3>${item.title}</h3>
-      <a href="views.html?id=${item.id}" class="btn1">عرض التفاصيل</a>
+    myCards.slice(0,4).forEach((item) => {
+      grid.innerHTML += `
+      <div class="card1">
+          <img src="${item.image}">
+          <div class="class-content1">
+          <h3>${item.title}</h3>
+          <a href="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
+          </div>
       </div>
-  </div>
-  `;
-});
-      
+      `;
+    });
     </script>
 
     <!--احدث اصدارات المدونات(زر)-->
     <div class="magazine-new-btn">
-      <a href="blogs.html"><button>عرض المزيد</button></a>
-
+    <a href="blogs.html"><button>عرض المزيد</button></a>
     </div>
+
+    <!----------------------------------------------------------------------------------------------------------->
 
     <!-- القسم الاخير-->
 

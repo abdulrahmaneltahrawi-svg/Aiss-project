@@ -12,16 +12,6 @@ body {
   padding-top: 110px;
 }
 
-/* نص العنوان فوق صورة الهيرو */
-.logo-text {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -65%);
-  color: red;
-  font-weight: bold;
-  font-size: 70px;
-}
-
 /* صفحة التفاصيل */
 .container0 {
   width: 90%;
@@ -210,26 +200,33 @@ header {
 /* تصميم زر تسجيل الدخول*/
 
 header button {
-  border-radius: 25px;
-  padding: 15px 15px;
+  padding: 10px 10px;
   font-size: 13px;
   font-weight: bold;
+  border: none;
+  border-radius: 5px;
+
 }
+
 
 header button:hover {
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.2);
-  transition: 0.25s;
+  transition: 0.2s;
+  box-shadow: 0 0 5px;
+  
 }
 
 .btn-cont img {
-  width: 15px;
+  margin-bottom: -2px;
+  margin-left: -2px;
+  width: 15px
 }
 /*زر البحث*/
 
 .search-img img {
   width: 25px;
   align-items: flex-end;
+  
 }
 
 .search-img img:hover {
@@ -280,7 +277,7 @@ header button:hover {
     border: 2px solid white; 
     z-index: 10;
 }
-    .cart-popup {
+.cart-popup {
     position: fixed;
     top: 75px;
     left: 20px; 
@@ -322,7 +319,6 @@ header button:hover {
 
 .btn-checkout { background-color: #e4293a; color: white; }
 .close-popup { cursor: pointer; float: right; font-size: 20px; }
-/*الهيدر*/
 
 /*قسم صفحة العرض*/
 
@@ -350,7 +346,7 @@ header button:hover {
 
 .hero-section .content {
   width: 50%;
-  padding: 90px 60px;
+ padding: 55px 80px;
 }
 
 .hero-section h1 {
@@ -366,6 +362,15 @@ header button:hover {
 }
 .hero-section span {
   color: #7a7a7a;
+}
+/* نص العنوان فوق صورة الهيرو */
+.logo-text {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -65%);
+  color: #e4293a;
+  font-weight: bold;
+  font-size: 70px;
 }
 
 
@@ -390,6 +395,7 @@ header button:hover {
   justify-content: center;
   flex-wrap: wrap;
   padding: 40px;
+ 
 }
 
 .card1 {
@@ -425,7 +431,8 @@ header button:hover {
   justify-content: space-between;
   align-items: flex-start; 
   text-align: right;      
-  direction: rtl;          
+  direction: rtl;         
+  gap: 3px; 
 }
 
 
@@ -462,7 +469,7 @@ header button:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  margin-bottom: 10px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
   direction: rtl;
 }
@@ -473,6 +480,7 @@ header button:hover {
   object-fit: cover;
   border-radius: 12px;
   display: block;
+  margin-left: 20px;
 }
 
 .cart-item__body {
