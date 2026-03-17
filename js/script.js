@@ -2,10 +2,10 @@
 // ===== بيانات الكروت =====
 
 const magazines = [
-    { title: "مجلة السلامة العربية", date: "العدد 62 - مارس 2026", img: "assets/magazine/IMG_1325.jpeg", link: "https://publuu.com/flip-book/1071783/2386715" },
-    { title: "مجلة السلامة العربية", date: "العدد 61 - فبراير 2026", img: "assets/magazine/IMG_1326.jpeg", link: "https://publuu.com/flip-book/1071783/2391520" },
-    { title: "مجلة السلامة العربية", date: "العدد 60 - يناير 2026", img: "assets/magazine/IMG_1327.jpeg", link: "https://publuu.com/flip-book/1071783/2386468#" },
-    { title: "مجلة السلامة العربية", date: "العدد 59 - ديسمبر 2025", img: "assets/magazine/IMG_1328.jpeg", link: "https://publuu.com/flip-book/1071783/2391521" },
+    { title: "مجلة السلامة العربية", date: "العدد 62 - مارس 2026", img: "assets/magazine/IMG_1325.jpeg", link: "https://publuu.com/flip-book/1071783/2386715/page/1?embed&transparent" },
+    { title: "مجلة السلامة العربية", date: "العدد 61 - فبراير 2026", img: "assets/magazine/IMG_1326.jpeg", link: "https://publuu.com/flip-book/1071783/2391520/page/1?embed&transparent" },
+    { title: "مجلة السلامة العربية", date: "العدد 60 - يناير 2026", img: "assets/magazine/IMG_1327.jpeg", link: "https://publuu.com/flip-book/1071783/2386468/page/1?embed&transparent" },
+    { title: "مجلة السلامة العربية", date: "العدد 59 - ديسمبر 2025", img: "assets/magazine/IMG_1328.jpeg", link: "https://publuu.com/flip-book/1071783/2391521/page/1?embed&transparent" },
     { title: "مجلة السلامة العربية", date: "العدد 58 - نوفمبر 2025", img: "assets/magazine/غلاف.png", link: "#" },
     { title: "مجلة السلامة العربية", date: "العدد 57 - أكتوبر 2025", img: "assets/magazine/Issue-57-October-2025.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "العدد 56 - سبتمبر 2025", img: "assets/magazine/Issue-56-September-2025 copy.jpg", link: "#" },
@@ -29,9 +29,9 @@ const magazines = [
 
 
 const manulas = [
-    { title: "معادلات السلامة والصحة المهنية", date: "كتيب تعليمي", img: "assets/manuals/Occupational-Safety-and-Health-Equations.jpg", link: "https://publuu.com/flip-book/1071783/2391531" },
-    { title: "دور الميثانول منخفض الكربون في التحول الطاقي", date: "إصدار خاص", img: "assets/manuals/WhatsApp-Image-2025-08-23-at-12.41.51-PM.jpg", link: "https://publuu.com/flip-book/1071783/2391532" },
-    { title: "الأبطال المجهولون", date: "كتيب توعوي", img: "assets/manuals/Unsung-heroes.jpg", link: "https://publuu.com/flip-book/1071783/2386659" },
+    { title: "معادلات السلامة والصحة المهنية", date: "كتيب تعليمي", img: "assets/manuals/Occupational-Safety-and-Health-Equations.jpg", link: "https://publuu.com/flip-book/1071783/2391531/page/1?embed&transparent" },
+    { title: "دور الميثانول منخفض الكربون في التحول الطاقي", date: "إصدار خاص", img: "assets/manuals/WhatsApp-Image-2025-08-23-at-12.41.51-PM.jpg", link: "https://publuu.com/flip-book/1071783/2391532/page/1?embed&transparent" },
+    { title: "الأبطال المجهولون", date: "كتيب توعوي", img: "assets/manuals/Unsung-heroes.jpg", link: "https://publuu.com/flip-book/1071783/2386659/page/1?embed&transparent" },
     { title: "الإطفاء والتكنولوجيا الذكية", date: "كتيب توعوي", img: "assets/manuals/الاطفاء-والتكنولوجيا-Recovered.png", link: "https://publuu.com/flip-book/1071783/2386659" },
     { title: "رحلة النيران", date: "كتيب توعوي", img: "assets/manuals/Journey-of-Fire.jpg", link: "https://publuu.com/flip-book/1071783/2386659" },
     { title: "الوقاية من الحريق", date: "كتيب توعوي", img: "assets/manuals/WhatsApp-Image-2024-09-04-at-2.44.40-PM.jpg", link: "https://publuu.com/flip-book/1071783/2386659" },
@@ -43,13 +43,17 @@ const manulas = [
 // ===== بناء الكروت =====
 
 function createCardHTML(item, btnText = "عرض المجلة") {
+    const src = item.link || "#";
+    const isManual = btnText.includes("كتيب");
+    const back = isManual ? "manuals.html" : "magazine.html";
+    const href = `flipbook.html?title=${encodeURIComponent(item.title || "")}&src=${encodeURIComponent(src)}&back=${encodeURIComponent(back)}`;
     return `
         <div class="card1">
             <img src="${item.img}" alt="${item.title}"/>
             <div class="class-content1">
                 <h3>${item.title}</h3>
                 <p>${item.date}</p>
-                <a href="${item.link}" class="btn1" target="_blank" rel="noopener noreferrer">${btnText} ←</a>
+                <a href="${href}" class="btn1">${btnText} ←</a>
             </div>
         </div>`;
 }
@@ -79,13 +83,22 @@ if (manulasGrid) {
 
 async function loadLayout() {
     try {
-        const headerRes = await fetch('components/header.html');
-        const headerData = await headerRes.text();
-        document.getElementById('header-placeholder').innerHTML = headerData;
+        const headerPlaceholder = document.getElementById('header-placeholder');
+        const footerPlaceholder = document.getElementById('footer-placeholder');
 
-        const footerRes = await fetch('components/footer.html');
-        const footerData = await footerRes.text();
-        document.getElementById('footer-placeholder').innerHTML = footerData;
+        if (headerPlaceholder) {
+            let headerRes = await fetch('components/header.html');
+            if (!headerRes.ok) headerRes = await fetch('../components/header.html');
+            const headerData = await headerRes.text();
+            headerPlaceholder.innerHTML = headerData;
+        }
+
+        if (footerPlaceholder) {
+            let footerRes = await fetch('components/footer.html');
+            if (!footerRes.ok) footerRes = await fetch('../components/footer.html');
+            const footerData = await footerRes.text();
+            footerPlaceholder.innerHTML = footerData;
+        }
 
         activateHeader();
         updateCartBadgeCount();
