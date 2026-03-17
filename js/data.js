@@ -85,6 +85,7 @@ const myCards = [
 
     `,
   },
+
   {
     id: 3,
     title:
@@ -118,6 +119,7 @@ const myCards = [
       </div>
     `,
   },
+
   {
     id: 4,
     title:
@@ -145,6 +147,4 @@ const myCards = [
       </div>
     `,
   },
-  
-  
 ];

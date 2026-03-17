@@ -1,3 +1,4 @@
+
 // ===== بيانات الكروت =====
 
 const magazines = [
@@ -10,18 +11,34 @@ const magazines = [
     { title: "مجلة السلامة العربية", date: "العدد 56 - سبتمبر 2025", img: "assets/magazine/Issue-56-September-2025 copy.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "العدد 55 - أغسطس 2025", img: "assets/magazine/Issue-55-August-2025.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "العدد 54 - يوليو 2025", img: "assets/magazine/Issue-54-July-2025.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "العدد 53 - يونيو 2025", img: "assets/magazine/issue-53-june-2025.jpg", link: "#" }
+    { title: "مجلة السلامة العربية", date: "العدد 53 - يونيو 2025", img: "assets/magazine/issue-53-june-2025.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد52-مايو2025", img: "assets/magazine/Issue-52-May-2025.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد51-ابريل-2025", img: "assets/magazine/Issue-51-April-2025.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد50-مارس2025", img: "assets/magazine/Issue50-march2025.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد-49-فبراير2025", img: "assets/magazine/Issue-49-February-2025.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد48-يناير2025", img: "assets/magazine/Issue-48-January-2025.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد47-ديسمبر2024", img: "assets/magazine/Issue-47-December-2024.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد46-نوفمبر2024", img: "assets/magazine/IMG-20241107-WA0000.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد45-أكتوبر2024", img: "assets/magazine/unnamed-file.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد44-سبتمبر2024", img: "assets/magazine/WhatsApp-Image-2024-09-02-at-1.29.52-PM.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد43-اغسطس2024", img: "assets/magazine/Issue_-43-_July-_2024-2.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد42-يوليو2024", img: "assets/magazine/Issue-42-July-2024.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد41-يونيو", img: "assets/magazine/Issue-41_May-2024.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "العدد40-مايو2024", img: "assets/magazine/Issue-40-May-2024.jpg", link: "#" },
 ];
 
 
 const manulas = [
     { title: "معادلات السلامة والصحة المهنية", date: "كتيب تعليمي", img: "assets/manuals/Occupational-Safety-and-Health-Equations.jpg", link: "https://publuu.com/flip-book/1071783/2391531" },
-    { title: "كتيب السلامة", date: "إصدار خاص", img: "assets/manuals/WhatsApp-Image-2025-08-23-at-12.41.51-PM.jpg", link: "https://publuu.com/flip-book/1071783/2391532" },
-    { title: "أبطال لا يُذكرون", date: "كتيب توعوي", img: "assets/manuals/Unsung-heroes.jpg", link: "https://publuu.com/flip-book/1071783/2386659" },
+    { title: "دور الميثانول منخفض الكربون في التحول الطاقي", date: "إصدار خاص", img: "assets/manuals/WhatsApp-Image-2025-08-23-at-12.41.51-PM.jpg", link: "https://publuu.com/flip-book/1071783/2391532" },
+    { title: "الأبطال المجهولون", date: "كتيب توعوي", img: "assets/manuals/Unsung-heroes.jpg", link: "https://publuu.com/flip-book/1071783/2386659" },
+    { title: "الإطفاء والتكنولوجيا الذكية", date: "كتيب توعوي", img: "assets/manuals/الاطفاء-والتكنولوجيا-Recovered.png", link: "https://publuu.com/flip-book/1071783/2386659" },
+    { title: "رحلة النيران", date: "كتيب توعوي", img: "assets/manuals/Journey-of-Fire.jpg", link: "https://publuu.com/flip-book/1071783/2386659" },
+    { title: "الوقاية من الحريق", date: "كتيب توعوي", img: "assets/manuals/WhatsApp-Image-2024-09-04-at-2.44.40-PM.jpg", link: "https://publuu.com/flip-book/1071783/2386659" },
+    { title: "رجال علي خط النار", date: "كتيب توعوي", img: "assets/manuals/IMG-20241010-WA0000.jpg", link: "https://publuu.com/flip-book/1071783/2386659" },
+    { title: "دليل السلامة المبسط في المنشآت التعليمية للأطفال", date: "كتيب توعوي", img: "assets/manuals/IMG-20241010-WA0001.jpg", link: "https://publuu.com/flip-book/1071783/2386659" },
+
 ];
-
-
-
 
 // ===== بناء الكروت =====
 
@@ -56,10 +73,9 @@ if (manulasGrid) {
     manulas.forEach(man => { manulasGrid.innerHTML += createCardHTML(man, "عرض الكتيب"); });
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-// ===== تحميل المكونات =====
+// ===== استدعاء المكونات =====
 
 async function loadLayout() {
     try {
@@ -78,6 +94,10 @@ async function loadLayout() {
         console.error('فشل التحميل:', error);
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//====المتجر=====
 
 function updateCartBadgeCount() {
     const badge = document.getElementById('cart-count');
@@ -98,6 +118,9 @@ function markActiveNav() {
     });
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//=====جميع ازرار الهيدر=====
 function activateHeader() {
     const openBtn = document.getElementById('openModel');
     const closeBtn = document.getElementById('closeModel');
