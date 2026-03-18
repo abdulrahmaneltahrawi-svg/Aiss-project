@@ -43,7 +43,7 @@
       const initialCat = params.get("cat");
 
       function getCategory(item) {
-        return item.category || "محتويات عامة";
+        return item.category || "محتويات علمية";
       }
 
       function render(items) {
@@ -63,7 +63,7 @@
 
       function initCategories() {
         if (!categorySelect) return;
-        const cats = ["محتويات علمية", "مقالات الخبراء", "المجلة"];
+        const cats = ["محتويات علمية", "مقالات الخبراء", "مقالات المجلة"];
         cats.forEach((c) => {
           const opt = document.createElement("option");
           opt.value = c;

@@ -52,6 +52,11 @@ body {
   font-weight: bold;
 }
 
+.back:hover{
+  cursor: pointer;
+  background-color: rgb(213, 209, 209);
+}
+
 header img {
   width: 300px;
 }
@@ -73,6 +78,7 @@ header {
   align-items: center;
   background-color: white;
   z-index: 9999;
+  
 }
 
 /* منيو المدونات (submenu) */
@@ -91,6 +97,7 @@ header {
   padding: 8px;
   display: none;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+ margin: 5px;
 }
 
 .header-nav .submenu li {
@@ -771,7 +778,7 @@ footer {
 
 /* تصنيف المدونات */
 .blogs-filter {
-  width: min(1100px, 92%);
+  width: 80%;
   margin: 20px auto 0;
   display: flex;
   align-items: center;
@@ -896,10 +903,14 @@ footer {
     padding: 0;
   }
 
+  .hero-section-m {
+    padding-top: 140px;
+  }
+
   .logo-text {
-    font-size: 34px;
-    transform: translate(-50%, -50%);
-    line-height: 1.2;
+    font-size: 32px;
+    transform: translate(-50%, -35%);
+    line-height: 1.3;
   }
 }
 
