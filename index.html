@@ -7,11 +7,74 @@
     <title>المعهد العربي لعلوم السلامة</title>
     <link rel="stylesheet" href="style.css" />
     <!--تعريف للخط-->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet"/>
   </head>
 
   <body>
+
+  <style>
+  .hero-section {
+  background: url("assets/imge/بروفايلات_page-0001.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 700px;
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  padding-top: 50px;
+  color: black;
+  border: 2px solid white;
+  
+}
+
+.hero-section .content {
+  width: 50%;
+  padding: 55px 80px;
+}
+.hero-section h1 {
+  font-size: 42px;
+  color: #e4293a;
+  margin-bottom: 20px;
+}
+
+.hero-section p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #000;
+}
+.hero-section span {
+  color: #7a7a7a;
+}
+/*احدث اصدارات المجلة و المدونات (زر)*/
+.magazine-new-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: -50px;
+  padding: 25px;
+}
+
+.magazine-new-btn button {
+  display: inline-block;
+  padding: 15px 20px;
+  background: whitesmoke;
+  text-decoration: none;
+  margin-top: 16px;
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 25px;
+  border: 1px solid black;
+}
+
+.magazine-new-btn button:hover {
+  cursor: pointer;
+  color: gray;
+}
+
+
+  </style>
+
     <div id="header-placeholder"></div>
 
     <!--قسم صفحة العرض-->
@@ -37,7 +100,7 @@
 
     <!--قسم المجلات-->
 
-    <div class="magazine-new"> <p><p class="news">أحدث </p> اصدارات المجلات </p> </div>
+    <div class="title0"> <p><p class="title0-color">أحدث </p> اصدارات المجلات </p> </div>
 
     <!--كود استدعاء المجلة-->
 
@@ -54,8 +117,8 @@
 
     <!--قسم المدونات-->
 
-      <div class="blogs-new">
-      <p><p class="news">أحدث </p> اصدارات المدونات </p>  
+      <div class="title0">
+      <p><p class="title0-color">أحدث </p> اصدارات المدونات </p>  
     </div>
 
     <!--كود استدعاء المدونة-->
@@ -67,10 +130,10 @@
     <script>
     const grid = document.getElementById("blogs-grid");
 
-    myCards.slice(0,4).forEach((item) => {
+    myCards.slice(0,8).forEach((item) => {
       grid.innerHTML += `
       <div class="card1">
-          <img src="${item.image}">
+          <img src="${item.image}" loading="lazy">
           <div class="class-content1">
           <h3>${item.title}</h3>
           <a href="views.html?id=${item.id}" class="btn1">عرض المدونة</a>

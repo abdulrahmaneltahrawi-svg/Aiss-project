@@ -14,17 +14,42 @@
     />
   </head>
 
+  <style>
+    /* تصنيف المدونات */
+    .blogs-filter {
+      width: 90%;
+      margin: 20px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      background: #fff;
+      padding: 12px 14px;
+      border-radius: 14px;
+    }
+
+    .blogs-filter label {
+      font-weight: 800;
+      color: #111;
+    }
+
+    .blogs-filter select {
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      background: #fff;
+    }
+  </style>
 
   <body>
     <div id="header-placeholder"></div>
 
-   <!--قسم صفحة العرض-->
+    <!--قسم صفحة العرض-->
 
     <div class="hero-section-m">
-      <img src="assets/imge/0006.jpg" alt="blogs-pic" loading="lazy"/>
+      <img src="assets/imge/0006.jpg" alt="blogs-pic" loading="lazy" />
       <div class="logo-text"><p>المدونات</p></div>
     </div>
-    
 
     <div class="blogs-filter">
       <label for="blog-category">التصنيف:</label>
@@ -51,7 +76,7 @@
         items.forEach((item) => {
           grid.innerHTML += `
           <div class="card1">
-            <img src="${item.image}">
+            <img src="${item.image}" loading="lazy">
             <div class="class-content1">
               <h3>${item.title}</h3>
               <a href ="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
@@ -83,8 +108,8 @@
         categorySelect.value = initialCat;
       }
       applyFilter();
-      if (categorySelect) categorySelect.addEventListener("change", applyFilter);
-      
+      if (categorySelect)
+        categorySelect.addEventListener("change", applyFilter);
     </script>
 
     <!-- القسم الاخير-->

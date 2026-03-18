@@ -12,64 +12,64 @@
       rel="stylesheet"
     />
 
-    <!--css الكود-->
-
+    <!--كود اخذ الملفات -->
   </head>
   <body>
     <div id="header-placeholder"></div>
+
+    <!--كود اخذ البيانات-->
+
     <div class="container0">
       <h1 id="title-placeholder"></h1>
-      <img id="image-placeholder" src=""  />
+      <img id="image-placeholder" src="" />
       <p id="description-placeholder"></p>
       <br />
-      <a id="back-link" href="blogs.html"><button class="back">العوده للصفحه السابقة</button></a>
+      <a id="back-link" href="blogs.html"
+        ><button class="back">العوده للصفحه السابقة</button></a
+      >
     </div>
 
     <script src="js/data.js"></script>
     <script src="js/events.js"></script>
     <script>
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
-const source = params.get("source"); // التحقق من مصدر البيانات
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      const source = params.get("source"); // التحقق من مصدر البيانات
 
-async function loadDynamicContent() {
-    let data;
+      async function loadDynamicContent() {
+        let data;
 
-    if (source === 'codes') {
-        // إذا كان المصدر "codes" نجلب البيانات من ملف الجيسون
-        const response = await fetch('cleaned-posts (1).json');
-        data = await response.json();
-        const backLink = document.getElementById('back-link');
-        if (backLink) backLink.href = 'cods.html';
-    } else if (source === 'events') {
-        data = events;
-        const backLink = document.getElementById('back-link');
-        if (backLink) backLink.href = 'event.html';
-    } else {
-        // إذا لم يكن، نستخدم مصفوفة المدونات الموجودة في js/data.js
-        data = myCards; 
-        const backLink = document.getElementById('back-link');
-        if (backLink) backLink.href = 'blogs.html';
-       
-    }
-    
-    
+        if (source === "codes") {
+          // إذا كان المصدر "codes" نجلب البيانات من ملف الجيسون
+          const response = await fetch("cleaned-posts (1).json");
+          data = await response.json();
+          const backLink = document.getElementById("back-link");
+          if (backLink) backLink.href = "cods.html";
+        } else if (source === "events") {
+          data = events;
+          const backLink = document.getElementById("back-link");
+          if (backLink) backLink.href = "event.html";
+        } else {
+          // إذا لم يكن، نستخدم مصفوفة المدونات الموجودة في js/data.js
+          data = myCards;
+          const backLink = document.getElementById("back-link");
+          if (backLink) backLink.href = "blogs.html";
+        }
 
-    const item = data[id];
+        const item = data[id];
 
-    if (item) {
-        document.getElementById("title-placeholder").innerText = item.title;
-        document.getElementById("image-placeholder").src = item.image;
-        // عرض المحتوى سواء كان اسمه content أو description
-        document.getElementById("description-placeholder").innerHTML = item.content || item.description;
-    }
-}
+        if (item) {
+          document.getElementById("title-placeholder").innerText = item.title;
+          document.getElementById("image-placeholder").src = item.image;
+          // عرض المحتوى سواء كان اسمه content أو description
+          document.getElementById("description-placeholder").innerHTML =
+            item.content || item.description;
+        }
+      }
 
-loadDynamicContent();
+      loadDynamicContent();
     </script>
 
-
-   
     <div id="footer-placeholder"></div>
 
     <script src="js/script.js"></script>

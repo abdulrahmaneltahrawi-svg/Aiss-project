@@ -8,11 +8,12 @@ body {
   font-family: "tajawal", sans-serif;
 }
 
+/* صفحة عرض الصور */
+
 .page-content {
   padding-top: 110px;
 }
 
-/* صفحة التفاصيل */
 .container0 {
   width: 90%;
   margin: 120px auto 40px;
@@ -52,17 +53,18 @@ body {
   font-weight: bold;
 }
 
-.back:hover{
+.back:hover {
   cursor: pointer;
   background-color: rgb(213, 209, 209);
 }
 
+/*الهيدر*/
 header img {
-  width: 300px;
+  width: 280px;
 }
 
 a {
-  color: black;
+  color: #111;
   text-decoration: none;
 }
 
@@ -78,7 +80,6 @@ header {
   align-items: center;
   background-color: white;
   z-index: 9999;
-  
 }
 
 /* منيو المدونات (submenu) */
@@ -97,7 +98,7 @@ header {
   padding: 8px;
   display: none;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
- margin: 5px;
+  margin: 5px;
 }
 
 .header-nav .submenu li {
@@ -112,7 +113,7 @@ header {
 }
 
 .header-nav .submenu a:hover {
-  background: rgba(228, 41, 58, 0.10);
+  background: rgba(228, 41, 58, 0.1);
   color: #e4293a;
 }
 
@@ -250,42 +251,34 @@ header button {
   font-weight: bold;
   border: none;
   border-radius: 5px;
-
 }
-
 
 header button:hover {
   cursor: pointer;
   transition: 0.2s;
   box-shadow: 0 0 5px;
-  
 }
 
 .btn-cont img {
   margin-bottom: -2px;
   margin-left: -2px;
-  width: 15px
+  width: 15px;
 }
-/*زر البحث*/
 
+/*زر البحث*/
 .search-img img {
   width: 25px;
-  align-items: flex-end;
-  
 }
-
 .search-img img:hover {
   cursor: pointer;
   scale: calc(1.1);
 }
-
 .hide-search {
   display: none;
 }
-
 .show-search {
   display: block;
-  padding: 10px;
+  padding: 6px;
 }
 
 /*زر التسوق*/
@@ -297,89 +290,29 @@ header button:hover {
   cursor: pointer;
   scale: calc(1.1);
 }
-/*المتجر*/
-  .shop-img {
-    position: relative; 
-    display: inline-block;
-}
+
 
 /* تنسيق الدائرة الحمراء */
 .cart-badge {
-    position: absolute;
-    top: -8px;     
-    right: -10px;   
-    background-color: #ff0000; 
-    color: white;   
-    font-size: 10px;
-    font-weight: bold;
-    width: 15px;    
-    height: 15px;   
-    border-radius: 50%; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    border: 2px solid white; 
-    z-index: 10;
-}
-.cart-popup {
-    position: fixed;
-    top: 75px;
-    left: 20px; 
-    width: 300px;
-    background: white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    border-radius: 8px;
-    z-index: 1000;
-    padding: 15px;
-    transition: 0.3s ease;
-}
-
-.cart-popup.hidden {
-    display: none;
-}
-
-.product-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.product-info img {
-    width: 60px;
-    height: 60px;
-    padding: 5px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.popup-footer button {
-    width: 100%;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-checkout { background-color: #e4293a; color: white; }
-.close-popup { cursor: pointer; float: right; font-size: 20px; }
-
-/*قسم صفحة العرض*/
-
-.hero-section {
-  background: url("assets/imge/بروفايلات_page-0001.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  height: 700px;
-  width: 100%;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #ff0000;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
   display: flex;
-  justify-content: right;
-  padding-top: 50px;
-  color: black;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border: 2px solid white;
+  z-index: 10;
 }
+
+/*قسم صور الهيرو او العنوان */
 
 .hero-section-m {
   padding-top: 200px;
@@ -387,27 +320,16 @@ header button:hover {
   background-size: cover;
   width: 100%;
   height: auto;
+  display: flex;
 }
 
-.hero-section .content {
-  width: 50%;
- padding: 55px 80px;
+.hero-section-m img {
+  width: 100%;
+  height: auto;
+  margin-top: -200px;
 }
 
-.hero-section h1 {
-  font-size: 42px;
-  color: #e4293a;
-  margin-bottom: 20px;
-}
 
-.hero-section p {
-  font-size: 16px;
-  line-height: 1.9;
-  color: #000;
-}
-.hero-section span {
-  color: #7a7a7a;
-}
 /* نص العنوان فوق صورة الهيرو */
 .logo-text {
   position: absolute;
@@ -420,20 +342,22 @@ header button:hover {
   width: 95%;
 }
 
-
-/*قسم احدث المجلات*/
-.magazine-new {
+/*قسم وصف الصفحه*/
+.title0 {
   display: flex;
-  justify-content: center;
   font-size: 25px;
-  margin-top: -50px;
+  justify-content: center;
+  padding: 20px 20px;
   gap: 5px;
   font-weight: bold;
+  background-color: white;
+  margin-top: -10px;
 }
-.news {
+
+.title0-color {
   color: #e4293a;
-  gap: 5px;
 }
+
 
 /*قسم الكروت*/
 
@@ -442,7 +366,6 @@ header button:hover {
   justify-content: center;
   flex-wrap: wrap;
   padding: 40px;
- 
 }
 
 .card1 {
@@ -476,12 +399,11 @@ header button:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start; 
-  text-align: right;      
-  direction: rtl;         
-  gap: 3px; 
+  align-items: flex-start;
+  text-align: right;
+  direction: rtl;
+  gap: 3px;
 }
-
 
 .class-content1 h3 {
   font-family: inherit;
@@ -499,7 +421,7 @@ header button:hover {
   border-radius: 10px;
   border: 1px solid black;
   transition: all 0.3s ease-in-out;
-  margin-top: auto; 
+  margin-top: auto;
   width: fit-content;
 }
 .class-content1 .btn1:hover {
@@ -590,43 +512,7 @@ header button:hover {
 .cart-checkout-btn:hover {
   filter: brightness(0.95);
 }
-/*احدث اصدارات المدونات*/
-.blogs-new {
-  display: flex;
-  justify-content: center;
-  font-size: 25px;
-  margin-bottom: -30px;
-  font-weight: bold;
-  background-color: white;
-  padding: 30px;
-  gap: 5px;
-}
 
-/*احدث اصدارات المجلة و المدونات (زر)*/
-.magazine-new-btn {
-  display: flex;
-  justify-content: center;
-  margin-top: -50px;
-  padding: 25px;
-}
-
-.magazine-new-btn button {
-  display: inline-block;
-  padding: 15px 20px;
-  background: whitesmoke;
-  text-decoration: none;
-  margin-top: 16px;
-  color: black;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 25px;
-  border: 1px solid black;
-}
-
-.magazine-new-btn button:hover {
-  cursor: pointer;
-  color: gray;
-}
 
 /*قسم الاخير*/
 
@@ -725,7 +611,7 @@ footer {
   margin-bottom: -11px;
 }
 
-/*صفحة الشهادات*/
+/*صفحة الشهادات و الوظائف*/
 
 .search-class {
   display: flex;
@@ -749,62 +635,6 @@ footer {
   color: rgb(112, 112, 112);
 }
 
-/*قسم المجلات*/
-.magazine-1 {
-  display: flex;
-  font-size: 25px;
-  justify-content: center;
-  padding: 20px 20px;
-  gap: 5px;
-  font-weight: bold;
-  background-color: white;
-  margin-top: -10px;
-}
-.magazine-11 {
-  color: #e4293a;
-}
-
-.hero-section-m {
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-}
-
-.hero-section-m img {
-  width: 100%;
-  height: auto;
-  margin-top: -200px;
-}
-
-/* تصنيف المدونات */
-.blogs-filter {
-  width: 80%;
-  margin: 20px auto 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  background: #fff;
-  padding: 12px 14px;
-  border-radius: 14px;
-}
-
-.blogs-filter label {
-  font-weight: 800;
-  color: #111;
-}
-
-.blogs-filter select {
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  background: #fff;
-}
-/*المدونات*/
-.container h1 {
-  padding-top: 60px;
-  padding-bottom: 20px;
-}
 
 /*قسم تحسين المقاسات*/
 

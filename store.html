@@ -1,145 +1,193 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="assets/icons/logo.png" />
     <title>المتجر-المعهد العربي لعلوم السلامة</title>
     <link rel="stylesheet" href="style.css" />
     <!--تعريف للخط-->
-
     <link
       href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
       rel="stylesheet"
     />
-</head>
-<body>
+  </head>
+  <body>
+    <style>
+      .cart-popup {
+        position: fixed;
+        top: 75px;
+        left: 20px;
+        width: 300px;
+        background: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        z-index: 1000;
+        padding: 15px;
+        transition: 0.3s ease;
+      }
 
+      .cart-popup.hidden {
+        display: none;
+      }
+
+      .product-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .product-info img {
+        width: 60px;
+        height: 60px;
+        padding: 5px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+
+      .popup-footer button {
+        width: 100%;
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-checkout {
+        background-color: #e4293a;
+        color: white;
+      }
+      .close-popup {
+        cursor: pointer;
+        float: right;
+        font-size: 20px;
+      }
+    </style>
     <div id="header-placeholder"></div>
-   <!--قسم صفحة العرض-->
-
+    <!--قسم صفحة العرض-->
 
     <div class="hero-section-m">
-      <img src="assets/imge/0005.jpg" alt="" loading="lazy"/>
+      <img src="assets/imge/0005.jpg" alt="store-pic" loading="lazy" />
       <div class="logo-text"><p>المتجر</p></div>
     </div>
 
-  
-  <div id="cart-popup" class="cart-popup hidden">
-    <div class="popup-content">
+    <div class="title0">
+      <p>المتجر</p>
+    </div>
+
+    <!--قسم نافذة المتجر -->
+    <div id="cart-popup" class="cart-popup hidden">
+      <div class="popup-content">
         <span class="close-popup" onclick="closeCartPopup()">&times;</span>
         <div class="product-info">
-            <img id="popup-img" src="" alt="">
-            <div>
-                <h4 id="popup-title"></h4>
-                <p id="popup-price"></p>
-            </div>
+          <img id="popup-img" src="" alt="" />
+          <div>
+            <h4 id="popup-title"></h4>
+            <p id="popup-price"></p>
+          </div>
         </div>
-        <hr>
+        <hr />
         <div class="popup-footer">
-    <button class="btn-view-cart" onclick="window.location.href='view-cart.html'">عرض السلة</button>
-    
-    <button class="btn-checkout" onclick="window.location.href='checkout.html'">إكمال الطلب</button>
-</div>
+          <button
+            class="btn-view-cart"
+            onclick="window.location.href = 'view-cart.html'"
+          >
+            عرض السلة
+          </button>
+
+          <button
+            class="btn-checkout"
+            onclick="window.location.href = 'checkout.html'"
+          >
+            إكمال الطلب
+          </button>
+        </div>
+      </div>
     </div>
-</div>
 
+    <div id="store-grid" class="card-container1"></div>
 
+    <script>
+      //المتجر
+      const store = [
+        {
+          title: "شهادة مدرب معتمد",
+          price: 735,
+          img: "assets/store&memberships/0011.jpg",
+          link: "assets/store&memberships/0011.jpg",
+        },
+        {
+          title: "شهادة مركز معتمد",
+          price: 1469,
+          img: "assets/store&memberships/0012.jpg",
+          link: "assets/store&memberships/0012.jpg",
+        },
+      ];
+      function createCardHTML(item, btnText = "عرض المجلة") {
+        const itemData = JSON.stringify(item).replace(/"/g, "&quot;");
 
-
-
-
-  <div class="magazine-1">
-      <p>المتجر </p>  
-
-    </div>
-
-  <div id="store-grid" class="card-container1"></div>
-
-  <script>
-    //المتجر
- const store = [
-{
- title: 'شهادة مدرب معتمد',
- price: 735,
- img: 'assets/store&memberships/0011.jpg',
- link: 'assets/store&memberships/0011.jpg'
-},
-{
- title: 'شهادة مركز معتمد',
- price: 1469,
- img: 'assets/store&memberships/0012.jpg',
- link: 'assets/store&memberships/0012.jpg'
-}
-];
-function createCardHTML(item, btnText = "عرض المجلة") {
-    
-    const itemData = JSON.stringify(item).replace(/"/g, '&quot;');
-    
-    return `
+        return `
     <div class="card1">
         <img src="${item.img}" alt="${item.title}"/>
         <div class="class-content1">
             <h3>${item.title}</h3>
-            <p>${item.price ? item.price + ' د.ا' : ''}</p>
+            <p>${item.price ? item.price + " د.ا" : ""}</p>
             <button onclick="addToCart(${itemData})" class="btn1 add-to-cart-btn">${btnText}</button>
         </div>
     </div>`;
-}
+      }
 
-//المتجر
-const myGrid5 = document.getElementById('store-grid');
-if (myGrid5) {
-    store.forEach(str => { myGrid5.innerHTML += createCardHTML(str, "اضافة الى السلة "); });
-}
+      //المتجر
+      const myGrid5 = document.getElementById("store-grid");
+      if (myGrid5) {
+        store.forEach((str) => {
+          myGrid5.innerHTML += createCardHTML(str, "اضافة الى السلة");
+        });
+      }
 
+      let cart = JSON.parse(localStorage.getItem("myCart")) || [];
 
+      function closeCartPopup() {
+        const popup = document.getElementById("cart-popup");
+        if (popup) popup.classList.add("hidden");
+      }
 
-let cart = JSON.parse(localStorage.getItem('myCart')) || [];
+      function addToCart(item) {
+        let itemData = item;
+        if (typeof item === "string") {
+          itemData = JSON.parse(item);
+        }
 
-function closeCartPopup() {
-    const popup = document.getElementById('cart-popup');
-    if (popup) popup.classList.add('hidden');
-}
+        cart.push(itemData);
+        localStorage.setItem("myCart", JSON.stringify(cart));
 
-function addToCart(item) {
-    let itemData = item;
-    if (typeof item === 'string') {
-        itemData = JSON.parse(item);
-    }
+        const cartBadge = document.getElementById("cart-count");
+        if (cartBadge) {
+          cartBadge.innerText = cart.length;
+          cartBadge.style.display = cart.length > 0 ? "flex" : "none";
+        }
 
- 
-    cart.push(itemData);
-    localStorage.setItem('myCart', JSON.stringify(cart));
+        const popup = document.getElementById("cart-popup");
+        if (popup) {
+          const titleEl = document.getElementById("popup-title");
+          const imgEl = document.getElementById("popup-img");
+          const priceEl = document.getElementById("popup-price");
+          if (titleEl)
+            titleEl.innerText = `تمت الإضافة للسلة: ${itemData.title || ""}`;
+          if (imgEl) imgEl.src = itemData.img;
+          if (priceEl)
+            priceEl.innerText = itemData.price ? `${itemData.price} د.ا` : "";
 
-    const cartBadge = document.getElementById('cart-count');
-    if (cartBadge) {
-        cartBadge.innerText = cart.length;
-        cartBadge.style.display = cart.length > 0 ? 'flex' : 'none';
-    }
+          popup.classList.remove("hidden");
+          setTimeout(() => {
+            popup.classList.add("hidden");
+          }, 4000);
+        }
+      }
+    </script>
 
-  
-    const popup = document.getElementById('cart-popup');
-    if (popup) {
-        const titleEl = document.getElementById('popup-title');
-        const imgEl = document.getElementById('popup-img');
-        const priceEl = document.getElementById("popup-price");
-        if (titleEl) titleEl.innerText = `تمت الإضافة للسلة: ${itemData.title || ''}`;
-        if (imgEl) imgEl.src = itemData.img;
-        if (priceEl) priceEl.innerText = (itemData.price ? `${itemData.price} د.ا` : '');
-
-        popup.classList.remove('hidden');
-        setTimeout(() => {
-            popup.classList.add('hidden');
-        }, 3000);
-    }
-}
-
-  </script>
-
-
-   <div id="footer-placeholder"></div>
-             
+    <div id="footer-placeholder"></div>
 
     <script src="js/script.js"></script>
   </body>

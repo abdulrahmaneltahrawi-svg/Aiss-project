@@ -1,207 +1,243 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-     <link rel="icon" href="assets/icons/logo.png" />
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="assets/icons/logo.png" />
     <title>إتمام الطلب</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
       rel="stylesheet"
     />
     <style>
-      
-.checkout-container {
-    display: flex;
-    margin-top: 50px;
-    flex-direction: row-reverse; 
-    gap: 50px;
-    padding: 50px 10%;
-    background-color: whitesmoke;
-    direction: rtl;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+      .checkout-container {
+        display: flex;
+        margin-top: 50px;
+        flex-direction: row-reverse;
+        gap: 50px;
+        padding: 50px 10%;
+        background-color: whitesmoke;
+        direction: rtl;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
 
+      .section-title {
+        color: #d32f2f;
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+        font-weight: bold;
+      }
 
-.section-title {
-    color: #d32f2f; 
-    font-size: 1.2rem;
-    margin-bottom: 25px;
-    font-weight: bold;
-}
+      .billing-details {
+        flex: 2;
+      }
+      .input-group {
+        display: flex;
+        gap: 30px;
+      }
+      .field {
+        margin-bottom: 20px;
+        flex: 1;
+      }
 
+      .field label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        color: #333;
+      }
 
-.billing-details { flex: 2; }
-.input-group { display: flex; gap: 30px; }
-.field { margin-bottom: 20px; flex: 1; }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #e0e0e0;
+        border-radius: 25px;
+        background: #fff;
+        outline: none;
+      }
 
-.field label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-    color: #333;
-}
+      textarea {
+        border-radius: 15px;
+        height: 120px;
+      }
 
-input, select, textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #e0e0e0;
-    border-radius: 25px; 
-    background: #fff;
-    outline: none;
-}
+      .order-sidebar {
+        flex: 1;
+      }
+      .order-card {
+        border: 1px solid #f0f0f0;
+        padding: 30px;
+        background: #fdfdfd;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+      }
 
-textarea { border-radius: 15px; height: 120px; }
+      .order-title {
+        text-align: center;
+        color: #d32f2f;
+        margin-bottom: 20px;
+      }
 
+      .order-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      .order-table th,
+      .order-table td {
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+        text-align: right;
+        font-size: 0.9rem;
+      }
 
-.order-sidebar { flex: 1; }
-.order-card {
-    border: 1px solid #f0f0f0;
-    padding: 30px;
-    background: #fdfdfd;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    border-radius: 8px;
-}
+      .price {
+        text-align: left !important;
+        font-weight: bold;
+      }
+      .red-text {
+        color: #d32f2f;
+        font-size: 1.3rem;
+      }
 
-.order-title { text-align: center; color: #d32f2f; margin-bottom: 20px; }
+      .pay-btn {
+        width: 100%;
+        background-color: #d32f2f;
+        color: white;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+      }
 
-.order-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-.order-table th, .order-table td {
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
-    text-align: right;
-    font-size: 0.9rem;
-}
+      .pay-btn:hover {
+        background-color: #b71c1c;
+      }
 
-.price { text-align: left !important; font-weight: bold; }
-.red-text { color: #d32f2f; font-size: 1.3rem; }
+      .payment-instruction {
+        background: #fff;
+        padding: 15px;
+        border: 1px solid #eee;
+        font-size: 0.8rem;
+        margin: 10px 0;
+      }
 
-
-.pay-btn {
-    width: 100%;
-    background-color: #d32f2f;
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-.pay-btn:hover { background-color: #b71c1c; }
-
-.payment-instruction {
-    background: #fff;
-    padding: 15px;
-    border: 1px solid #eee;
-    font-size: 0.8rem;
-    margin: 10px 0;
-}
-
-.terms-text { font-size: 0.75rem; color: #777; line-height: 1.6; }
+      .terms-text {
+        font-size: 0.75rem;
+        color: #777;
+        line-height: 1.6;
+      }
     </style>
-</head>
-<body>
-    <div class="aiss-checkout-wrapper">
-        
-    </div>
+  </head>
+  <body>
+    <div class="aiss-checkout-wrapper"></div>
 
     <div id="header-placeholder"></div>
-<div class="checkout-container">
-    <div class="billing-details">
+    
+    <div class="checkout-container">
+      <div class="billing-details">
         <h3 class="section-title">تفاصيل الفاتورة</h3>
         <form>
-            <div class="input-group">
-                <div class="field">
-                    <label>اسم العائلة *</label>
-                    <input type="text" required>
-                </div>
-                <div class="field">
-                    <label>الاسم الأول *</label>
-                    <input type="text" required>
-                </div>
-            </div>
-
+          <div class="input-group">
             <div class="field">
-                <label>اسم الشركة (اختياري)</label>
-                <input type="text">
+              <label>اسم العائلة *</label>
+              <input type="text" required />
             </div>
-
             <div class="field">
-                <label>الدولة / المنطقة *</label>
-                <select>
-                    <option>الإمارات العربية المتحدة</option>
-                </select>
+              <label>الاسم الأول *</label>
+              <input type="text" required />
             </div>
+          </div>
 
-            <div class="field">
-                <label>الجوال *</label>
-                <input type="tel" required>
-            </div>
+          <div class="field">
+            <label>اسم الشركة (اختياري)</label>
+            <input type="text" />
+          </div>
 
-            <div class="field">
-                <label>البريد الإلكتروني *</label>
-                <input type="email" required>
-            </div>
+          <div class="field">
+            <label>الدولة / المنطقة *</label>
+            <select>
+              <option>الإمارات العربية المتحدة</option>
+            </select>
+          </div>
 
-            <h3 class="section-title">معلومات إضافية</h3>
-            <div class="field">
-                <label>ملاحظات الطلب (اختياري)</label>
-                <textarea placeholder="ملاحظات حول الطلب، مثال: ملحوظة خاصة بتسليم الطلب."></textarea>
-            </div>
+          <div class="field">
+            <label>الجوال *</label>
+            <input type="tel" required />
+          </div>
+
+          <div class="field">
+            <label>البريد الإلكتروني *</label>
+            <input type="email" required />
+          </div>
+
+          <h3 class="section-title">معلومات إضافية</h3>
+          <div class="field">
+            <label>ملاحظات الطلب (اختياري)</label>
+            <textarea
+              placeholder="ملاحظات حول الطلب، مثال: ملحوظة خاصة بتسليم الطلب."
+            ></textarea>
+          </div>
         </form>
-    </div>
+      </div>
 
-    <div class="order-sidebar">
+      <div class="order-sidebar">
         <div class="order-card">
-            <h3 class="order-title">طلبك</h3>
-            <table class="order-table">
-                <thead>
-                    <tr>
-                        <th>المجموع</th>
-                        <th>المنتج</th>
-                    </tr>
-                </thead>
-                <tbody id="order-items"></tbody>
-            </table>
+          <h3 class="order-title">طلبك</h3>
+          <table class="order-table">
+            <thead>
+              <tr>
+                <th>المجموع</th>
+                <th>المنتج</th>
+              </tr>
+            </thead>
+            <tbody id="order-items"></tbody>
+          </table>
 
-            <div class="payment-box">
-                <p>بطاقة الائتمان أو الخصم</p>
-                <div class="payment-instruction">
-                    ادفع باستخدام بطاقة الائتمان أو الخصم عبر المعهد العربي لعلوم السلامة
-                </div>
+          <div class="payment-box">
+            <p>بطاقة الائتمان أو الخصم</p>
+            <div class="payment-instruction">
+              ادفع باستخدام بطاقة الائتمان أو الخصم عبر المعهد العربي لعلوم
+              السلامة
             </div>
+          </div>
 
-            <p class="terms-text">
-                سيتم استخدام بياناتك الشخصية لدعم تجربتك عبر هذا الموقع، ولإدارة الوصول إلى حسابك، ولأغراض أخرى موضحة في
-                <a href="privacy.html">سياسة الخصوصية</a>.
-            </p>
+          <p class="terms-text">
+            سيتم استخدام بياناتك الشخصية لدعم تجربتك عبر هذا الموقع، ولإدارة
+            الوصول إلى حسابك، ولأغراض أخرى موضحة في
+            <a href="privacy.html">سياسة الخصوصية</a>.
+          </p>
 
-            <button class="pay-btn" id="pay-btn" type="button">تأكيد وإتمام الطلب</button>
+          <button class="pay-btn" id="pay-btn" type="button">
+            تأكيد وإتمام الطلب
+          </button>
         </div>
+      </div>
     </div>
-</div>
 
-<script>
-  function formatPrice(value) {
-    const n = Number(value);
-    if (Number.isFinite(n)) return `${n} د.ا`;
-    return value ? `${value} د.ا` : "";
-  }
+    <script>
+      function formatPrice(value) {
+        const n = Number(value);
+        if (Number.isFinite(n)) return `${n} د.ا`;
+        return value ? `${value} د.ا` : "";
+      }
 
-  function calcTotal(items) {
-    return items.reduce((sum, it) => sum + (Number(it.price) || 0), 0);
-  }
+      function calcTotal(items) {
+        return items.reduce((sum, it) => sum + (Number(it.price) || 0), 0);
+      }
 
-  function renderOrderSummary() {
-    const cart = JSON.parse(localStorage.getItem("myCart")) || [];
-    const tbody = document.getElementById("order-items");
-    if (!tbody) return;
+      function renderOrderSummary() {
+        const cart = JSON.parse(localStorage.getItem("myCart")) || [];
+        const tbody = document.getElementById("order-items");
+        if (!tbody) return;
 
-    if (cart.length === 0) {
-      tbody.innerHTML = `
+        if (cart.length === 0) {
+          tbody.innerHTML = `
         <tr>
           <td class="price">0 د.ا</td>
           <td>لا توجد منتجات</td>
@@ -211,20 +247,22 @@ textarea { border-radius: 15px; height: 120px; }
           <td>الإجمالي</td>
         </tr>
       `;
-      return;
-    }
+          return;
+        }
 
-    const total = calcTotal(cart);
-    tbody.innerHTML =
-      cart
-        .map((item) => `
+        const total = calcTotal(cart);
+        tbody.innerHTML =
+          cart
+            .map(
+              (item) => `
           <tr>
             <td class="price">${formatPrice(item.price)}</td>
             <td>${item.title || ""} × 1</td>
           </tr>
-        `)
-        .join("") +
-      `
+        `,
+            )
+            .join("") +
+          `
         <tr class="subtotal">
           <td class="price">${formatPrice(total)}</td>
           <td>المجموع</td>
@@ -234,19 +272,19 @@ textarea { border-radius: 15px; height: 120px; }
           <td>الإجمالي</td>
         </tr>
       `;
-  }
+      }
 
-  renderOrderSummary();
+      renderOrderSummary();
 
-  const payBtn = document.getElementById("pay-btn");
-  if (payBtn) {
-    payBtn.addEventListener("click", () => {
-      window.location.href = "check.html";
-    });
-  }
-</script>
+      const payBtn = document.getElementById("pay-btn");
+      if (payBtn) {
+        payBtn.addEventListener("click", () => {
+          window.location.href = "check.html";
+        });
+      }
+    </script>
 
-<div id="footer-placeholder"></div>
-<script src="js/script.js"></script>
-</body>
+    <div id="footer-placeholder"></div>
+    <script src="js/script.js"></script>
+  </body>
 </html>
