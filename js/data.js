@@ -4,7 +4,8 @@ const myCards = [
     title: "الصفحة الاخيرة 62",
     image:
       "assets/blogs/integrated-strategies-for-womens-participation-in-safety-management-towards-a-leading-arab-model-1.png",
-    category: "محتويات عامة",
+    // محتويات علمية / مقالات الخبراء / مقالات المجلة
+    category: "محتويات علمية",
 
     description: `
       <div class="intro-text">
@@ -45,7 +46,7 @@ const myCards = [
     title: "3 – تقنيات الكشف المبكر، أنظمة الإطفاء، والتدريب الوقائي",
     image:
       "assets/blogs/3-early-detection-techniques-fire-suppression-systems-and-preventative-training-1.png",
-    category: "محتويات عملية",
+    category: "محتويات علمية",
 
     description: `
       <div class="intro-text">
@@ -69,7 +70,7 @@ const myCards = [
     title: "13- برنامج iRAP خارطة طريق لعالَم بلا طرق عالية الخطورة",
     image:
       "assets/blogs/13-the-irap-program-a-roadmap-to-a-world-without-high-risk-roads-1.png",
-    category: "محتويات عملية",
+    category: "مقالات الخبراء",
 
     description: `
       <div class="intro-text">
@@ -95,7 +96,7 @@ const myCards = [
       "الضوضاء في بيئة العمل: الخطر الصامت الذي لا يُرى ولا يُسمع إلا بعد فوات الأوان",
     image:
       "assets/blogs/Noise-in-the-workplace-the-silent-danger-that-is-neither-seen-nor-heard-until-its-too-late.png",
-    category: "محتويات عملية",
+    category: "مقالات المجلة",
 
     description: `
       <div class="intro-text">
@@ -130,7 +131,7 @@ const myCards = [
       "ملف العدد (3): الاستراتيجيات المقترحة لإشراك المرأة في إدارة السلام",
     image:
       "assets/blogs/Issue-File-1_-The-Role-of-Women-in-Safety-Management-1.jpg",
-    category: "ملفات العدد",
+    category: "مقالات المجلة",
 
     description: `
       <div class="intro-text">
@@ -157,6 +158,4 @@ const myCards = [
 // ضمان وجود تصنيف لكل مدونة
 myCards.forEach((item) => {
   if (!item.category) item.category = "محتويات علمية";
-  if (item.category === "محتويات عامة" || item.category === "محتويات عملية") item.category = "محتويات علمية";
-  if (item.category === "ملفات العدد" || item.category === "ملفات المجلة") item.category = "المجلة";
 });
