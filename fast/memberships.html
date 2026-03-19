@@ -117,7 +117,13 @@
             <li>اضافة وظائف جديدة</li>
             <li>الاضافة الى دليل الشركات</li>
           </ul>
-          <button class="cta-button">احصل على عضويتك</button>
+          <button
+            class="cta-button"
+            type="button"
+            onclick="addToCart({title:'عضوية الشركات',price:367.29,img:'assets/store&memberships/0011.jpg'})"
+          >
+            احصل على عضويتك
+          </button>
         </h2>
       </div>
 
@@ -129,7 +135,13 @@
             <li>مشاهدة و تحميل المجلة</li>
             <li>التقدم على الوئاظف المتاحة</li>
           </ul>
-          <button class="cta-button">عضويتك</button>
+          <button
+            class="cta-button"
+            type="button"
+            onclick="addToCart({title:'عضوية مشارك',price:55.55,img:'assets/store&memberships/0012.jpg'})"
+          >
+            عضويتك
+          </button>
         </h2>
       </div>
     
@@ -143,7 +155,13 @@
             <li>مشاهدة و تحميل المجلة</li>
             <li>التقدم على الوظائف المتاحة</li>
           </ul>
-          <button class="cta-button">احصل على عضويتك</button>
+          <button
+            class="cta-button"
+            type="button"
+            onclick="addToCart({title:'عضوية خبير',price:91.82,img:'assets/store&memberships/0012.jpg'})"
+          >
+            احصل على عضويتك
+          </button>
     </div>
 
     
@@ -151,6 +169,26 @@
 
     </div>
     <div id="footer-placeholder"></div>
+    <script>
+      // ربط العضويات بالسلة عبر localStorage (نفس منطق السلة في المتجر)
+      let cart = JSON.parse(localStorage.getItem("myCart")) || [];
+
+      function updateCartBadgeCount() {
+        const badge = document.getElementById("cart-count");
+        if (!badge) return;
+        badge.innerText = cart.length;
+        badge.style.display = cart.length > 0 ? "flex" : "none";
+      }
+
+      window.addToCart = function addToCart(item) {
+        cart.push(item);
+        localStorage.setItem("myCart", JSON.stringify(cart));
+        updateCartBadgeCount();
+      };
+
+      // تحديث الشارة عند فتح الصفحة
+      updateCartBadgeCount();
+    </script>
     <script src="js/script.js"></script>
   </body>
 </html>
