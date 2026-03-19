@@ -15,8 +15,6 @@
     />
   </head>
   <body>
-    
-  <body>
     <div id="header-placeholder"></div>
    <!--قسم صفحة العرض-->
 
@@ -35,32 +33,59 @@
     <div id="codes-grid" class="card-container1"></div>
 
 <script>
-async function loadCodes() {
-    const grid = document.getElementById("codes-grid");
-    if (!grid) return;
+async function fetchCodesData() {
+  // نحاول أكثر من مسار لتفادي مشاكل الأسماء/الترميز أثناء النشر
+  const paths = [
+    "cleaned-posts (1).json",
+    "cleaned-posts%20(1).json",
+    "./cleaned-posts (1).json",
+    "./cleaned-posts%20(1).json",
+  ];
 
+  for (const path of paths) {
     try {
-        const response = await fetch('cleaned-posts (1).json');
-        const data = await response.json();
+      const response = await fetch(path, { cache: "no-store" });
+      if (!response.ok) continue;
+      const data = await response.json();
+      if (Array.isArray(data) && data.length) return data;
+    } catch (_) {}
+  }
 
-        grid.innerHTML = ""; // تنظيف الحاوية قبل الإضافة
-
-        data.forEach((item, index) => {
-            grid.innerHTML += `
-                <div class="card1">
-                    <img src="${item.image}">
-                    <div class="class-content1">
-                        <h3>${item.title}</h3>
-                        <a href="views.html?id=${index}&source=codes" class="btn1">عرض التفاصيل</a>
-                    </div>
-                </div>
-            `;
-        });
-    } catch (error) {
-        console.error("خطأ في جلب البيانات:", error);
-    }
+  throw new Error("تعذّر تحميل ملف الأكواد والمعايير");
 }
-document.addEventListener('DOMContentLoaded', loadCodes);
+
+function renderCodes(data) {
+  const grid = document.getElementById("codes-grid");
+  if (!grid) return;
+  grid.innerHTML = "";
+
+  data.forEach((item, index) => {
+    const img = item.image || "assets/imge/0006.jpg";
+    grid.innerHTML += `
+      <div class="card1">
+        <img src="${img}" alt="${item.title || "كود"}">
+        <div class="class-content1">
+          <h3>${item.title || ""}</h3>
+          <a href="views.html?id=${index}&source=codes" class="btn1">عرض التفاصيل</a>
+        </div>
+      </div>
+    `;
+  });
+}
+
+async function loadCodes() {
+  const grid = document.getElementById("codes-grid");
+  if (!grid) return;
+  try {
+    const data = await fetchCodesData();
+    renderCodes(data);
+  } catch (error) {
+    console.error("خطأ في جلب البيانات:", error);
+    grid.innerHTML = `<p style="padding:16px;text-align:center;">تعذر تحميل الأكواد والمعايير حاليًا.</p>`;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadCodes);
 </script>
     
 

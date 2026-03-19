@@ -35,18 +35,41 @@
       const params = new URLSearchParams(window.location.search);
       const id = params.get("id");
       const source = params.get("source"); // التحقق من مصدر البيانات
+      const EVENTS_CACHE_KEY = "aissEventsCacheV1";
 
       async function loadDynamicContent() {
         let data;
 
         if (source === "codes") {
           // إذا كان المصدر "codes" نجلب البيانات من ملف الجيسون
-          const response = await fetch("cleaned-posts (1).json");
-          data = await response.json();
+          const paths = [
+            "cleaned-posts (1).json",
+            "cleaned-posts%20(1).json",
+            "./cleaned-posts (1).json",
+            "./cleaned-posts%20(1).json",
+          ];
+          for (const path of paths) {
+            try {
+              const response = await fetch(path, { cache: "no-store" });
+              if (!response.ok) continue;
+              const json = await response.json();
+              if (Array.isArray(json) && json.length) {
+                data = json;
+                break;
+              }
+            } catch (_) {}
+          }
+          if (!data) data = [];
           const backLink = document.getElementById("back-link");
           if (backLink) backLink.href = "cods.html";
         } else if (source === "events") {
-          data = events;
+          // إذا تم جلب الأحداث من موقع AISS مسبقًا، نستخدم الكاش أولًا
+          try {
+            const cached = JSON.parse(localStorage.getItem(EVENTS_CACHE_KEY));
+            data = Array.isArray(cached) && cached.length ? cached : events;
+          } catch (_) {
+            data = events;
+          }
           const backLink = document.getElementById("back-link");
           if (backLink) backLink.href = "event.html";
         } else {
@@ -60,7 +83,9 @@
         // لذلك نطابق حسب قيمة `item.id` بدل استخدام `data[id]`.
         let item = null;
         if (Array.isArray(data)) {
-          item = data.find((it) => String(it.id) === String(id)) || null;
+          const byId = data.find((it) => String(it.id) === String(id));
+          const byIndex = data[Number(id)];
+          item = byId || byIndex || null;
         } else if (data && typeof data === "object") {
           item = data[id] || data[String(id)] || data[Number(id)] || null;
         }

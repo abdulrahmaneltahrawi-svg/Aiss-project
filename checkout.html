@@ -279,7 +279,11 @@
       const payBtn = document.getElementById("pay-btn");
       if (payBtn) {
         payBtn.addEventListener("click", () => {
-          window.location.href = "check.html";
+          // لا توجد صفحة check.html حاليًا، لذلك ننهي الطلب بشكل آمن
+          // ثم نعيد المستخدم للرئيسية.
+          localStorage.removeItem("myCart");
+          alert("تم استلام طلبك بنجاح.");
+          window.location.href = "index.html";
         });
       }
     </script>
