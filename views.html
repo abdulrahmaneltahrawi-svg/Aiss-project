@@ -56,7 +56,14 @@
           if (backLink) backLink.href = "blogs.html";
         }
 
-        const item = data[id];
+        // `myCards` مصفوفة، وداخلها `id` ليس بنفس ترتيب الفهارس (index)،
+        // لذلك نطابق حسب قيمة `item.id` بدل استخدام `data[id]`.
+        let item = null;
+        if (Array.isArray(data)) {
+          item = data.find((it) => String(it.id) === String(id)) || null;
+        } else if (data && typeof data === "object") {
+          item = data[id] || data[String(id)] || data[Number(id)] || null;
+        }
 
         if (item) {
           document.getElementById("title-placeholder").innerText = item.title;
