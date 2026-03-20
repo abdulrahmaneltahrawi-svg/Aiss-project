@@ -25,6 +25,47 @@ const magazines = [
     { title: "مجلة السلامة العربية", date: "العدد42-يوليو2024", img: "assets/magazine/Issue-42-July-2024.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "العدد41-يونيو", img: "assets/magazine/Issue-41_May-2024.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "العدد40-مايو2024", img: "assets/magazine/Issue-40-May-2024.jpg", link: "#" },
+    // باقي المجلات الموجودة داخل assets/magazine (بدون روابط فلـِپ حاليًا)
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/335a1bda-2cb7-49f5-bda0-4f9345a5cfab.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/36e23e38-8f65-4920-9034-19c89fea2070.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/47fe6496-a5b7-420e-9094-73a8b08daae5.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/6ffd7fac-1d43-45e5-b055-7204f7087b3d.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/7ab5f092-5d9e-4de6-aec4-15f034a7e27d.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/8b90e057-0286-4a12-b584-3386b2846cc9.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/ac8fdb62-5e7c-4a13-bed3-8e9780f20712.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/e3b51429-f2e1-4dcd-9eb7-f0ed7f1ccd06.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-17-june-2022.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-18-july-2022.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-19-august-2022.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-20-september-2022.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-21-october-2022.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-22-november-2022.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-23-december-2022.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-25-february-2023.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-27-april-2023-1.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/Issue-34_November-2023.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-35_december-2023.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/Issue-36_January-2024.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/Issue-37-February-2024.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-38-march-2024.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/Issue-No.-39_April-2024.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue1.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue3.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue7.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue9.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue10.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue28.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue29.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue30.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue31.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue32.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/magazine33.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/WhatsApp-Image-2023-10-13-at-6.58.26-AM.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/WhatsApp-Image-2024-11-12-at-3.09.34-PM.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/WhatsApp-Image-2025-03-12-at-1.37.54-PM-1.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/WhatsApp-Image-2025-03-12-at-1.37.54-PM.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/WhatsApp-Image-2025-03-12-at-1.37.55-PM.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/????.png", link: "#" },
 ];
 
 
@@ -59,23 +100,118 @@ function createCardHTML(item, btnText = "عرض المجلة") {
         </div>`;
 }
 
+function getMagazineDateScore(mag, idx) {
+    // الهدف: حساب رقم قابل للفرز (year*12 + month) من تاريخ عربي أو من اسم ملف الصورة
+    const d = (mag?.date || "").toString();
+    const yearMatch = d.match(/(19|20)\d{2}/);
+    const year = yearMatch ? Number(yearMatch[0]) : null;
+
+    const arabicMonths = {
+        "يناير": 0,
+        "فبراير": 1,
+        "مارس": 2,
+        "ابريل": 3,
+        "أبريل": 3,
+        "مايو": 4,
+        "يونيو": 5,
+        "يوليو": 6,
+        "اغسطس": 7,
+        "أغسطس": 7,
+        "سبتمبر": 8,
+        "اكتوبر": 9,
+        "أكتوبر": 9,
+        "نوفمبر": 10,
+        "ديسمبر": 11,
+    };
+
+    let month = null;
+    for (const key in arabicMonths) {
+        if (d.includes(key)) {
+            month = arabicMonths[key];
+            break;
+        }
+    }
+
+    if (year !== null && month !== null) return year * 12 + month;
+
+    // fallback: محاولة قراءة الشهر/السنة من اسم ملف الصورة (بالإنجليزي)
+    const imgName = (mag?.img || "").toString().toLowerCase();
+    const imgYearMatch = imgName.match(/(19|20)\d{2}/);
+    const imgYear = imgYearMatch ? Number(imgYearMatch[0]) : null;
+
+    const englishMonths = {
+        "january": 0,
+        "february": 1,
+        "march": 2,
+        "april": 3,
+        "may": 4,
+        "june": 5,
+        "july": 6,
+        "august": 7,
+        "september": 8,
+        "october": 9,
+        "november": 10,
+        "december": 11,
+    };
+
+    let imgMonth = null;
+    for (const key in englishMonths) {
+        if (imgName.includes(key)) {
+            imgMonth = englishMonths[key];
+            break;
+        }
+    }
+
+    if (imgYear !== null && imgMonth !== null) return imgYear * 12 + imgMonth;
+
+    // إذا ما قدرنا نقرأ تاريخ: نرجع null ونتركه في نهاية القائمة
+    return null;
+}
+
 // المجلات - الصفحة الكاملة
 const myGrid = document.getElementById('magazines-grid');
 if (myGrid) {
-    magazines.forEach(mag => { myGrid.innerHTML += createCardHTML(mag, "عرض المجلة"); });
+    const sortSelect = document.getElementById("magazines-sort");
+
+    function renderSorted(order) {
+        const items = magazines.map((mag, idx) => ({
+            mag,
+            idx,
+            score: getMagazineDateScore(mag, idx),
+        }));
+
+        const withScore = items.filter((x) => x.score !== null);
+        const withoutScore = items.filter((x) => x.score === null).sort((a, b) => a.idx - b.idx);
+
+        withScore.sort((a, b) => {
+            if (order === "oldest") return a.score - b.score;
+            return b.score - a.score; // newest
+        });
+
+        const result = [...withScore, ...withoutScore].map((x) => x.mag);
+        myGrid.innerHTML = result.map((m) => createCardHTML(m, "عرض المجلة")).join("");
+    }
+
+    const initialOrder = sortSelect ? sortSelect.value : "newest";
+    renderSorted(initialOrder);
+
+    if (sortSelect) {
+        sortSelect.addEventListener("change", () => renderSorted(sortSelect.value));
+    }
 }
 
 // المجلات - الرئيسية (4 فقط)
 const homeGrid = document.getElementById('home-magazines-grid');
 if (homeGrid) {
-    magazines.slice(0, 4).forEach(mag => { homeGrid.innerHTML += createCardHTML(mag, "عرض المجلة"); });
+    // اعرض كل المجلات بدل عرض 4 فقط
+    homeGrid.innerHTML = magazines.map(mag => createCardHTML(mag, "عرض المجلة")).join("");
 }
 
 
 // الكتيبات
 const manulasGrid = document.getElementById('manuals-grid');
 if (manulasGrid) {
-    manulas.forEach(man => { manulasGrid.innerHTML += createCardHTML(man, "عرض الكتيب"); });
+    manulasGrid.innerHTML = manulas.map(man => createCardHTML(man, "عرض الكتيب")).join("");
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -154,6 +290,78 @@ function activateHeader() {
         loginModel.addEventListener('click', (e) => {
             if (e.target === loginModel) loginModel.style.display = 'none';
         });
+
+        // تسجيل دخول/إنشاء حساب بشكل تجريبي (بدون Backend)
+        const emailInput = loginModel.querySelector('.email-input[type="email"]');
+        const passwordInput = loginModel.querySelector('.password-input');
+        const submitBtn = loginModel.querySelector('.submit-btn');
+        const messageEl = loginModel.querySelector('#auth-message') || loginModel.querySelector('.auth-message');
+        const createLink = loginModel.querySelector('.auth-create-link');
+        if (createLink) {
+            // شكل الرابط فقط، بدون تبديل فعلي للحساب (تجنب قفزة صفحة عند الضغط)
+            createLink.addEventListener('click', (ev) => ev.preventDefault());
+        }
+
+        const USERS_KEY = 'aissUsersV1';
+        const CURRENT_KEY = 'aissCurrentUserV1';
+
+        const setMessage = (text, type) => {
+            if (!messageEl) return;
+            messageEl.textContent = text || '';
+            messageEl.classList.remove('error', 'success');
+            if (type) messageEl.classList.add(type);
+        };
+
+        if (submitBtn && emailInput && passwordInput) {
+            submitBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                const email = (emailInput.value || '').trim().toLowerCase();
+                const password = passwordInput.value || '';
+
+                if (!email) {
+                    setMessage('من فضلك أدخل البريد الإلكتروني.', 'error');
+                    return;
+                }
+                if (!password) {
+                    setMessage('من فضلك أدخل كلمة المرور.', 'error');
+                    return;
+                }
+                if (password.length < 4) {
+                    setMessage('كلمة المرور قصيرة جدًا.', 'error');
+                    return;
+                }
+
+                let users = {};
+                try {
+                    users = JSON.parse(localStorage.getItem(USERS_KEY)) || {};
+                } catch (_) {
+                    users = {};
+                }
+
+                const existing = users[email];
+                    if (existing) {
+                        // تسجيل دخول
+                        if (existing.password !== password) {
+                            setMessage('كلمة المرور غير صحيحة.', 'error');
+                            return;
+                        }
+                        localStorage.setItem(CURRENT_KEY, email);
+                        setMessage('تم تسجيل الدخول بنجاح.', 'success');
+                    } else {
+                        // إنشاء حساب تلقائيًا عند عدم وجوده
+                        users[email] = { password };
+                        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+                        localStorage.setItem(CURRENT_KEY, email);
+                        setMessage('تم إنشاء الحساب بنجاح.', 'success');
+                    }
+
+                // إغلاق المودال بعد إظهار الرسالة
+                setTimeout(() => {
+                    if (loginModel) loginModel.style.display = 'none';
+                }, 800);
+            });
+        }
     }
     if (searchBtn && searchInput) {
         searchBtn.onclick = () => {
