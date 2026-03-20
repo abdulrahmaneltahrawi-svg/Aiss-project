@@ -25,47 +25,8 @@ const magazines = [
     { title: "مجلة السلامة العربية", date: "العدد42-يوليو2024", img: "assets/magazine/Issue-42-July-2024.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "العدد41-يونيو", img: "assets/magazine/Issue-41_May-2024.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "العدد40-مايو2024", img: "assets/magazine/Issue-40-May-2024.jpg", link: "#" },
-    // باقي المجلات الموجودة داخل assets/magazine (بدون روابط فلـِپ حاليًا)
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/335a1bda-2cb7-49f5-bda0-4f9345a5cfab.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/36e23e38-8f65-4920-9034-19c89fea2070.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/47fe6496-a5b7-420e-9094-73a8b08daae5.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/6ffd7fac-1d43-45e5-b055-7204f7087b3d.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/7ab5f092-5d9e-4de6-aec4-15f034a7e27d.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/8b90e057-0286-4a12-b584-3386b2846cc9.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/ac8fdb62-5e7c-4a13-bed3-8e9780f20712.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/e3b51429-f2e1-4dcd-9eb7-f0ed7f1ccd06.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-17-june-2022.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-18-july-2022.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-19-august-2022.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-20-september-2022.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-21-october-2022.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-22-november-2022.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-23-december-2022.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-25-february-2023.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-27-april-2023-1.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/Issue-34_November-2023.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-35_december-2023.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/Issue-36_January-2024.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/Issue-37-February-2024.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue-38-march-2024.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/Issue-No.-39_April-2024.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue1.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue3.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue7.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue9.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue10.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue28.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue29.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue30.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue31.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/issue32.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/magazine33.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/WhatsApp-Image-2023-10-13-at-6.58.26-AM.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/WhatsApp-Image-2024-11-12-at-3.09.34-PM.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/WhatsApp-Image-2025-03-12-at-1.37.54-PM-1.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/WhatsApp-Image-2025-03-12-at-1.37.54-PM.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/WhatsApp-Image-2025-03-12-at-1.37.55-PM.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "", img: "assets/magazine/????.png", link: "#" },
+
+
 ];
 
 
@@ -204,7 +165,7 @@ if (myGrid) {
 const homeGrid = document.getElementById('home-magazines-grid');
 if (homeGrid) {
     // اعرض كل المجلات بدل عرض 4 فقط
-    homeGrid.innerHTML = magazines.map(mag => createCardHTML(mag, "عرض المجلة")).join("");
+    homeGrid.innerHTML = magazines.slice(0, 4).map(mag => createCardHTML(mag, "عرض المجلة")).join("");
 }
 
 
@@ -291,7 +252,7 @@ function activateHeader() {
             if (e.target === loginModel) loginModel.style.display = 'none';
         });
 
-        // تسجيل دخول/إنشاء حساب بشكل تجريبي (بدون Backend)
+        
         const emailInput = loginModel.querySelector('.email-input[type="email"]');
         const passwordInput = loginModel.querySelector('.password-input');
         const submitBtn = loginModel.querySelector('.submit-btn');
