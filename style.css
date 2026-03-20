@@ -376,10 +376,13 @@ header button:hover {
 
 /* إذا كان النص داخل وسم h1 مثلاً */
 .hero-section-m p {
-    color: red;
-    font-size: 2.5rem;
-    margin: 7;
+    color: #e4293a;
+    font-size: 5rem;
+    margin-bottom: -90px;
+    text-shadow: 2px 3px 9px rgba(0, 0, 0, 0.6);
+    
 }
+
 
 /* نص العنوان فوق صورة الهيرو */
 .logo-text {
@@ -774,8 +777,8 @@ footer {
     background: rgba(0, 0, 0, 0.03);
   }
 
-  .hero-section-m img {
-    margin-top: 0;
+  .hero-section-m p {
+    margin-top: -50px;
   }
 
   .cart-popup {
