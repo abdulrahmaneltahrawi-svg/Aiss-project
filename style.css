@@ -243,6 +243,45 @@ header {
   margin-top: 14px;
 }
 
+/* رسالة نتيجة تسجيل الدخول/إنشاء الحساب داخل المودال */
+.auth-message {
+  min-height: 16px;
+  margin: 8px 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.auth-message.error {
+  color: #d32f2f;
+}
+
+.auth-message.success {
+  color: #2e7d32;
+}
+
+.auth-switch-row {
+  margin: 6px 0 2px;
+}
+
+.auth-switch-row span {
+  font-size: 12px;
+  font-weight: 700;
+  color: #111;
+}
+
+.auth-create-link {
+  margin-top: 2px;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 900;
+  color: #e4293a;
+  text-decoration: none;
+}
+
+.auth-create-link:hover {
+  text-decoration: underline;
+}
+
 /* تصميم زر تسجيل الدخول*/
 
 header button {
@@ -316,20 +355,31 @@ header button:hover {
 /*قسم صور الهيرو او العنوان */
 
 .hero-section-m {
-  padding-top: 200px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: auto;
-  display: flex;
+    position: relative;
+    width: 100%;
+    height: 300px; /* حدد ارتفاعاً مناسباً للقسم */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .hero-section-m img {
-  width: 100%;
-  height: auto;
-  margin-top: -200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* لجعل الصورة خلف النص */
 }
 
+/* إذا كان النص داخل وسم h1 مثلاً */
+.hero-section-m p {
+    color: red;
+    font-size: 2.5rem;
+    margin: 7;
+}
 
 /* نص العنوان فوق صورة الهيرو */
 .logo-text {
@@ -367,6 +417,33 @@ header button:hover {
   justify-content: center;
   flex-wrap: wrap;
   padding: 40px;
+}
+
+.magazines-filter {
+  width: 90%;
+  margin: 12px auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  direction: rtl;
+}
+
+.magazines-filter label {
+  font-weight: 800;
+  color: #111;
+}
+
+.magazines-filter select {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #fff;
+  font-weight: 700;
 }
 
 .card1 {
@@ -647,7 +724,7 @@ footer {
   }
 
   header img {
-    width: 180px;
+    width: 140px;
   }
 
   .menu-toggle {
@@ -735,7 +812,24 @@ footer {
   }
 
   .hero-section-m {
-    padding-top: 140px;
+    margin-top: 55px;
+    height: 210px;
+  }
+
+  .hero-section-m img {
+    height: 210px;
+    margin-top: 0;
+  }
+
+  .card-container1 {
+    padding: 18px 10px;
+    gap: 0;
+  }
+
+  .title0 {
+    padding: 12px 12px;
+    font-size: 20px;
+    margin-top: -6px;
   }
 
   .logo-text {

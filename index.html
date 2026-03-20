@@ -130,8 +130,7 @@
     <script>
     const grid = document.getElementById("blogs-grid");
 
-    myCards.slice(0,8).forEach((item) => {
-      grid.innerHTML += `
+    grid.innerHTML = myCards.slice(0,8).map((item) => `
       <div class="card1">
           <img src="${item.image}" loading="lazy">
           <div class="class-content1">
@@ -139,8 +138,7 @@
           <a href="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
           </div>
       </div>
-      `;
-    });
+      `).join("");
     </script>
 
     <!--احدث اصدارات المدونات(زر)-->

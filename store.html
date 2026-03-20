@@ -141,9 +141,9 @@
       //المتجر
       const myGrid5 = document.getElementById("store-grid");
       if (myGrid5) {
-        store.forEach((str) => {
-          myGrid5.innerHTML += createCardHTML(str, "اضافة الى السلة");
-        });
+        myGrid5.innerHTML = store
+          .map((str) => createCardHTML(str, "اضافة الى السلة"))
+          .join("");
       }
 
       let cart = JSON.parse(localStorage.getItem("myCart")) || [];

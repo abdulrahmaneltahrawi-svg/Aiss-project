@@ -41,7 +41,6 @@ async function fetchCodesData() {
     "./cleaned-posts (1).json",
     "./cleaned-posts%20(1).json",
   ];
-
   for (const path of paths) {
     try {
       const response = await fetch(path, { cache: "no-store" });

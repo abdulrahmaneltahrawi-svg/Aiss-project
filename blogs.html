@@ -72,9 +72,7 @@
       }
 
       function render(items) {
-        grid.innerHTML = "";
-        items.forEach((item) => {
-          grid.innerHTML += `
+        grid.innerHTML = items.map((item) => `
           <div class="card1">
             <img src="${item.image}" loading="lazy">
             <div class="class-content1">
@@ -82,8 +80,7 @@
               <a href ="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
             </div>
           </div>
-          `;
-        });
+          `).join("");
       }
 
       function initCategories() {

@@ -43,6 +43,7 @@
       function toEventItem(post, idx) {
         const title = decodeHtmlEntities(post?.title?.rendered || "").trim();
         const excerpt = decodeHtmlEntities(post?.excerpt?.rendered || "").trim();
+        const content = decodeHtmlEntities(post?.content?.rendered || "").trim();
         const image =
           post?._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
           "assets/events/مسابقة-4.png";
@@ -51,7 +52,10 @@
           id: idx,
           title: title || "حدث",
           image,
-          description: `<div class="intro-text"><p>${excerpt || "لا يوجد وصف."}</p></div>`,
+          // نستخدم content من AISS لو متاح (أغنى من excerpt)
+          description: content
+            ? content
+            : `<div class="intro-text"><p>${excerpt || "لا يوجد وصف."}</p></div>`,
         };
       }
 
@@ -90,9 +94,9 @@
 
       function renderEvents(items) {
         if (!Egrid) return;
-        Egrid.innerHTML = "";
-        items.forEach((item, index) => {
-          Egrid.innerHTML += `
+        Egrid.innerHTML = items
+          .map((item, index) => {
+            return `
             <div class="card1">
               <img src="${item.image}" alt="${item.title}">
               <div class="class-content1">
@@ -101,7 +105,8 @@
               </div>
             </div>
           `;
-        });
+          })
+          .join("");
       }
 
       async function initEvents() {
@@ -122,8 +127,6 @@
 
       initEvents();
     </script>
-
-    <script></script>
 
     <!--قسم سياسة الخصوصية-->
 
