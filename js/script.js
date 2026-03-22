@@ -105,70 +105,32 @@ function createCardHTML(item, btnText = "عرض المجلة") {
 }
 
 function getMagazineDateScore(mag, idx) {
-    // الهدف: حساب رقم قابل للفرز (year*12 + month) من تاريخ عربي أو من اسم ملف الصورة
+    // التعديل: استخراج رقم العدد (Issue Number) للترتيب بدلاً من التاريخ لضمان دقة الترتيب
+    // البيانات تحتوي دائماً على رقم العدد في حقل date أو img
     const d = (mag?.date || "").toString();
-    const yearMatch = d.match(/(19|20)\d{2}/);
-    const year = yearMatch ? Number(yearMatch[0]) : null;
-
-    const arabicMonths = {
-        "يناير": 0,
-        "فبراير": 1,
-        "مارس": 2,
-        "ابريل": 3,
-        "أبريل": 3,
-        "مايو": 4,
-        "يونيو": 5,
-        "يوليو": 6,
-        "اغسطس": 7,
-        "أغسطس": 7,
-        "سبتمبر": 8,
-        "اكتوبر": 9,
-        "أكتوبر": 9,
-        "نوفمبر": 10,
-        "ديسمبر": 11,
-    };
-
-    let month = null;
-    for (const key in arabicMonths) {
-        if (d.includes(key)) {
-            month = arabicMonths[key];
-            break;
+    
+    // البحث عن الأرقام في حقل التاريخ
+    // (عادةً رقم العدد يأتي في البداية ويكون أقل من 1000، بينما السنة تكون أكبر)
+    const matches = d.match(/(\d+)/g);
+    if (matches) {
+        for (const m of matches) {
+            const val = Number(m);
+            if (val < 1000) return val; // نعتمد أول رقم أقل من 1000 كرقم للعدد
         }
     }
 
-    if (year !== null && month !== null) return year * 12 + month;
-
-    // fallback: محاولة قراءة الشهر/السنة من اسم ملف الصورة (بالإنجليزي)
+    // fallback: محاولة استخراج رقم العدد من اسم الصورة إذا لم يوجد في التاريخ
     const imgName = (mag?.img || "").toString().toLowerCase();
-    const imgYearMatch = imgName.match(/(19|20)\d{2}/);
-    const imgYear = imgYearMatch ? Number(imgYearMatch[0]) : null;
+    const imgMatch = imgName.match(/issue\D*(\d+)/i); // يبحث عن كلمة issue متبوعة برقم
+    if (imgMatch) return Number(imgMatch[1]);
 
-    const englishMonths = {
-        "january": 0,
-        "february": 1,
-        "march": 2,
-        "april": 3,
-        "may": 4,
-        "june": 5,
-        "july": 6,
-        "august": 7,
-        "september": 8,
-        "october": 9,
-        "november": 10,
-        "december": 11,
-    };
-
-    let imgMonth = null;
-    for (const key in englishMonths) {
-        if (imgName.includes(key)) {
-            imgMonth = englishMonths[key];
-            break;
-        }
+    // محاولة أخيرة: أي رقم في اسم الصورة أقل من 1000
+    const anyNumImg = imgName.match(/(\d+)/);
+    if (anyNumImg) {
+        const val = Number(anyNumImg[0]);
+        if (val < 1000) return val;
     }
 
-    if (imgYear !== null && imgMonth !== null) return imgYear * 12 + imgMonth;
-
-    // إذا ما قدرنا نقرأ تاريخ: نرجع null ونتركه في نهاية القائمة
     return null;
 }
 
@@ -294,77 +256,156 @@ function activateHeader() {
         loginModel.addEventListener('click', (e) => {
             if (e.target === loginModel) loginModel.style.display = 'none';
         });
-
         
-        const emailInput = loginModel.querySelector('.email-input[type="email"]');
-        const passwordInput = loginModel.querySelector('.password-input');
-        const submitBtn = loginModel.querySelector('.submit-btn');
-        const messageEl = loginModel.querySelector('#auth-message') || loginModel.querySelector('.auth-message');
-        const createLink = loginModel.querySelector('.auth-create-link');
-        if (createLink) {
-            // شكل الرابط فقط، بدون تبديل فعلي للحساب (تجنب قفزة صفحة عند الضغط)
-            createLink.addEventListener('click', (ev) => ev.preventDefault());
-        }
-
+        // إدارة المحتوى الديناميكي للنافذة المنبثقة
+        const modelBox = loginModel.querySelector('.model-box');
         const USERS_KEY = 'aissUsersV1';
         const CURRENT_KEY = 'aissCurrentUserV1';
 
-        const setMessage = (text, type) => {
-            if (!messageEl) return;
-            messageEl.textContent = text || '';
-            messageEl.classList.remove('error', 'success');
-            if (type) messageEl.classList.add(type);
+        // قوالب HTML للواجهات المختلفة
+        const views = {
+            login: `
+                <div class="close-btn">×</div>
+                <h2>تسجيل الدخول</h2>
+                <div class="social-buttons">
+                    <button type="button"><img src="assets/icons/google.png" alt=""> استخدام Google</button>
+                    <button type="button"><img src="assets/icons/facebook.png" alt=""> استخدام Facebook</button>
+                </div>
+                <div class="divider">أو</div>
+                <input class="email-input text-input" type="email" placeholder="البريد الإلكتروني">
+                <input class="password-input text-input" type="password" placeholder="كلمة المرور">
+                <a href="#" class="forgot-pass-link" id="go-forgot">نسيت كلمة المرور؟</a>
+                <button class="submit-btn" id="btn-login">دخول</button>
+                <div class="auth-message"></div>
+                <div class="auth-switch-row">
+                    <span>ليس لديك حساب؟</span>
+                    <a href="#" class="auth-create-link" id="go-register">إنشاء حساب</a>
+                </div>
+            `,
+            register: `
+                <div class="close-btn">×</div>
+                <h2>إنشاء حساب جديد</h2>
+                <div class="social-buttons">
+                    <button type="button"><img src="assets/icons/google.png" alt=""> التسجيل باستخدام Google</button>
+                    <button type="button"><img src="assets/icons/facebook.png" alt=""> التسجيل باستخدام Facebook</button>
+                </div>
+                <div class="divider">أو</div>
+                <input class="text-input" id="reg-name" type="text" placeholder="الاسم الكامل">
+                <input class="text-input" id="reg-phone" type="tel" placeholder="رقم الهاتف">
+                <input class="email-input text-input" id="reg-email" type="email" placeholder="البريد الإلكتروني">
+                <input class="password-input text-input" id="reg-pass" type="password" placeholder="كلمة المرور">
+                <button class="submit-btn" id="btn-register">إنشاء حساب</button>
+                <div class="auth-message"></div>
+                <div class="auth-switch-row">
+                    <span>لديك حساب بالفعل؟</span>
+                    <a href="#" class="auth-create-link" id="go-login">تسجيل الدخول</a>
+                </div>
+            `,
+            forgot: `
+                <div class="close-btn">×</div>
+                <h2>نسيت كلمة المرور</h2>
+                <div class="divider"></div>
+                <p style="font-size:13px; color:#666; margin-bottom:15px;">أدخل بريدك الإلكتروني أدناه وسنرسل لك رمز التحقق لاستعادة كلمة المرور.</p>
+                <input class="email-input text-input" id="forgot-email" type="email" placeholder="البريد الإلكتروني">
+                <button class="submit-btn" id="btn-send-code">إرسال الرمز</button>
+                <div class="auth-message"></div>
+                <div class="auth-switch-row">
+                    <a href="#" class="auth-create-link" id="go-login-back">العودة لتسجيل الدخول</a>
+                </div>
+            `
         };
 
-        if (submitBtn && emailInput && passwordInput) {
-            submitBtn.addEventListener('click', (e) => {
-                e.preventDefault();
+        function renderView(viewName) {
+            if (!modelBox) return;
+            modelBox.innerHTML = views[viewName];
 
-                const email = (emailInput.value || '').trim().toLowerCase();
-                const password = passwordInput.value || '';
+            // إعادة تفعيل زر الإغلاق
+            const newCloseBtn = modelBox.querySelector('.close-btn');
+            if (newCloseBtn) newCloseBtn.onclick = () => loginModel.style.display = 'none';
 
-                if (!email) {
-                    setMessage('من فضلك أدخل البريد الإلكتروني.', 'error');
-                    return;
+            // دوال المساعدة
+            const getVal = (sel) => (modelBox.querySelector(sel)?.value || '').trim();
+            const setMessage = (msg, type) => {
+                const el = modelBox.querySelector('.auth-message');
+                if (el) {
+                    el.textContent = msg;
+                    el.className = `auth-message ${type}`;
                 }
-                if (!password) {
-                    setMessage('من فضلك أدخل كلمة المرور.', 'error');
-                    return;
-                }
-                if (password.length < 4) {
-                    setMessage('كلمة المرور قصيرة جدًا.', 'error');
-                    return;
-                }
+            };
+            const getUsers = () => JSON.parse(localStorage.getItem(USERS_KEY)) || {};
 
-                let users = {};
-                try {
-                    users = JSON.parse(localStorage.getItem(USERS_KEY)) || {};
-                } catch (_) {
-                    users = {};
-                }
-
-                const existing = users[email];
-                    if (existing) {
-                        // تسجيل دخول
-                        if (existing.password !== password) {
-                            setMessage('كلمة المرور غير صحيحة.', 'error');
-                            return;
-                        }
+            // منطق تسجيل الدخول
+            if (viewName === 'login') {
+                modelBox.querySelector('#go-register').onclick = (e) => { e.preventDefault(); renderView('register'); };
+                modelBox.querySelector('#go-forgot').onclick = (e) => { e.preventDefault(); renderView('forgot'); };
+                
+                modelBox.querySelector('#btn-login').onclick = (e) => {
+                    e.preventDefault();
+                    const email = getVal('.email-input').toLowerCase();
+                    const pass = getVal('.password-input');
+                    
+                    const users = getUsers();
+                    if (users[email] && users[email].password === pass) {
                         localStorage.setItem(CURRENT_KEY, email);
                         setMessage('تم تسجيل الدخول بنجاح.', 'success');
+                        setTimeout(() => loginModel.style.display = 'none', 800);
                     } else {
-                        // إنشاء حساب تلقائيًا عند عدم وجوده
-                        users[email] = { password };
+                        setMessage('البريد الإلكتروني أو كلمة المرور غير صحيحة.', 'error');
+                    }
+                };
+            }
+
+            // منطق إنشاء حساب (تفاصيل أكثر)
+            if (viewName === 'register') {
+                modelBox.querySelector('#go-login').onclick = (e) => { e.preventDefault(); renderView('login'); };
+                
+                modelBox.querySelector('#btn-register').onclick = (e) => {
+                    e.preventDefault();
+                    const name = getVal('#reg-name');
+                    const phone = getVal('#reg-phone');
+                    const email = getVal('#reg-email').toLowerCase();
+                    const pass = getVal('#reg-pass');
+
+                    if (!name || !phone || !email || !pass) return setMessage('يرجى ملء جميع الحقول.', 'error');
+                    if (pass.length < 4) return setMessage('كلمة المرور قصيرة جدًا.', 'error');
+
+                    const users = getUsers();
+                    if (users[email]) {
+                        setMessage('هذا البريد مسجل مسبقًا.', 'error');
+                    } else {
+                        users[email] = { password: pass, name, phone };
                         localStorage.setItem(USERS_KEY, JSON.stringify(users));
                         localStorage.setItem(CURRENT_KEY, email);
                         setMessage('تم إنشاء الحساب بنجاح.', 'success');
+                        setTimeout(() => loginModel.style.display = 'none', 800);
                     }
+                };
+            }
 
-                // إغلاق المودال بعد إظهار الرسالة
-                setTimeout(() => {
-                    if (loginModel) loginModel.style.display = 'none';
-                }, 800);
-            });
+            // منطق نسيت كلمة المرور
+            if (viewName === 'forgot') {
+                modelBox.querySelector('#go-login-back').onclick = (e) => { e.preventDefault(); renderView('login'); };
+
+                modelBox.querySelector('#btn-send-code').onclick = (e) => {
+                    e.preventDefault();
+                    const email = getVal('#forgot-email');
+                    if (!email) return setMessage('يرجى إدخال البريد الإلكتروني.', 'error');
+                    
+                    // محاكاة إرسال الرمز
+                    setMessage('جاري الإرسال...', 'success');
+                    setTimeout(() => {
+                        setMessage(`تم إرسال رمز التحقق إلى ${email}`, 'success');
+                    }, 1000);
+                };
+            }
+        }
+
+        // البدء بعرض تسجيل الدخول عند فتح النافذة
+        if (openBtn) {
+            openBtn.onclick = () => {
+                renderView('login');
+                loginModel.style.display = 'flex';
+            };
         }
     }
     if (searchBtn && searchInput) {
@@ -390,22 +431,3 @@ window.addEventListener('storage', (e) => {
 
 
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
