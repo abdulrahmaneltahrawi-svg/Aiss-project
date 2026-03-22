@@ -733,23 +733,18 @@ footer {
 
 @media (max-width: 600px) {
   header {
-    justify-content: space-between;
-    padding: 10px 12px;
-    gap: 10px;
+    padding: 10px 10px;
   }
 
   header img {
     width: 35%;
     margin-left: 15px;
 
-
   }
 
   .menu-toggle {
     order: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display:block;
   }
 
   .search-img,
@@ -776,15 +771,10 @@ footer {
 
   .hero-section .content p {
     font-size: 10px;
-    /* تصغير حجم النص الطويل */
     line-height: 1.4;
     width: 100%;
-
     margin-left: 90px;
-    /* يترك مساحة لليمين */
-
-
-
+    
 
   }
 
@@ -890,13 +880,12 @@ footer {
 
   footer .container {
     width: 100%;
-    gap:5px;
     font-size: 12px;
+    gap: 5px;
         
   }
     footer .container h3 {
     width: 100%;
-    
   }
   .bottom-bar{
     flex-direction: column;
