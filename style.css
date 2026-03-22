@@ -991,14 +991,15 @@ footer {
 @media (max-width: 768px) {
 
   .hero-section .content {
-    width: 80%;
+    width: 90%;
+    
   }
   .hero-section h1 {
     font-size: 22px;
   }
   .hero-section p {
-    font-size: 9px;
-    margin-left: 25px;
+    font-size: 8px;
+    margin-left: 30px;
   
   }
 }
@@ -1056,6 +1057,11 @@ footer {
 
   .shop-img img {
     width: 22px;
+  }
+
+  .btn-cont{
+   width: 50px;
+   font-size: 10px;
   }
 
 
@@ -1164,9 +1170,6 @@ footer {
   .order-card {
     padding: 20px;
   }
-
-
-
 }
 
 .empty-cart-container {
