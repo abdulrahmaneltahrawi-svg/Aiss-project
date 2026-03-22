@@ -739,7 +739,6 @@ footer {
   header img {
     width: 35%;
     margin-left: 15px;
-
   }
 
   .menu-toggle {
@@ -747,38 +746,15 @@ footer {
     display:block;
   }
 
-  .search-img,
-  #search-input1,
-  .shop-img,
-  .btn-cont {
-    margin: 0;
-  }
-
-
-
-  .hero-section .content {
-    padding: 0;
-
-
-  }
-
   .hero-section .content h1 {
     font-size: 24px;
-    /* تصغير العنوان في الجوال */
-
-
   }
 
   .hero-section .content p {
     font-size: 10px;
     line-height: 1.4;
     width: 100%;
-    margin-left: 90px;
-    
-
   }
-
-
 
   .header-nav {
     position: fixed;
@@ -895,8 +871,6 @@ footer {
 
 
 }
-
-
 .magazines-filter {
   padding: 10px 86px;
 }
