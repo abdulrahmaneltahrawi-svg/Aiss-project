@@ -970,7 +970,7 @@ footer {
 
 .hero-section .content {
   width: 50%;
-  padding: 50px 60px;
+  padding: 30px;
   text-shadow: 2px 3px 9px rgba(0, 0, 0, 0.3);
 }
 .hero-section h1 {
@@ -991,8 +991,13 @@ footer {
 @media (max-width: 768px) {
 
   .hero-section .content {
+    margin-top: 10px;margin-left: 100px;
     width: 90%;
     
+    
+  }
+    .hero-section span {
+    font-size: 12px;
   }
   .hero-section h1 {
     font-size: 22px;
@@ -1000,22 +1005,26 @@ footer {
   .hero-section p {
     font-size: 8px;
     margin-left: 30px;
-  
   }
 }
 
 @media (max-width: 600px) {
   header {
+    position: fixed;
     padding: 10px 10px;
+    
   }
 
   header img {
-    width: 200px;
+    width:150px;
+    
   }
 
   .menu-toggle {
     order: 1;
     display: block;
+    color: black;
+    margin-left: 10px;
   }
 
   .header-nav {
@@ -1053,16 +1062,23 @@ footer {
 
   .search-img img {
     width: 20px;
+    margin-top: 5px;
   }
 
   .shop-img img {
-    width: 22px;
+    width: 20px;
+    margin-top: 5px;
+
   }
 
   .btn-cont{
-   width: 50px;
+   width: 100px;
    font-size: 10px;
+   color: black;
+   margin-left: 5px;
   }
+
+  /**/
 
 
   .hero-section-m p {
@@ -1136,17 +1152,18 @@ footer {
     align-items: center;
     width: 100%;
     font-size: 12px;
-    gap: 5px;
+    
         
   }
     footer .container h3 {
     width: 100%;
   }
+  .footer-content img{
+    width: 13px;
+  }
   .bottom-bar{
     flex-direction: column;
-    gap: 10px;
     text-align: center;
-    margin-bottom: 20px;
   }
 
 
