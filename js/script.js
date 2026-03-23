@@ -31,26 +31,23 @@ const magazines = [
     { title: "مجلة السلامة العربية", date: "36", img: "assets/magazine/Issue-36_January-2024.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "35", img: "assets/magazine/issue-35_december-2023.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "34", img: "assets/magazine/Issue-34_November-2023.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "33", img: "assets/magazine/Issue-34_November-2023.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "32", img: "assets/magazine/Issue-34_November-2023.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "31", img: "assets/magazine/Issue-34_November-2023.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "30", img: "assets/magazine/Issue-34_November-2023.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "29", img: "assets/magazine/Issue-34_November-2023.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "28", img: "assets/magazine/Issue-34_November-2023.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "33", img: "assets/magazine/magazine33.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "32", img: "assets/magazine/issue32.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "31", img: "assets/magazine/issue31.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "30", img: "assets/magazine/issue30.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "29", img: "assets/magazine/issue29.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "28", img: "assets/magazine/issue28.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "27", img: "assets/magazine/issue-27-april-2023-1.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "26", img: "assets/magazine/issue-27-april-2023-1.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "26", img: "assets/magazine/e3b51429-f2e1-4dcd-9eb7-f0ed7f1ccd06.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "25", img: "assets/magazine/issue-25-february-2023.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "24", img: "assets/magazine/issue-25-february-2023.jpg", link: "#" },
-
+    { title: "مجلة السلامة العربية", date: "24", img: "assets/magazine/WhatsApp-Image-2023-10-13-at-6.58.26-AM.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "23", img: "assets/magazine/issue-23-december-2022.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "22", img: "assets/magazine/issue-22-november-2022.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "21", img: "assets/magazine/issue-21-october-2022.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "20", img: "assets/magazine/issue-20-september-2022.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "19", img: "assets/magazine/issue-19-august-2022.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "18", img: "", link: "#" },
-    
-    { title: "مجلة السلامة العربية", date: "17", img: "", link: "#" },
-
+    { title: "مجلة السلامة العربية", date: "18", img: "assets/magazine/issue-18-july-2022.jpg", link: "#" },
+    { title: "مجلة السلامة العربية", date: "17", img: "assets/magazine/issue-17-june-2022.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "16", img: "assets/magazine/36e23e38-8f65-4920-9034-19c89fea2070.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "15", img: "assets/magazine/ac8fdb62-5e7c-4a13-bed3-8e9780f20712.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "14", img: "assets/magazine/335a1bda-2cb7-49f5-bda0-4f9345a5cfab.jpg", link: "#" },
@@ -63,7 +60,7 @@ const magazines = [
     { title: "مجلة السلامة العربية", date: "7", img: "assets/magazine/issue7.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "6", img: "assets/magazine/WhatsApp-Image-2025-03-12-at-1.37.55-PM.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "5", img: "assets/magazine/WhatsApp-Image-2025-03-12-at-1.37.54-PM-1.jpg", link: "#" },
-    { title: "مجلة السلامة العربية", date: "4", img: "", link: "#" },
+    { title: "مجلة السلامة العربية", date: "4", img: "assets/magazine/WhatsApp-Image-2025-03-12-at-12.48.59-PM.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "3", img: "assets/magazine/issue3.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "2", img: "assets/magazine/WhatsApp-Image-2025-03-12-at-1.37.54-PM.jpg", link: "#" },
     { title: "مجلة السلامة العربية", date: "1", img: "assets/magazine/issue1.jpg", link: "#" },
@@ -268,8 +265,8 @@ function activateHeader() {
                 <div class="close-btn">×</div>
                 <h2>تسجيل الدخول</h2>
                 <div class="social-buttons">
-                    <button type="button"><img src="assets/icons/google.png" alt=""> استخدام Google</button>
-                    <button type="button"><img src="assets/icons/facebook.png" alt=""> استخدام Facebook</button>
+                    <button type="button">استخدام Google <img src="assets/icons/google.png" alt=""></button>
+                    <button type="button">استخدام Facebook <img src="assets/icons/facebooks.png" alt=""></button>
                 </div>
                 <div class="divider">أو</div>
                 <input class="email-input text-input" type="email" placeholder="البريد الإلكتروني">
@@ -286,8 +283,8 @@ function activateHeader() {
                 <div class="close-btn">×</div>
                 <h2>إنشاء حساب جديد</h2>
                 <div class="social-buttons">
-                    <button type="button"><img src="assets/icons/google.png" alt=""> التسجيل باستخدام Google</button>
-                    <button type="button"><img src="assets/icons/facebook.png" alt=""> التسجيل باستخدام Facebook</button>
+                    <button type="button">التسجيل باستخدام Google <img src="assets/icons/google.png" alt=""></button>
+                    <button type="button">التسجيل باستخدام Facebook <img src="assets/icons/facebooks.png" alt=""></button>
                 </div>
                 <div class="divider">أو</div>
                 <input class="text-input" id="reg-name" type="text" placeholder="الاسم الكامل">
