@@ -1138,9 +1138,12 @@ footer {
   }
 
   .hero-section-m {
-    margin-top: 55px;
-    height: 210px;
+    margin-top: 50px;
+    height: 150px;
   }
+.logo-text{
+  margin-top: 50px;
+}
 
   .hero-section-m img {
     height: 210px;
