@@ -993,10 +993,8 @@ footer {
   .hero-section .content {
     margin-top: 10px;margin-left: 100px;
     width: 90%;
-    
-    
   }
-    .hero-section span {
+  .hero-section span {
     font-size: 12px;
   }
   .hero-section h1 {
@@ -1012,12 +1010,10 @@ footer {
   header {
     position: fixed;
     padding: 10px 10px;
-    
   }
 
   header img {
     width:150px;
-    
   }
 
   .menu-toggle {
@@ -1087,9 +1083,7 @@ footer {
   }
 
   .logo-text {
-    font-size: 2rem;
-    transform: translate(-50%, -50%);
-    line-height: 1.3;
+    margin-top: 50px;
   }
 
   .title0 {
@@ -1141,9 +1135,7 @@ footer {
     margin-top: 50px;
     height: 150px;
   }
-.logo-text{
-  margin-top: 50px;
-}
+
 
   .hero-section-m img {
     height: 210px;
