@@ -1073,6 +1073,9 @@ footer {
    color: black;
    margin-left: 5px;
   }
+  .social-buttons button{
+    color: #111;
+  }
 
   /**/
 
