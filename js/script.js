@@ -403,10 +403,30 @@ function activateHeader() {
         }
     }
     if (searchBtn && searchInput) {
-        searchBtn.onclick = () => {
-            searchInput.classList.toggle('hide-search');
-            searchInput.classList.toggle('show-search');
+        const triggerSearch = () => {
+            const query = searchInput.value.trim();
+            if (query) {
+                window.location.href = `search.html?query=${encodeURIComponent(query)}`;
+            }
         };
+
+        searchBtn.onclick = () => {
+            if (searchInput.classList.contains('show-search') && searchInput.value.trim()) {
+                triggerSearch();
+            } else {
+                searchInput.classList.toggle('hide-search');
+                searchInput.classList.toggle('show-search');
+                if (searchInput.classList.contains('show-search')) {
+                    searchInput.focus();
+                }
+            }
+        };
+
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                triggerSearch();
+            }
+        });
     }
 
     if (menuToggle && headerNav) {
