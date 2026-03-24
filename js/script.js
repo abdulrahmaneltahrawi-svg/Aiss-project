@@ -134,17 +134,17 @@ if (myGrid) {
     const sortSelect = document.getElementById("magazines-sort");
     const loadMoreBtn = document.getElementById("load-more-magazines");
     let currentSortedMagazines = [];
-    let visibleCount = 9;
+    const itemsPerPage = 9;
 
-    function renderPage() {
-        const toShow = currentSortedMagazines.slice(0, visibleCount);
+    function renderInitialPage() {
+        const toShow = currentSortedMagazines.slice(0, itemsPerPage);
         myGrid.innerHTML = toShow.map((m) => createCardHTML(m, "عرض المجلة")).join("");
         
         if (loadMoreBtn) {
-            if (visibleCount >= currentSortedMagazines.length) {
-                loadMoreBtn.style.display = 'none';
-            } else {
+            if (currentSortedMagazines.length > itemsPerPage) {
                 loadMoreBtn.style.display = 'inline-block';
+            } else {
+                loadMoreBtn.style.display = 'none';
             }
         }
     }
@@ -165,8 +165,7 @@ if (myGrid) {
         });
 
         currentSortedMagazines = [...withScore, ...withoutScore].map((x) => x.mag);
-        visibleCount = 9; // إعادة تعيين العدد عند تغيير الترتيب
-        renderPage();
+        renderInitialPage();
     }
 
     const initialOrder = sortSelect ? sortSelect.value : "newest";
@@ -178,8 +177,17 @@ if (myGrid) {
     
     if (loadMoreBtn) {
         loadMoreBtn.addEventListener('click', () => {
-            visibleCount += 9;
-            renderPage();
+            const currentCount = myGrid.children.length;
+            const nextItems = currentSortedMagazines.slice(currentCount, currentCount + itemsPerPage);
+
+            if (nextItems.length > 0) {
+                const newHtml = nextItems.map((m) => createCardHTML(m, "عرض المجلة")).join("");
+                myGrid.insertAdjacentHTML('beforeend', newHtml);
+            }
+
+            if (myGrid.children.length >= currentSortedMagazines.length) {
+                loadMoreBtn.style.display = 'none';
+            }
         });
     }
 }
@@ -196,22 +204,29 @@ if (homeGrid) {
 const manulasGrid = document.getElementById('manuals-grid');
 if (manulasGrid) {
     const loadMoreBtn = document.getElementById("load-more-manuals");
-    let visibleCount = 6;
+    const itemsPerPage = 6;
 
-    const renderManuals = () => {
-        const toShow = manulas.slice(0, visibleCount);
+    const renderInitialManuals = () => {
+        const toShow = manulas.slice(0, itemsPerPage);
         manulasGrid.innerHTML = toShow.map(man => createCardHTML(man, "عرض الكتيب")).join("");
         if (loadMoreBtn) {
-            loadMoreBtn.style.display = visibleCount >= manulas.length ? 'none' : 'inline-block';
+            loadMoreBtn.style.display = manulas.length > itemsPerPage ? 'inline-block' : 'none';
         }
     };
 
-    renderManuals();
+    renderInitialManuals();
 
     if (loadMoreBtn) {
         loadMoreBtn.addEventListener('click', () => {
-            visibleCount += 6;
-            renderManuals();
+            const currentCount = manulasGrid.children.length;
+            const nextItems = manulas.slice(currentCount, currentCount + itemsPerPage);
+            if (nextItems.length > 0) {
+                const newHtml = nextItems.map(man => createCardHTML(man, "عرض الكتيب")).join("");
+                manulasGrid.insertAdjacentHTML('beforeend', newHtml);
+            }
+            if (manulasGrid.children.length >= manulas.length) {
+                loadMoreBtn.style.display = 'none';
+            }
         });
     }
 }
