@@ -315,13 +315,20 @@ header button:hover {
 }
 
 /*زر البحث*/
+.search-container {
+  position: relative;
+}
+
+.search-img {
+  cursor: pointer;
+}
+
 .search-img img {
   width: 25px;
 }
 
 .search-img img:hover {
-  cursor: pointer;
-  scale: calc(1.1);
+  transform: scale(1.1);
 }
 
 .hide-search {
@@ -330,7 +337,17 @@ header button:hover {
 
 .show-search {
   display: block;
-  padding: 6px;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 50%;
+  transform: translateX(50%);
+  width: 250px;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  background: #fff;
 }
 
 /*زر التسوق*/
