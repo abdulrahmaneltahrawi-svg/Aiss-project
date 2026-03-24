@@ -7,6 +7,7 @@
 body {
   background: #235287;
   font-family: "tajawal", sans-serif;
+  scroll-behavior: smooth;
 }
 
 /* صفحة عرض الصور */
@@ -1306,3 +1307,58 @@ footer {
   background-color: #b71c1c;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
+/* زر الصعود للأعلى */
+#scroll-to-top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color: #e4293a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  display: none;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+#scroll-to-top:hover {
+  background-color: #b71c1c;
+  transform: translateY(-5px);
+}
+
+.load-more-btn-container {
+  text-align: center;
+  margin: 20px 0 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.btn1 {
+  display: inline-block;
+  padding: 15px 20px;
+  background: whitesmoke;
+  text-decoration: none;
+  margin-top: 16px;
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 25px;
+  border: 1px solid black;
+}
+
+.btn1:hover {
+  cursor: pointer;
+  color: gray;
+}
+
+
+
+

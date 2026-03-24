@@ -89,7 +89,7 @@ function createCardHTML(item, btnText = "عرض المجلة") {
     const href = `flipbook.html?title=${encodeURIComponent(item.title || "")}&src=${encodeURIComponent(src)}&back=${encodeURIComponent(back)}`;
     return `
         <div class="card1">
-            <img src="${item.img}" alt="${item.title}" loading=""/>
+            <img src="${item.img}" alt="${item.title}" loading="lazy"/>
             <div class="class-content1">
                 <h3>${item.title}</h3>
                 <p>${item.date}</p>
@@ -132,6 +132,22 @@ function getMagazineDateScore(mag, idx) {
 const myGrid = document.getElementById('magazines-grid');
 if (myGrid) {
     const sortSelect = document.getElementById("magazines-sort");
+    const loadMoreBtn = document.getElementById("load-more-magazines");
+    let currentSortedMagazines = [];
+    let visibleCount = 9;
+
+    function renderPage() {
+        const toShow = currentSortedMagazines.slice(0, visibleCount);
+        myGrid.innerHTML = toShow.map((m) => createCardHTML(m, "عرض المجلة")).join("");
+        
+        if (loadMoreBtn) {
+            if (visibleCount >= currentSortedMagazines.length) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                loadMoreBtn.style.display = 'inline-block';
+            }
+        }
+    }
 
     function renderSorted(order) {
         const items = magazines.map((mag, idx) => ({
@@ -148,8 +164,9 @@ if (myGrid) {
             return b.score - a.score; // newest
         });
 
-        const result = [...withScore, ...withoutScore].map((x) => x.mag);
-        myGrid.innerHTML = result.map((m) => createCardHTML(m, "عرض المجلة")).join("");
+        currentSortedMagazines = [...withScore, ...withoutScore].map((x) => x.mag);
+        visibleCount = 9; // إعادة تعيين العدد عند تغيير الترتيب
+        renderPage();
     }
 
     const initialOrder = sortSelect ? sortSelect.value : "newest";
@@ -157,6 +174,13 @@ if (myGrid) {
 
     if (sortSelect) {
         sortSelect.addEventListener("change", () => renderSorted(sortSelect.value));
+    }
+    
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            visibleCount += 9;
+            renderPage();
+        });
     }
 }
 
@@ -171,7 +195,25 @@ if (homeGrid) {
 // الكتيبات
 const manulasGrid = document.getElementById('manuals-grid');
 if (manulasGrid) {
-    manulasGrid.innerHTML = manulas.map(man => createCardHTML(man, "عرض الكتيب")).join("");
+    const loadMoreBtn = document.getElementById("load-more-manuals");
+    let visibleCount = 6;
+
+    const renderManuals = () => {
+        const toShow = manulas.slice(0, visibleCount);
+        manulasGrid.innerHTML = toShow.map(man => createCardHTML(man, "عرض الكتيب")).join("");
+        if (loadMoreBtn) {
+            loadMoreBtn.style.display = visibleCount >= manulas.length ? 'none' : 'inline-block';
+        }
+    };
+
+    renderManuals();
+
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            visibleCount += 6;
+            renderManuals();
+        });
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -200,6 +242,8 @@ async function loadLayout() {
         activateHeader();
         updateCartBadgeCount();
         markActiveNav();
+        initScrollToTop();
+        loadRelatedPosts(); // استدعاء دالة المقالات ذات الصلة
     } catch (error) {
         console.error('فشل التحميل:', error);
     }
@@ -485,6 +529,60 @@ function activateHeader() {
             const isOpen = headerNav.classList.toggle('is-open');
             menuToggle.setAttribute('aria-expanded', String(isOpen));
         };
+    }
+}
+
+// وظيفة زر الصعود للأعلى
+function initScrollToTop() {
+    const btn = document.createElement('button');
+    btn.id = 'scroll-to-top';
+    btn.innerHTML = '&#8679;'; // سهم للأعلى
+    btn.title = "الصعود للأعلى";
+    document.body.appendChild(btn);
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            btn.style.display = 'block';
+        } else {
+            btn.style.display = 'none';
+        }
+    });
+
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// وظيفة المقالات ذات الصلة
+function loadRelatedPosts() {
+    // نبحث عن حاوية المقالات ذات الصلة (يجب إضافتها في صفحة views.html)
+    const relatedGrid = document.getElementById('related-posts-grid');
+    if (!relatedGrid) return; 
+
+    const params = new URLSearchParams(window.location.search);
+    const currentId = parseInt(params.get('id'));
+
+    if (!currentId || typeof myCards === 'undefined') return;
+
+    // العثور على المدونة الحالية
+    const currentPost = myCards.find(p => p.id === currentId);
+    if (!currentPost) return;
+
+    // جلب مقالات من نفس التصنيف واستثناء المقال الحالي
+    const related = myCards
+        .filter(p => p.category === currentPost.category && p.id !== currentId)
+        .slice(0, 3);
+        
+    if (related.length > 0) {
+        relatedGrid.innerHTML = related.map(item => `
+          <div class="card1">
+            <img src="${item.image}" loading="lazy">
+            <div class="class-content1">
+              <h3>${item.title}</h3>
+              <a href="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
+            </div>
+          </div>
+        `).join("");
     }
 }
 
