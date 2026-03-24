@@ -1095,6 +1095,11 @@ footer {
   }
 
   /**/
+  .back{
+    color: #111;
+    border: 1px solid #242323;
+    
+  }
 
 
   .hero-section-m p {
