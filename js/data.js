@@ -5,7 +5,7 @@ const myCards = [
     title:
       "السلامة في مناطق ألعاب الأطفال: معايير دولية، إجراءات وقائية، وتحليل إحصائي للإصابات",
     image:
-      "assets/blogs/Scientific Contents/Safety-in-childrens-play-areas-1.jpg",
+      "assets/blogs/Scientific Contents/Safety-in-childrens-play-areas-1.webp",
     category: "محتويات علمية",
 
     description: `
@@ -32,7 +32,7 @@ const myCards = [
     title:
       "السلامة الصحية لموائد الرحمن والتجمعات الخيرية في رمضان",
     image:
-      "assets/blogs/Scientific Contents/Health-and-safety-measures-for-Ramadan-charity-meals-and-gatherings-1.jpg",
+      "assets/blogs/Scientific Contents/Health-and-safety-measures-for-Ramadan-charity-meals-and-gatherings-1.webp",
     category: "محتويات علمية",
 
     description: `
@@ -63,7 +63,7 @@ const myCards = [
     title:
       "السَّيطرة على الإخفاقات البشريَّة في مكان العمل",
     image:
-      "assets/blogs/Journal Articles/controlling-human-failures-in-the-workplace-1.png",
+      "assets/blogs/Journal Articles/controlling-human-failures-in-the-workplace-1.webp",
     category: "مقالات المجلة",
 
     description: `
@@ -94,7 +94,7 @@ const myCards = [
     title:
       "23- تطبيق منهجية LOPA (Layer of Protection Analysis) للحماية من الصعق الكهربائي في الأماكن الحرجة",
     image:
-      "assets/blogs/Journal Articles/23-applying-the-lopa-layer-of-protection-analysis-methodology-for-protection-against-electric-shock-in-critical-locations-1.png",
+      "assets/blogs/Journal Articles/23-applying-the-lopa-layer-of-protection-analysis-methodology-for-protection-against-electric-shock-in-critical-locations-1.webp",
     category: "مقالات المجلة",
 
     description: `
@@ -127,7 +127,7 @@ const myCards = [
     id: 96,
     title: "الصفحة الاخيرة 62",
     image:
-      "assets/blogs/Journal Articles/integrated-strategies-for-womens-participation-in-safety-management-towards-a-leading-arab-model-1.png",
+      "assets/blogs/Journal Articles/integrated-strategies-for-womens-participation-in-safety-management-towards-a-leading-arab-model-1.webp",
     
     category: "مقالات المجلة",
 
@@ -168,7 +168,7 @@ const myCards = [
     id: 95,
     title: "3 – تقنيات الكشف المبكر، أنظمة الإطفاء، والتدريب الوقائي",
     image:
-      "assets/blogs/Journal Articles/3-early-detection-techniques-fire-suppression-systems-and-preventative-training-1.png",
+      "assets/blogs/Journal Articles/3-early-detection-techniques-fire-suppression-systems-and-preventative-training-1.webp",
     category: "مقالات المجلة",
 
     description: `
@@ -192,7 +192,7 @@ const myCards = [
     id: 94,
     title: "13- برنامج iRAP خارطة طريق لعالَم بلا طرق عالية الخطورة",
     image:
-      "assets/blogs/Journal Articles/13-the-irap-program-a-roadmap-to-a-world-without-high-risk-roads-1.png",
+      "assets/blogs/Journal Articles/13-the-irap-program-a-roadmap-to-a-world-without-high-risk-roads-1.webp",
     category: "مقالات المجلة",
 
     description: `
@@ -243,7 +243,7 @@ const myCards = [
     title:
       "الضوضاء في بيئة العمل: الخطر الصامت الذي لا يُرى ولا يُسمع إلا بعد فوات الأوان",
     image:
-      "assets/blogs/Scientific Contents/Noise-in-the-workplace-the-silent-danger-that-is-neither-seen-nor-heard-until-its-too-late.png",
+      "assets/blogs/Scientific Contents/Noise-in-the-workplace-the-silent-danger-that-is-neither-seen-nor-heard-until-its-too-late.webp",
     category: "محتويات علمية",
 
     description: `
@@ -280,7 +280,7 @@ const myCards = [
     title:
       "المعيار الخاص بمرافق التنظيف الجاف NFPA 32",
     image:
-      "assets/blogs/Expert Articles/NFPA-32-Standard-for-Dry-Cleaning-Facilities.png",
+      "assets/blogs/Expert Articles/NFPA-32-Standard-for-Dry-Cleaning-Facilities.webp",
     category: "مقالات الخبراء",
 
     description: `
@@ -308,7 +308,7 @@ const myCards = [
     title:
       "المعيار الخاص بأنظمة سلامة التنبيهات الشخصية (PASS)",
     image:
-      "assets/blogs/Expert Articles/Personal-Alert-Safety-Systems.jpg",
+      "assets/blogs/Expert Articles/Personal-Alert-Safety-Systems.webp",
     category: "مقالات الخبراء",
 
     description: `
@@ -337,7 +337,7 @@ const myCards = [
     "السلامة الإنشائية الواجب توافرها فى المصعد الكهربي",
       
     image:
-      "assets/blogs/Expert Articles/Safety-systems-in-electric-elevators-1.jpg",
+      "assets/blogs/Expert Articles/Safety-systems-in-electric-elevators-1.webp",
     category: "مقالات الخبراء",
 
     description: `
@@ -365,7 +365,7 @@ const myCards = [
     title:
       "خزانات المياه المستخدمة في الإطفاء NFPA 22",
     image:
-      "assets/blogs/Expert Articles/Water-tanks-used-in-firefighting-NFPA-22.jpg",
+      "assets/blogs/Expert Articles/Water-tanks-used-in-firefighting-NFPA-22.webp",
     category: "مقالات الخبراء",
 
     description: `
@@ -396,7 +396,7 @@ const myCards = [
     id: 1,
     title: "3 – تقنيات الكشف المبكر، أنظمة الإطفاء، والتدريب الوقائي",
     image:
-      "assets/blogs/Journal Articles/3-early-detection-techniques-fire-suppression-systems-and-preventative-training-1.png",
+      "assets/blogs/Journal Articles/3-early-detection-techniques-fire-suppression-systems-and-preventative-training-1.webp",
     category: "مقالات المجلة",
 
     description: `
@@ -422,7 +422,7 @@ const myCards = [
     title:
       "ملف العدد (3): الاستراتيجيات المقترحة لإشراك المرأة في إدارة السلام",
     image:
-      "assets/blogs/Journal Articles/issue-file-3-proposed-strategies-for-involving-women-in-safety-management-1.jpg",
+      "assets/blogs/Journal Articles/issue-file-3-proposed-strategies-for-involving-women-in-safety-management-1.webp",
     category: "مقالات المجلة",
 
     description: `
