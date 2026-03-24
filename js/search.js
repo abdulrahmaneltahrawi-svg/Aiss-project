@@ -21,11 +21,14 @@ async function performSearch() {
     }
     const cleanPosts = await response.json();
 
+    const eventsData = (typeof events !== 'undefined') ? events : [];
+
     const allContent = [
-      ...myCards.map(item => ({...item, type: 'blog'})),
-      ...magazines.map(item => ({...item, type: 'magazine'})),
-      ...manulas.map(item => ({...item, type: 'manual'})),
-      ...cleanPosts.map(item => ({...item, type: 'post'}))
+      ...myCards.map(item => ({...item, type: 'blog', label: 'مدونة', color: '#e4293a', link: `views.html?id=${item.id}`, btn: 'عرض المدونة'})),
+      ...magazines.map(item => ({...item, type: 'magazine', label: 'مجلة', color: '#235287', link: item.link ? `flipbook.html?title=${encodeURIComponent(item.title)}&src=${encodeURIComponent(item.link)}&back=magazine.html` : '#', btn: 'عرض المجلة'})),
+      ...manulas.map(item => ({...item, type: 'manual', label: 'كتيب', color: '#28a745', link: item.link ? `flipbook.html?title=${encodeURIComponent(item.title)}&src=${encodeURIComponent(item.link)}&back=manuals.html` : '#', btn: 'عرض الكتيب'})),
+      ...eventsData.map(item => ({...item, type: 'event', label: 'حدث', color: '#fd7e14', link: '#', btn: 'عرض التفاصيل'})),
+      ...cleanPosts.map(item => ({...item, type: 'code', label: 'كود/معيار', color: '#6610f2', link: '#', btn: 'عرض المحتوى'}))
     ];
 
     const results = allContent.filter(item => {
@@ -42,39 +45,15 @@ async function performSearch() {
 
     searchGrid.innerHTML = results
       .map((item) => {
-        let link = '#';
-        let btnText = 'عرض';
-        if (item.type === 'blog') {
-            link = `views.html?id=${item.id}`;
-            btnText = 'عرض المدونة';
-        } else if (item.type === 'magazine') {
-            const back = "magazine.html";
-            link = `flipbook.html?title=${encodeURIComponent(item.title || "")}&src=${encodeURIComponent(item.link)}&back=${encodeURIComponent(back)}`;
-            btnText = 'عرض المجلة';
-        } else if (item.type === 'manual') {
-            const back = "manuals.html";
-            link = `flipbook.html?title=${encodeURIComponent(item.title || "")}&src=${encodeURIComponent(item.link)}&back=${encodeURIComponent(back)}`;
-            btnText = 'عرض الكتيب';
-        } else if (item.type === 'post') {
-            // For posts from cleaned-posts, we don't have a specific view page, so we can link to a page that might display it or just show the content.
-            // For now, let's just show a card without a specific link, or link to a generic page if available.
-            // Let's assume a simple card display for now.
-             return `
-              <div class="card1">
-                <img src="${item.image}" loading="lazy">
-                <div class="class-content1">
-                  <h3>${item.title}</h3>
-                </div>
-              </div>
-              `;
-        }
-
+        // استخدام صورة افتراضية إذا لم تتوفر صورة
+        const imageSrc = item.image || item.img || 'assets/icons/logo.png';
         return `
           <div class="card1">
-            <img src="${item.image || item.img}" loading="lazy">
+            <span class="type-badge" style="background-color: ${item.color}">${item.label}</span>
+            <img src="${imageSrc}" loading="lazy" onerror="this.src='assets/icons/logo.png'">
             <div class="class-content1">
               <h3>${item.title}</h3>
-              <a href ="${link}" class="btn1">${btnText}</a>
+              <a href="${item.link}" class="btn1">${item.btn}</a>
             </div>
           </div>
           `;

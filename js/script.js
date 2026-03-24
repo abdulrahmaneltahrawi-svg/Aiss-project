@@ -239,6 +239,18 @@ function activateHeader() {
     const searchInput = document.getElementById('search-input1');
     const menuToggle = document.getElementById('menu-toggle');
     const headerNav = document.getElementById('header-nav');
+    const suggestionsList = document.getElementById('search-suggestions');
+
+    // Promise to fetch and cache codes data
+    let codesPromise = null;
+    const fetchCodes = () => {
+        if (!codesPromise) {
+            codesPromise = fetch('cleaned-posts (1).json')
+                .then(res => res.ok ? res.json() : [])
+                .catch(() => []);
+        }
+        return codesPromise;
+    };
 
     if (openBtn && loginModel) {
         openBtn.onclick = () => loginModel.style.display = 'flex';
@@ -402,29 +414,68 @@ function activateHeader() {
             };
         }
     }
-    if (searchBtn && searchInput) {
-        const triggerSearch = () => {
-            const query = searchInput.value.trim();
-            if (query) {
-                window.location.href = `search.html?query=${encodeURIComponent(query)}`;
-            }
-        };
-
+    if (searchBtn && searchInput && suggestionsList) {
         searchBtn.onclick = () => {
-            if (searchInput.classList.contains('show-search') && searchInput.value.trim()) {
-                triggerSearch();
+            const isHidden = searchInput.classList.contains('hide-search');
+            if (isHidden) {
+                searchInput.classList.remove('hide-search');
+                searchInput.classList.add('show-search');
+                searchInput.focus();
             } else {
-                searchInput.classList.toggle('hide-search');
-                searchInput.classList.toggle('show-search');
-                if (searchInput.classList.contains('show-search')) {
-                    searchInput.focus();
-                }
+                searchInput.classList.add('hide-search');
+                searchInput.classList.remove('show-search');
+                suggestionsList.style.display = 'none';
             }
         };
 
-        searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                triggerSearch();
+        // البحث والاقتراحات
+        searchInput.addEventListener('input', async function() {
+            const query = this.value.trim().toLowerCase();
+            suggestionsList.innerHTML = '';
+
+            if (query.length < 1) {
+                suggestionsList.style.display = 'none';
+                return;
+            }
+
+            // تجميع البيانات المتاحة للبحث
+            const blogs = (typeof myCards !== 'undefined') ? myCards : [];
+            const eventsData = (typeof events !== 'undefined') ? events : [];
+            const codes = await fetchCodes();
+            
+            const allItems = [
+                ...magazines.map(m => ({...m, type: 'مجلة', url: m.link ? `flipbook.html?title=${encodeURIComponent(m.title)}&src=${encodeURIComponent(m.link)}&back=magazine.html` : '#'})),
+                ...manulas.map(m => ({...m, type: 'كتيب', url: m.link ? `flipbook.html?title=${encodeURIComponent(m.title)}&src=${encodeURIComponent(m.link)}&back=manuals.html` : '#'})),
+                ...blogs.map(b => ({...b, type: 'مدونة', url: `views.html?id=${b.id}`})),
+                ...eventsData.map(e => ({...e, type: 'حدث', url: `search.html?query=${encodeURIComponent(e.title)}`})),
+                ...codes.map(c => ({...c, type: 'كود', url: `search.html?query=${encodeURIComponent(c.title)}`}))
+            ];
+
+            // تصفية النتائج
+            const results = allItems.filter(item => item.title && item.title.toLowerCase().includes(query));
+
+            if (results.length > 0) {
+                suggestionsList.style.display = 'block';
+                results.slice(0, 8).forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <a href="${item.url}" style="display:block; color:inherit; text-decoration:none;">
+                           <span style="color:#e4293a; font-weight:bold; margin-left:5px; font-size:11px;">${item.type}</span>
+                           ${item.title}
+                        </a>
+                    `;
+                    suggestionsList.appendChild(li);
+                });
+            } else {
+                suggestionsList.style.display = 'block';
+                suggestionsList.innerHTML = '<li style="color:#999; cursor:default;">لا توجد نتائج</li>';
+            }
+        });
+
+        // إخفاء القائمة عند النقر خارجها
+        document.addEventListener('click', (e) => {
+            if (!searchInput.contains(e.target) && !suggestionsList.contains(e.target)) {
+                suggestionsList.style.display = 'none';
             }
         });
     }
