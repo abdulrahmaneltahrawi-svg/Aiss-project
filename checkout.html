@@ -18,6 +18,7 @@
     <div id="header-placeholder"></div>
     
     <div class="checkout-container">
+
       <div class="billing-details">
         <h3 class="section-title">تفاصيل الفاتورة</h3>
         <form>
@@ -98,75 +99,8 @@
       </div>
     </div>
 
-    <script>
-      function formatPrice(value) {
-        const n = Number(value);
-        if (Number.isFinite(n)) return `${n} د.ا`;
-        return value ? `${value} د.ا` : "";
-      }
-
-      function calcTotal(items) {
-        return items.reduce((sum, it) => sum + (Number(it.price) || 0), 0);
-      }
-
-      function renderOrderSummary() {
-        const cart = JSON.parse(localStorage.getItem("myCart")) || [];
-        const tbody = document.getElementById("order-items");
-        if (!tbody) return;
-
-        if (cart.length === 0) {
-          tbody.innerHTML = `
-        <tr>
-          <td class="price">0 د.ا</td>
-          <td>لا توجد منتجات</td>
-        </tr>
-        <tr class="total">
-          <td class="price red-text">0 د.ا</td>
-          <td>الإجمالي</td>
-        </tr>
-      `;
-          return;
-        }
-
-        const total = calcTotal(cart);
-        tbody.innerHTML =
-          cart
-            .map(
-              (item) => `
-          <tr>
-            <td class="price">${formatPrice(item.price)}</td>
-            <td>${item.title || ""} × 1</td>
-          </tr>
-        `,
-            )
-            .join("") +
-          `
-        <tr class="subtotal">
-          <td class="price">${formatPrice(total)}</td>
-          <td>المجموع</td>
-        </tr>
-        <tr class="total">
-          <td class="price red-text">${formatPrice(total)}</td>
-          <td>الإجمالي</td>
-        </tr>
-      `;
-      }
-
-      renderOrderSummary();
-
-      const payBtn = document.getElementById("pay-btn");
-      if (payBtn) {
-        payBtn.addEventListener("click", () => {
-          // لا توجد صفحة check.html حاليًا، لذلك ننهي الطلب بشكل آمن
-          // ثم نعيد المستخدم للرئيسية.
-          localStorage.removeItem("myCart");
-          alert("تم استلام طلبك بنجاح.");
-          window.location.href = "index.html";
-        });
-      }
-    </script>
-
     <div id="footer-placeholder"></div>
     <script src="js/script.js"></script>
+    <script src="js/checkout.js"></script>
   </body>
 </html>
