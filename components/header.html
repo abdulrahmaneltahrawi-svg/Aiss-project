@@ -10,7 +10,7 @@
     <div id="search-btn1" class="search-img">
         <img src="assets/icons/loupe.png" alt="search" />
     </div>
-    <input type="text" id="search-input1" class="hide-search" placeholder="ابحث عن ما تريد...">
+    <input type="text" id="search-input1" name="search" class="hide-search" placeholder="...ابحث عما تريد">
 
     <!--===زر البحث===-->
     <a href="view-cart.html" aria-label="سلة المشتريات">
@@ -45,8 +45,8 @@
 
             <div class="divider">أو</div>
 
-            <input type="email" class="email-input" placeholder="البريد الإلكتروني">
-            <input type="password" class="email-input password-input" placeholder="كلمة المرور">
+            <input type="email" id="login-email" name="email" class="email-input" placeholder="البريد الإلكتروني" autocomplete="email">
+            <input type="password" id="login-password" name="password" class="email-input password-input" placeholder="كلمة المرور" autocomplete="current-password">
             <button class="submit-btn">متابعة</button>
             <p id="auth-message" class="auth-message" aria-live="polite"></p>
             <div class="auth-switch-row">
