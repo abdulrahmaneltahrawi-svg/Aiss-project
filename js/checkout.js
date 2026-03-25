@@ -117,11 +117,13 @@ async function completeOrder() {
             phone: phoneField.value
         },
         items: cart,
+        totalAmount: calcTotal(cart),
         orderDate: new Date().toISOString(),
         platform: 'AISS Web'
     };
 
     try {
+        console.log("البيانات المرسلة للباك اند:", orderPayload);
         // 3. كود الربط (Fetch Call)
         const response = await fetch('https://api.aiss.co/v1/checkout', {
             method: 'POST',
