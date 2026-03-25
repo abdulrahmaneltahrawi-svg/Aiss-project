@@ -243,6 +243,7 @@ async function loadLayout() {
         if (headerPlaceholder) {
             let headerRes = await fetch('components/header.html');
             if (!headerRes.ok) headerRes = await fetch('../components/header.html');
+            if (!headerRes.ok) throw new Error('Header file not found');
             const headerData = await headerRes.text();
             headerPlaceholder.innerHTML = headerData;
         }
@@ -250,6 +251,7 @@ async function loadLayout() {
         if (footerPlaceholder) {
             let footerRes = await fetch('components/footer.html');
             if (!footerRes.ok) footerRes = await fetch('../components/footer.html');
+            if (!footerRes.ok) throw new Error('Footer file not found');
             const footerData = await footerRes.text();
             footerPlaceholder.innerHTML = footerData;
         }
@@ -258,7 +260,8 @@ async function loadLayout() {
         updateCartBadgeCount();
         markActiveNav();
         initScrollToTop();
-        loadRelatedPosts(); // استدعاء دالة المقالات ذات الصلة
+        // التحقق من وجود الدالة قبل استدعائها لمنع توقف الكود
+        if (typeof loadRelatedPosts === 'function') loadRelatedPosts(); 
     } catch (error) {
         console.error('فشل التحميل:', error);
     }
@@ -299,7 +302,39 @@ function activateHeader() {
     const searchInput = document.getElementById('search-input1');
     const menuToggle = document.getElementById('menu-toggle');
     const headerNav = document.getElementById('header-nav');
+    console.log('activateHeader called. menuToggle element:', menuToggle, 'headerNav element:', headerNav); // رسالة لتأكيد وجود العناصر
+
     const suggestionsList = document.getElementById('search-suggestions');
+
+    // === تفعيل قائمة الهامبرغر للهواتف ===
+    if (menuToggle && headerNav) {
+        // استخدام addEventListener بدلاً من onclick لضمان عدم تداخل الأكواد
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // منع انتقال النقرة للعناصر الأب
+            headerNav.classList.toggle('active');
+            const isOpen = headerNav.classList.contains('active');
+            console.log('Menu state:', isOpen ? 'Opened' : 'Closed'); // طباعة الحالة
+            menuToggle.setAttribute('aria-expanded', isOpen);
+        });
+
+        // إغلاق القائمة تلقائياً عند النقر على أي رابط (مهم جداً للهواتف)
+        headerNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                headerNav.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // إغلاق القائمة عند النقر في أي مكان خارجها
+        document.addEventListener('click', (e) => {
+            if (headerNav && headerNav.classList.contains('active') && !headerNav.contains(e.target) && !menuToggle.contains(e.target)) {
+                headerNav.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    } else {
+        console.error('Error: menuToggle or headerNav not found in the DOM. Hamburger menu functionality will not be active.');
+    }
 
     // Promise to fetch and cache codes data
     let codesPromise = null;
