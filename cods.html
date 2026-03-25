@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
   <head>
-    <link rel="icon" href="assets/icons/logo.png" />
+    <link rel="icon" href="assets/icons/logo.webp" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
@@ -20,7 +20,7 @@
 
 
     <div class="hero-section-m">
-      <img src="assets/imge/0006.jpg" alt="" loading="lazy"/>
+      <img src="assets/imge/0006.webp" alt="hero-logo" loading="lazy"/>
       <div class="logo-text"><p>الأكواد والمعايير</p></div>
     </div>
 
@@ -59,7 +59,7 @@ function renderCodes(data) {
   grid.innerHTML = "";
 
   data.forEach((item, index) => {
-    const img = item.image || "assets/imge/0006.jpg";
+    const img = item.image || "assets/imge/0006.webp";  
     grid.innerHTML += `
       <div class="card1">
         <img src="${img}" alt="${item.title || "كود"}">
