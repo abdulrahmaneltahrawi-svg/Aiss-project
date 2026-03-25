@@ -326,6 +326,30 @@ function activateHeader() {
         const modelBox = loginModel.querySelector('.model-box');
         const USERS_KEY = 'aissUsersV1';
         const CURRENT_KEY = 'aissCurrentUserV1';
+        const LOGIN_BTN_TEXT_DEFAULT = 'اشتراك/ دخول';
+
+        const normalizeEmail = (v) => (v || '').toString().trim().toLowerCase();
+        const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        const getUsers = () => JSON.parse(localStorage.getItem(USERS_KEY)) || {};
+        const getCurrentEmail = () => normalizeEmail(localStorage.getItem(CURRENT_KEY));
+        const getCurrentUser = () => {
+            const email = getCurrentEmail();
+            if (!email) return null;
+            const users = getUsers();
+            const u = users[email];
+            if (!u) return null;
+            return { email, ...u };
+        };
+        const setCurrentEmail = (email) => localStorage.setItem(CURRENT_KEY, normalizeEmail(email));
+        const clearCurrentUser = () => localStorage.removeItem(CURRENT_KEY);
+        const updateHeaderAuthLabel = () => {
+            if (!openBtn) return;
+            const span = openBtn.querySelector('span');
+            if (!span) return;
+            const user = getCurrentUser();
+            span.textContent = user?.name ? user.name : LOGIN_BTN_TEXT_DEFAULT;
+            openBtn.setAttribute('aria-label', user ? `الحساب: ${span.textContent}` : 'اشتراك/ دخول');
+        };
 
         // قوالب HTML للواجهات المختلفة
         const views = {
@@ -346,6 +370,13 @@ function activateHeader() {
                     <span>ليس لديك حساب؟</span>
                     <a href="#" class="auth-create-link" id="go-register">إنشاء حساب</a>
                 </div>
+            `,
+            account: `
+                <div class="close-btn">×</div>
+                <h2>حسابي</h2>
+                <div class="divider"></div>
+                <p class="auth-message success" style="display:block; margin-bottom: 10px;"></p>
+                <button class="submit-btn" id="btn-logout" type="button">تسجيل الخروج</button>
             `,
             register: `
                 <div class="close-btn">×</div>
@@ -397,7 +428,13 @@ function activateHeader() {
                     el.className = `auth-message ${type}`;
                 }
             };
-            const getUsers = () => JSON.parse(localStorage.getItem(USERS_KEY)) || {};
+            const setBusy = (busy) => {
+                const btn = modelBox.querySelector('.submit-btn');
+                if (!btn) return;
+                btn.disabled = !!busy;
+                btn.style.opacity = busy ? '0.7' : '1';
+                btn.style.cursor = busy ? 'not-allowed' : 'pointer';
+            };
 
             // منطق تسجيل الدخول
             if (viewName === 'login') {
@@ -406,18 +443,48 @@ function activateHeader() {
                 
                 modelBox.querySelector('#btn-login').onclick = (e) => {
                     e.preventDefault();
-                    const email = getVal('.email-input').toLowerCase();
+                    const email = normalizeEmail(getVal('.email-input'));
                     const pass = getVal('.password-input');
+
+                    if (!email || !pass) return setMessage('يرجى إدخال البريد الإلكتروني وكلمة المرور.', 'error');
+                    if (!isValidEmail(email)) return setMessage('صيغة البريد الإلكتروني غير صحيحة.', 'error');
                     
                     const users = getUsers();
                     if (users[email] && users[email].password === pass) {
-                        localStorage.setItem(CURRENT_KEY, email);
+                        setBusy(true);
+                        setCurrentEmail(email);
+                        updateHeaderAuthLabel();
                         setMessage('تم تسجيل الدخول بنجاح.', 'success');
                         setTimeout(() => loginModel.style.display = 'none', 800);
                     } else {
                         setMessage('البريد الإلكتروني أو كلمة المرور غير صحيحة.', 'error');
                     }
                 };
+            }
+
+            // منطق الحساب/تسجيل الخروج
+            if (viewName === 'account') {
+                const user = getCurrentUser();
+                if (!user) {
+                    renderView('login');
+                    return;
+                }
+
+                const msg = modelBox.querySelector('.auth-message');
+                if (msg) msg.textContent = `مرحبًا ${user.name || user.email}`;
+
+                const logoutBtn = modelBox.querySelector('#btn-logout');
+                if (logoutBtn) {
+                    logoutBtn.onclick = (e) => {
+                        e.preventDefault();
+                        clearCurrentUser();
+                        updateHeaderAuthLabel();
+                        setMessage('تم تسجيل الخروج.', 'success');
+                        setTimeout(() => {
+                            loginModel.style.display = 'none';
+                        }, 600);
+                    };
+                }
             }
 
             // منطق إنشاء حساب (تفاصيل أكثر)
@@ -428,10 +495,11 @@ function activateHeader() {
                     e.preventDefault();
                     const name = getVal('#reg-name');
                     const phone = getVal('#reg-phone');
-                    const email = getVal('#reg-email').toLowerCase();
+                    const email = normalizeEmail(getVal('#reg-email'));
                     const pass = getVal('#reg-pass');
 
                     if (!name || !phone || !email || !pass) return setMessage('يرجى ملء جميع الحقول.', 'error');
+                    if (!isValidEmail(email)) return setMessage('صيغة البريد الإلكتروني غير صحيحة.', 'error');
                     if (pass.length < 4) return setMessage('كلمة المرور قصيرة جدًا.', 'error');
 
                     const users = getUsers();
@@ -440,7 +508,9 @@ function activateHeader() {
                     } else {
                         users[email] = { password: pass, name, phone };
                         localStorage.setItem(USERS_KEY, JSON.stringify(users));
-                        localStorage.setItem(CURRENT_KEY, email);
+                        setBusy(true);
+                        setCurrentEmail(email);
+                        updateHeaderAuthLabel();
                         setMessage('تم إنشاء الحساب بنجاح.', 'success');
                         setTimeout(() => loginModel.style.display = 'none', 800);
                     }
@@ -468,7 +538,8 @@ function activateHeader() {
         // البدء بعرض تسجيل الدخول عند فتح النافذة
         if (openBtn) {
             openBtn.onclick = () => {
-                renderView('login');
+                updateHeaderAuthLabel();
+                renderView(getCurrentUser() ? 'account' : 'login');
                 loginModel.style.display = 'flex';
             };
         }
@@ -555,6 +626,23 @@ function activateHeader() {
             menuToggle.setAttribute('aria-expanded', String(isOpen));
         };
     }
+
+    // ضبط نص زر الدخول عند تحميل الهيدر
+    try {
+        const loginModel = document.getElementById('loginModel');
+        if (loginModel) {
+            const USERS_KEY = 'aissUsersV1';
+            const CURRENT_KEY = 'aissCurrentUserV1';
+            const normalizeEmail = (v) => (v || '').toString().trim().toLowerCase();
+            const getUsers = () => JSON.parse(localStorage.getItem(USERS_KEY)) || {};
+            const email = normalizeEmail(localStorage.getItem(CURRENT_KEY));
+            const user = email ? getUsers()[email] : null;
+            if (openBtn) {
+                const span = openBtn.querySelector('span');
+                if (span) span.textContent = user?.name ? user.name : 'اشتراك/ دخول';
+            }
+        }
+    } catch (_) {}
 }
 
 // وظيفة زر الصعود للأعلى
