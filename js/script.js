@@ -333,8 +333,8 @@ function activateHeader() {
                 <div class="close-btn">×</div>
                 <h2>تسجيل الدخول</h2>
                 <div class="social-buttons">
-                    <button type="button">استخدام Google <img src="assets/icons/google.webp" alt=""></button>
-                    <button type="button">استخدام Facebook <img src="assets/icons/facebooks.webp" alt=""></button>
+                    <button type="button">استخدام Google <img src="assets/icons/google.png" alt=""></button>
+                    <button type="button">استخدام Facebook <img src="assets/icons/facebooks.png" alt=""></button>
                 </div>
                 <div class="divider">أو</div>
                 <input class="email-input text-input" type="email" placeholder="البريد الإلكتروني">
@@ -351,8 +351,8 @@ function activateHeader() {
                 <div class="close-btn">×</div>
                 <h2>إنشاء حساب جديد</h2>
                 <div class="social-buttons">
-                    <button type="button">التسجيل باستخدام Google <img src="assets/icons/google.webp" alt=""></button>
-                    <button type="button">التسجيل باستخدام Facebook <img src="assets/icons/facebooks.webp" alt=""></button>
+                    <button type="button">التسجيل باستخدام Google <img src="assets/icons/google.png" alt=""></button>
+                    <button type="button">التسجيل باستخدام Facebook <img src="assets/icons/facebooks.png" alt=""></button>
                 </div>
                 <div class="divider">أو</div>
                 <input class="text-input" id="reg-name" type="text" placeholder="الاسم الكامل">
