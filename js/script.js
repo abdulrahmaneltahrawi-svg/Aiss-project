@@ -263,6 +263,7 @@ async function loadLayout() {
         console.error('فشل التحميل:', error);
     }
 }
+document.addEventListener('DOMContentLoaded', loadLayout);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -441,7 +442,7 @@ function activateHeader() {
                 modelBox.querySelector('#go-register').onclick = (e) => { e.preventDefault(); renderView('register'); };
                 modelBox.querySelector('#go-forgot').onclick = (e) => { e.preventDefault(); renderView('forgot'); };
                 
-                modelBox.querySelector('#btn-login').onclick = (e) => {
+                modelBox.querySelector('#btn-login').onclick = async (e) => {
                     e.preventDefault();
                     const email = normalizeEmail(getVal('.email-input'));
                     const pass = getVal('.password-input');
@@ -449,15 +450,31 @@ function activateHeader() {
                     if (!email || !pass) return setMessage('يرجى إدخال البريد الإلكتروني وكلمة المرور.', 'error');
                     if (!isValidEmail(email)) return setMessage('صيغة البريد الإلكتروني غير صحيحة.', 'error');
                     
-                    const users = getUsers();
-                    if (users[email] && users[email].password === pass) {
-                        setBusy(true);
-                        setCurrentEmail(email);
-                        updateHeaderAuthLabel();
-                        setMessage('تم تسجيل الدخول بنجاح.', 'success');
-                        setTimeout(() => loginModel.style.display = 'none', 800);
-                    } else {
-                        setMessage('البريد الإلكتروني أو كلمة المرور غير صحيحة.', 'error');
+                    setBusy(true);
+                    try {
+                        const response = await fetch('https://api.aiss.co/v1/login', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email, password: pass })
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            // حفظ التوكن (Token) في التخزين المحلي للاستخدام في الطلبات القادمة
+                            localStorage.setItem('userToken', result.token || '');
+                            setCurrentEmail(email);
+                            updateHeaderAuthLabel();
+                            setMessage('تم تسجيل الدخول بنجاح.', 'success');
+                            setTimeout(() => loginModel.style.display = 'none', 800);
+                        } else {
+                            setMessage(result.message || 'البريد الإلكتروني أو كلمة المرور غير صحيحة.', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Login API error:', error);
+                        setMessage('حدث خطأ أثناء الاتصال بالخادم، يرجى المحاولة لاحقاً.', 'error');
+                    } finally {
+                        setBusy(false);
                     }
                 };
             }
@@ -491,7 +508,7 @@ function activateHeader() {
             if (viewName === 'register') {
                 modelBox.querySelector('#go-login').onclick = (e) => { e.preventDefault(); renderView('login'); };
                 
-                modelBox.querySelector('#btn-register').onclick = (e) => {
+                modelBox.querySelector('#btn-register').onclick = async (e) => {
                     e.preventDefault();
                     const name = getVal('#reg-name');
                     const phone = getVal('#reg-phone');
@@ -502,17 +519,30 @@ function activateHeader() {
                     if (!isValidEmail(email)) return setMessage('صيغة البريد الإلكتروني غير صحيحة.', 'error');
                     if (pass.length < 4) return setMessage('كلمة المرور قصيرة جدًا.', 'error');
 
-                    const users = getUsers();
-                    if (users[email]) {
-                        setMessage('هذا البريد مسجل مسبقًا.', 'error');
-                    } else {
-                        users[email] = { password: pass, name, phone };
-                        localStorage.setItem(USERS_KEY, JSON.stringify(users));
-                        setBusy(true);
-                        setCurrentEmail(email);
-                        updateHeaderAuthLabel();
-                        setMessage('تم إنشاء الحساب بنجاح.', 'success');
-                        setTimeout(() => loginModel.style.display = 'none', 800);
+                    setBusy(true);
+                    try {
+                        const response = await fetch('https://api.aiss.co/v1/register', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ name, phone, email, password: pass })
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            localStorage.setItem('userToken', result.token || '');
+                            setCurrentEmail(email);
+                            updateHeaderAuthLabel();
+                            setMessage('تم إنشاء الحساب بنجاح.', 'success');
+                            setTimeout(() => loginModel.style.display = 'none', 800);
+                        } else {
+                            setMessage(result.message || 'فشل إنشاء الحساب، يرجى التحقق من البيانات.', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Registration API error:', error);
+                        setMessage('حدث خطأ أثناء الاتصال بالخادم.', 'error');
+                    } finally {
+                        setBusy(false);
                     }
                 };
             }
@@ -559,14 +589,7 @@ function activateHeader() {
         };
 
         // تفعيل البحث عند الضغط على زر Enter
-        searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const val = searchInput.value.trim();
-                if (val) {
-                    window.location.href = `search.html?query=${encodeURIComponent(val)}`;
-                }
-            }
-        });
+
 
         // البحث والاقتراحات
         searchInput.addEventListener('input', async function() {
@@ -611,38 +634,11 @@ function activateHeader() {
                 suggestionsList.innerHTML = '<li style="color:#999; cursor:default;">لا توجد نتائج</li>';
             }
         });
-
-        // إخفاء القائمة عند النقر خارجها
-        document.addEventListener('click', (e) => {
-            if (!searchInput.contains(e.target) && !suggestionsList.contains(e.target)) {
-                suggestionsList.style.display = 'none';
-            }
-        });
-    }
-
-    if (menuToggle && headerNav) {
-        menuToggle.onclick = () => {
-            const isOpen = headerNav.classList.toggle('is-open');
-            menuToggle.setAttribute('aria-expanded', String(isOpen));
-        };
+      
     }
 
     // ضبط نص زر الدخول عند تحميل الهيدر
-    try {
-        const loginModel = document.getElementById('loginModel');
-        if (loginModel) {
-            const USERS_KEY = 'aissUsersV1';
-            const CURRENT_KEY = 'aissCurrentUserV1';
-            const normalizeEmail = (v) => (v || '').toString().trim().toLowerCase();
-            const getUsers = () => JSON.parse(localStorage.getItem(USERS_KEY)) || {};
-            const email = normalizeEmail(localStorage.getItem(CURRENT_KEY));
-            const user = email ? getUsers()[email] : null;
-            if (openBtn) {
-                const span = openBtn.querySelector('span');
-                if (span) span.textContent = user?.name ? user.name : 'اشتراك/ دخول';
-            }
-        }
-    } catch (_) {}
+
 }
 
 // وظيفة زر الصعود للأعلى
@@ -666,44 +662,10 @@ function initScrollToTop() {
     });
 }
 
-// وظيفة المقالات ذات الصلة
-function loadRelatedPosts() {
-    // نبحث عن حاوية المقالات ذات الصلة (يجب إضافتها في صفحة views.html)
-    const relatedGrid = document.getElementById('related-posts-grid');
-    if (!relatedGrid) return; 
 
-    const params = new URLSearchParams(window.location.search);
-    const currentId = parseInt(params.get('id'));
 
-    if (!currentId || typeof myCards === 'undefined') return;
 
-    // العثور على المدونة الحالية
-    const currentPost = myCards.find(p => p.id === currentId);
-    if (!currentPost) return;
 
-    // جلب مقالات من نفس التصنيف واستثناء المقال الحالي
-    const related = myCards
-        .filter(p => p.category === currentPost.category && p.id !== currentId)
-        .slice(0, 3);
-        
-    if (related.length > 0) {
-        relatedGrid.innerHTML = related.map(item => `
-          <div class="card1">
-            <img src="${item.image}" loading="lazy">
-            <div class="class-content1">
-              <h3>${item.title}</h3>
-              <a href="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
-            </div>
-          </div>
-        `).join("");
-    }
-}
-
-document.addEventListener('DOMContentLoaded', loadLayout);
-
-window.addEventListener('storage', (e) => {
-    if (e.key === 'myCart') updateCartBadgeCount();
-});
 
 
     
