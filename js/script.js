@@ -331,6 +331,7 @@ function activateHeader() {
 
         const normalizeEmail = (v) => (v || '').toString().trim().toLowerCase();
         const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        const isValidPhone = (phone) => /^\d{7,15}$/.test(phone); // يتحقق من وجود أرقام فقط بطول 7 إلى 15 رقم
         const getUsers = () => JSON.parse(localStorage.getItem(USERS_KEY)) || {};
         const getCurrentEmail = () => normalizeEmail(localStorage.getItem(CURRENT_KEY));
         const getCurrentUser = () => {
@@ -458,7 +459,12 @@ function activateHeader() {
                             body: JSON.stringify({ email, password: pass })
                         });
 
-                        const result = await response.json();
+                        // التأكد من أن الرد يحتوي على JSON قبل محاولة قراءته
+                        let result = {};
+                        const contentType = response.headers.get("content-type");
+                        if (contentType && contentType.includes("application/json")) {
+                            result = await response.json();
+                        }
 
                         if (response.ok) {
                             // حفظ التوكن (Token) في التخزين المحلي للاستخدام في الطلبات القادمة
@@ -517,6 +523,7 @@ function activateHeader() {
 
                     if (!name || !phone || !email || !pass) return setMessage('يرجى ملء جميع الحقول.', 'error');
                     if (!isValidEmail(email)) return setMessage('صيغة البريد الإلكتروني غير صحيحة.', 'error');
+                    if (!isValidPhone(phone)) return setMessage('رقم الهاتف غير صحيح، يرجى إدخال أرقام فقط.', 'error');
                     if (pass.length < 4) return setMessage('كلمة المرور قصيرة جدًا.', 'error');
 
                     setBusy(true);
@@ -527,7 +534,11 @@ function activateHeader() {
                             body: JSON.stringify({ name, phone, email, password: pass })
                         });
 
-                        const result = await response.json();
+                        let result = {};
+                        const contentType = response.headers.get("content-type");
+                        if (contentType && contentType.includes("application/json")) {
+                            result = await response.json();
+                        }
 
                         if (response.ok) {
                             localStorage.setItem('userToken', result.token || '');
