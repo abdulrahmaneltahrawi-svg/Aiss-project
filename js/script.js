@@ -2,13 +2,13 @@
 // ===== بيانات الكروت =====
 
 const magazines = [
-    { title: "مجلة السلامة العربية", date: "العدد 62 - مارس 2026", img: "assets/magazine/IMG_1325.webp" , link: "https://publuu.com/flip-book/1071783/2386715/page/1?embed&transparent" },
-    { title: "مجلة السلامة العربية", date: "العدد 61 - فبراير 2026", img: "assets/magazine/IMG_1326.webp", link: "https://publuu.com/flip-book/1071783/2391520/page/1?embed&transparent" },
-    { title: "مجلة السلامة العربية", date: "العدد 60 - يناير 2026", img: "assets/magazine/IMG_1327.webp", link: "https://publuu.com/flip-book/1071783/2386468/page/1?embed&transparent" },
-    { title: "مجلة السلامة العربية", date: "العدد 59 - ديسمبر 2025", img: "assets/magazine/IMG_1328.webp", link: "https://publuu.com/flip-book/1071783/2391521/page/1?embed&transparent" },
-    { title: "مجلة السلامة العربية", date: "العدد 58 - نوفمبر 2025", img: "assets/magazine/58.webp", link: "https://publuu.com/flip-book/1071783/2394787/page/1?embed&transparent" },
+    { title: "مجلة السلامة العربية", date: "العدد 62 - مارس 2026", img: "assets/magazine/IMG_1325.webp" , link: "assets/pdfs/Issue-62-Interactive-Pages.pdf" },
+    { title: "مجلة السلامة العربية", date: "العدد 61 - فبراير 2026", img: "assets/magazine/IMG_1326.webp", link: "assets/pdfs/Issue-61-Interactive-Pages.pdf" },
+    { title: "مجلة السلامة العربية", date: "العدد 60 - يناير 2026", img: "assets/magazine/IMG_1327.webp", link: "assets/pdfs/Issue-60-Interactive-Pages-1.pdf" },
+    { title: "مجلة السلامة العربية", date: "العدد 59 - ديسمبر 2025", img: "assets/magazine/IMG_1328.webp", link: "assets/pdfs/Issue-59-Interactive-Pages_compressed.pdf" },
+    { title: "مجلة السلامة العربية", date: "العدد 58 - نوفمبر 2025", img: "assets/magazine/58.webp", link: "assets/pdfs/Issue-58-Interactive-Pages_compressed.pdf" },
     { title: "مجلة السلامة العربية", date: "العدد 57 - أكتوبر 2025", img: "assets/magazine/Issue-57-October-2025.webp", link: "https://publuu.com/flip-book/1077479/2400957/page/1?embed&transparent" },
-    { title: "مجلة السلامة العربية", date: "العدد 56 - سبتمبر 2025", img: "assets/magazine/Issue-56-September-2025 copy.webp", link: "https://publuu.com/flip-book/1077479/2401104/page/1?embed&transparent" },
+    { title: "مجلة مالسلامة العربية", date: "العدد 56 - سبتمبر 2025", img: "assets/magazine/Issue-56-September-2025 copy.webp", link: "https://publuu.com/flip-book/1077479/2401104/page/1?embed&transparent" },
     { title: "مجلة السلامة العربية", date: "العدد 55 - أغسطس 2025", img: "assets/magazine/Issue-55-August-2025.webp", link: "https://publuu.com/flip-book/1077479/2401099/page/1?embed&transparent" },
     { title: "مجلة السلامة العربية", date: "العدد 54 - يوليو 2025", img: "assets/magazine/Issue-54-July-2025.webp", link: "https://publuu.com/flip-book/1077479/2401098/page/1?embed&transparent" },
     { title: "مجلة السلامة العربية", date: "العدد 53 - يونيو 2025", img: "assets/magazine/issue-53-june-2025.webp", link: "https://publuu.com/flip-book/1077479/2401100/page/1?embed&transparent" },
@@ -195,8 +195,8 @@ if (myGrid) {
 // المجلات - الرئيسية (4 فقط)
 const homeGrid = document.getElementById('home-magazines-grid');
 if (homeGrid) {
-    // اعرض كل المجلات بدل عرض 4 فقط
-    homeGrid.innerHTML = magazines.slice(0, 4).map(mag => createCardHTML(mag, "عرض المجلة")).join("");
+    // اعرض كل المجلات
+    homeGrid.innerHTML = magazines.map(mag => createCardHTML(mag, "عرض المجلة")).join("");
 }
 
 
