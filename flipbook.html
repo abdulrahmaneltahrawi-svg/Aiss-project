@@ -1,97 +1,297 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="assets/icons/logo.webp" />
-    <title>عرض - المعهد العربي لعلوم السلامة</title>
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet" />
-    <style>
-      .flip-wrap {
-        width: min(1200px, 95%);
-        margin: 120px auto 40px;
-        background: #fff;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      }
-      .flip-top {
-        padding: 14px 16px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        border-bottom: 1px solid rgba(0,0,0,0.08);
-      }
-      .flip-top h1 {
-        font-size: 16px;
-        color: #111;
-        font-weight: 900;
-      }
-      .flip-top a {
-        display: inline-block;
-        padding: 10px 14px;
-        border-radius: 12px;
-        background: rgba(228,41,58,0.12);
-        color: #e4293a;
-        font-weight: 900;
-      }
-      .flip-frame {
-        width: 100%;
-        height: min(85vh, 900px);
-        border: 0;
-        display: block;
-      }
-      .flip-empty {
-        padding: 30px;
-        color: #444;
-        line-height: 1.9;
-      }
-      @media (max-width: 600px) {
-        .flip-wrap { margin-top: 140px; }
-        .flip-top { flex-direction: column; align-items: stretch; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="header-placeholder"></div>
 
-    <main class="page-content">
-      <div class="flip-wrap">
-        <div class="flip-top">
-          <h1 id="flip-title">عرض</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="assets/icons/logo.webp" />
+  <title>عرض - المعهد العربي لعلوم السلامة</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+    rel="stylesheet" />
+  <style>
+    .flip-wrap {
+      width: min(600px, 98%);
+      /* تكبير الحاوية لتستوعب عرض الصفحتين */
+      height: 88vh;
+      /* تحديد طول ثابت للحاوية */
+      margin: 60px auto 30px;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flip-top {
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .flip-top h1 {
+      font-size: 16px;
+      color: #111;
+      font-weight: 900;
+    }
+
+    .flip-top a {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(228, 41, 58, 0.12);
+      color: #e4293a;
+      font-weight: 900;
+    }
+
+    /* تعديل حاوية الجسم لمنع التمدد */
+    /* الحاوية التي تحتوي على كلمة book */
+    #book {
+      display: none;
+      margin: 0 auto;
+      position: relative !important;
+    }
+
+    /* الحاوية الأكبر (البوكس الأبيض الداخلي) */
+    #flip-body {
+      display: flex !important;
+      justify-content: center !important;
+      /* توسيط المحتوى أفقياً */
+      align-items: center !important;
+      /* توسيط المحتوى عمودياً */
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      /* لمنع النزول لأسفل */
+      position: relative;
+    }
+
+    .page {
+      background-color: white;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .page canvas {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    #loading-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* تغطية الحاوية بالكامل */
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      transition: opacity 0.5s ease;
+      /* إضافة تأثير تلاشي */
+    }
+
+    .loader {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #e4293a;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+
+    #load-status {
+      font-weight: 900;
+      color: #e4293a;
+      font-size: 22px;
+      margin: 10px 0;
+    }
+
+    #load-progress {
+      font-size: 13px;
+      color: #777;
+      margin-top: 5px;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .flip-wrap {
+        margin-top: 140px;
+      }
+
+      .flip-top {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      #flip-body {
+        padding: 10px 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="page-content">
+    <div class="flip-wrap">
+      <div class="flip-top">
+        <h1 id="flip-title">عرض</h1>
+        <div style="display: flex; gap: 15px; align-items: center;">
+          <span id="page-num" style="font-size: 14px; font-weight: bold; color: #666; direction: ltr;">0 / 0</span>
           <a id="flip-back" href="magazine.html">رجوع</a>
         </div>
-        <div id="flip-body"></div>
       </div>
-    </main>
+      <div id="flip-body">
+        <div id="loading-screen" style="display: flex;">
+          <div class="loader"></div>
+          <p id="load-status">جاري التحميل...</p>
+          <div id="load-progress">يرجى الانتظار، يتم تحضير الكتاب...</div>
+        </div>
+        <div id="book"></div>
+      </div>
+    </div>
+  </main>
 
-    <div id="footer-placeholder"></div>
+  <div id="footer-placeholder"></div>
 
-    <script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+
+  <script>
+    const pdfjsLib = window['pdfjs-dist/build/pdf'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+    async function startFlipbook() {
+      // تسجيل وقت البداية لضمان بقاء الشاشة لفترة كافية
+      const startTime = Date.now();
       const params = new URLSearchParams(window.location.search);
-      const title = params.get("title") || "عرض";
-      const src = params.get("src") || "";
-      const back = params.get("back") || "magazine.html";
+      const src = params.get('src');
+      const title = params.get('title');
+      const back = params.get('back') || 'magazine.html';
 
-      const titleEl = document.getElementById("flip-title");
-      const backEl = document.getElementById("flip-back");
-      const bodyEl = document.getElementById("flip-body");
+      // التأكد من ظهور شاشة التحميل
+      document.getElementById('loading-screen').style.display = 'flex';
 
-      if (titleEl) titleEl.innerText = title;
-      if (backEl) backEl.href = back;
+      if (title) document.getElementById('flip-title').textContent = title;
+      document.getElementById('flip-back').href = back;
 
-      if (!src || src === "#") {
-        if (bodyEl) {
-          bodyEl.innerHTML = `<div class="flip-empty">هذا الإصدار غير مرفوع بعد.    .</div>`;
-        }
-      } else {
-        if (bodyEl) {
-          bodyEl.innerHTML = `<iframe class="flip-frame" src="${src}" scrolling="no" frameborder="0" allow="clipboard-write; autoplay; fullscreen" allowfullscreen="allowfullscreen"></iframe>`;
-        }
+      if (!src) {
+        document.getElementById('loading-screen').innerHTML = "<p>لم يتم العثور على ملف للعرض.</p>";
+        return;
       }
-    </script>
-    <script src="js/script.js"></script>
-  </body>
+
+      if (src.includes('publuu.com')) {
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.style.width = "100%";
+        iframe.style.height = "100%"; /* ملء الحاوية بالكامل */
+        iframe.frameBorder = "0";
+        iframe.allowFullscreen = true;
+        iframe.onload = () => {
+          const elapsed = Date.now() - startTime;
+          const delay = Math.max(1000, 3000 - elapsed);
+          setTimeout(() => {
+            document.getElementById('loading-screen').style.opacity = '0';
+            setTimeout(() => {
+              document.getElementById('loading-screen').style.display = 'none';
+            }, 500);
+          }, delay);
+        };
+        document.getElementById('flip-body').appendChild(iframe);
+        return;
+      }
+
+      try {
+        const pdf = await pdfjsLib.getDocument(src).promise;
+        const book = document.getElementById('book');
+        const totalPages = pdf.numPages;
+        document.getElementById('page-num').textContent = `1 / ${totalPages}`;
+
+        for (let i = 1; i <= totalPages; i++) {
+          // تحديث نص التحميل
+          document.getElementById('load-progress').textContent = `جاري معالجة الصفحة ${i} من ${totalPages}`;
+
+          const page = await pdf.getPage(i);
+          const viewport = page.getViewport({ scale: 1.8 });
+          const canvas = document.createElement('canvas');
+          const context = canvas.getContext('2d');
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+
+          await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+          const pageDiv = document.createElement('div');
+          pageDiv.className = 'page';
+          pageDiv.appendChild(canvas);
+          book.appendChild(pageDiv);
+        }
+
+        const pageFlip = new St.PageFlip(book, {
+          width: 900,
+          height: 500,
+          size: "fixed",
+          showCover: true,      // إظهار الغلاف منفرد
+          drawShadow: true,
+          flippingTime: 800,
+          startPage: 0,
+          autoSize: false,
+          usePortrait: true,
+          mobileScrollSupport: false,
+          clickEventForward: true,
+          swipeDistance: 30,
+          showPageCorners: true,
+          disableFlipByClick: false
+        });
+        pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+        pageFlip.on('flip', (e) => {
+          document.getElementById('page-num').textContent = `${e.data + 1} / ${totalPages}`;
+        });
+
+        // ننتظر حتى يكتمل بناء المجلة تماماً وتثبيتها في المتصفح
+        const elapsed = Date.now() - startTime;
+        const delay = Math.max(1000, 3000 - elapsed); // ضمان بقاء الشاشة لمدة 3 ثوانٍ على الأقل
+
+        setTimeout(() => {
+          book.style.display = 'block'; // إظهار الكتاب فقط بعد اكتمال معالجة كافة الصفحات
+          pageFlip.update();
+          document.getElementById('loading-screen').style.opacity = '0';
+          setTimeout(() => {
+            document.getElementById('loading-screen').style.display = 'none';
+          }, 500);
+        }, delay);
+      } catch (err) {
+        console.error("Error loading PDF:", err);
+        document.getElementById('loading-screen').innerHTML = "<p>عذراً، حدث خطأ أثناء تحميل الملف.</p>";
+      }
+    }
+    window.addEventListener('DOMContentLoaded', startFlipbook);
+  </script>
+  <script src="js/script.js"></script>
+</body>
+
 </html>

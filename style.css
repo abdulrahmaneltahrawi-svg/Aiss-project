@@ -176,6 +176,8 @@ header {
   padding: 30px;
   border-radius: 16px;
   width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
   text-align: center;
   direction: rtl;
   position: relative;
@@ -1359,6 +1361,31 @@ footer {
   color: gray;
 }
 
+/* تصميم حاوية عرض المجلة PDF لمنع تمدد الصفحة */
+.pdf-viewer-container {
+  width: 95%;
+  max-width: 1200px;
+  height: 85vh; /* ارتفاع ثابت يمنع الصفحة من النزول للأسفل بشكل مفرط */
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden; /* يمنع تمدد الحاوية مع محتوى الـ PDF */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
 
+.pdf-viewer-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 
-
+/* تنسيق المجلة المصغرة بدون حاوية */
+.mini-magazine-view {
+  width: min(600px, 95%); /* عرض مرن يسمح برؤية تأثير تقليب الصفحات */
+  height: 400px; /* ارتفاع متناسق للعرض المصغر */
+  margin: 30px auto;
+  display: block;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* ظل خفيف لإبرازها فقط */
+}

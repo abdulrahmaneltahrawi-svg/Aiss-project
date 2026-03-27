@@ -1,60 +1,96 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="assets/icons/logo.webp"/>
-    <title>المجلة-المعهد العربي لعلوم السلامة</title>
-    <link rel="stylesheet" href="style.css" />
 
-    <!--تعريف للخط-->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"rel="stylesheet"/>
-  </head>
-  <body>
-    
-    <div id="header-placeholder"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="assets/icons/logo.webp" />
+  <title>المجلة-المعهد العربي لعلوم السلامة</title>
+  <link rel="stylesheet" href="style.css" />
 
-    <!--قسم صفحة العرض-->
+  <!--تعريف للخط-->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+    rel="stylesheet" />
+</head>
 
-    <div class="hero-section-m">
-      <img src="assets/imge/0004.webp" alt="magazine-pic" loading="lazy"/>
-      <div class="logo-text"><p>المجلات</p></div>
+<body>
+
+  <style>
+    .lastV {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+      
+    }
+
+    .lastV img {
+      width: 300px;
+      border: 1px solid rgba(0, 0, 0, 0.5);
+    }
+
+    .lastV img:hover {
+      transform: scale(1.01);
+      box-shadow: 0 10px 20px rgba(0, 0, 5, 0.25);
+      transition: all 0.3s ease;
+      z-index: 10;
+      
+    }
+  </style>
+
+  <div id="header-placeholder"></div>
+
+  <!--قسم صفحة العرض-->
+
+  <div class="hero-section-m">
+    <img src="assets/imge/0004.webp" alt="magazine-pic" loading="lazy" />
+    <div class="logo-text">
+      <p>المجلات</p>
     </div>
+  </div>
 
-    <!--قسم المجلات-->
+  <!--قسم المجلات-->
 
-    <div class="title0">
-      <p> <p class="title0-color">اخر</p> مجلة السلامة العربية </p>  
-    </div>
+  <div class="title0">
+    <p>
+    <p class="title0-color">اخر</p> مجلة السلامة العربية </p>
+  </div>
 
-    <iframe src="https://publuu.com/flip-book/1071783/2386715/page/1?embed&transparent" width="100%" height="460" scrolling="no" frameborder="0" allow="clipboard-write; autoplay; fullscreen" allowfullscreen="allowfullscreen" class="publuuflip"></iframe>
-
-   <!--قسم الكروت-->
-   <div class="title0">
-      <p> <p class="title0-color">اصدارات</p> مجلة السلامة العربية </p>  
-    </div>
-
-    <div class="magazines-filter">
-      <label for="magazines-sort">ترتيب المجلات:</label>
-      <select id="magazines-sort">
-        <option value="newest" selected>من الأحدث للأقدم</option>
-        <option value="oldest">من الأقدم للأحدث</option>
-      </select>
-    </div>
-    
-    <div id="magazines-grid" class="card-container1">
-    </div>
-    <div class="load-more-btn-container">
-       <button id="load-more-magazines" class="btn1" style="display: none;">عرض المزيد</button>
-    </div>
+  <div class="lastV">
+    <a
+      href="flipbook.html?title=مجلة السلامة العربية&src=assets/pdfs/Issue-62-Interactive-Pages.pdf&back=magazine.html">
+      <img src="assets/imge/cover.jpg" alt="latest-magazine-cover" loading="lazy" />
+    </a>
+  </div>
 
 
- <!-- القسم الاخير-->
+  <!--قسم الكروت-->
+  <div class="title0">
+    <p>
+    <p class="title0-color">اصدارات</p> مجلة السلامة العربية </p>
+  </div>
 
-   <div id="footer-placeholder"></div>
+  <div class="magazines-filter">
+    <label for="magazines-sort">ترتيب المجلات:</label>
+    <select id="magazines-sort">
+      <option value="newest" selected>من الأحدث للأقدم</option>
+      <option value="oldest">من الأقدم للأحدث</option>
+    </select>
+  </div>
 
-   <script src="js/script.js"></script>
-  </body>
+  <div id="magazines-grid" class="card-container1">
+  </div>
+  <div class="load-more-btn-container">
+    <button id="load-more-magazines" class="btn1" style="display: none;">عرض المزيد</button>
+  </div>
 
-  
+
+  <!-- القسم الاخير-->
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/script.js"></script>
+</body>
+
+
 </html>
