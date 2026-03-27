@@ -2,7 +2,7 @@
 // ===== بيانات الكروت =====
 
 const magazines = [
-    { title: "مجلة السلامة العربية", date: "العدد 62 - مارس 2026", img: "assets/magazine/IMG_1325.webp" , link: "assets/pdfs/Issue-62-Interactive-Pages.pdf" },
+    { title: "مجلة السلامة العربية", date: "العدد 62 - مارس 2026", img: "assets/magazine/IMG_1325.webp" , link: "assets/pdfs/Issue-62-Interactive-Pages_compressed.pdf" },
     { title: "مجلة السلامة العربية", date: "العدد 61 - فبراير 2026", img: "assets/magazine/IMG_1326.webp", link: "assets/pdfs/Issue-61-Interactive-Pages.pdf" },
     { title: "مجلة السلامة العربية", date: "العدد 60 - يناير 2026", img: "assets/magazine/IMG_1327.webp", link: "assets/pdfs/Issue-60-Interactive-Pages-1.pdf" },
     { title: "مجلة السلامة العربية", date: "العدد 59 - ديسمبر 2025", img: "assets/magazine/IMG_1328.webp", link: "assets/pdfs/Issue-59-Interactive-Pages_compressed.pdf" },
