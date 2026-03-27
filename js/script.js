@@ -195,8 +195,8 @@ if (myGrid) {
 // المجلات - الرئيسية (4 فقط)
 const homeGrid = document.getElementById('home-magazines-grid');
 if (homeGrid) {
-    // اعرض كل المجلات
-    homeGrid.innerHTML = magazines.map(mag => createCardHTML(mag, "عرض المجلة")).join("");
+    // اعرض 4 مجلات فقط
+    homeGrid.innerHTML = magazines.slice(0, 4).map(mag => createCardHTML(mag, "عرض المجلة")).join("");
 }
 
 
