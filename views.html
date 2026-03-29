@@ -21,7 +21,7 @@
 
     <div class="container0">
       <h1 id="title-placeholder"></h1>
-      <img id="image-placeholder" alt="take-data"/>
+      <img id="image-placeholder" alt="" loading="lazy"/>
       <p id="description-placeholder"></p>
       <br />
       <a id="back-link" href="blogs.html"
@@ -42,23 +42,15 @@
 
         if (source === "codes") {
           // إذا كان المصدر "codes" نجلب البيانات من ملف الجيسون
-          const paths = [
-            "cleaned-posts (1).json",
-            "cleaned-posts%20(1).json",
-            "./cleaned-posts (1).json",
-            "./cleaned-posts%20(1).json",
-          ];
-
-          for (const path of paths) {
-            try {
-              const response = await fetch(path, { cache: "no-store" });
-              if (!response.ok) continue;
+          try {
+            // تم توحيد المسار واستخدام اسم الملف الصحيح
+            const response = await fetch("cleaned-posts (1).json", { cache: "no-store" });
+            if (response.ok) {
               const json = await response.json();
-              if (Array.isArray(json) && json.length) {
-                data = json;
-                break;
-              }
-            } catch (_) {}
+              if (Array.isArray(json)) data = json;
+            }
+          } catch (e) {
+            console.error("خطأ في جلب بيانات الأكواد:", e);
           }
           if (!data) data = [];
           const backLink = document.getElementById("back-link");
@@ -93,7 +85,9 @@
 
         if (item) {
           document.getElementById("title-placeholder").innerText = item.title;
-          document.getElementById("image-placeholder").src = item.image;
+          const imgPlaceholder = document.getElementById("image-placeholder");
+          imgPlaceholder.src = item.image;
+          imgPlaceholder.alt = item.title || "صورة توضيحية"; // إضافة alt ديناميكيًا
           // عرض المحتوى سواء كان اسمه content أو description
           document.getElementById("description-placeholder").innerHTML =
             item.content || item.description;

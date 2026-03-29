@@ -14,8 +14,6 @@
     />
   </head>
 
-
-
   <body>
     <div id="header-placeholder"></div>
 
@@ -24,6 +22,10 @@
     <div class="hero-section-m">
       <img src="assets/imge/0006.webp" alt="blogs-pic" loading="lazy" />
       <div class="logo-text"><p>المدونات</p></div>
+    </div>
+
+    <div class="title0">
+      <p>كتابات و مدونات</p>
     </div>
 
     <div class="blogs-filter">
@@ -47,15 +49,19 @@
       }
 
       function render(items) {
-        grid.innerHTML = items.map((item) => `
+        grid.innerHTML = items
+          .map(
+            (item) => `
           <div class="card1">
-            <img src="${item.image}" loading="lazy">
+            <img src="${item.image}" alt="${item.title || "صورة المدونة"}" loading="lazy">
             <div class="class-content1">
               <h3>${item.title}</h3>
               <a href ="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
             </div>
           </div>
-          `).join("");
+          `,
+          )
+          .join("");
       }
 
       function initCategories() {

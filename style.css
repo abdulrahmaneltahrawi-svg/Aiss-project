@@ -377,10 +377,13 @@ header button:hover {
   border-bottom: 1px solid #f1f1f1;
   font-size: 13px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .search-suggestions li:hover {
-  background-color: #f9f9f9;
+  background-color: #fff5f5;
+  color: #e4293a;
+  padding-right: 18px;
 }
 /*زر التسوق*/
 .shop-img img {
@@ -497,31 +500,49 @@ header button:hover {
 }
 
 .magazines-filter {
-  width: 90%;
-  margin: 12px auto 0;
+  max-width: fit-content;
+  margin: 30px auto 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   background: #fff;
-  padding: 10px 14px;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  padding: 10px 25px;
+  border-radius: 50px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
   direction: rtl;
+  border: 1px solid #eee;
 }
 
 .magazines-filter label {
-  font-weight: 800;
-  color: #111;
+  font-weight: 700;
+  font-size: 15px;
+  white-space: nowrap;
 }
 
 .magazines-filter select {
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  background: #fff;
+  padding: 6px 15px 6px 35px;
+  font-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23e4293a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 12px center;
+  background-color: #fff;
+  border-radius: 30px;
+  border: 1.0px solid #000;
   font-weight: 700;
+  color: #e4293a;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
 }
+
+.magazines-filter select:hover {
+  background-color: rgb(236, 235, 235) ;
+}
+
 
 .card1 {
   width: 280px;
@@ -534,6 +555,12 @@ header button:hover {
   z-index: 1;
   display: flex;
   flex-direction: column;
+  animation: cardFadeIn 0.6s ease forwards;
+}
+
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .card1:hover {
@@ -690,7 +717,7 @@ footer .container {
   align-items: flex-start;
   padding: 40px 20px;
   background-color: #ececec;
-  color: #7a7a7a;
+  color: #444;
 
   margin: 0 auto;
 }
@@ -712,10 +739,11 @@ footer {
   border-bottom: 2px solid #23528754;
   display: inline-block;
   padding-bottom: 5px;
+  color: #222;
 }
 
 .footer-content a {
-  color: #7a7a7a;
+  color: #444;
 }
 
 .footer-content a:hover {
@@ -784,23 +812,109 @@ footer {
 .search-class {
   display: flex;
   justify-content: center;
-  padding: 100px;
-  gap: 5px;
+  align-items: stretch;
+  padding: 150px 5% 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  direction: rtl;
 }
 
 .search-input {
-  padding: 10px;
-  border-radius: 30px;
+  flex: 1;
+  padding: 15px 25px;
+  border: 2px solid #eee;
+  border-radius: 0 50px 50px 0;
+  border-left: none;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.search-input:focus {
+  border-color: #e4293a;
+}
+
+.search-category {
+  position: relative;
+  background: #fff;
+  border: 2px solid #eee;
+  border-left: none;
+  padding: 0 25px; /* زيادة المسافة قليلاً لزر تصنيف البحث أيضاً */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  min-width: 140px;
+}
+
+.category-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: #444;
+  font-size: 14px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.arrow-icon {
+  font-size: 10px;
+  color: #e4293a;
+  transition: transform 0.3s;
+}
+
+.category-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 100%;
+  background: #fff;
+  list-style: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  display: none;
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid #eee;
+  margin-top: 2px; /* مسافة بسيطة جداً لا تؤثر على حركة الماوس */
+}
+
+.search-category:hover .category-menu {
+  display: block;
+}
+
+.search-category:hover .arrow-icon {
+  transform: rotate(180deg);
+}
+
+.category-menu li {
+  padding: 12px 20px;
+  font-size: 13px;
+  border-bottom: 1px solid #f9f9f9;
+  text-align: right;
+  transition: all 0.2s ease;
+}
+
+.category-menu li:hover {
+  background: #fff5f5;
+  color: #e4293a;
+  padding-right: 25px;
 }
 
 .search-btn {
-  padding: 10px;
-  border-radius: 15px;
+  padding: 0 35px;
+  background: #e4293a;
+  color: #fff;
+  border: none;
+  border-radius: 50px 0 0 50px;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .search-btn:hover {
-  cursor: pointer;
-  color: rgb(112, 112, 112);
+  background: #b71c1c;
 }
 
 /*احدث اصدارات المجلة و المدونات (زر)*/
@@ -831,28 +945,55 @@ footer {
 
 /* تصنيف المدونات */
 .blogs-filter {
-  width: 90%;
-  margin: 20px auto 0;
+  max-width: fit-content;
+  margin: 30px auto 20px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
+  gap: 12px;
   background: #fff;
-  padding: 12px 14px;
-  border-radius: 14px;
+  padding: 10px 25px;
+  border-radius: 50px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  direction: rtl;
+  border: 1px solid #eee;
 }
 
 .blogs-filter label {
-  font-weight: 800;
-  color: #111;
+  font-weight: 700;
+  color: #666;
+  font-size: 15px;
+  white-space: nowrap;
 }
 
 .blogs-filter select {
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  background: #fff;
+  padding: 6px 15px 6px 35px;
+  font-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23e4293a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 12px center;
+  background-color: #fff;
+  border-radius: 30px;
+  border: 1.5px solid #e4293a;
+  font-weight: 700;
+  color: #e4293a;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
 }
+
+.blogs-filter select:hover {
+  background-color: rgb(236, 235, 235);
+}
+
+.blogs-filter select:focus {
+  box-shadow: 0 0 0 3px rgba(228, 41, 58, 0.15);
+  border-color: #b71c1c;
+}
+
 .cart-popup {
   position: fixed;
   top: 75px;
@@ -1029,6 +1170,7 @@ textarea {
 
 .hero-section {
   background: url("assets/imge/page.webp");
+
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -1092,21 +1234,38 @@ textarea {
   .menu-toggle {
     order: 1;
     display: block;
-    color: black;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    color: #333;
     margin-left: 10px;
   }
 
   .header-nav {
+    display: block;
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
-    background: #fff;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-    padding: 12px;
-    display: none;
-    z-index: 9998;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+
+    /* تأثيرات الحركة */
+    max-height: 0;
+    overflow: hidden;
+    transition:
+    max-height 0.4s ease-in-out,
+    opacity 0.3s ease;
+    opacity: 0;
+    border-top: 2px solid #e4293a; /* لون أحمر يتناسب مع الشعار */
+  }
+
+  .header-nav.active {
+    max-height: 100vh; /* تسمح للقائمة بالتمدد حسب المحتوى */
+    opacity: 1;
   }
 
   .header-nav.is-open {
@@ -1115,18 +1274,21 @@ textarea {
 
   .header-nav ul {
     flex-direction: column;
-    gap: 8px;
-  }
-
-  .header-nav ul li {
-    margin-right: 0;
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;
   }
 
   .header-nav ul li a {
     display: block;
-    padding: 10px 12px;
+    padding: 15px 25px;
+    color: #333;
     border-radius: 12px;
     background: rgba(0, 0, 0, 0.03);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+    text-align: right;
   }
 
   .search-img img {
@@ -1153,15 +1315,6 @@ textarea {
   .back {
     color: #111;
     border: 1px solid #242323;
-  }
-
-  .hero-section-m p {
-    font-size: 3rem;
-    margin-top: -50px;
-  }
-
-  .logo-text {
-    margin-top: 50px;
   }
 
   .title0 {
@@ -1209,16 +1362,6 @@ textarea {
     padding: 0;
   }
 
-  .hero-section-m {
-    margin-top: 50px;
-    height: 150px;
-  }
-
-  .hero-section-m img {
-    height: 210px;
-    margin-top: 0;
-  }
-
   footer .container {
     flex-direction: column;
     align-items: center;
@@ -1235,9 +1378,40 @@ textarea {
     flex-direction: column;
     text-align: center;
   }
-}
-.magazines-filter {
-  padding: 10px 14px;
+
+  .hero-section-m {
+    margin-top: 80px; /* لإعطاء مساحة كافية تحت الهيدر الثابت */
+    height: 150px;
+  }
+
+  .hero-section-m img {
+    height: 100%;
+    margin-top: 0;
+  }
+
+  .logo-text {
+    margin-top: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+  }
+
+  .hero-section-m p {
+    font-size: 1.6rem;
+    margin: 0;
+  }
+
+  .search-class {
+    flex-direction: column;
+    padding: 120px 20px 30px;
+    gap: 10px;
+  }
+  .search-input, .search-category, .search-btn {
+    border-radius: 12px !important;
+    border: 1px solid #eee !important;
+    padding: 12px 20px;
+    height: 50px;
+  }
 }
 
 @media (max-width: 900px) {

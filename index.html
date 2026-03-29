@@ -35,6 +35,10 @@
       </div>
     </section>
 
+
+
+    
+
 <!---------------------------------------------------------------------------------------------------------------->
 
     <!--قسم المجلات-->
@@ -71,7 +75,7 @@
 
     grid.innerHTML = myCards.slice(0,8).map((item) => `
       <div class="card1">
-          <img src="${item.image}" loading="lazy" >
+          <img src="${item.image}" alt="${item.title || 'صورة المدونة'}" loading="lazy" >
           <div class="class-content1">
           <h3>${item.title}</h3>
           <a href="views.html?id=${item.id}" class="btn1">عرض المدونة</a>

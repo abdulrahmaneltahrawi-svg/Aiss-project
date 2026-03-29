@@ -62,7 +62,7 @@ function renderCodes(data) {
     const img = item.image || "assets/imge/0006.webp";  
     grid.innerHTML += `
       <div class="card1">
-        <img src="${img}" alt="${item.title || "كود"}">
+        <img src="${img}" alt="${item.title || "كود"}" loading="lazy">
         <div class="class-content1">
           <h3>${item.title || ""}</h3>
           <a href="views.html?id=${index}&source=codes" class="btn1">عرض التفاصيل</a>
