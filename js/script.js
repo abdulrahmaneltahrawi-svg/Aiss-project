@@ -1,14 +1,17 @@
 
 // ===== بيانات الكروت =====
 
+// ملاحظة: استخدام jsDelivr يضمن عمل روابط PDF داخل متصفح المجلة بدون مشاكل أمنية (CORS)
+const GITHUB_BASE = "https://cdn.jsdelivr.net/gh/abdulrahmaneltahrawi-svg/aiss-storage@main/";
+
 const magazines = [
-    { title: "مجلة السلامة العربية", date: "العدد 62 - مارس 2026", img: "assets/magazine/IMG_1325.webp" , link: "assets/pdfs/Issue-62-Interactive-Pages_compressed.pdf" },
-    { title: "مجلة السلامة العربية", date: "العدد 61 - فبراير 2026", img: "assets/magazine/IMG_1326.webp", link: "assets/pdfs/Issue-61-Interactive-Pages.pdf" },
-    { title: "مجلة السلامة العربية", date: "العدد 60 - يناير 2026", img: "assets/magazine/IMG_1327.webp", link: "assets/pdfs/Issue-60-Interactive-Pages-1.pdf" },
-    { title: "مجلة السلامة العربية", date: "العدد 59 - ديسمبر 2025", img: "assets/magazine/IMG_1328.webp", link: "assets/pdfs/Issue-59-Interactive-Pages_compressed.pdf" },
-    { title: "مجلة السلامة العربية", date: "العدد 58 - نوفمبر 2025", img: "assets/magazine/58.webp", link: "assets/pdfs/Issue-58-Interactive-Pages_compressed.pdf" },
+    { title: "مجلة السلامة العربية", date: "العدد 62 - مارس 2026", img: "assets/magazine/IMG_1325.webp" , link: GITHUB_BASE + "pdfs/Issue-62-Interactive-Pages.pdf" },
+    { title: "مجلة السلامة العربية", date: "العدد 61 - فبراير 2026", img: "assets/magazine/IMG_1326.webp", link: GITHUB_BASE + "pdfs/Issue-61-Interactive-Pages.pdf" },
+    { title: "مجلة السلامة العربية", date: "العدد 60 - يناير 2026", img: "assets/magazine/IMG_1327.webp", link: GITHUB_BASE + "pdfs/Issue-60-Interactive-Pages-1_compressed.pdf" },
+    { title: "مجلة السلامة العربية", date: "العدد 59 - ديسمبر 2025", img: "assets/magazine/IMG_1328.webp", link: GITHUB_BASE + "pdfs/Issue-59-Interactive-Pages_compressed_compressed.pdf" },
+    { title: "مجلة السلامة العربية", date: "العدد 58 - نوفمبر 2025", img: "assets/magazine/58.webp", link: GITHUB_BASE + "pdfs/Issue-58-Interactive-Pages_compressed_compressed.pdf" },
     { title: "مجلة السلامة العربية", date: "العدد 57 - أكتوبر 2025", img: "assets/magazine/Issue-57-October-2025.webp", link: "https://publuu.com/flip-book/1077479/2400957/page/1?embed&transparent" },
-    { title: "مجلة مالسلامة العربية", date: "العدد 56 - سبتمبر 2025", img: "assets/magazine/Issue-56-September-2025 copy.webp", link: "https://publuu.com/flip-book/1077479/2401104/page/1?embed&transparent" },
+    { title: "مجلة السلامة العربية", date: "العدد 56 - سبتمبر 2025", img: "assets/magazine/Issue-56-September-2025 copy.webp", link: "https://publuu.com/flip-book/1077479/2401104/page/1?embed&transparent" },
     { title: "مجلة السلامة العربية", date: "العدد 55 - أغسطس 2025", img: "assets/magazine/Issue-55-August-2025.webp", link: "https://publuu.com/flip-book/1077479/2401099/page/1?embed&transparent" },
     { title: "مجلة السلامة العربية", date: "العدد 54 - يوليو 2025", img: "assets/magazine/Issue-54-July-2025.webp", link: "https://publuu.com/flip-book/1077479/2401098/page/1?embed&transparent" },
     { title: "مجلة السلامة العربية", date: "العدد 53 - يونيو 2025", img: "assets/magazine/issue-53-june-2025.webp", link: "https://publuu.com/flip-book/1077479/2401100/page/1?embed&transparent" },

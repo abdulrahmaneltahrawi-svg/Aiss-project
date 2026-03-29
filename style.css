@@ -203,7 +203,6 @@ header {
   background: #fff;
   font-weight: 500;
   cursor: pointer;
-
 }
 
 .social-button button:hover {
@@ -222,7 +221,9 @@ header {
   font-size: 14px;
 }
 
-.email-input, .password-input, .text-input {
+.email-input,
+.password-input,
+.text-input {
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
@@ -384,14 +385,12 @@ header button:hover {
 /*زر التسوق*/
 .shop-img img {
   width: 27px;
-
 }
 
 .shop-img img:hover {
   cursor: pointer;
   scale: calc(1.1);
 }
-
 
 /* تنسيق الدائرة الحمراء */
 .cart-badge {
@@ -435,15 +434,12 @@ header button:hover {
   z-index: -1;
 }
 
-
 .hero-section-m p {
   color: #e4293a;
   font-size: 5rem;
   margin-bottom: -90px;
   text-shadow: 2px 3px 9px rgba(0, 0, 0, 0.6);
-
 }
-
 
 /* نص العنوان فوق صورة الهيرو */
 .logo-text {
@@ -472,7 +468,24 @@ header button:hover {
 .title0-color {
   color: #e4293a;
 }
+.lastV {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
 
+.lastV img {
+  width: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.lastV img:hover {
+  transform: scale(1.01);
+  box-shadow: 0 10px 20px rgba(0, 0, 5, 0.25);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
 
 /*قسم الكروت*/
 
@@ -540,7 +553,7 @@ header button:hover {
   border-radius: 20px;
   font-weight: bold;
   z-index: 5;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .card1 img {
@@ -669,7 +682,6 @@ header button:hover {
   filter: brightness(0.95);
 }
 
-
 /*قسم الاخير*/
 
 footer .container {
@@ -679,7 +691,7 @@ footer .container {
   padding: 40px 20px;
   background-color: #ececec;
   color: #7a7a7a;
-  
+
   margin: 0 auto;
 }
 
@@ -817,201 +829,201 @@ footer {
   color: gray;
 }
 
-    /* تصنيف المدونات */
-    .blogs-filter {
-      width: 90%;
-      margin: 20px auto 0;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 10px;
-      background: #fff;
-      padding: 12px 14px;
-      border-radius: 14px;
-    }
+/* تصنيف المدونات */
+.blogs-filter {
+  width: 90%;
+  margin: 20px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  background: #fff;
+  padding: 12px 14px;
+  border-radius: 14px;
+}
 
-    .blogs-filter label {
-      font-weight: 800;
-      color: #111;
-    }
+.blogs-filter label {
+  font-weight: 800;
+  color: #111;
+}
 
-    .blogs-filter select {
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 0, 0, 0.15);
-      background: #fff;
-    }
-      .cart-popup {
-        position: fixed;
-        top: 75px;
-        left: 20px;
-        width: 300px;
-        background: white;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        border-radius: 8px;
-        z-index: 1000;
-        padding: 15px;
-        transition: 0.3s ease;
-      }
+.blogs-filter select {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #fff;
+}
+.cart-popup {
+  position: fixed;
+  top: 75px;
+  left: 20px;
+  width: 300px;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  z-index: 1000;
+  padding: 15px;
+  transition: 0.3s ease;
+}
 
-      .cart-popup.hidden {
-        display: none;
-      }
+.cart-popup.hidden {
+  display: none;
+}
 
-      .product-info {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
+.product-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-      .product-info img {
-        width: 60px;
-        height: 60px;
-        padding: 5px;
-        object-fit: cover;
-        border-radius: 5px;
-      }
+.product-info img {
+  width: 60px;
+  height: 60px;
+  padding: 5px;
+  object-fit: cover;
+  border-radius: 5px;
+}
 
-      .popup-footer button {
-        width: 100%;
-        margin-top: 10px;
-        padding: 10px;
-        border-radius: 20px;
-        border: none;
-        cursor: pointer;
-      }
+.popup-footer button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
 
-      .btn-checkout {
-        background-color: #e4293a;
-        color: white;
-      }
-      .close-popup {
-        cursor: pointer;
-        float: right;
-        font-size: 20px;
-      }
-      .checkout-container {
-        display: flex;
-        margin-top: 50px;
-        flex-direction: row-reverse;
-        gap: 50px;
-        padding: 50px 10%;
-        background-color: whitesmoke;
-        direction: rtl;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      }
+.btn-checkout {
+  background-color: #e4293a;
+  color: white;
+}
+.close-popup {
+  cursor: pointer;
+  float: right;
+  font-size: 20px;
+}
+.checkout-container {
+  display: flex;
+  margin-top: 50px;
+  flex-direction: row-reverse;
+  gap: 50px;
+  padding: 50px 10%;
+  background-color: whitesmoke;
+  direction: rtl;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
-      .section-title {
-        color: #d32f2f;
-        font-size: 1.2rem;
-        margin-bottom: 25px;
-        font-weight: bold;
-      }
+.section-title {
+  color: #d32f2f;
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
 
-      .billing-details {
-        flex: 2;
-      }
-      .input-group {
-        display: flex;
-        gap: 30px;
-      }
-      .field {
-        margin-bottom: 20px;
-        flex: 1;
-      }
+.billing-details {
+  flex: 2;
+}
+.input-group {
+  display: flex;
+  gap: 30px;
+}
+.field {
+  margin-bottom: 20px;
+  flex: 1;
+}
 
-      .field label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 0.9rem;
-        color: #333;
-      }
+.field label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: #333;
+}
 
-      input,
-      select,
-      textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #e0e0e0;
-        border-radius: 25px;
-        background: #fff;
-        outline: none;
-      }
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 25px;
+  background: #fff;
+  outline: none;
+}
 
-      textarea {
-        border-radius: 15px;
-        height: 120px;
-      }
+textarea {
+  border-radius: 15px;
+  height: 120px;
+}
 
-      .order-sidebar {
-        flex: 1;
-      }
-      .order-card {
-        border: 1px solid #f0f0f0;
-        padding: 30px;
-        background: #fdfdfd;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        border-radius: 8px;
-      }
+.order-sidebar {
+  flex: 1;
+}
+.order-card {
+  border: 1px solid #f0f0f0;
+  padding: 30px;
+  background: #fdfdfd;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
 
-      .order-title {
-        text-align: center;
-        color: #d32f2f;
-        margin-bottom: 20px;
-      }
+.order-title {
+  text-align: center;
+  color: #d32f2f;
+  margin-bottom: 20px;
+}
 
-      .order-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-      }
-      .order-table th,
-      .order-table td {
-        padding: 15px 0;
-        border-bottom: 1px solid #eee;
-        text-align: right;
-        font-size: 0.9rem;
-      }
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+.order-table th,
+.order-table td {
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  text-align: right;
+  font-size: 0.9rem;
+}
 
-      .price {
-        text-align: left !important;
-        font-weight: bold;
-      }
-      .red-text {
-        color: #d32f2f;
-        font-size: 1.3rem;
-      }
+.price {
+  text-align: left !important;
+  font-weight: bold;
+}
+.red-text {
+  color: #d32f2f;
+  font-size: 1.3rem;
+}
 
-      .pay-btn {
-        width: 100%;
-        background-color: #d32f2f;
-        color: white;
-        padding: 15px;
-        border: none;
-        border-radius: 5px;
-        font-size: 1.1rem;
-        font-weight: bold;
-        cursor: pointer;
-        margin-top: 20px;
-      }
+.pay-btn {
+  width: 100%;
+  background-color: #d32f2f;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
 
-      .pay-btn:hover {
-        background-color: #b71c1c;
-      }
+.pay-btn:hover {
+  background-color: #b71c1c;
+}
 
-      .payment-instruction {
-        background: #fff;
-        padding: 15px;
-        border: 1px solid #eee;
-        font-size: 0.8rem;
-        margin: 10px 0;
-      }
+.payment-instruction {
+  background: #fff;
+  padding: 15px;
+  border: 1px solid #eee;
+  font-size: 0.8rem;
+  margin: 10px 0;
+}
 
-      .terms-text {
-        font-size: 0.75rem;
-        color: #777;
-        line-height: 1.6;
-      }
+.terms-text {
+  font-size: 0.75rem;
+  color: #777;
+  line-height: 1.6;
+}
 
 /*قسم تحسين المقاسات*/
 
@@ -1050,9 +1062,9 @@ footer {
 }
 
 @media (max-width: 768px) {
-
   .hero-section .content {
-    margin-top: 10px;margin-left: 100px;
+    margin-top: 10px;
+    margin-left: 100px;
     width: 90%;
   }
   .hero-section span {
@@ -1074,7 +1086,7 @@ footer {
   }
 
   header img {
-    width:150px;
+    width: 150px;
   }
 
   .menu-toggle {
@@ -1125,26 +1137,23 @@ footer {
   .shop-img img {
     width: 20px;
     margin-top: 5px;
-
   }
 
-  .btn-cont{
-   width: 100px;
-   font-size: 10px;
-   color: black;
-   margin-left: 5px;
+  .btn-cont {
+    width: 100px;
+    font-size: 10px;
+    color: black;
+    margin-left: 5px;
   }
-  .social-buttons button{
+  .social-buttons button {
     color: #111;
   }
 
   /**/
-  .back{
+  .back {
     color: #111;
     border: 1px solid #242323;
-    
   }
-
 
   .hero-section-m p {
     font-size: 3rem;
@@ -1205,7 +1214,6 @@ footer {
     height: 150px;
   }
 
-
   .hero-section-m img {
     height: 210px;
     margin-top: 0;
@@ -1216,21 +1224,17 @@ footer {
     align-items: center;
     width: 100%;
     font-size: 12px;
-    
-        
   }
-    footer .container h3 {
+  footer .container h3 {
     width: 100%;
   }
-  .footer-content img{
+  .footer-content img {
     width: 13px;
   }
-  .bottom-bar{
+  .bottom-bar {
     flex-direction: column;
     text-align: center;
   }
-
-
 }
 .magazines-filter {
   padding: 10px 14px;
@@ -1323,7 +1327,7 @@ footer {
   height: 45px;
   font-size: 20px;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   display: none;
   z-index: 1000;
   transition: all 0.3s ease;
@@ -1341,7 +1345,6 @@ footer {
   display: flex;
   justify-content: center;
 }
-
 
 .btn1 {
   display: inline-block;
@@ -1370,7 +1373,7 @@ footer {
   background: #fff;
   border-radius: 16px;
   overflow: hidden; /* يمنع تمدد الحاوية مع محتوى الـ PDF */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .pdf-viewer-container iframe {
@@ -1387,5 +1390,5 @@ footer {
   display: block;
   border: none;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* ظل خفيف لإبرازها فقط */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* ظل خفيف لإبرازها فقط */
 }
