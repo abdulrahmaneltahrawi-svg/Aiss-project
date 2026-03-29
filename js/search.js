@@ -50,7 +50,7 @@ async function performSearch() {
         return `
           <div class="card1">
             <span class="type-badge" style="background-color: ${item.color}">${item.label}</span>
-            <img src="${imageSrc}" loading="lazy" onerror="this.src='assets/icons/logo.webp'">
+            <img src="${imageSrc}" alt="${item.title || 'صورة توضيحية'}" loading="lazy" onerror="this.onerror=null; this.src='assets/icons/logo.webp'; this.alt='شعار افتراضي';">
             <div class="class-content1">
               <h3>${item.title}</h3>
               <a href="${item.link}" class="btn1">${item.btn}</a>

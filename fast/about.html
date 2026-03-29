@@ -14,11 +14,82 @@
   </head>
   <body>
     <style>
+      .aboutUs-container {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        padding: 80px 5%;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .aboutUs-container img {
+        flex: 1;
+        min-width: 300px;
+        max-width: 450px;
+        border-radius: 25px;
+       
+      }
+
+      .aboutUs-container .text-content {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      .aboutUs-container .text-content span {
+        color: #7a7a7a;
+        font-size: 15px;
+        display: block;
+        margin-bottom: 15px;
+      }
+
+      .aboutUs-container .text-content h1 {
+        font-size: 2rem;
+        color: #e4293a;
+        margin-bottom: 25px;
+        font-weight: 900;
+        line-height: 1.2;
+      }
+
+      .aboutUs-container .text-content p {
+        line-height: 2;
+        color: #555;
+        font-size: 1.0rem;
+        text-align: justify;
+      }
+
+      @media (max-width: 992px) {
+        .aboutUs-container {
+          padding: 40px 20px;
+          text-align: center;
+          flex-direction: column;
+          gap: 30px;
+        }
+
+        .aboutUs-container img {
+          min-width: unset;
+          width: 100%;
+          max-width: 380px;
+          margin: 0 auto;
+        }
+
+        .aboutUs-container .text-content p {
+          text-align: right;
+          font-size: 0.95rem;
+        }
+
+        .aboutUs-container .text-content h1 {
+          font-size: 1.6rem;
+          margin-bottom: 15px;
+        }
+      }
+
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
+
       body {
         background-color: white;
       }
@@ -47,6 +118,7 @@
         margin: 10px;
         flex-wrap: wrap;
       }
+
       .services-card {
         background: #fff;
         padding: 20px;
@@ -61,6 +133,7 @@
         color: #e4293aed;
         margin-bottom: 10px;
       }
+
       .services-card p {
         color: #1c4f83;
         margin-bottom: 10px;
@@ -71,8 +144,38 @@
     <!--قسم صفحة العرض-->
 
     <div class="hero-section-m">
-      <img src="../assets/imge/0004.webp" alt="hero-logo4" loading="lazy" />
-      <div class="logo-text"><p>معهد السلامة العربي</p></div>
+      <img src="assets/imge/banar.jpg" alt="hero-logo4" loading="lazy" />
+      <div class="logo-text">
+        <p>المعهد العربي لعلوم السلامة</p>
+        <div class="hero-line"></div>
+      </div>
+    </div>
+
+    <div class="aboutUs-container">
+      <img src="assets/imge/aboutUs.png" alt="aboutUs-image">
+      <div class="text-content">
+        <span>مرحبا بك في</span>
+        <h1>المعهد العربي لعلوم السلامة</h1>
+        <p>
+          المعهد العربي لعلوم السلامة هو أول منصة علمية عربية غير ربحية متخصصة في
+          نشر الوعي وتعزيز الثقافة في علوم السلامة على مستوى العالم العربي. منذ
+          تأسيسه، تميز المعهد بدوره الريادي في تعريب أكواد ومعايير السلامة
+          العالمية، ليصبح مرجعًا رئيسيًا للمؤسسات والأفراد الساعين لتحقيق بيئات
+          عمل آمنة ومتوافقة مع المعايير الدولية. يقدم المعهد مجموعة متنوعة من
+          البرامج التدريبية والدورات العلمية التي تستهدف تأهيل كوادر عربية متخصصة
+          في مجالات السلامة المختلفة، ويمنح شهادات اعتماد للمحترفين والجهات
+          التدريبية المتميزة. يُصدر المعهد مجلة “السلامة العربية” شهريًا، وهي أول
+          مجلة عربية متخصصة في علوم السلامة، كما ينظم فعاليات بارزة مثل “مسابقة
+          السلامة العربية” التي تشجع على الابتكار في هذا المجال، بالإضافة إلى
+          مؤتمرات السلامة العربية التي تُعد منصة لتبادل الخبرات والتجارب بين
+          الخبراء والمتخصصين. يضم المعهد شبكة واسعة من الخبراء الذين يقدمون الدعم
+          العلمي والاستشاري عبر منصات التواصل الاجتماعي، إضافة إلى فريق من
+          الممثلين في عدة دول عربية يعملون على توحيد الجهود وتوسيع نطاق التعاون في
+          مجالات السلامة. يسعى المعهد العربي لعلوم السلامة إلى أن يكون المرجع
+          الأول في العالم العربي في مجال السلامة، من خلال تقديم حلول مبتكرة، نشر
+          المعرفة، وبناء مجتمعات أكثر وعيًا وأمانًا.
+        </p>
+      </div>
     </div>
 
     <section class="services">

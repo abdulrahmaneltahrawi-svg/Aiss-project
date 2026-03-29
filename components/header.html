@@ -1,69 +1,6 @@
 <header>
-    <style>
-        @media (max-width: 768px) {
-            /* تصميم حاوية القائمة */
-            .header-nav {
-                display: block; 
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background-color: #ffffff;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-                z-index: 9999;
-                
-                /* تأثيرات الحركة */
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.4s ease-in-out, opacity 0.3s ease;
-                opacity: 0;
-                border-top: 2px solid #e4293a; /* لون أحمر يتناسب مع الشعار */
-            }
-            
-            .header-nav.active {
-                max-height: 100vh; /* تسمح للقائمة بالتمدد حسب المحتوى */
-                opacity: 1;
-            }
 
-            .header-nav ul {
-                flex-direction: column;
-                padding: 10px 0;
-                margin: 0;
-                list-style: none;
-            }
-
-            .header-nav ul li {
-                width: 100%;
-                border-bottom: 1px solid #f5f5f5;
-            }
-
-            .header-nav ul li a {
-                display: block;
-                padding: 15px 25px;
-                color: #333;
-                text-decoration: none;
-                font-weight: 600;
-                transition: background 0.3s;
-                text-align: right;
-            }
-
-            .header-nav ul li a:hover {
-                background-color: #fcfcfc;
-                color: #e4293a;
-            }
-
-            /* تنسيق زر الهمبرجر */
-            .menu-toggle {
-                font-size: 24px;
-                background: none;
-                border: none;
-                cursor: pointer;
-                padding: 10px;
-                color: #333;
-            }
-        }
-    </style>
-    <img src="assets/icons/headerLogo.webp" alt="logo" />
+    <img src="assets/icons/headerLogo.webp" alt="logo" loading="lazy" />
 
     <!--===قائمة البرجر===-->
     <button class="menu-toggle" id="menu-toggle" aria-label="فتح القائمة" aria-expanded="false">
@@ -72,7 +9,7 @@
 
     <!--===زر البحث===-->
     <div id="search-btn1" class="search-img">
-        <img src="assets/icons/loupe.webp" alt="search" />
+        <img src="assets/icons/loupe.webp" alt="search" loading="lazy" />
     </div>
     <input type="text" id="search-input1" name="search" class="hide-search" placeholder="...ابحث عما تريد">
     <ul id="search-suggestions" class="search-suggestions"></ul>
@@ -80,14 +17,14 @@
     <!--===زر البحث===-->
     <a href="view-cart.html" aria-label="سلة المشتريات">
       <div class="shop-img" style="position: relative;">
-        <img src="assets/icons/shopping-cart.webp" alt="cart" />
+        <img src="assets/icons/shopping-cart.webp" alt="cart" loading="lazy" />
         <span id="cart-count" class="cart-badge">0</span>
       </div>
     </a>
 
     <!--===زر تسجيل الدخول===-->
     <button class="btn-cont" id="openModel">
-        <img src="assets/icons/login.webp" alt="btn-logo" />
+        <img src="assets/icons/login.webp" alt="btn-logo" loading="lazy" />
         <span>اشتراك/ دخول</span>
     </button>
 
@@ -96,17 +33,6 @@
         <div class="model-box">
             <span class="close-btn" id="closeModel">&times;</span>
             <h3>سجل الدخول أو أنشئ حسابك</h3>
-
-            
-            
-            <div class="social-buttons">
-                <button class="social-obt google">
-                    المتابعة باستخدام Google 
-                </button>
-                <button class="social-obt facebook">
-                   المتابعة باستخدام Facebook 
-                </button>   
-            </div>
 
             <div class="divider">أو</div>
 

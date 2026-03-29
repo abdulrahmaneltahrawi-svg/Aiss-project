@@ -350,6 +350,18 @@ function activateHeader() {
         return codesPromise;
     };
 
+    // إضافة سمات alt لأيقونات البحث وسلة التسوق بعد تحميل الهيدر
+    const searchIcon = document.querySelector('.search-img img');
+    if (searchIcon && !searchIcon.alt) {
+        searchIcon.alt = 'أيقونة البحث';
+    }
+
+    const shopIcon = document.querySelector('.shop-img img');
+    if (shopIcon && !shopIcon.alt) {
+        shopIcon.alt = 'أيقونة سلة التسوق';
+    }
+
+
     if (openBtn && loginModel) {
         openBtn.onclick = () => loginModel.style.display = 'flex';
     }
@@ -396,9 +408,9 @@ function activateHeader() {
             login: `
                 <div class="close-btn">×</div>
                 <h2>تسجيل الدخول</h2>
-                <div class="social-buttons">
-                    <button type="button">استخدام Google <img src="assets/icons/google.webp" alt=""></button>
-                    <button type="button">استخدام Facebook <img src="assets/icons/facebooks.webp" alt=""></button>
+                <div class="social-buttons"> 
+                    <button type="button">استخدام Google <img src="assets/icons/google.webp" alt="شعار جوجل"></button> 
+                    <button type="button">استخدام Facebook <img src="assets/icons/facebooks.webp" alt="شعار فيسبوك"></button> 
                 </div>
                 <div class="divider">أو</div>
                 <input class="email-input text-input" type="email" placeholder="البريد الإلكتروني">
@@ -422,8 +434,8 @@ function activateHeader() {
                 <div class="close-btn">×</div>
                 <h2>إنشاء حساب جديد</h2>
                 <div class="social-buttons">
-                    <button type="button">التسجيل باستخدام Google <img src="assets/icons/google.webp" alt=""></button>
-                    <button type="button">التسجيل باستخدام Facebook <img src="assets/icons/facebooks.webp" alt=""></button>
+                    <button type="button">التسجيل باستخدام Google <img src="assets/icons/google.webp" alt="شعار جوجل"></button>
+                    <button type="button">التسجيل باستخدام Facebook <img src="assets/icons/facebooks.webp" alt="شعار فيسبوك"></button>
                 </div>
                 <div class="divider">أو</div>
                 <input class="text-input" id="reg-name" type="text" placeholder="الاسم الكامل">
