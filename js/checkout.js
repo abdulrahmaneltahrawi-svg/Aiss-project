@@ -125,7 +125,7 @@ async function completeOrder() {
   try {
     console.log("البيانات المرسلة للباك اند:", orderPayload);
     // 3. كود الربط (Fetch Call)
-    const response = await fetch("https://api.aiss.co/v1/checkout", {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -135,8 +135,10 @@ async function completeOrder() {
     });
 
     const result = await response.json();
+    console.log("استجابة السيرفر (Server Response):", result);
 
     if (response.ok) {
+      console.log("✅ نجحت العملية!");
       // 4. معالجة النجاح
       alert(
         "تم استلام طلبك بنجاح! شكراً لتعاملك مع المعهد العربي لعلوم السلامة.",
@@ -145,6 +147,7 @@ async function completeOrder() {
       window.location.href = "index.html"; // العودة للرئيسية
     } else {
       // معالجة أخطاء الخادم
+      console.error("❌ فشل الطلب في السيرفر:", result);
       throw new Error(result.message || "فشل إتمام الطلب");
     }
   } catch (error) {

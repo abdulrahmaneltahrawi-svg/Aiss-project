@@ -46,7 +46,7 @@ async function performSearch() {
     searchGrid.innerHTML = results
       .map((item) => {
         // استخدام صورة افتراضية إذا لم تتوفر صورة
-        const imageSrc = item.image || item.img || 'assets/icons/logo.webp';
+        const imageSrc = item.image || item.img || 'assets/imge/0006.webp';
         return `
           <div class="card1">
             <span class="type-badge" style="background-color: ${item.color}">${item.label}</span>
