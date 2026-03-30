@@ -32,100 +32,25 @@
     <script>
       const Egrid = document.getElementById("events-grid");
       const LOCAL_EVENTS = typeof events !== "undefined" ? events : [];
-      const EVENTS_CACHE_KEY = "aissEventsCacheV1";
-
-      function decodeHtmlEntities(str) {
-        const txt = document.createElement("textarea");
-        txt.innerHTML = str || "";
-        return txt.value;
-      }
-
-      function toEventItem(post, idx) {
-        const title = decodeHtmlEntities(post?.title?.rendered || "").trim();
-        const excerpt = decodeHtmlEntities(post?.excerpt?.rendered || "").trim();
-        const content = decodeHtmlEntities(post?.content?.rendered || "").trim();
-        const image =
-          post?._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
-          "assets/events/مسابقة-4.webp";
-
-        return {
-          id: idx,
-          title: title || "حدث",
-          image,
-          // نستخدم content من AISS لو متاح (أغنى من excerpt)
-          description: content
-            ? content
-            : `<div class="intro-text"><p>${excerpt || "لا يوجد وصف."}</p></div>`,
-        };
-      }
-
-      async function fetchRemoteEvents() {
-        // WordPress API (لو يسمح CORS سيتم التحديث تلقائيًا)
-        const url =
-          "https://aiss.co/wp-json/wp/v2/posts?per_page=40&_embed";
-        const res = await fetch(url, { cache: "no-store" });
-        if (!res.ok) throw new Error("Remote events fetch failed");
-        const posts = await res.json();
-        if (!Array.isArray(posts)) throw new Error("Invalid events payload");
-
-        const eventRegex = /(مؤتمر|مسابقة|فعالية|ملتقى|ورشة|ندوة|event|conference)/i;
-        const filtered = posts.filter((p) =>
-          eventRegex.test(decodeHtmlEntities(p?.title?.rendered || ""))
-        );
-        const mapped = filtered.slice(0, 12).map((p, idx) => toEventItem(p, idx));
-        if (!mapped.length) throw new Error("No remote event-like posts found");
-        return mapped;
-      }
-
-      function getCachedEvents() {
-        try {
-          const raw = localStorage.getItem(EVENTS_CACHE_KEY);
-          const parsed = raw ? JSON.parse(raw) : null;
-          if (Array.isArray(parsed) && parsed.length) return parsed;
-        } catch (_) {}
-        return null;
-      }
-
-      function cacheEvents(items) {
-        try {
-          localStorage.setItem(EVENTS_CACHE_KEY, JSON.stringify(items));
-        } catch (_) {}
-      }
 
       function renderEvents(items) {
         if (!Egrid) return;
-        Egrid.innerHTML = items
-          .map((item, index) => {
-            return `
-            <div class="card1">
-              <img src="${item.image}" alt="${item.title}" loading="lazy">
-              <div class="class-content1">
-                <h3>${item.title}</h3>
-                <a href="views.html?id=${item.id}&source=events" class="btn1">عرض التفاصيل</a>
-              </div>
+        Egrid.innerHTML = items.map(item => `
+          <div class="card1">
+            <img src="${item.image}" alt="${item.title}" loading="lazy">
+            <div class="class-content1">
+              <h3>${item.title}</h3>
+              <a href="views.html?id=${item.id}&source=events" class="btn1">عرض التفاصيل</a>
             </div>
-          `;
-          })
-          .join("");
+          </div>
+        `).join("");
       }
 
-      async function initEvents() {
-        const cached = getCachedEvents();
-        if (cached) renderEvents(cached);
-        else if (LOCAL_EVENTS.length) renderEvents(LOCAL_EVENTS);
-
-        try {
-          const remote = await fetchRemoteEvents();
-          cacheEvents(remote);
-          renderEvents(remote);
-        } catch (err) {
-          // فشل الجلب الخارجي (مثل CORS) => نظهر البيانات الحالية
-          if (!cached && LOCAL_EVENTS.length) renderEvents(LOCAL_EVENTS);
-          console.warn("تعذر جلب الأحداث من aiss.co، تم استخدام البيانات المحلية.", err);
-        }
+      if (LOCAL_EVENTS.length) {
+        renderEvents(LOCAL_EVENTS);
+      } else {
+        Egrid.innerHTML = '<p style="text-align:center; padding:20px;">لا توجد أحداث متاحة حالياً.</p>';
       }
-
-      initEvents();
     </script>
 
     <!--قسم سياسة الخصوصية-->

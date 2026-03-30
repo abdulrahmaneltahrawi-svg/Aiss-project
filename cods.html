@@ -34,20 +34,27 @@
 
 <script>
 async function fetchCodesData() {
-  // نحاول أكثر من مسار لتفادي مشاكل الأسماء/الترميز أثناء النشر
+  // تحسين عملية الجلب لتشمل المسار الحالي والمسار الرئيسي (الأب)
   const paths = [
     "cleaned-posts (1).json",
-    "cleaned-posts%20(1).json",
-    "./cleaned-posts (1).json",
-    "./cleaned-posts%20(1).json",
+    "../cleaned-posts (1).json", // البحث في المجلد الأعلى
+    "cleaned-posts%20(1).json"   // محاولة النسخة المرمزة (Encoded)
   ];
+
   for (const path of paths) {
     try {
+      console.log(`محاولة تحميل الملف من: ${path}`);
       const response = await fetch(path, { cache: "no-store" });
       if (!response.ok) continue;
+
       const data = await response.json();
-      if (Array.isArray(data) && data.length) return data;
-    } catch (_) {}
+      if (Array.isArray(data) && data.length) {
+        console.log("✅ تم العثور على ملف الأكواد بنجاح.");
+        return data;
+      }
+    } catch (err) {
+      console.warn(`فشل الجلب من المسار: ${path}`, err);
+    }
   }
 
   throw new Error("تعذّر تحميل ملف الأكواد والمعايير");
@@ -62,7 +69,7 @@ function renderCodes(data) {
     const img = item.image || "assets/imge/0006.webp";  
     grid.innerHTML += `
       <div class="card1">
-        <img src="${img}" alt="${item.title || "كود"}" loading="lazy">
+        <img src="${img}" alt="${item.title || "كود"}" loading="lazy" onerror="this.onerror=null; this.src='assets/icons/logo.webp';">
         <div class="class-content1">
           <h3>${item.title || ""}</h3>
           <a href="views.html?id=${index}&source=codes" class="btn1">عرض التفاصيل</a>
