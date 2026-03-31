@@ -46,7 +46,7 @@ const magazines = [
   {
     title: "مجلة السلامة العربية",
     date: "العدد 56 - سبتمبر 2025",
-    img: "assets/magazine/Issue-56-September-2025 copy.webp",
+    img: "assets/magazine/Issue-56-September-2025%20copy.webp",
     link: "https://publuu.com/flip-book/1077479/2401104/page/1?embed&transparent",
   },
   {
@@ -433,15 +433,16 @@ const manulas = [
 ];
 
 // ===== بناء الكروت =====
-
 function createCardHTML(item, btnText = "عرض المجلة") {
   const src = item.link || "#";
+  // حماية في حال كانت الصورة مفقودة أو غير معرفة لمنع خطأ 404
+  const imagePath = item.img && item.img.trim() !== "" ? item.img : "assets/magazine/placeholder.webp";
   const isManual = btnText.includes("كتيب");
   const back = isManual ? "manuals.html" : "magazine.html";
   const href = `flipbook.html?title=${encodeURIComponent(item.title || "")}&src=${encodeURIComponent(src)}&back=${encodeURIComponent(back)}`;
   return `
         <div class="card1">
-            <img src="${item.img}" alt="${item.title}" loading="lazy"/>
+            <img src="${imagePath}" alt="${item.title}" loading="lazy" onerror="this.src='assets/magazine/IMG_1325.webp'; console.warn('Missing image for: ${item.title} - ${item.date}');"/>
             <div class="class-content1">
                 <h3>${item.title}</h3>
                 <p>${item.date}</p>
