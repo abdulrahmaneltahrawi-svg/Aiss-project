@@ -24,30 +24,140 @@
       <img id="image-placeholder" alt="" loading="lazy"/>
       <p id="description-placeholder"></p>
       <br />
+
+      <!-- قسم التعليقات -->
+      <div class="comments-section">
+        <h3>التعليقات</h3>
+        <div id="comments-list">
+          <!-- التعليقات ستظهر هنا -->
+        </div>
+
+        <div class="comment-form" id="comment-form-container">
+          <h3 id="form-title">اترك تعليقاً</h3>
+          <form id="comment-form">
+            <input type="hidden" id="parent-id" value="">
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="commenter-name" placeholder="الاسم *" required>
+              <input type="email" id="commenter-email" placeholder="البريد الإلكتروني *" required>
+            </div>
+            <textarea id="comment-text" rows="4" placeholder="اكتب تعليقك هنا..." required></textarea>
+            <button type="submit" id="submit-comment">إرسال التعليق</button>
+            <button type="button" id="cancel-reply" style="display:none; background:#888; margin-right:5px;">إلغاء الرد</button>
+          </form>
+        </div>
+      </div>
+
       <a id="back-link" href="blogs.html"
         ><button class="back">العوده للصفحه السابقة</button></a
       >
     </div>
 
-    <script src="js/data.js"></script>
+    <script src="js/blogs.js"></script>
     <script src="js/events.js"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
       const id = params.get("id");
       const source = params.get("source"); // التحقق من مصدر البيانات
       const EVENTS_CACHE_KEY = "aissEventsCacheV1";
+      const COMMENTS_KEY = `comments_${source || 'blog'}_${id}`;
+
+      // دوال إدارة التعليقات
+      function getComments() {
+        return JSON.parse(localStorage.getItem(COMMENTS_KEY)) || [];
+      }
+
+      function saveComment(name, email, text, parentId = null) {
+        const comments = getComments();
+        const newComment = {
+          id: Date.now(),
+          name,
+          email,
+          text,
+          parentId,
+          date: new Date().toLocaleDateString('ar-EG', { year:'numeric', month:'long', day:'numeric' })
+        };
+        comments.push(newComment);
+        localStorage.setItem(COMMENTS_KEY, JSON.stringify(comments));
+        renderComments();
+      }
+
+      function renderComments() {
+        const container = document.getElementById("comments-list");
+        const allComments = getComments();
+        container.innerHTML = "";
+
+        const mainComments = allComments.filter(c => !c.parentId);
+        
+        if (mainComments.length === 0) {
+          container.innerHTML = "<p style='color:#888;'>لا توجد تعليقات بعد. كن أول من يعلق!</p>";
+          return;
+        }
+
+        mainComments.forEach(comment => {
+          container.innerHTML += createCommentHTML(comment, allComments);
+        });
+      }
+
+      function createCommentHTML(comment, allComments) {
+        const replies = allComments.filter(c => c.parentId === comment.id);
+        let html = `
+          <div class="comment-item" id="comment-${comment.id}">
+            <div class="comment-header">
+              <span class="comment-author">${comment.name}</span>
+              <span class="comment-date">${comment.date}</span>
+            </div>
+            <div class="comment-body">${comment.text}</div>
+            <button class="reply-btn" onclick="prepareReply(${comment.id}, '${comment.name}')">رد</button>
+            <div class="replies-container">
+              ${replies.map(r => createCommentHTML(r, allComments)).join('')}
+            </div>
+          </div>
+        `;
+        return html;
+      }
+
+      function prepareReply(parentId, parentName) {
+        document.getElementById("parent-id").value = parentId;
+        document.getElementById("form-title").innerText = `الرد على: ${parentName}`;
+        document.getElementById("cancel-reply").style.display = "inline-block";
+        document.getElementById("comment-text").focus();
+        // التمرير للنموذج
+        document.getElementById("comment-form-container").scrollIntoView({ behavior: 'smooth' });
+      }
+
+      function resetForm() {
+        document.getElementById("comment-form").reset();
+        document.getElementById("parent-id").value = "";
+        document.getElementById("form-title").innerText = "اترك تعليقاً";
+        document.getElementById("cancel-reply").style.display = "none";
+      }
+
+      // تهيئة الأحداث
+      document.getElementById("comment-form").onsubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById("commenter-name").value;
+        const email = document.getElementById("commenter-email").value;
+        const text = document.getElementById("comment-text").value;
+        const parentId = document.getElementById("parent-id").value ? parseInt(document.getElementById("parent-id").value) : null;
+
+        saveComment(name, email, text, parentId);
+        resetForm();
+      };
+
+      document.getElementById("cancel-reply").onclick = resetForm;
 
       async function loadDynamicContent() {
         let data;
 
         if (source === "codes") {
-          // إذا كان المصدر "codes" نجلب البيانات من ملف الجيسون
+          // جلب بيانات الأكواد والمعايير من الملف المحلي
           try {
-            // تم توحيد المسار واستخدام اسم الملف الصحيح
-            const response = await fetch("cleaned-posts (1).json", { cache: "no-store" });
+            const jsonFile = "cleaned-posts (1).json";
+            let response = await fetch(jsonFile);
+            if (!response.ok) response = await fetch("../" + jsonFile);
+            
             if (response.ok) {
-              const json = await response.json();
-              if (Array.isArray(json)) data = json;
+              data = await response.json();
             }
           } catch (e) {
             console.error("خطأ في جلب بيانات الأكواد:", e);
@@ -66,7 +176,7 @@
           const backLink = document.getElementById("back-link");
           if (backLink) backLink.href = "event.html";
         } else {
-          // إذا لم يكن، نستخدم مصفوفة المدونات الموجودة في js/data.js
+          // إذا لم يكن، نستخدم مصفوفة المدونات الموجودة في js/blogs.js
           data = myCards;
           const backLink = document.getElementById("back-link");
           if (backLink) backLink.href = "blogs.html";
@@ -86,11 +196,12 @@
         if (item) {
           document.getElementById("title-placeholder").innerText = item.title;
           const imgPlaceholder = document.getElementById("image-placeholder");
-          imgPlaceholder.src = item.image;
+          imgPlaceholder.src = item.image || item.img || "assets/icons/logo.webp";
           imgPlaceholder.alt = item.title || "صورة توضيحية"; // إضافة alt ديناميكيًا
           // عرض المحتوى سواء كان اسمه content أو description
           document.getElementById("description-placeholder").innerHTML =
             item.content || item.description;
+          renderComments(); // تحميل التعليقات بعد تحميل المحتوى
         }
       }
 

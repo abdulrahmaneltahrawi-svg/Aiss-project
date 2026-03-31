@@ -11,7 +11,7 @@
     rel="stylesheet" />
   <style>
     .flip-wrap {
-      width: min(600px, 98%);
+      width: min(1000px, 98%);
       /* تكبير الحاوية لتستوعب عرض الصفحتين */
       height: 88vh;
       /* تحديد طول ثابت للحاوية */
@@ -200,10 +200,12 @@
       document.getElementById('flip-back').href = back;
 
       if (!src) {
-        document.getElementById('loading-screen').innerHTML = "<p>لم يتم العثور على ملف للعرض.</p>";
+        document.getElementById('loading-screen').innerHTML = "<p>لم يتم العثور على رابط لملف PDF للعرض.</p>";
+        console.error("PDF loading error: No 'src' parameter provided in URL.");
         return;
       }
 
+      console.log("Attempting to load PDF from:", src); // سجل الرابط الذي يتم محاولة تحميله
       if (src.includes('publuu.com')) {
         const iframe = document.createElement('iframe');
         iframe.src = src;
@@ -226,7 +228,13 @@
       }
 
       try {
-        const pdf = await pdfjsLib.getDocument(src).promise;
+        // إضافة خيارات لتعطيل التحميل الجزئي (Range) لتجنب أخطاء 403 و CORS مع بعض خوادم الـ CDN
+        const loadingTask = pdfjsLib.getDocument({
+          url: src,
+          disableRange: true,
+          disableStream: true
+        });
+        const pdf = await loadingTask.promise;
         const book = document.getElementById('book');
         const totalPages = pdf.numPages;
         document.getElementById('page-num').textContent = `1 / ${totalPages}`;
@@ -250,10 +258,11 @@
           book.appendChild(pageDiv);
         }
 
+        // تحديد ما إذا كان الجهاز جوال أم لابتوب بناءً على عرض الشاشة
+        const isMobile = window.innerWidth <= 768;
         const pageFlip = new St.PageFlip(book, {
-          width: 900,
+          width: isMobile ? 400 : 1000, // 400 للجوال و 900 للابتوب
           height: 500,
-          size: "fixed",
           showCover: true,      // إظهار الغلاف منفرد
           drawShadow: true,
           flippingTime: 800,
@@ -286,7 +295,7 @@
         }, delay);
       } catch (err) {
         console.error("Error loading PDF:", err);
-        document.getElementById('loading-screen').innerHTML = "<p>عذراً، حدث خطأ أثناء تحميل الملف.</p>";
+        document.getElementById('loading-screen').innerHTML = `<p>عذراً، حدث خطأ أثناء تحميل الملف: <br> <strong>${err.message || err}</strong></p><p>يرجى التأكد من أن الرابط صحيح وأن الملف موجود.</p><p>الرابط الذي حاولنا تحميله: <br><code>${src}</code></p>`;
       }
     }
     window.addEventListener('DOMContentLoaded', startFlipbook);
