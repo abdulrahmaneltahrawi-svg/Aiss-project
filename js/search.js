@@ -28,7 +28,7 @@ async function performSearch() {
       ...magazines.map(item => ({...item, type: 'magazine', label: 'مجلة', color: '#235287', link: item.link ? `flipbook.html?title=${encodeURIComponent(item.title)}&src=${encodeURIComponent(item.link)}&back=magazine.html` : '#', btn: 'عرض المجلة'})),
       ...manulas.map(item => ({...item, type: 'manual', label: 'كتيب', color: '#28a745', link: item.link ? `flipbook.html?title=${encodeURIComponent(item.title)}&src=${encodeURIComponent(item.link)}&back=manuals.html` : '#', btn: 'عرض الكتيب'})),
       ...eventsData.map(item => ({...item, type: 'event', label: 'حدث', color: '#fd7e14', link: '#', btn: 'عرض التفاصيل'})),
-      ...cleanPosts.map(item => ({...item, type: 'code', label: 'كود/معيار', color: '#6610f2', link: '#', btn: 'عرض المحتوى'}))
+      ...cleanPosts.map((item, index) => ({...item, type: 'code', label: 'كود/معيار', color: '#6610f2', link: `views.html?id=${index}&source=codes`, btn: 'عرض المحتوى'}))
     ];
 
     const results = allContent.filter(item => {
