@@ -487,20 +487,35 @@ if (myGrid) {
   const sortSelect = document.getElementById("magazines-sort");
   const loadMoreBtn = document.getElementById("load-more-magazines");
   let currentSortedMagazines = [];
-  const itemsPerPage = 9;
+  let isFirstMagLoad = true;
+  let itemsPerPage = 9;
 
   function renderInitialPage() {
-    const toShow = currentSortedMagazines.slice(0, itemsPerPage);
+    // استرجاع العدد الذي كان معروضاً سابقاً عند العودة
+    let countToRender = itemsPerPage;
+    if (isFirstMagLoad && (document.referrer.includes('flipbook.html') || document.referrer.includes('views.html'))) {
+      const savedCount = sessionStorage.getItem("count_magazine.html");
+      if (savedCount) countToRender = parseInt(savedCount);
+    }
+
+    const toShow = currentSortedMagazines.slice(0, countToRender);
     myGrid.innerHTML = toShow
       .map((m) => createCardHTML(m, "عرض المجلة"))
       .join("");
 
     if (loadMoreBtn) {
-      if (currentSortedMagazines.length > itemsPerPage) {
+      if (currentSortedMagazines.length > countToRender) {
         loadMoreBtn.style.display = "inline-block";
       } else {
         loadMoreBtn.style.display = "none";
       }
+    }
+
+    // استرجاع مكان النزول عند العودة من صفحة العرض
+    if (isFirstMagLoad && (document.referrer.includes('flipbook.html') || document.referrer.includes('views.html'))) {
+      const savedPos = sessionStorage.getItem("scroll_magazine.html");
+      if (savedPos) setTimeout(() => window.scrollTo({ top: parseInt(savedPos), behavior: 'instant' }), 250);
+      isFirstMagLoad = false;
     }
   }
 
@@ -568,16 +583,31 @@ if (homeGrid) {
 const manulasGrid = document.getElementById("manuals-grid");
 if (manulasGrid) {
   const loadMoreBtn = document.getElementById("load-more-manuals");
-  const itemsPerPage = 6;
+  let itemsPerPage = 6;
+  let isFirstManualLoad = true;
 
   const renderInitialManuals = () => {
-    const toShow = manulas.slice(0, itemsPerPage);
+    let countToRender = itemsPerPage;
+    if (isFirstManualLoad && (document.referrer.includes('flipbook.html') || document.referrer.includes('views.html'))) {
+      const savedCount = sessionStorage.getItem("count_manuals.html");
+      if (savedCount) countToRender = parseInt(savedCount);
+    }
+
+    const toShow = manulas.slice(0, countToRender);
     manulasGrid.innerHTML = toShow
       .map((man) => createCardHTML(man, "عرض الكتيب"))
       .join("");
+
+    // استرجاع مكان النزول
+    if (isFirstManualLoad && (document.referrer.includes('flipbook.html') || document.referrer.includes('views.html'))) {
+      const savedPos = sessionStorage.getItem("scroll_manuals.html");
+      if (savedPos) setTimeout(() => window.scrollTo({ top: parseInt(savedPos), behavior: 'instant' }), 250);
+      isFirstManualLoad = false;
+    }
+
     if (loadMoreBtn) {
       loadMoreBtn.style.display =
-        manulas.length > itemsPerPage ? "inline-block" : "none";
+        manulas.length > countToRender ? "inline-block" : "none";
     }
   };
 
@@ -1181,3 +1211,25 @@ function initScrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
+// وظيفة حفظ الحالة (متوافقة مع الجوال)
+const saveCurrentPageState = () => {
+  const page = window.location.pathname.split("/").pop() || "index.html";
+  sessionStorage.setItem(`scroll_${page}`, window.scrollY);
+  
+  // حفظ عدد العناصر المعروضة حالياً
+  const grids = [
+    "magazines-grid", "manuals-grid", "blogs-grid", "codes-grid", "events-grid"
+  ];
+  grids.forEach(id => {
+    const g = document.getElementById(id);
+    if (g) sessionStorage.setItem(`count_${page}`, g.children.length);
+  });
+};
+
+// استخدام pagehide بدلاً من beforeunload لأنه أدق في الهواتف
+window.addEventListener("pagehide", saveCurrentPageState);
+// حفظ إضافي عند تغيير وضوح الصفحة (مثلاً عند تصغير المتصفح)
+window.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") saveCurrentPageState();
+});
