@@ -20,7 +20,7 @@
     <!--قسم صفحة العرض-->
 
     <div class="hero-section-m">
-      <img src="assets/imge/0006.webp" alt="blogs-pic" loading="lazy" />
+      <img src="assets/imge/0006.jpg" alt="blogs-pic" loading="lazy" />
       <div class="logo-text"><p>المدونات</p></div>
     </div>
 
@@ -37,21 +37,30 @@
 
     <div id="blogs-grid" class="card-container1"></div>
 
+    <div class="load-more-btn-container">
+      <button id="load-more-blogs" class="btn1">عرض المزيد</button>
+    </div>
+
     <script src="js/blogs.js"></script>
     <script>
       const grid = document.getElementById("blogs-grid");
       const categorySelect = document.getElementById("blog-category");
       const params = new URLSearchParams(window.location.search);
+      let isFirstBlogLoad = true;
       const initialCat = params.get("cat");
+      const PAGE_NAME = "blogs.html";
+      
+      let displayedBlogs = 0;
+      const blogsPerPage = 8;
+      let currentFilteredBlogs = [];
 
       function getCategory(item) {
         return item.category || "محتويات علمية";
       }
 
-      function render(items) {
-        grid.innerHTML = items
-          .map(
-            (item) => `
+      function loadMoreBlogs() {
+        const nextBatch = currentFilteredBlogs.slice(displayedBlogs, displayedBlogs + blogsPerPage);
+        const html = nextBatch.map(item => `
           <div class="card1">
             <img src="${item.image}" alt="${item.title || "صورة المدونة"}" loading="lazy">
             <div class="class-content1">
@@ -59,9 +68,14 @@
               <a href ="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
             </div>
           </div>
-          `,
-          )
-          .join("");
+        `).join("");
+        grid.insertAdjacentHTML('beforeend', html);
+        displayedBlogs += nextBatch.length;
+        
+        const loadMoreBtn = document.getElementById("load-more-blogs");
+        if (loadMoreBtn) {
+          loadMoreBtn.style.display = (displayedBlogs < currentFilteredBlogs.length) ? "inline-block" : "none";
+        }
       }
 
       function initCategories() {
@@ -77,8 +91,39 @@
 
       function applyFilter() {
         const val = categorySelect ? categorySelect.value : "all";
-        if (val === "all") return render(myCards);
-        return render(myCards.filter((it) => getCategory(it) === val));
+        currentFilteredBlogs = val === "all" ? myCards : myCards.filter((it) => getCategory(it) === val);
+        
+        grid.innerHTML = "";
+        displayedBlogs = 0;
+
+        // استرجاع العدد المحمل سابقاً عند العودة من صفحة العرض
+        let countToRender = blogsPerPage;
+        if (isFirstBlogLoad && document.referrer.includes('views.html')) {
+            const savedCount = sessionStorage.getItem(`count_${PAGE_NAME}`);
+            if (savedCount) countToRender = parseInt(savedCount);
+        }
+
+        const initialBatch = currentFilteredBlogs.slice(0, countToRender);
+        grid.innerHTML = initialBatch.map(item => `
+          <div class="card1">
+            <img src="${item.image}" alt="${item.title || "صورة المدونة"}" loading="lazy">
+            <div class="class-content1">
+              <h3>${item.title}</h3>
+              <a href ="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
+            </div>
+          </div>
+        `).join("");
+        displayedBlogs = initialBatch.length;
+
+        const loadMoreBtn = document.getElementById("load-more-blogs");
+        if (loadMoreBtn) loadMoreBtn.style.display = (displayedBlogs < currentFilteredBlogs.length) ? "inline-block" : "none";
+
+        // استرجاع مكان النزول عند العودة من صفحة المقال
+        if (isFirstBlogLoad && document.referrer.includes('views.html')) {
+          const savedPos = sessionStorage.getItem(`scroll_${PAGE_NAME}`);
+          if (savedPos) setTimeout(() => window.scrollTo({ top: parseInt(savedPos), behavior: 'instant' }), 250);
+          isFirstBlogLoad = false;
+        }
       }
 
       initCategories();
@@ -88,6 +133,8 @@
       applyFilter();
       if (categorySelect)
         categorySelect.addEventListener("change", applyFilter);
+        
+      document.getElementById("load-more-blogs").addEventListener("click", loadMoreBlogs);
     </script>
 
     <!-- القسم الاخير-->

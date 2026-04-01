@@ -20,7 +20,7 @@
 
 
     <div class="hero-section-m">
-      <img src="assets/imge/0006.webp" alt="hero-logo" loading="lazy"/>
+      <img src="assets/imge/0006.jpg" alt="hero-logo" loading="lazy"/>
       <div class="logo-text"><p>الأكواد والمعايير</p></div>
     </div>
 
@@ -31,6 +31,10 @@
     </div>
 
     <div id="codes-grid" class="card-container1"></div>
+
+    <div class="load-more-btn-container">
+      <button id="load-more-codes" class="btn1" style="display: none;">عرض المزيد</button>
+    </div>
 
 <script>
 async function fetchCodesData() {
@@ -60,23 +64,67 @@ async function fetchCodesData() {
   throw new Error("تعذّر تحميل ملف الأكواد والمعايير");
 }
 
-function renderCodes(data) {
-  const grid = document.getElementById("codes-grid");
-  if (!grid) return;
-  grid.innerHTML = "";
+let allCodes = [];
+let displayedCodesCount = 0;
+const codesPerPage = 6;
+const PAGE_NAME = "cods.html";
 
-  data.forEach((item, index) => {
-    const img = item.image || "assets/imge/0006.webp";  
-    grid.innerHTML += `
+function renderNextCodes() {
+  const grid = document.getElementById("codes-grid");
+  const loadMoreBtn = document.getElementById("load-more-codes");
+  if (!grid) return;
+
+  const nextChunk = allCodes.slice(displayedCodesCount, displayedCodesCount + codesPerPage);
+  
+  const html = nextChunk.map((item, index) => {
+    const realIndex = displayedCodesCount + index;
+    const img = item.image || "assets/imge/0006.jpg";
+    return `
       <div class="card1">
         <img src="${img}" alt="${item.title || "كود"}" loading="lazy" onerror="this.onerror=null; this.src='assets/icons/logo.webp';">
+        <div class="class-content1">
+          <h3>${item.title || ""}</h3>
+          <a href="views.html?id=${realIndex}&source=codes" class="btn1">عرض التفاصيل</a>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  grid.insertAdjacentHTML('beforeend', html);
+  displayedCodesCount += nextChunk.length;
+
+  if (loadMoreBtn) {
+    loadMoreBtn.style.display = (displayedCodesCount < allCodes.length) ? "inline-block" : "none";
+  }
+}
+
+function renderCodes(data) {
+  allCodes = data;
+  const grid = document.getElementById("codes-grid");
+  if (grid) grid.innerHTML = "";
+  
+  let countToRender = codesPerPage;
+  if (document.referrer.includes('views.html')) {
+    const savedCount = sessionStorage.getItem(`count_${PAGE_NAME}`);
+    if (savedCount) countToRender = parseInt(savedCount);
+  }
+
+  displayedCodesCount = 0;
+  const initialCodes = allCodes.slice(0, countToRender);
+  displayedCodesCount = initialCodes.length;
+  
+  grid.innerHTML = initialCodes.map((item, index) => `
+      <div class="card1">
+        <img src="${item.image || 'assets/imge/0006.jpg'}" alt="${item.title || "كود"}" loading="lazy" onerror="this.onerror=null; this.src='assets/icons/logo.webp';">
         <div class="class-content1">
           <h3>${item.title || ""}</h3>
           <a href="views.html?id=${index}&source=codes" class="btn1">عرض التفاصيل</a>
         </div>
       </div>
-    `;
-  });
+  `).join("");
+
+  const loadMoreBtn = document.getElementById("load-more-codes");
+  if (loadMoreBtn) loadMoreBtn.style.display = (displayedCodesCount < allCodes.length) ? "inline-block" : "none";
 }
 
 async function loadCodes() {
@@ -85,12 +133,19 @@ async function loadCodes() {
   try {
     const data = await fetchCodesData();
     renderCodes(data);
+
+    // استرجاع مكان النزول عند العودة من صفحة التفاصيل
+    if (document.referrer.includes('views.html')) {
+      const savedPos = sessionStorage.getItem(`scroll_${PAGE_NAME}`);
+      if (savedPos) setTimeout(() => window.scrollTo({ top: parseInt(savedPos), behavior: 'instant' }), 250);
+    }
   } catch (error) {
     console.error("خطأ في جلب البيانات:", error);
     grid.innerHTML = `<p style="padding:16px;text-align:center;">تعذر تحميل الأكواد والمعايير حاليًا.</p>`;
   }
 }
 
+document.getElementById("load-more-codes")?.addEventListener("click", renderNextCodes);
 document.addEventListener("DOMContentLoaded", loadCodes);
 </script>
     
