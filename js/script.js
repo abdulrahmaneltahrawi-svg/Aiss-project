@@ -488,7 +488,7 @@ if (myGrid) {
   const loadMoreBtn = document.getElementById("load-more-magazines");
   let currentSortedMagazines = [];
   let isFirstMagLoad = true;
-  let itemsPerPage = 9;
+  let itemsPerPage = 8;
 
   function renderInitialPage() {
     // استرجاع العدد الذي كان معروضاً سابقاً عند العودة
@@ -583,7 +583,7 @@ if (homeGrid) {
 const manulasGrid = document.getElementById("manuals-grid");
 if (manulasGrid) {
   const loadMoreBtn = document.getElementById("load-more-manuals");
-  let itemsPerPage = 6;
+  let itemsPerPage = 8;
   let isFirstManualLoad = true;
 
   const renderInitialManuals = () => {
