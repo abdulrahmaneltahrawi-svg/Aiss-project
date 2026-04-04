@@ -83,12 +83,17 @@
 
         emptyCartEl.style.display = "none";
         cartContainer.style.display = "flex";
+        cartContainer.style.flexDirection = "column";
         const summary = document.querySelector(".cart-summary");
         if (summary) summary.style.display = "flex";
 
-        cartContainer.innerHTML = cart
+        // عرض الكروت بترتيب عكسي (الأحدث في الأعلى)
+        cartContainer.innerHTML = [...cart]
+          .reverse()
           .map(
-            (item, idx) => `
+            (item, reversedIdx) => {
+              const originalIdx = cart.length - 1 - reversedIdx;
+              return `
       <div class="cart-item">
         <div class="cart-item__media">
           <img src="${item.img}" alt="${item.title || "منتج"}">
@@ -98,10 +103,11 @@
           <p class="cart-item__price">${formatPrice(item.price)}</p>
         </div>
         <div class="cart-item__actions">
-          <button class="cart-remove-btn" type="button" onclick="removeFromCart(${idx})">حذف</button>
+          <button class="cart-remove-btn" type="button" onclick="removeFromCart(${originalIdx})">حذف</button>
         </div>
       </div>
-    `,
+    `;
+            }
           )
           .join("");
 

@@ -496,11 +496,13 @@ header button:hover {
 
 .card-container1 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 350px));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 280px));
   gap: 30px;
   padding: 40px 5%;
   justify-content: center;
   justify-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .magazines-filter {
@@ -549,7 +551,7 @@ header button:hover {
 
 .card1 {
   width: 100%;
-  max-width: 350px;
+  max-width: 300px;
   background-color: #f1f1f1;
   border-radius: 30px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
@@ -1239,11 +1241,13 @@ textarea {
 @media (max-width: 600px) {
   header {
     position: fixed;
-    padding: 10px 10px;
+    padding: 5px 10px;
+    justify-content: space-between;
+    gap: 5px;
   }
 
   header img {
-    width: 150px;
+    width: 130px;
   }
 
   .menu-toggle {
@@ -1307,20 +1311,23 @@ textarea {
   }
 
   .search-img img {
-    width: 20px;
-    margin-top: 5px;
+    width: 22px;
+    display: block;
   }
 
   .shop-img img {
-    width: 20px;
-    margin-top: 5px;
+    width: 22px;
+    display: block;
   }
 
   .btn-cont {
-    width: 100px;
-    font-size: 10px;
+    width: auto;
+    min-width: 80px;
+    font-size: 11px;
     color: black;
-    margin-left: 5px;
+    padding: 6px 8px;
+    margin: 0;
+    white-space: nowrap;
   }
   .social-buttons button {
     color: #111;
@@ -1566,6 +1573,13 @@ textarea {
 .btn1:hover {
   cursor: pointer;
   color: gray;
+}
+
+/* ضمان ظهور 4 كروت وتوسيطها في الشاشات الكبيرة */
+@media (min-width: 992px) {
+  .card-container1 {
+    grid-template-columns: repeat(auto-fit, minmax(210px, 280px));
+  }
 }
 
 /* تصميم حاوية عرض المجلة PDF لمنع تمدد الصفحة */
