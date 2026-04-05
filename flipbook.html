@@ -150,6 +150,18 @@
         padding: 10px 5px;
       }
     }
+
+      /* تنسيق وضع ملء الشاشة للتكبير */
+      .flip-wrap:fullscreen {
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        margin: 0;
+        border-radius: 0;
+      }
+      .flip-wrap:fullscreen #flip-body {
+        flex: 1;
+      }
   </style>
 </head>
 
@@ -162,6 +174,7 @@
         <h1 id="flip-title">عرض</h1>
         <div style="display: flex; gap: 15px; align-items: center;">
           <span id="page-num" style="font-size: 14px; font-weight: bold; color: #666; direction: ltr;">0 / 0</span>
+          <button id="fullscreen-btn" style="background: #e4293a; color: white; border: none; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-weight: bold; font-family: inherit;">ملء الشاشة</button>
           <a id="flip-back" href="magazine.html">رجوع</a>
         </div>
       </div>
@@ -184,6 +197,8 @@
   <script>
     const pdfjsLib = window['pdfjs-dist/build/pdf'];
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+    let pageFlipInstance; // تعريف المتغير في النطاق العام للوصول إليه عند التكبير
 
     async function startFlipbook() {
       // تسجيل وقت البداية لضمان بقاء الشاشة لفترة كافية
@@ -260,7 +275,7 @@
 
         // تحديد ما إذا كان الجهاز جوال أم لابتوب بناءً على عرض الشاشة
         const isMobile = window.innerWidth <= 768;
-        const pageFlip = new St.PageFlip(book, {
+        pageFlipInstance = new St.PageFlip(book, {
           width: isMobile ? 400 : 1000, // 400 للجوال و 900 للابتوب
           height: 500,
           showCover: true,      // إظهار الغلاف منفرد
@@ -275,9 +290,9 @@
           showPageCorners: true,
           disableFlipByClick: false
         });
-        pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+        pageFlipInstance.loadFromHTML(document.querySelectorAll('.page'));
 
-        pageFlip.on('flip', (e) => {
+        pageFlipInstance.on('flip', (e) => {
           document.getElementById('page-num').textContent = `${e.data + 1} / ${totalPages}`;
         });
 
@@ -287,12 +302,33 @@
 
         setTimeout(() => {
           book.style.display = 'block'; // إظهار الكتاب فقط بعد اكتمال معالجة كافة الصفحات
-          pageFlip.update();
+          if (pageFlipInstance) pageFlipInstance.update();
           document.getElementById('loading-screen').style.opacity = '0';
           setTimeout(() => {
             document.getElementById('loading-screen').style.display = 'none';
           }, 500);
         }, delay);
+
+      // منطق زر ملء الشاشة (التكبير)
+      const fsBtn = document.getElementById('fullscreen-btn');
+      const flipWrap = document.querySelector('.flip-wrap');
+
+      fsBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          flipWrap.requestFullscreen().catch(err => {
+            console.error(`Error: ${err.message}`);
+          });
+        } else {
+          document.exitFullscreen();
+        }
+      });
+
+      document.addEventListener('fullscreenchange', () => {
+        fsBtn.textContent = document.fullscreenElement ? 'خروج' : 'ملء الشاشة';
+        // تحديث مقاسات المجلة لضمان استجابتها للمقاس الجديد
+        if(pageFlipInstance) pageFlipInstance.update();
+      });
+
       } catch (err) {
         console.error("Error loading PDF:", err);
         document.getElementById('loading-screen').innerHTML = `<p>عذراً، حدث خطأ أثناء تحميل الملف: <br> <strong>${err.message || err}</strong></p><p>يرجى التأكد من أن الرابط صحيح وأن الملف موجود.</p><p>الرابط الذي حاولنا تحميله: <br><code>${src}</code></p>`;

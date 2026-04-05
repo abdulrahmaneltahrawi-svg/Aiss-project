@@ -20,6 +20,7 @@ body {
   width: 90%;
   margin: 120px auto 40px;
   background-color: white;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
   padding: 30px;
   border-radius: 16px;
 }
@@ -496,7 +497,7 @@ header button:hover {
 
 .card-container1 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 280px));
+  grid-template-columns:  repeat(4, 1fr);
   gap: 30px;
   padding: 40px 5%;
   justify-content: center;
@@ -605,8 +606,8 @@ header button:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
-  text-align: right;
+  align-items: center;
+  text-align: center;
   direction: rtl;
   gap: 3px;
 }
@@ -1191,7 +1192,7 @@ textarea {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 700px;
+  height: 790px;
   width: 100%;
   display: flex;
   justify-content: flex-start; /* المحاذاة لليمين في وضع RTL */
@@ -1578,7 +1579,7 @@ textarea {
 /* ضمان ظهور 4 كروت وتوسيطها في الشاشات الكبيرة */
 @media (min-width: 992px) {
   .card-container1 {
-    grid-template-columns: repeat(auto-fit, minmax(210px, 280px));
+    grid-template-columns: repeat(auto-fit, 280px);
   }
 }
 
