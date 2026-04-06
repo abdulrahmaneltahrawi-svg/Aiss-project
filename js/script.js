@@ -41,49 +41,49 @@ const magazines = [
     title: "مجلة السلامة العربية",
     date: "العدد 57 - أكتوبر 2025",
     img: "assets/magazine/Issue-57-October-2025.webp",
-    link: "https://publuu.com/flip-book/1077479/2400957/page/1?embed&transparent",
+    link: GITHUB_BASE + "pdfs/Issue-57-High-quality.pdf",
   },
   {
     title: "مجلة السلامة العربية",
     date: "العدد 56 - سبتمبر 2025",
     img: "assets/magazine/Issue-56-September-2025%20copy.webp",
-    link: "https://publuu.com/flip-book/1077479/2401104/page/1?embed&transparent",
+    link: GITHUB_BASE + "pdfs/Issue-56-Interactive-Pages.pdf",
   },
   {
     title: "مجلة السلامة العربية",
     date: "العدد 55 - أغسطس 2025",
     img: "assets/magazine/Issue-55-August-2025.webp",
-    link: "https://publuu.com/flip-book/1077479/2401099/page/1?embed&transparent",
+    link: GITHUB_BASE + "pdfs/Issue-55-Interactive-Pages.pdf",
   },
   {
     title: "مجلة السلامة العربية",
     date: "العدد 54 - يوليو 2025",
     img: "assets/magazine/Issue-54-July-2025.webp",
-    link: "https://publuu.com/flip-book/1077479/2401098/page/1?embed&transparent",
+    link: GITHUB_BASE + "pdfs/Issue-54-Interactive-Pages.pdf",
   },
   {
     title: "مجلة السلامة العربية",
     date: "العدد 53 - يونيو 2025",
     img: "assets/magazine/issue-53-june-2025.webp",
-    link: "https://publuu.com/flip-book/1077479/2401100/page/1?embed&transparent",
+    link: GITHUB_BASE + "pdfs/Issue-53-Interactive-Pages.pdf",
   },
   {
     title: "مجلة السلامة العربية",
     date: "العدد52-مايو2025",
     img: "assets/magazine/Issue-52-May-2025.webp",
-    link: "https://publuu.com/flip-book/1077479/2401101/page/1?embed",
+    link: GITHUB_BASE + "pdfs/Issue-52-Interactive-Pages.pdf",
   },
   {
     title: "مجلة السلامة العربية",
     date: "العدد51-ابريل-2025",
     img: "assets/magazine/Issue-51-April-2025.webp",
-    link: "https://publuu.com/flip-book/1077479/2401102/page/1?embed&transparent",
+    link: GITHUB_BASE + "pdfs/Issue-51-Interactive-Pages-1.pdf",
   },
   {
     title: "مجلة السلامة العربية",
     date: "العدد50-مارس2025",
     img: "assets/magazine/Issue50-march2025.webp",
-    link: "https://publuu.com/flip-book/1077479/2401103/page/1?embed&transparent",
+    link: GITHUB_BASE + "pdfs/Issue-50-Interactive-Pages.pdf",
   },
   {
     title: "مجلة السلامة العربية",
@@ -831,12 +831,7 @@ function activateHeader() {
     const views = {
       login: `
                 <div class="close-btn">×</div>
-                <h2>تسجيل الدخول</h2>
-                <div class="social-buttons"> 
-                    <button type="button">استخدام Google <img src="assets/icons/google.webp" alt="شعار جوجل"></button> 
-                    <button type="button">استخدام Facebook <img src="assets/icons/facebooks.webp" alt="شعار فيسبوك"></button> 
-                </div>
-                <div class="divider">أو</div>
+                <h2 class="sign-title">تسجيل الدخول</h2>
                 <form onsubmit="return false;">
                     <input class="email-input text-input" id="auth-login-email" name="email" type="email" placeholder="البريد الإلكتروني" autocomplete="username">
                     <input class="password-input text-input" id="auth-login-pass" name="password" type="password" placeholder="كلمة المرور" autocomplete="current-password">
@@ -858,12 +853,10 @@ function activateHeader() {
             `,
       register: `
                 <div class="close-btn">×</div>
-                <h2>إنشاء حساب جديد</h2>
+                <h2 class="sign-title">إنشاء حساب جديد</h2>
                 <div class="social-buttons">
-                    <button type="button">التسجيل باستخدام Google <img src="assets/icons/google.webp" alt="شعار جوجل"></button>
-                    <button type="button">التسجيل باستخدام Facebook <img src="assets/icons/facebooks.webp" alt="شعار فيسبوك"></button>
                 </div>
-                <div class="divider">أو</div>
+                
                 <form onsubmit="return false;">
                     <input class="text-input" id="reg-name" name="name" type="text" placeholder="الاسم الكامل" autocomplete="name">
                     <input class="text-input" id="reg-phone" name="phone" type="tel" placeholder="رقم الهاتف" autocomplete="tel">

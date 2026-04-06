@@ -10,57 +10,6 @@ body {
   scroll-behavior: smooth;
 }
 
-/* صفحة عرض الصور */
-
-.page-content {
-  padding-top: 110px;
-}
-
-.container0 {
-  width: 90%;
-  margin: 120px auto 40px;
-  background-color: white;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-  padding: 30px;
-  border-radius: 16px;
-}
-
-#title-placeholder {
-  color: #e4293a;
-  text-align: center;
-  padding: 20px;
-}
-
-#image-placeholder {
-  display: block;
-  margin: 0 auto;
-  max-width: 400px;
-  width: 100%;
-}
-
-#description-placeholder {
-  text-align: right;
-  line-height: 1.8;
-  margin-top: 20px;
-}
-
-#description-placeholder img {
-  display: none !important;
-}
-
-.back {
-  background: white;
-  padding: 15px 20px;
-  border-radius: 25px;
-  margin-bottom: 16px;
-  font-weight: bold;
-}
-
-.back:hover {
-  cursor: pointer;
-  background-color: rgb(213, 209, 209);
-}
-
 /*الهيدر*/
 header img {
   width: 280px;
@@ -83,6 +32,26 @@ header {
   align-items: center;
   background-color: white;
   z-index: 9999;
+}
+
+.header-nav ul {
+  display: flex;
+  list-style: none;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.header-nav ul li {
+  margin-right: 10px;
+}
+
+.header-nav ul li a {
+  padding: 6px 10px;
+}
+
+.header-nav ul li a:hover,
+.header-nav ul li a.active {
+  color: #e4293a;
 }
 
 /* منيو المدونات (submenu) */
@@ -124,40 +93,7 @@ header {
   display: block;
 }
 
-/* زر الهامبرغر */
-.menu-toggle {
-  display: none;
-  background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 12px;
-  padding: 10px 12px;
-  font-size: 18px;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.header-nav ul {
-  display: flex;
-  list-style: none;
-  font-size: 13px;
-  font-weight: bold;
-}
-
-.header-nav ul li {
-  margin-right: 10px;
-}
-
-.header-nav ul li a {
-  padding: 6px 10px;
-}
-
-.header-nav ul li a:hover,
-.header-nav ul li a.active {
-  color: #e4293a;
-}
-
 /* تصميم صفحة تسجيل الدخول*/
-
 .model-overlay {
   display: none;
   position: fixed;
@@ -187,40 +123,18 @@ header {
 
 .close-btn {
   position: absolute;
-  top: 15px;
+  top: 20px;
   right: 20px;
   font-size: 24px;
   cursor: pointer;
   color: #888;
 }
 
-.social-buttons button {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #e0c0c0;
-  border-radius: 8px;
-  background: #fff;
-  font-weight: 500;
-  cursor: pointer;
+.sign-title{
+  padding-bottom: 20px;
 }
 
-.social-button button:hover {
-  background: #f9f9f9;
-}
 
-.social-buttons img {
-  width: 20px;
-  height: auto;
-  vertical-align: text-bottom;
-}
-
-.divider {
-  margin: 15px 0;
-  color: #aaa;
-  font-size: 14px;
-}
 
 .email-input,
 .password-input,
@@ -494,10 +408,10 @@ header button:hover {
 }
 
 /*قسم الكروت*/
-
 .card-container1 {
   display: grid;
-  grid-template-columns:  repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, 280px);
+  grid-template-columns: repeat(auto-fit, 270px);
   gap: 30px;
   padding: 40px 5%;
   justify-content: center;
@@ -823,6 +737,54 @@ footer {
   width: 30px;
   height: auto;
   margin-bottom: -11px;
+}
+
+/*تنيسق صفحة عرض الكروت*/
+
+#title-placeholder {
+  color: #e4293a;
+  text-align: center;
+  padding: 20px;
+}
+
+#image-placeholder {
+  display: block;
+  margin: 0 auto;
+  max-width: 400px;
+  width: 100%;
+}
+
+#description-placeholder {
+  text-align: right;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+
+#description-placeholder img {
+  display: none !important;
+}
+
+.back {
+  background: white;
+  padding: 15px 20px;
+  border-radius: 25px;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.back:hover {
+  cursor: pointer;
+  background-color: rgb(213, 209, 209);
+}
+
+/*تنسيف حاوية ملفات روابط سريعة*/
+.container0 {
+  width: 90%;
+  margin: 120px auto 40px;
+  background-color: white;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 16px;
 }
 
 /*صفحة الشهادات و الوظائف*/
@@ -1222,6 +1184,18 @@ textarea {
   color: #7a7a7a;
 }
 
+/* زر الهامبرغر */
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .hero-section .content {
     margin-top: 10px;
@@ -1346,6 +1320,7 @@ textarea {
 
   .card-container1 {
     padding: 20px 10px;
+    grid-template-columns: repeat(1, 1fr);
   }
 
   .cart-popup {
@@ -1355,7 +1330,7 @@ textarea {
   }
 
   .page-content {
-    padding-top: 120px;
+    padding-bottom: 50px;
   }
 
   .cart-item {
@@ -1411,7 +1386,7 @@ textarea {
     text-align: center;
   }
 
-  .hero-section{
+  .hero-section {
     width: 100%;
   }
 
@@ -1576,13 +1551,6 @@ textarea {
   color: gray;
 }
 
-/* ضمان ظهور 4 كروت وتوسيطها في الشاشات الكبيرة */
-@media (min-width: 992px) {
-  .card-container1 {
-    grid-template-columns: repeat(auto-fit, 280px);
-  }
-}
-
 /* تصميم حاوية عرض المجلة PDF لمنع تمدد الصفحة */
 .pdf-viewer-container {
   width: 95%;
@@ -1708,7 +1676,7 @@ textarea {
   height: 50px;
   overflow: hidden;
   direction: rtl;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .ticker-label {
@@ -1722,7 +1690,7 @@ textarea {
   font-size: 15px;
   z-index: 10;
   white-space: nowrap;
-  box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .ticker-container {
@@ -1765,6 +1733,10 @@ textarea {
 }
 
 @keyframes ticker-slide {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
