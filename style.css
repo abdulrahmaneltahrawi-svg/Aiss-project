@@ -641,6 +641,9 @@ header button:hover {
   filter: brightness(0.95);
 }
 
+.page-content{
+  margin-top: 80px;
+}
 /*قسم الاخير*/
 
 footer .container {
@@ -660,7 +663,7 @@ footer {
 
 .footer-content {
   flex: 1;
-  max-width: 250px;
+  min-width: 250px;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -688,8 +691,22 @@ footer {
   list-style: none;
 }
 
+.footer-content li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
 .footer-content p {
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
 }
 
 .footer-content p:hover {

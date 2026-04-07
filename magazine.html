@@ -8,6 +8,9 @@
   <title>المجلة-المعهد العربي لعلوم السلامة</title>
   <link rel="stylesheet" href="style.css" />
 
+  <!-- تسريع الاتصال بسيرفر الملفات الخارجية -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
   <!--تعريف للخط-->
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
     rel="stylesheet" />
@@ -35,7 +38,7 @@
   <div class="lastV">
     <a
       href="flipbook.html?title=مجلة السلامة العربية - العدد 62&src=https://cdn.jsdelivr.net/gh/abdulrahmaneltahrawi-svg/aiss-storage@main/pdfs/Issue-62-Interactive-Pages.pdf&back=magazine.html">
-      <img src="assets/imge/cover.jpg" alt="latest-magazine-cover" loading="lazy" />
+      <img src="assets/imge/cover.jpg" alt="latest-magazine-cover" fetchpriority="high" decoding="sync" />
     </a>
   </div>
 

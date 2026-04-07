@@ -89,31 +89,31 @@ const magazines = [
     title: "مجلة السلامة العربية",
     date: "العدد-49-فبراير2025",
     img: "assets/magazine/Issue-49-February-2025.webp",
-    link: "https://publuu.com/flip-book/1077479/2401144/page/1?embed&transparent",
+    link: GITHUB_BASE + "pdfs/Issue-49-Interactive-Pages.pdf",
   },
   {
     title: "مجلة السلامة العربية",
     date: "العدد48-يناير2025",
     img: "assets/magazine/Issue-48-January-2025.webp",
-    link: "https://publuu.com/flip-book/1077479/2401145/page/1?embed&transparent",
+    link: GITHUB_BASE + "pdfs/Issue-48-Interactive-Pages.pdf",
   },
   {
     title: "مجلة السلامة العربية",
     date: "العدد47-ديسمبر2024",
     img: "assets/magazine/Issue-47-December-2024.webp",
-    link: "https://publuu.com/flip-book/1077555/2401174/page/1?embed&transparent",
+    link: GITHUB_BASE + "pdfs/Issue-47-Interactive-Pages.pdf",
   },
   {
     title: "مجلة السلامة العربية",
     date: "العدد46-نوفمبر2024",
     img: "assets/magazine/IMG-20241107-WA0000.webp",
-    link: "https://publuu.com/flip-book/1077555/2401182/page/1?embed&transparent",
+    link: GITHUB_BASE + "pdfs/Issue-45-Interactive-Pages.pdf",
   },
   {
     title: "مجلة السلامة العربية",
     date: "العدد45-أكتوبر2024",
     img: "assets/magazine/unnamed-file.webp",
-    link: "https://publuu.com/flip-book/1077555/2401183/page/1?embed&transparent",
+    link: GITHUB_BASE + "pdfs/Issue-50-Interactive-Pages.pdf",
   },
   {
     title: "مجلة السلامة العربية",
@@ -442,7 +442,7 @@ function createCardHTML(item, btnText = "عرض المجلة") {
   const href = `flipbook.html?title=${encodeURIComponent(item.title || "")}&src=${encodeURIComponent(src)}&back=${encodeURIComponent(back)}`;
   return `
         <div class="card1">
-            <img src="${imagePath}" alt="${item.title}" loading="lazy" onerror="this.src='assets/magazine/IMG_1325.webp'; console.warn('Missing image for: ${item.title} - ${item.date}');"/>
+            <img src="${imagePath}" alt="${item.title}" loading="lazy" decoding="async" onerror="this.src='assets/magazine/IMG_1325.webp'; console.warn('Missing image for: ${item.title} - ${item.date}');"/>
             <div class="class-content1">
                 <h3>${item.title}</h3>
                 <p>${item.date}</p>
@@ -480,6 +480,13 @@ function getMagazineDateScore(mag, idx) {
 
   return null;
 }
+
+// حساب نقاط الترتيب مسبقاً لتحسين الأداء وتجنب تكرار العمليات المعقدة
+const magazinesWithScores = magazines.map((mag, idx) => ({
+  mag,
+  idx,
+  score: getMagazineDateScore(mag, idx),
+}));
 
 // المجلات - الصفحة الكاملة
 const myGrid = document.getElementById("magazines-grid");
@@ -520,15 +527,10 @@ if (myGrid) {
   }
 
   function renderSorted(order) {
-    const items = magazines.map((mag, idx) => ({
-      mag,
-      idx,
-      score: getMagazineDateScore(mag, idx),
-    }));
-
-    const withScore = items.filter((x) => x.score !== null);
-    const withoutScore = items
+    const withScore = magazinesWithScores.filter((x) => x.score !== null);
+    const withoutScore = magazinesWithScores
       .filter((x) => x.score === null)
+      .slice()
       .sort((a, b) => a.idx - b.idx);
 
     withScore.sort((a, b) => {
@@ -820,7 +822,11 @@ function activateHeader() {
       const span = openBtn.querySelector("span");
       if (!span) return;
       const user = getCurrentUser();
-      span.textContent = user?.name ? user.name : LOGIN_BTN_TEXT_DEFAULT;
+      if (user) {
+        span.textContent = "أهلاً " + (user.name || user.email.split('@')[0]);
+      } else {
+        span.textContent = LOGIN_BTN_TEXT_DEFAULT;
+      }
       openBtn.setAttribute(
         "aria-label",
         user ? `الحساب: ${span.textContent}` : "اشتراك/ دخول",
@@ -833,7 +839,7 @@ function activateHeader() {
                 <div class="close-btn">×</div>
                 <h2 class="sign-title">تسجيل الدخول</h2>
                 <form onsubmit="return false;">
-                    <input class="email-input text-input" id="auth-login-email" name="email" type="email" placeholder="البريد الإلكتروني" autocomplete="username">
+                    <input class="email-input text-input" id="auth-login-email" name="email" type="email" placeholder="البريد الإلكتروني" autocomplete="email">
                     <input class="password-input text-input" id="auth-login-pass" name="password" type="password" placeholder="كلمة المرور" autocomplete="current-password">
                 </form>
                 <a href="#" class="forgot-pass-link" id="go-forgot">نسيت كلمة المرور؟</a>
@@ -938,7 +944,7 @@ function activateHeader() {
 
           setBusy(true);
           try {
-            const response = await fetch("https://api.aiss.co/v1/login", {
+            const response = await fetch("api/user_login.php", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ email, password: pass }),
@@ -954,6 +960,16 @@ function activateHeader() {
             if (response.ok) {
               // حفظ التوكن (Token) في التخزين المحلي للاستخدام في الطلبات القادمة
               localStorage.setItem("userToken", result.token || "");
+              if (result.user) {
+                const users = getUsers();
+                users[email] = result.user;
+                localStorage.setItem(USERS_KEY, JSON.stringify(users));
+              } else {
+                // تأمين حفظ البريد على الأقل لضمان ظهور حالة الدخول
+                const users = getUsers();
+                if (!users[email]) users[email] = { name: email.split('@')[0] };
+                localStorage.setItem(USERS_KEY, JSON.stringify(users));
+              }
               setCurrentEmail(email);
               updateHeaderAuthLabel();
               setMessage("تم تسجيل الدخول بنجاح.", "success");
@@ -1029,7 +1045,7 @@ function activateHeader() {
 
           setBusy(true);
           try {
-            const response = await fetch("https://api.aiss.co/v1/register", {
+            const response = await fetch("api/user_register.php", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ name, phone, email, password: pass }),
@@ -1043,6 +1059,10 @@ function activateHeader() {
 
             if (response.ok) {
               localStorage.setItem("userToken", result.token || "");
+              const users = getUsers();
+              users[email] = { name, phone };
+              localStorage.setItem(USERS_KEY, JSON.stringify(users));
+              
               setCurrentEmail(email);
               updateHeaderAuthLabel();
               setMessage("تم إنشاء الحساب بنجاح.", "success");
@@ -1092,6 +1112,9 @@ function activateHeader() {
         loginModel.style.display = "flex";
       };
     }
+
+    // تحديث حالة الزر فور تحميل الهيدر إذا كان المستخدم مسجلاً دخوله مسبقاً
+    updateHeaderAuthLabel();
   }
   if (searchBtn && searchInput && suggestionsList) {
     searchBtn.onclick = () => {
