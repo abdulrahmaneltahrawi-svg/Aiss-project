@@ -1,70 +1,46 @@
-<header>
-<a href="index.html"><img src="assets/icons/headerLogo.webp" alt="logo" loading="lazy" /></a>
-    
-    <!--===قائمة البرجر===-->
-    <button class="menu-toggle" id="menu-toggle" aria-label="فتح القائمة" aria-expanded="false">
-      ☰
-    </button>
-
-    <!--===زر البحث===-->
-    <div class="search-container">
-        <div id="search-btn1" class="search-img">
-            <img src="assets/icons/loupe.webp" alt="search" loading="lazy" />
-        </div>
-        <input type="text" id="search-input1" name="search" class="hide-search" placeholder="...ابحث عما تريد">
-        <ul id="search-suggestions" class="search-suggestions"></ul>
-    </div>
-
-    <!--===زر البحث===-->
-    <a href="view-cart.html" aria-label="سلة المشتريات">
-      <div class="shop-img" style="position: relative;">
-        <img src="assets/icons/shopping-cart.webp" alt="cart" loading="lazy" />
-        <span id="cart-count" class="cart-badge">0</span>
-      </div>
-    </a>
-
-    <!--===زر تسجيل الدخول===-->
-    <button class="btn-cont" id="openModel">
-        <img src="assets/icons/login.webp" alt="btn-logo" loading="lazy" />
-        <span>اشتراك/ دخول</span>
-    </button>
-
-    <!--===صفحة زر تسجيل الدخول===-->
-    <div class="model-overlay" id="loginModel">
-        <div class="model-box">
-            <span class="close-btn" id="closeModel">&times;</span>
-            <h3>سجل الدخول أو أنشئ حسابك</h3>
-            
-
-            <input type="email" id="login-email" name="email" class="email-input" placeholder="البريد الإلكتروني" autocomplete="email">
-            <input type="password" id="login-password" name="password" class="email-input password-input" placeholder="كلمة المرور" autocomplete="current-password">
-            <button class="submit-btn">متابعة</button>
-            <p id="auth-message" class="auth-message" aria-live="polite"></p>
-            <div class="auth-switch-row">
-                <span>ليس لديك حساب؟</span>
-                <a href="#" class="auth-create-link" aria-label="أنشئ حسابًا">أنشئ حسابًا</a>
+<div class="header-container">
+    <div class="header-top">
+        <div class="top-container">
+            <div class="contact-info">
+                <a href="mailto:info@shomoulgroup.com">info@shomoulgroup.com</a>
+                <span> | </span>
+                <a href="https://api.whatsapp.com/send/?phone=966920031520">920031520</a>
             </div>
-            <p class="policy-text">تتم معالجة بياناتك الشخصية وفقاً لسياسة الخصوصية</p>
+            <a href="index.html">
+                    <p class="top-logo">مجموعة شمول للاستشارات الهندسية</p>
+            </a>
         </div>
     </div>
+    <header>
+        <div class="header-wrapper">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/imges/-Lk5FekV.jpg" alt="Logo">
+                </a>
+            </div>
 
-    <!--===القائمة===-->
-    <nav class="header-nav" id="header-nav">
-      <ul>
-          <li><a href="index.html">الرئيسية</a></li>
-          <li><a href="magazine.html">المجلات</a></li>
-          <li class="has-submenu">
-            <a href="blogs.html" aria-haspopup="true">المدونات</a>
-            <ul class="submenu">
-              <li><a href="blogs.html?cat=%D9%85%D8%AD%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%20%D8%B9%D9%84%D9%85%D9%8A%D8%A9">محتويات علمية</a></li>
-              <li><a href="blogs.html?cat=%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AE%D8%A8%D8%B1%D8%A7%D8%A1">مقالات الخبراء</a></li>
-              <li><a href="blogs.html?cat=%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AC%D9%84%D8%A9">مقالات المجلة</a></li>
-            </ul>
-          </li>
-          <li><a href="manuals.html">كتيبات السلامة</a></li>
-          <li><a href="cods.html">الأكواد والمعايير</a></li>
-          <li><a href="event.html">الأحداث</a></li>
-          <li><a href="store.html">المتجر</a></li>
-      </ul>
-    </nav>
-</header>
+            <nav class="header-nav" id="header-nav">
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="services.html">الخدمات</a></li>
+                    <li><a href="companies.html">الشركات</a></li>
+                    <li><a href="projects.html">المشاريع</a></li>
+                    <li><a href="clients.html">العملاء</a></li>
+                    <li><a href="contact.html">التواصل</a></li>
+
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="https://api.whatsapp.com/send/?phone=966920031520" class="contact-btn">تواصل معنا</a>
+            </div>
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="فتح القائمة">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+</div>
