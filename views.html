@@ -196,7 +196,8 @@
         if (item) {
           document.getElementById("title-placeholder").innerText = item.title;
           const imgPlaceholder = document.getElementById("image-placeholder");
-          imgPlaceholder.src = item.image || item.img || "assets/icons/logo.webp";
+          // First try viewImage, then backgrongImage, then image, then img, then default
+          imgPlaceholder.src = item.viewImage || item.backgrongImage || item.image || item.img || "assets/icons/logo.webp";
           imgPlaceholder.alt = item.title || "صورة توضيحية"; // إضافة alt ديناميكيًا
           // عرض المحتوى سواء كان اسمه content أو description
           document.getElementById("description-placeholder").innerHTML =

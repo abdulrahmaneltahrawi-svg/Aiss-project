@@ -2,10 +2,13 @@ const myCards = [
  {
     id: 113,
     title:
-      "السلامة في مواقع البناء",
+      "شخصية العدد - 63",
     image:
-      "assets/blogs/Journal Articles/شخثية-العدد-63.png",
+      "assets/blogs/Journal Articles/pic63.png",
+      
     category: "مقالات المجلة",
+
+    backgrongImage:"assets/blogs/Journal Articles/pic63big.png",
 
     description: `
       <div class="intro-text">
@@ -174,9 +177,9 @@ const myCards = [
     id: 112,
     title:
       "دور وحدود مختصِّي السلامة في التعامل مع الصحة النفسية والمخاطر النفسية الاجتماعية في بيئة العمل",
-      backgrongImage:"assets/blogs/Journal Articles/عريض-ملف-العدد-63.jpg",
+      backgrongImage:"assets/blogs/Journal Articles/pic63-1big.jpg",
     image:
-      "assets/blogs/Journal Articles/ملف-العدد-63.jpg",
+      "assets/blogs/Journal Articles/pic63-1.jpg",
     category: "مقالات المجلة",
 
     description: `

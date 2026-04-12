@@ -62,7 +62,7 @@
         const nextBatch = currentFilteredBlogs.slice(displayedBlogs, displayedBlogs + blogsPerPage);
         const html = nextBatch.map(item => `
           <div class="card1">
-            <img src="${item.image}" alt="${item.title || "صورة المدونة"}" width="300" height="169" loading="lazy">
+            <img src="${item.image}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy">
             <div class="class-content1">
               <h3>${item.title}</h3>
               <a href ="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
@@ -106,7 +106,7 @@
         const initialBatch = currentFilteredBlogs.slice(0, countToRender);
         grid.innerHTML = initialBatch.map(item => `
           <div class="card1">
-            <img src="${item.image}" alt="${item.title || "صورة المدونة"}" width="300" height="169" loading="lazy">
+            <img src="${item.image}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy">
             <div class="class-content1">
               <h3>${item.title}</h3>
               <a href ="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
