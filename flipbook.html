@@ -259,13 +259,13 @@
           document.getElementById('load-progress').textContent = `جاري معالجة الصفحة ${i} من ${totalPages}`;
 
           const page = await pdf.getPage(i);
-          const viewport = page.getViewport({ scale: 1.8 });
+          const viewport = page.getViewport({ scale: 1.5 }); // تقليل المقياس لتسريع المعالجة
           const canvas = document.createElement('canvas');
           const context = canvas.getContext('2d');
           canvas.height = viewport.height;
           canvas.width = viewport.width;
 
-          await page.render({ canvasContext: context, viewport: viewport }).promise;
+          await page.render({ canvasContext: context, viewport: viewport, intent: 'display' }).promise;
 
           const pageDiv = document.createElement('div');
           pageDiv.className = 'page';
@@ -298,7 +298,7 @@
 
         // ننتظر حتى يكتمل بناء المجلة تماماً وتثبيتها في المتصفح
         const elapsed = Date.now() - startTime;
-        const delay = Math.max(1000, 3000 - elapsed); // ضمان بقاء الشاشة لمدة 3 ثوانٍ على الأقل
+        const delay = Math.max(300, 800 - elapsed); // تقليل وقت الانتظار الاصطناعي من 3 ثواني إلى أقل من ثانية
 
         setTimeout(() => {
           book.style.display = 'block'; // إظهار الكتاب فقط بعد اكتمال معالجة كافة الصفحات
@@ -306,7 +306,7 @@
           document.getElementById('loading-screen').style.opacity = '0';
           setTimeout(() => {
             document.getElementById('loading-screen').style.display = 'none';
-          }, 500);
+          }, 300);
         }, delay);
 
       // منطق زر ملء الشاشة (التكبير)
@@ -336,7 +336,8 @@
     }
     window.addEventListener('DOMContentLoaded', startFlipbook);
   </script>
-  <script src="js/script.js"></script>
+      <script src="js/script.js"></script>
+    <script src="js/auth-toggle.js"></script>
 </body>
 
 </html>
