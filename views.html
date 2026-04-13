@@ -54,6 +54,7 @@
 
     <script src="js/blogs.js"></script>
     <script src="js/events.js"></script>
+    <script src="js/codes.js"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
       const id = params.get("id");
@@ -151,18 +152,8 @@
 
         if (source === "codes") {
           // جلب بيانات الأكواد والمعايير من الملف المحلي
-          try {
-            const jsonFile = "cleaned-posts (1).json";
-            let response = await fetch(jsonFile);
-            if (!response.ok) response = await fetch("../" + jsonFile);
-            
-            if (response.ok) {
-              data = await response.json();
-            }
-          } catch (e) {
-            console.error("خطأ في جلب بيانات الأكواد:", e);
-          }
-          if (!data) data = [];
+          // استخدام البيانات من js/codes.js التي تم استدعاؤها أعلاه
+          data = typeof codesData !== "undefined" ? codesData : [];
           const backLink = document.getElementById("back-link");
           if (backLink) backLink.href = "cods.html";
         } else if (source === "events") {

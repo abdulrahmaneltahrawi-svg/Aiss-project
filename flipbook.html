@@ -243,11 +243,8 @@
       }
 
       try {
-        // إضافة خيارات لتعطيل التحميل الجزئي (Range) لتجنب أخطاء 403 و CORS مع بعض خوادم الـ CDN
         const loadingTask = pdfjsLib.getDocument({
-          url: src,
-          disableRange: true,
-          disableStream: true
+          url: src
         });
         const pdf = await loadingTask.promise;
         const book = document.getElementById('book');
@@ -259,7 +256,7 @@
           document.getElementById('load-progress').textContent = `جاري معالجة الصفحة ${i} من ${totalPages}`;
 
           const page = await pdf.getPage(i);
-          const viewport = page.getViewport({ scale: 1.5 }); // تقليل المقياس لتسريع المعالجة
+          const viewport = page.getViewport({ scale: 1.2 }); // تقليل المقياس لتسريع المعالجة وتحسين الأداء
           const canvas = document.createElement('canvas');
           const context = canvas.getContext('2d');
           canvas.height = viewport.height;
@@ -336,6 +333,7 @@
     }
     window.addEventListener('DOMContentLoaded', startFlipbook);
   </script>
+      <script src="js/m&m.js"></script>
       <script src="js/script.js"></script>
     <script src="js/auth-toggle.js"></script>
 </body>

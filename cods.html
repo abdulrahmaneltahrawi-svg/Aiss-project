@@ -36,34 +36,8 @@
       <button id="load-more-codes" class="btn1" style="display: none;">عرض المزيد</button>
     </div>
 
+<script src="js/codes.js"></script>
 <script>
-async function fetchCodesData() {
-  // تحسين عملية الجلب لتشمل المسار الحالي والمسار الرئيسي (الأب)
-  const paths = [
-    "cleaned-posts (1).json",
-    "../cleaned-posts (1).json", // البحث في المجلد الأعلى
-    "cleaned-posts%20(1).json"   // محاولة النسخة المرمزة (Encoded)
-  ];
-
-  for (const path of paths) {
-    try {
-      console.log(`محاولة تحميل الملف من: ${path}`);
-      const response = await fetch(path, { cache: "no-store" });
-      if (!response.ok) continue;
-
-      const data = await response.json();
-      if (Array.isArray(data) && data.length) {
-        console.log("✅ تم العثور على ملف الأكواد بنجاح.");
-        return data;
-      }
-    } catch (err) {
-      console.warn(`فشل الجلب من المسار: ${path}`, err);
-    }
-  }
-
-  throw new Error("تعذّر تحميل ملف الأكواد والمعايير");
-}
-
 let allCodes = [];
 let displayedCodesCount = 0;
 const codesPerPage = 8;
@@ -77,14 +51,15 @@ function renderNextCodes() {
   const nextChunk = allCodes.slice(displayedCodesCount, displayedCodesCount + codesPerPage);
   
   const html = nextChunk.map((item, index) => {
-    const realIndex = displayedCodesCount + index;
     const img = item.image || "assets/imge/0006.jpg";
+    const title = (item.titlesubject || item.title || "").trim();
+    const slug = title.replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '');
     return `
       <div class="card1">
-        <img src="${img}" alt="${item.title || "كود"}" loading="lazy" onerror="this.onerror=null; this.src='assets/icons/logo.webp';">
+        <img src="${img}" alt="${title || "كود"}" loading="lazy" onerror="this.onerror=null; this.src='assets/icons/logo.webp';">
         <div class="class-content1">
-          <h3>${item.title || ""}</h3>
-          <a href="views.html?id=${item.title.trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}&source=codes" class="btn1">عرض التفاصيل</a>
+          <h3>${title}</h3>
+          <a href="views.html?id=${slug}&source=codes" class="btn1">عرض التفاصيل</a>
         </div>
       </div>
     `;
@@ -115,10 +90,10 @@ function renderCodes(data) {
   
   grid.innerHTML = initialCodes.map((item, index) => `
       <div class="card1">
-        <img src="${item.image || 'assets/imge/0006.jpg'}" alt="${item.title || "كود"}" loading="lazy" onerror="this.onerror=null; this.src='assets/icons/logo.webp';">
+        <img src="${item.image || 'assets/imge/0006.jpg'}" alt="${item.titlesubject || item.title || "كود"}" loading="lazy" onerror="this.onerror=null; this.src='assets/icons/logo.webp';">
         <div class="class-content1">
-          <h3>${item.title || ""}</h3>
-          <a href="views.html?id=${item.title.trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}&source=codes" class="btn1">عرض التفاصيل</a>
+          <h3>${item.titlesubject || item.title || ""}</h3>
+          <a href="views.html?id=${(item.titlesubject || item.title || "").trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}&source=codes" class="btn1">عرض التفاصيل</a>
         </div>
       </div>
   `).join("");
@@ -127,11 +102,14 @@ function renderCodes(data) {
   if (loadMoreBtn) loadMoreBtn.style.display = (displayedCodesCount < allCodes.length) ? "inline-block" : "none";
 }
 
-async function loadCodes() {
+function loadCodes() {
   const grid = document.getElementById("codes-grid");
   if (!grid) return;
-  try {
-    const data = await fetchCodesData();
+
+  // استخدام البيانات من js/codes.js المتوقع وجود متغير codesData فيها
+  const data = typeof codesData !== "undefined" ? codesData : [];
+
+  if (data.length > 0) {
     renderCodes(data);
 
     // استرجاع مكان النزول عند العودة من صفحة التفاصيل
@@ -139,8 +117,7 @@ async function loadCodes() {
       const savedPos = sessionStorage.getItem(`scroll_${PAGE_NAME}`);
       if (savedPos) setTimeout(() => window.scrollTo({ top: parseInt(savedPos), behavior: 'instant' }), 250);
     }
-  } catch (error) {
-    console.error("خطأ في جلب البيانات:", error);
+  } else {
     grid.innerHTML = `<p style="padding:16px;text-align:center;">تعذر تحميل الأكواد والمعايير حاليًا.</p>`;
   }
 }

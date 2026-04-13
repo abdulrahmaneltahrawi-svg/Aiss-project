@@ -73,19 +73,6 @@
 
     <script src="js/blogs.js"></script>
 
-    <script>
-    const grid = document.getElementById("blogs-grid"); // Keep this line
-
-    grid.innerHTML = myCards.slice(0,8).map((item, index) => `
-      <div class="card1">
-          <img src="${item.image}" alt="${item.title || 'صورة المدونة'}" loading="lazy" >
-          <div class="class-content1">
-          <h3>${item.title}</h3>
-          <a href="views.html?id=${(item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}" class="btn1">عرض المدونة</a>
-          </div>
-      </div>
-      `).join("");
-    </script>
 
     <!--احدث اصدارات المدونات(زر)-->
     <div class="magazine-new-btn">
@@ -98,6 +85,7 @@
 
    <div id="footer-placeholder"></div>
 
+    <script src="js/m&m.js"></script>
     <script src="js/script.js"></script>
     <script src="js/auth-toggle.js"></script>
   </body> 
