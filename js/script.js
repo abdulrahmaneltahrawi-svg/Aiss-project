@@ -431,7 +431,6 @@ const manulas = [
     link: GITHUB_BASE + "manuals/School-safety-book-new-1.pdf",
   },
 ];
-
 // ===== بناء الكروت =====
 function createCardHTML(item, btnText = "عرض المجلة", index = 10) {
   const src = item.link || "#";
@@ -439,7 +438,7 @@ function createCardHTML(item, btnText = "عرض المجلة", index = 10) {
   const imagePath = item.img && item.img.trim() !== "" ? item.img : "assets/magazine/placeholder.webp";
   const isManual = btnText.includes("كتيب");
   const back = isManual ? "manuals.html" : "magazine.html";
-  const href = `flipbook.html?title=${encodeURIComponent(item.title || "")}&src=${encodeURIComponent(src)}&back=${encodeURIComponent(back)}`;
+  const href = `flipbook.html?title=${item.title || ""}&src=${encodeURIComponent(src)}&back=${encodeURIComponent(back)}`;
   // إعطاء أولوية تحميل عالية لأول 4 عناصر في الصفحة لسرعة الظهور
   const loadingAttr = index < 4 ? 'fetchpriority="high"' : 'loading="lazy"';
   return `
@@ -843,20 +842,20 @@ function activateHeader() {
           ...m,
           type: "مجلة",
           url: m.link
-            ? `flipbook.html?title=${encodeURIComponent(m.title)}&src=${encodeURIComponent(m.link)}&back=magazine.html`
+            ? `flipbook.html?title=${m.title}&src=${encodeURIComponent(m.link)}&back=magazine.html`
             : "#",
         })),
         ...manulas.map((m) => ({
           ...m,
           type: "كتيب",
           url: m.link
-            ? `flipbook.html?title=${encodeURIComponent(m.title)}&src=${encodeURIComponent(m.link)}&back=manuals.html`
+            ? `flipbook.html?title=${m.title}&src=${encodeURIComponent(m.link)}&back=manuals.html`
             : "#",
         })),
         ...blogs.map((b) => ({
           ...b,
           type: "مدونة",
-          url: `views.html?id=${b.id}`,
+          url: `views.html?id=${(b.titlesubject || b.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`,
         })),
         ...eventsData.map((e) => ({
           ...e,
@@ -894,7 +893,6 @@ function activateHeader() {
       }
     });
   }
-
 }
 
 // وظيفة زر الصعود للأعلى

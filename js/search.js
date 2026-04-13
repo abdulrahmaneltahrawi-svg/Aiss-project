@@ -24,11 +24,11 @@ async function performSearch() {
     const eventsData = (typeof events !== 'undefined') ? events : [];
 
     const allContent = [
-      ...myCards.map(item => ({...item, type: 'blog', label: 'مدونة', color: '#e4293a', link: `views.html?id=${item.id}`, btn: 'عرض المدونة'})),
-      ...magazines.map(item => ({...item, type: 'magazine', label: 'مجلة', color: '#235287', link: item.link ? `flipbook.html?title=${encodeURIComponent(item.title)}&src=${encodeURIComponent(item.link)}&back=magazine.html` : '#', btn: 'عرض المجلة'})),
-      ...manulas.map(item => ({...item, type: 'manual', label: 'كتيب', color: '#28a745', link: item.link ? `flipbook.html?title=${encodeURIComponent(item.title)}&src=${encodeURIComponent(item.link)}&back=manuals.html` : '#', btn: 'عرض الكتيب'})),
-      ...eventsData.map(item => ({...item, type: 'event', label: 'حدث', color: '#fd7e14', link: '#', btn: 'عرض التفاصيل'})),
-      ...cleanPosts.map((item, index) => ({...item, type: 'code', label: 'كود/معيار', color: '#6610f2', link: `views.html?id=${index}&source=codes`, btn: 'عرض المحتوى'}))
+      ...myCards.map(item => ({...item, type: 'blog', label: 'مدونة', color: '#e4293a', link: `views.html?id=${(item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`, btn: 'عرض المدونة'})),
+      ...magazines.map(item => ({...item, type: 'magazine', label: 'مجلة', color: '#235287', link: item.link ? `flipbook.html?title=${item.title}&src=${encodeURIComponent(item.link)}&back=magazine.html` : '#', btn: 'عرض المجلة'})),
+      ...manulas.map(item => ({...item, type: 'manual', label: 'كتيب', color: '#28a745', link: item.link ? `flipbook.html?title=${item.title}&src=${encodeURIComponent(item.link)}&back=manuals.html` : '#', btn: 'عرض الكتيب'})),
+      ...eventsData.map(item => ({...item, type: 'event', label: 'حدث', color: '#fd7e14', link: `views.html?id=${(item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}&source=events`, btn: 'عرض التفاصيل'})),
+      ...cleanPosts.map((item, index) => ({...item, type: 'code', label: 'كود/معيار', color: '#6610f2', link: `views.html?id=${(item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}&source=codes`, btn: 'عرض المحتوى'}))
     ];
 
     const results = allContent.filter(item => {

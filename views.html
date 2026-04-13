@@ -187,8 +187,9 @@
         let item = null;
         if (Array.isArray(data)) {
           const byId = data.find((it) => String(it.id) === String(id));
+          const byTitle = data.find((it) => (it.titlesubject || it.title) && (it.titlesubject || it.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '') === id);
           const byIndex = data[Number(id)];
-          item = byId || byIndex || null;
+          item = byId || byTitle || byIndex || null;
         } else if (data && typeof data === "object") {
           item = data[id] || data[String(id)] || data[Number(id)] || null;
         }

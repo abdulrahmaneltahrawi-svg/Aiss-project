@@ -59,13 +59,13 @@
       }
 
       function loadMoreBlogs() {
-        const nextBatch = currentFilteredBlogs.slice(displayedBlogs, displayedBlogs + blogsPerPage);
-        const html = nextBatch.map(item => `
+        const nextBatch = currentFilteredBlogs.slice(displayedBlogs, displayedBlogs + blogsPerPage); // Keep this line
+        const html = nextBatch.map((item, index) => `
           <div class="card1">
             <img src="${item.image}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy">
             <div class="class-content1">
               <h3>${item.title}</h3>
-              <a href ="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
+              <a href ="views.html?id=${(item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}" class="btn1">عرض المدونة</a>
             </div>
           </div>
         `).join("");
@@ -103,13 +103,14 @@
             if (savedCount) countToRender = parseInt(savedCount);
         }
 
-        const initialBatch = currentFilteredBlogs.slice(0, countToRender);
-        grid.innerHTML = initialBatch.map(item => `
+        //انشاء الكروت===================================================================================
+        const initialBatch = currentFilteredBlogs.slice(0, countToRender); // Keep this line
+        grid.innerHTML = initialBatch.map((item, index) => `
           <div class="card1">
             <img src="${item.image}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy">
             <div class="class-content1">
               <h3>${item.title}</h3>
-              <a href ="views.html?id=${item.id}" class="btn1">عرض المدونة</a>
+              <a href ="views.html?id=${(item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}" class="btn1">عرض المدونة</a>
             </div>
           </div>
         `).join("");

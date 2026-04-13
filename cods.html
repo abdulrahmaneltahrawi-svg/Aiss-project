@@ -84,7 +84,7 @@ function renderNextCodes() {
         <img src="${img}" alt="${item.title || "كود"}" loading="lazy" onerror="this.onerror=null; this.src='assets/icons/logo.webp';">
         <div class="class-content1">
           <h3>${item.title || ""}</h3>
-          <a href="views.html?id=${realIndex}&source=codes" class="btn1">عرض التفاصيل</a>
+          <a href="views.html?id=${item.title.trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}&source=codes" class="btn1">عرض التفاصيل</a>
         </div>
       </div>
     `;
@@ -118,7 +118,7 @@ function renderCodes(data) {
         <img src="${item.image || 'assets/imge/0006.jpg'}" alt="${item.title || "كود"}" loading="lazy" onerror="this.onerror=null; this.src='assets/icons/logo.webp';">
         <div class="class-content1">
           <h3>${item.title || ""}</h3>
-          <a href="views.html?id=${index}&source=codes" class="btn1">عرض التفاصيل</a>
+          <a href="views.html?id=${item.title.trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}&source=codes" class="btn1">عرض التفاصيل</a>
         </div>
       </div>
   `).join("");

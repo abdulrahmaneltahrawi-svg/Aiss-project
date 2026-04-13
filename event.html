@@ -58,7 +58,7 @@
             <img src="${item.image}" alt="${item.title}" loading="lazy">
             <div class="class-content1">
               <h3>${item.title}</h3>
-              <a href="views.html?id=${item.id}&source=events" class="btn1">عرض التفاصيل</a>
+              <a href="views.html?id=${item.title.trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}&source=events" class="btn1">عرض التفاصيل</a>
             </div>
           </div>
         `).join("");
@@ -74,7 +74,7 @@
         // أخذ أحدث 5 أحداث
         const latest = LOCAL_EVENTS.slice(0, 5);
         const tickerHTML = latest.map(item => `
-          <a href="views.html?id=${item.id}&source=events" class="ticker-event">
+          <a href="views.html?id=${item.title.trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}&source=events" class="ticker-event">
             ${item.title}
           </a>
         `).join("");
@@ -103,7 +103,7 @@
               <img src="${item.image}" alt="${item.title}" loading="lazy">
               <div class="class-content1">
                 <h3>${item.title}</h3>
-                <a href="views.html?id=${item.id}&source=events" class="btn1">عرض التفاصيل</a>
+                <a href="views.html?id=${item.title.trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}&source=events" class="btn1">عرض التفاصيل</a>
               </div>
             </div>
         `).join("");
