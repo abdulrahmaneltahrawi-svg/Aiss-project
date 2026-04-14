@@ -545,8 +545,8 @@ header button:hover {
 
 .class-content1 .btn1 {
   display: inline-block;
-  padding: 15px 35px;
-  background: linear-gradient(#e4293a, #e429397e);
+  padding: 10px 15px;
+  background: linear-gradient(#f56874, #e429397e);
   color: black;
   font-size: 15px;
   font-weight: bold;
@@ -1769,3 +1769,9 @@ textarea {
     transform: translateX(100%);
   }
 }
+
+/* إخفاء العناصر التي تتطلب تسجيل دخول بشكل افتراضي */
+.auth-only {
+  display: none !important;
+}
+

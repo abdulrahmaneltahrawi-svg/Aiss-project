@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم - المعهد العربي لعلوم السلامة</title>
     <link rel="stylesheet" href="style.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
     <style>
         .dashboard-wrapper {
             max-width: 1200px;
@@ -58,10 +62,7 @@
         <aside class="db-sidebar">
             <h3 style="color: #235287; margin-bottom: 20px;">القائمة</h3>
             <ul>
-                <li><a href="#" class="active">الرئيسية</a></li>
-                <li><a href="add_article.html">إضافة مقال</a></li>
-                <li><a href="blogs.html">المدونات</a></li>
-                <li><a href="index.html">العودة للموقع</a></li>
+                <li><a href="add_article.html">إضافة مقال </a></li></li>
             </ul>
         </aside>
 
@@ -70,14 +71,6 @@
                 <div class="stat-item">
                     <h4>مرحباً بك</h4>
                     <div class="val" id="user-welcome">...</div>
-                </div>
-                <div class="stat-item">
-                    <h4>المقالات المنشورة</h4>
-                    <div class="val">12</div>
-                </div>
-                <div class="stat-item">
-                    <h4>الزيارات اليومية</h4>
-                    <div class="val">154</div>
                 </div>
             </div>
 
@@ -115,5 +108,6 @@
             });
         });
     </script>
+    <script src="js/auth-toggle.js"></script>
 </body>
 </html>

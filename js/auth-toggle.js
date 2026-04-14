@@ -92,6 +92,7 @@ document.addEventListener('click', function (e) {
             }
         })
         .catch(error => {
+            console.error('Login Fetch Error:', error);
             if (messageBox) messageBox.textContent = "حدث خطأ في الاتصال بالسيرفر";
             if (messageBox) messageBox.style.color = "red";
         });
@@ -157,6 +158,7 @@ document.addEventListener('click', function (e) {
             }
         })
         .catch(error => {
+            console.error('Registration Fetch Error:', error);
             if (messageBox) messageBox.textContent = "حدث خطأ في الاتصال بالسيرفر: " + error.message;
             if (messageBox) messageBox.style.color = "red";
         });
@@ -206,7 +208,8 @@ document.addEventListener('click', function (e) {
                 }
             }
         })
-        .catch(() => {
+        .catch(error => {
+            console.error('Forgot Password Fetch Error:', error);
             if (messageBox) messageBox.textContent = "حدث خطأ في الاتصال بالسيرفر";
             if (messageBox) messageBox.style.color = "red";
         });
@@ -241,6 +244,11 @@ document.addEventListener('click', function (e) {
                     messageBox.style.color = "red";
                 }
             }
+        })
+        .catch(error => {
+            console.error('Verify Code Fetch Error:', error);
+            if (messageBox) messageBox.textContent = "حدث خطأ في الاتصال بالسيرفر";
+            if (messageBox) messageBox.style.color = "red";
         });
     }
 
@@ -281,6 +289,11 @@ document.addEventListener('click', function (e) {
                     messageBox.style.color = "red";
                 }
             }
+        })
+        .catch(error => {
+            console.error('Reset Password Fetch Error:', error);
+            if (messageBox) messageBox.textContent = "حدث خطأ في الاتصال بالسيرفر";
+            if (messageBox) messageBox.style.color = "red";
         });
     }
 

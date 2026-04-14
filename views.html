@@ -149,8 +149,23 @@
 
       async function loadDynamicContent() {
         let data;
+        let item = null; // تعريف المتغير في البداية لتجنب خطأ ReferenceError
 
-        if (source === "codes") {
+         if (source === "db") {
+          // جلب من قاعدة البيانات مباشرة
+          try {
+            const response = await fetch(`api/get_article.php?id=${id}`);
+            const result = await response.json(); // تغيير الاسم لتجنب تضاربه مع المتغير data في الأعلى
+            if (result.success) {
+              item = result.article;
+              // توحيد المسميات لتعمل مع الكود الموجود
+              item.image = item.inner_image;
+              item.description = item.content;
+            }
+          } catch (err) {
+            console.error("Fetch DB article error:", err);
+          }
+        } else if (source === "codes") {       // جلب بيانات الأكواد والمعايير من الملف المحلي
           // جلب بيانات الأكواد والمعايير من الملف المحلي
           // استخدام البيانات من js/codes.js التي تم استدعاؤها أعلاه
           data = typeof codesData !== "undefined" ? codesData : [];
@@ -175,14 +190,15 @@
 
         // `myCards` مصفوفة، وداخلها `id` ليس بنفس ترتيب الفهارس (index)،
         // لذلك نطابق حسب قيمة `item.id` بدل استخدام `data[id]`.
-        let item = null;
-        if (Array.isArray(data)) {
-          const byId = data.find((it) => String(it.id) === String(id));
-          const byTitle = data.find((it) => (it.titlesubject || it.title) && (it.titlesubject || it.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '') === id);
-          const byIndex = data[Number(id)];
-          item = byId || byTitle || byIndex || null;
-        } else if (data && typeof data === "object") {
-          item = data[id] || data[String(id)] || data[Number(id)] || null;
+        if (!item) { // نقوم بالبحث في البيانات المحلية فقط إذا لم نجد المقال في قاعدة البيانات
+          if (Array.isArray(data)) {
+            const byId = data.find((it) => String(it.id) === String(id));
+            const byTitle = data.find((it) => (it.titlesubject || it.title) && (it.titlesubject || it.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '') === id);
+            const byIndex = data[Number(id)];
+            item = byId || byTitle || byIndex || null;
+          } else if (data && typeof data === "object") {
+            item = data[id] || data[String(id)] || data[Number(id)] || null;
+          }
         }
 
         if (item) {
@@ -204,5 +220,6 @@
     <div id="footer-placeholder"></div>
 
     <script src="js/script.js"></script>
+    <script src="js/auth-toggle.js"></script>
   </body>
 </html>

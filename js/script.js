@@ -11,13 +11,18 @@ function createCardHTML(item, btnText = "عرض المجلة", index = 10) {
   const loadingAttr = index < 4 ? 'fetchpriority="high"' : 'loading="lazy"';
   return `
         <div class="card1 is-loading">
+        <a href="${href}">
             <img src="${imagePath}" alt="${item.title}" width="270" height="350" ${loadingAttr} decoding="async" onload="this.classList.add('loaded'); this.parentElement.classList.remove('is-loading');" onerror="if(this.src != 'assets/magazine/IMG_1325.webp'){this.src='assets/magazine/IMG_1325.webp';} this.classList.add('loaded'); this.parentElement.classList.remove('is-loading');"/>
+            </a>
             <div class="class-content1">
                 <h3>${item.title}</h3>
                 <p>${item.date}</p>
                 <a href="${href}" class="btn1">${btnText} ←</a>
             </div>
-        </div>`;
+        </div>
+        
+        `;
+    
 }
 
     // تم تغليف الكود في نطاق محلي لتجنب تعارض الأسماء (const grid) مع صفحة المدونات
@@ -33,6 +38,7 @@ function createCardHTML(item, btnText = "عرض المجلة", index = 10) {
               <a href="views.html?id=${(item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}" class="btn1">عرض المدونة</a>
               </div>
           </div>
+
           `).join("");
       }
     }
@@ -249,6 +255,10 @@ async function checkAuthStatus() {
     const data = await response.json();
 
     if (data.authenticated && data.user) {
+      // التحقق مما إذا كان المستخدم أدمن (يدعم كلمة admin أو القيمة الرقمية 1)
+      // وكذلك التحقق من صلاحية إضافة المقالات إذا كانت موجودة
+      const isAdmin = data.user.role === 'admin' || data.user.role == 1 || data.user.can_add_article == 1;
+
       // استبدال كود الزر نفسه فقط بمحتوى الحالة المسجلة
       loginBtn.outerHTML = `
         <div class="user-logged-in" style="display: flex; align-items: center; gap: 8px; direction: rtl;">
@@ -263,9 +273,21 @@ async function checkAuthStatus() {
             }
           </style>
           <span style="font-size: 15px; font-weight: bold; color: #060606; white-space: nowrap;">مرحبا ${data.user.name}</span>
-          <a href="dashboard.html" style="padding: 5px 10px; font-size: 14px; background: #235287; color: white; border-radius: 8px; text-decoration: none; font-weight: bold;">لوحة التحكم</a>
+          ${isAdmin ? '<a href="dashboard.html" style="padding: 5px 10px; font-size: 14px; background: #235287; color: white; border-radius: 8px; text-decoration: none; font-weight: bold;">لوحة التحكم</a>' : ''}
           <button id="logout-btn" style="padding: 5px 10px; font-size: 14px; border: 1px solid #e4293a; background: white; color: #e4293a; border-radius: 8px; cursor: pointer; font-weight: bold;">خروج</button>
         </div>`;
+
+      // إظهار كافة العناصر التي تتطلب تسجيل دخول (مثل روابط إضافة المقالات في المنيو)
+      document.querySelectorAll('.auth-only').forEach(el => {
+        el.style.setProperty('display', 'block', 'important');
+      });
+
+      // إظهار العناصر الخاصة بالأدمن فقط إذا كان المستخدم أدمن
+      document.querySelectorAll('.admin-only').forEach(el => {
+        if (isAdmin) {
+          el.style.setProperty('display', 'block', 'important');
+        }
+      });
     }
   } catch (err) {
     console.error("فشل التحقق من الجلسة:", err);
@@ -425,7 +447,7 @@ function activateHeader() {
         ...blogs.map((b) => ({
           ...b,
           type: "مدونة",
-          url: `views.html?id=${(b.titlesubject || b.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`,
+          url: `views.html?id=${b.source === 'db' ? b.id : (b.titlesubject || b.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}${b.source === 'db' ? '&source=db' : ''}`,
         })),
         ...eventsData.map((e) => ({
           ...e,
@@ -441,17 +463,18 @@ function activateHeader() {
 
       // تصفية النتائج
       const results = allItems.filter(
-        (item) => item.title && item.title.toLowerCase().includes(query),
+        (item) => (item.title && item.title.toLowerCase().includes(query)) || (item.titlesubject && item.titlesubject.toLowerCase().includes(query)),
       );
 
       if (results.length > 0) {
         if (suggestionsList) suggestionsList.style.display = "block";
         results.slice(0, 8).forEach((item) => {
           const li = document.createElement("li");
+          const displayTitle = (item.titlesubject && item.titlesubject.trim() !== "") ? item.titlesubject : item.title;
           li.innerHTML = `
                         <a href="${item.url}" style="display:block; color:inherit; text-decoration:none;">
                            <span style="color:#e4293a; font-weight:bold; margin-left:5px; font-size:11px;">${item.type}</span>
-                           ${item.title}
+                           <span class="search-title-text">${displayTitle}</span>
                         </a>
                     `;
           suggestionsList.appendChild(li);

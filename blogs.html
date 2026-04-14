@@ -43,6 +43,7 @@
 
     <script src="js/blogs.js"></script>
     <script>
+      
       const grid = document.getElementById("blogs-grid");
       const categorySelect = document.getElementById("blog-category");
       const params = new URLSearchParams(window.location.search);
@@ -52,20 +53,26 @@
       
       let displayedBlogs = 0;
       const blogsPerPage = 8;
+      let allBlogs = [...myCards]; // دمج البيانات الثابتة مع المتغيرة لاحقاً
       let currentFilteredBlogs = [];
 
       function getCategory(item) {
-        return item.category || "محتويات علمية";
+        if (item.source === 'db') {
+          if (item.type == 0) return "محتويات علمية";
+          if (item.type == 1) return "مقالات الخبراء";
+          if (item.type == 2) return "مقالات المجلة";
+        }
+        return item.category || "مقالات تجربه";
       }
 
       function loadMoreBlogs() {
         const nextBatch = currentFilteredBlogs.slice(displayedBlogs, displayedBlogs + blogsPerPage); // Keep this line
         const html = nextBatch.map((item, index) => `
           <div class="card1">
-            <img src="${item.image}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy" decoding="async">
+            <img src="${item.image || item.cover_image}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy" decoding="async">
             <div class="class-content1">
               <h3>${item.title}</h3>
-              <a href ="views.html?id=${(item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}" class="btn1">عرض المدونة</a>
+              <a href ="views.html?id=${item.source === 'db' ? item.id : (item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}${item.source === 'db' ? '&source=db' : ''}" class="btn1">عرض المدونة</a>
             </div>
           </div>
         `).join("");
@@ -91,7 +98,7 @@
 
       function applyFilter() {
         const val = categorySelect ? categorySelect.value : "all";
-        currentFilteredBlogs = val === "all" ? myCards : myCards.filter((it) => getCategory(it) === val);
+        currentFilteredBlogs = val === "all" ? allBlogs : allBlogs.filter((it) => getCategory(it) === val);
         
         grid.innerHTML = "";
         displayedBlogs = 0;
@@ -107,10 +114,10 @@
         const initialBatch = currentFilteredBlogs.slice(0, countToRender); // Keep this line
         grid.innerHTML = initialBatch.map((item, index) => `
           <div class="card1">
-            <img src="${item.image}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy" decoding="async">
+            <img src="${item.image || item.cover_image}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy" decoding="async">
             <div class="class-content1">
               <h3>${item.title}</h3>
-              <a href ="views.html?id=${(item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}" class="btn1">عرض المدونة</a>
+              <a href ="views.html?id=${item.source === 'db' ? item.id : (item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}${item.source === 'db' ? '&source=db' : ''}" class="btn1">عرض المدونة</a>
             </div>
           </div>
         `).join("");
@@ -127,14 +134,27 @@
         }
       }
 
-      initCategories();
-      if (initialCat && categorySelect) {
-        categorySelect.value = initialCat;
-      }
-      applyFilter();
-      if (categorySelect)
-        categorySelect.addEventListener("change", applyFilter);
-        
+      // جلب البيانات من قاعدة البيانات
+      fetch('api/get_articles.php')
+        .then(res => res.json())
+        .then(dbData => {
+          if (dbData.success) {
+            const dbArticles = dbData.articles.map(a => ({...a, source: 'db'}));
+            allBlogs = [...dbArticles, ...myCards]; // وضع مقالات القاعدة في البداية
+          }
+        })
+        .catch(err => console.error("Error fetching DB articles:", err))
+        .finally(() => {
+          // تنفيذ الفلترة بعد محاولة جلب البيانات (سواء نجحت أو فشلت)
+          initCategories();
+          if (initialCat && categorySelect) {
+            categorySelect.value = initialCat;
+          }
+          applyFilter();
+          if (categorySelect)
+            categorySelect.addEventListener("change", applyFilter);
+        });
+
       document.getElementById("load-more-blogs").addEventListener("click", loadMoreBlogs);
     </script>
     <!-- القسم الاخير-->
