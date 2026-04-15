@@ -102,6 +102,35 @@
       <div class="logo-text"><p>العضويات</p></div>
     </div>
 
+    <!--قسم نافذة العضويات (نفس تصميم المتجر) -->
+    <div id="cart-popup" class="cart-popup hidden">
+      <div class="popup-content">
+        <span class="close-popup" onclick="closeCartPopup()">&times;</span>
+        <div class="product-info">
+          <img id="popup-img" alt="membership-icon" loading="lazy" />
+          <div>
+            <h4 id="popup-title"></h4>
+            <p id="popup-price"></p>
+          </div>
+        </div>
+        <hr />
+        <div class="popup-footer">
+          <button
+            class="btn-view-cart"
+            onclick="window.location.href = 'view-cart.html'"
+          >
+            عرض السلة
+          </button>
+          <button
+            class="btn-checkout"
+            onclick="window.location.href = 'checkout.html'"
+          >
+            إكمال الطلب
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div id="header-placeholder"></div>
     <div class="title0">
       <p>احصل على عضويتك الآن</p>
@@ -120,9 +149,7 @@
         <button
           class="cta-button"
           type="button"
-          onclick="
-            addToCart({ title: 'عضوية الشركات', price: 367.29, img: '' })
-          "
+          onclick="addToCart({ title: 'عضوية الشركات', price: 367.29, img: 'assets/icons/logo.webp' })"
         >
           احصل على عضويتك
         </button>
@@ -139,7 +166,7 @@
         <button
           class="cta-button"
           type="button"
-          onclick="addToCart({ title: 'عضوية مشارك', price: 55.55, img: '' })"
+          onclick="addToCart({ title: 'عضوية مشارك', price: 55.55, img: 'assets/icons/logo.webp' })"
         >
           احصل على عضويتك
         </button>
@@ -157,7 +184,7 @@
         <button
           class="cta-button"
           type="button"
-          onclick="addToCart({ title: 'عضوية خبير', price: 91.82, img: '' })"
+          onclick="addToCart({ title: 'عضوية خبير', price: 91.82, img: 'assets/icons/logo.webp' })"
         >
           احصل على عضويتك
         </button>
