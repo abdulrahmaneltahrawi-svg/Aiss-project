@@ -39,7 +39,7 @@ function saveImage($fileKey) {
     $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
     $allowedTypes = ["jpg", "jpeg", "png", "webp"];
 
-    if (!in_array($extension, $allowedTypes)) {
+    if (!in_array($extension, $allowedTypes, true)) {
         return [false, "Invalid image type for " . $fileKey];
     }
 
@@ -80,11 +80,16 @@ if ((int)$user["can_add_article"] !== 1) {
 }
 
 $title = isset($_POST["title"]) ? trim($_POST["title"]) : "";
+$slug = isset($_POST["slug"]) ? trim($_POST["slug"]) : "";
 $content = isset($_POST["content"]) ? trim($_POST["content"]) : "";
-$type = isset($_POST["type"]) ? (int) $_POST["type"] : 0;
+$type = isset($_POST["type"]) ? (int)$_POST["type"] : 0;
 
 if ($title === "") {
     respond(false, "Title is required");
+}
+
+if ($slug === "") {
+    respond(false, "Slug is required");
 }
 
 if ($content === "") {
@@ -95,8 +100,30 @@ if (mb_strlen($title) > 255) {
     respond(false, "Title is too long");
 }
 
+if (mb_strlen($slug) > 255) {
+    respond(false, "Slug is too long");
+}
+
+if (!preg_match('/^[a-z0-9-]+$/', $slug)) {
+    respond(false, "Slug must contain only lowercase letters, numbers, and hyphens");
+}
+
 if (!in_array($type, [0, 1, 2], true)) {
     respond(false, "Invalid article type");
+}
+
+// التحقق من عدم تكرار slug
+$checkSlugStmt = $conn->prepare("SELECT id FROM user_articles WHERE slug = ?");
+if (!$checkSlugStmt) {
+    respond(false, "Server error");
+}
+
+$checkSlugStmt->bind_param("s", $slug);
+$checkSlugStmt->execute();
+$checkSlugResult = $checkSlugStmt->get_result();
+
+if ($checkSlugResult->num_rows > 0) {
+    respond(false, "Slug already exists");
 }
 
 list($coverOk, $coverResult) = saveImage("cover_image");
@@ -115,8 +142,8 @@ if (!$innerOk) {
 $innerImagePath = $innerResult;
 
 $stmt = $conn->prepare("
-    INSERT INTO user_articles (user_id, title, cover_image, inner_image, content, type)
-    VALUES (?, ?, ?, ?, ?, ?)
+    INSERT INTO user_articles (user_id, title, slug, cover_image, inner_image, content, type)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
 ");
 
 if (!$stmt) {
@@ -129,11 +156,12 @@ if (!$stmt) {
     respond(false, "Server error");
 }
 
-$stmt->bind_param("issssi", $user_id, $title, $coverImagePath, $innerImagePath, $content, $type);
+$stmt->bind_param("isssssi", $user_id, $title, $slug, $coverImagePath, $innerImagePath, $content, $type);
 
 if ($stmt->execute()) {
     respond(true, "Article added successfully", [
         "article_id" => $stmt->insert_id,
+        "slug" => $slug,
         "cover_image" => $coverImagePath,
         "inner_image" => $innerImagePath,
         "type" => $type

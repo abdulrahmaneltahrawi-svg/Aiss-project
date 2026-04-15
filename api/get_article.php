@@ -21,7 +21,7 @@ if ($id <= 0) {
 }
 
 $stmt = $conn->prepare("
-    SELECT title, inner_image, content, type
+    SELECT title, slug, inner_image, content, type
     FROM user_articles
     WHERE id = ?
 ");
