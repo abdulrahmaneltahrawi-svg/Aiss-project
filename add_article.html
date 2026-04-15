@@ -41,7 +41,7 @@
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #235287; }
         .form-group input[type="text"], .form-group input[type="file"] {
-            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;margin-bottom: 10px;
         }
         .save-btn {
             background: #e4293a; color: #fff; border: none; padding: 12px 30px; border-radius: 8px;
@@ -67,7 +67,7 @@
             </ul>
         </aside>
         <main class="form-box">
-                        <div class="form-group">
+                <div class="form-group">
                 <label>نوع المقال (مكان النشر):</label>
                 <select id="type" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;">
                     <option value="0">محتويات علمية</option>
@@ -80,6 +80,8 @@
             <div class="form-group">
                 <label>عنوان المقال:</label>
                 <input type="text" id="title" placeholder="أدخل عنوان المقال هنا...">
+                <label>المقال باللغة الانجليزية:</label>
+                <input type="text" id="slug" placeholder="أدخل اسم المقال بالانجليزي...">
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -113,6 +115,7 @@
 
         function saveArticle() {
             const title = document.getElementById("title").value;
+            const slug = document.getElementById("slug").value;
             const content = tinymce.get("content").getContent();
             const coverImage = document.getElementById("cover_image").files[0];
             const innerImage = document.getElementById("inner_image").files[0];
@@ -120,6 +123,7 @@
             const formData = new FormData();
             
             formData.append("title", title); 
+            formData.append("slug", slug);
             formData.append("content", content);
             formData.append("type", type);
             formData.append("cover_image", coverImage); formData.append("inner_image", innerImage);
@@ -138,7 +142,6 @@
                     window.location.href = 'index.html';
                 } 
             })
-            
         });
     </script>
     <script src="js/auth-toggle.js"></script>

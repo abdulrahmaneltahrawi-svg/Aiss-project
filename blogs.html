@@ -43,7 +43,9 @@
 
     <script src="js/blogs.js"></script>
     <script>
-      
+
+          // ضمان وجود تصنيف لكل مدونة
+
       const grid = document.getElementById("blogs-grid");
       const categorySelect = document.getElementById("blog-category");
       const params = new URLSearchParams(window.location.search);
@@ -53,7 +55,7 @@
       
       let displayedBlogs = 0;
       const blogsPerPage = 8;
-      let allBlogs = [...myCards]; // دمج البيانات الثابتة مع المتغيرة لاحقاً
+      let allBlogs = []; // لم نعد نستخدم myCards الثابتة
       let currentFilteredBlogs = [];
 
       function getCategory(item) {
@@ -64,15 +66,18 @@
         }
         return item.category || "مقالات تجربه";
       }
-
+//عرض الكروت عند الضغط على المزيد من الصفحات
       function loadMoreBlogs() {
         const nextBatch = currentFilteredBlogs.slice(displayedBlogs, displayedBlogs + blogsPerPage); // Keep this line
         const html = nextBatch.map((item, index) => `
           <div class="card1">
-            <img src="${item.image || item.cover_image}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy" decoding="async">
+            <a href="views.html?id=${item.source === 'db' ? item.id + '-' + (item.title || "").trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g,'-').replace(/^-+|-+$/g,'') : (item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g,'-').replace(/^-+|-+$/g,'')}">
+              <img src="${item.image || item.cover_image || 'assets/magazine/placeholder.webp'}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='assets/magazine/placeholder.webp';">
+            </a>
             <div class="class-content1">
               <h3>${item.title}</h3>
-              <a href ="views.html?id=${item.source === 'db' ? item.id : (item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}${item.source === 'db' ? '&source=db' : ''}" class="btn1">عرض المدونة</a>
+              <a href ="views.html?id=${item.source === 'db' ? item.id + '-' + (item.title || "").trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g,'-').replace(/^-+|-+$/g,'') : (item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}" class="btn1">عرض المدونة</a>
+              <a href ="views.html?id=${item.source === 'db' ? item.id + '-' + (item.title || "").trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g,'-').replace(/^-+|-+$/g,'') : (item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}" class="btn1">عرض المدونة</a>
             </div>
           </div>
         `).join("");
@@ -114,10 +119,12 @@
         const initialBatch = currentFilteredBlogs.slice(0, countToRender); // Keep this line
         grid.innerHTML = initialBatch.map((item, index) => `
           <div class="card1">
-            <img src="${item.image || item.cover_image}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy" decoding="async">
+            <a href="views.html?id=${item.source === 'db' ? item.id + '-' + (item.title || "").trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g,'-').replace(/^-+|-+$/g,'') : (item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g,'-').replace(/^-+|-+$/g,'')}">
+              <img src="${item.image || item.cover_image || 'assets/magazine/placeholder.webp'}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='assets/magazine/placeholder.webp';">
+            </a>
             <div class="class-content1">
               <h3>${item.title}</h3>
-              <a href ="views.html?id=${item.source === 'db' ? item.id : (item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}${item.source === 'db' ? '&source=db' : ''}" class="btn1">عرض المدونة</a>
+              <a href ="views.html?id=${item.source === 'db' ? item.id : (item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}" class="btn1">عرض المدونة</a>
             </div>
           </div>
         `).join("");
@@ -140,7 +147,7 @@
         .then(dbData => {
           if (dbData.success) {
             const dbArticles = dbData.articles.map(a => ({...a, source: 'db'}));
-            allBlogs = [...dbArticles, ...myCards]; // وضع مقالات القاعدة في البداية
+            allBlogs = [...dbArticles]; // نستخدم مقالات قاعدة البيانات فقط
           }
         })
         .catch(err => console.error("Error fetching DB articles:", err))
@@ -156,6 +163,7 @@
         });
 
       document.getElementById("load-more-blogs").addEventListener("click", loadMoreBlogs);
+      
     </script>
     <!-- القسم الاخير-->
 

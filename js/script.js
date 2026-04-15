@@ -25,24 +25,37 @@ function createCardHTML(item, btnText = "عرض المجلة", index = 10) {
     
 }
 
-    // تم تغليف الكود في نطاق محلي لتجنب تعارض الأسماء (const grid) مع صفحة المدونات
-    {
-      const grid = document.getElementById("blogs-grid"); // Keep this line
-      // نقوم بالتنفيذ فقط إذا لم نكن في صفحة المدونات لتجنب تضارب التصفية (Filtering)
-      if (grid && typeof myCards !== "undefined" && !window.location.pathname.includes("blogs.html")) {
-        grid.innerHTML = myCards.slice(0, 8).map((item, index) => `
+// ===== وظيفة جلب وعرض المدونات من قاعدة البيانات =====
+async function get_articles() {
+  const grid = document.getElementById("blogs-grid");
+  if (!grid || window.location.pathname.includes("blogs.html")) return;
+
+  try {
+    const response = await fetch("api/get_articles.php");
+    const data = await response.json();
+
+    if (data.success && data.articles && data.articles.length > 0) {
+      grid.innerHTML = data.articles.slice(0, 8).map((item) => {
+        const slug = (item.title || "").trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        const link = `views.html?id=${item.id}-${slug}`;
+        const image = item.cover_image || 'assets/magazine/placeholder.webp';
+
+        return `
           <div class="card1">
-              <img src="${item.image}" alt="${item.title || 'صورة المدونة'}" loading="lazy" decoding="async">
+              <a href="${link}">
+                <img src="${image}" alt="${item.title || 'صورة المدونة'}" loading="lazy" decoding="async">
+              </a>
               <div class="class-content1">
-              <h3>${item.title}</h3>
-              <a href="views.html?id=${(item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}" class="btn1">عرض المدونة</a>
+                <h3>${item.title}</h3>
+                <a href="${link}" class="btn1">عرض المدونة</a>
               </div>
-          </div>
-
-          `).join("");
-      }
+          </div>`;
+      }).join("");
     }
-
+  } catch (error) {
+    console.error("خطأ في جلب المدونات من قاعدة البيانات:", error);
+  }
+}
 
 // المجلات - الصفحة الكاملة
 const myGrid = document.getElementById("magazines-grid");
@@ -236,6 +249,7 @@ async function loadLayout() {
     initScrollToTop();
     checkAuthStatus();
     // التحقق من وجود الدالة قبل استدعائها لمنع توقف الكود
+    await get_articles();
     if (typeof loadRelatedPosts === "function") loadRelatedPosts();
   } catch (error) {
     console.error("فشل التحميل:", error);

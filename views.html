@@ -151,7 +151,7 @@
         let data;
         let item = null; // تعريف المتغير في البداية لتجنب خطأ ReferenceError
 
-         if (source === "db") {
+         if (source === "db" || !source) {
           // جلب من قاعدة البيانات مباشرة
           try {
             const response = await fetch(`api/get_article.php?id=${id}`);
@@ -159,13 +159,24 @@
             if (result.success) {
               item = result.article;
               // توحيد المسميات لتعمل مع الكود الموجود
-              item.image = item.inner_image;
+              item.image = item.inner_image || item.cover_image;
               item.description = item.content;
+
+              // تحديث شريط العنوان ليحتوي على الـ slug الحقيقي من قاعدة البيانات
+              if (item.slug) {
+                // يجب إبقاء الرقم في بداية الرابط لكي يتمكن ملف PHP من قراءته عند تحديث الصفحة
+                const numericId = String(id).split('-')[0];
+                const newUrl = window.location.pathname + `?id=${numericId}-${item.slug}`;
+                window.history.replaceState(null, '', newUrl);
+              }
             }
           } catch (err) {
             console.error("Fetch DB article error:", err);
           }
-        } else if (source === "codes") {       // جلب بيانات الأكواد والمعايير من الملف المحلي
+        } 
+        
+        if (!item) { // إذا لم يتم العثور عليه في قاعدة البيانات، نتحقق من المصادر الأخرى
+         if (source === "codes") {       // جلب بيانات الأكواد والمعايير من الملف المحلي
           // جلب بيانات الأكواد والمعايير من الملف المحلي
           // استخدام البيانات من js/codes.js التي تم استدعاؤها أعلاه
           data = typeof codesData !== "undefined" ? codesData : [];
@@ -187,6 +198,7 @@
           const backLink = document.getElementById("back-link");
           if (backLink) backLink.href = "blogs.html";
         }
+        }
 
         // `myCards` مصفوفة، وداخلها `id` ليس بنفس ترتيب الفهارس (index)،
         // لذلك نطابق حسب قيمة `item.id` بدل استخدام `data[id]`.
@@ -202,10 +214,15 @@
         }
 
         if (item) {
+          // تحديث عنوان التبويب في المتصفح ليظهر عنوان المقال
+          if (item.title) {
+            document.title = item.title + " - المعهد العربي لعلوم السلامة";
+          }
+
           document.getElementById("title-placeholder").innerText = item.title;
           const imgPlaceholder = document.getElementById("image-placeholder");
           // First try viewImage, then backgrongImage, then image, then img, then default
-          imgPlaceholder.src = item.viewImage || item.backgrongImage || item.image || item.img || "assets/icons/logo.webp";
+          imgPlaceholder.src = item.viewImage || item.backgrongImage || item.image || item.img || "assets/magazine/placeholder.webp";
           imgPlaceholder.alt = item.title || "صورة توضيحية"; // إضافة alt ديناميكيًا
           // عرض المحتوى سواء كان اسمه content أو description
           document.getElementById("description-placeholder").innerHTML =

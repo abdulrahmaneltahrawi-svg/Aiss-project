@@ -1420,7 +1420,7 @@ textarea {
   }
 
   .hero-section-m {
-    margin-top: 65px; /* لإعطاء مساحة كافية تحت الهيدر الثابت */
+    margin-top: 50px; /* لإعطاء مساحة كافية تحت الهيدر الثابت */
     height: 150px;
   }
 
@@ -1435,6 +1435,7 @@ textarea {
     font-size: 2.5rem;
     margin: 0;
   }
+
   .lastV img {
     width: 100%;
     max-width: 100%;

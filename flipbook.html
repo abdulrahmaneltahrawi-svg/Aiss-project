@@ -22,6 +22,7 @@
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
       display: flex;
       flex-direction: column;
+  
     }
 
     .flip-top {
@@ -63,7 +64,7 @@
       /* توسيط المحتوى أفقياً */
       align-items: center !important;
       /* توسيط المحتوى عمودياً */
-      height: 100%;
+      flex: 1;
       width: 100%;
       overflow: hidden;
       /* لمنع النزول لأسفل */
@@ -102,6 +103,28 @@
       transition: opacity 0.5s ease;
       /* إضافة تأثير تلاشي */
     }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(228, 41, 58, 0.7);
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 50;
+      font-size: 20px;
+      display: none; /* تظهر بعد التحميل */
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+    .nav-btn:hover { background: #b71c1c; }
+    .nav-btn.prev { right: 30px; }
+    .nav-btn.next { left: 30px; }
 
     .loader {
       border: 4px solid #f3f3f3;
@@ -173,7 +196,6 @@
       <div class="flip-top">
         <h1 id="flip-title">عرض</h1>
         <div style="display: flex; gap: 15px; align-items: center;">
-          <span id="page-num" style="font-size: 14px; font-weight: bold; color: #666; direction: ltr;">0 / 0</span>
           <button id="fullscreen-btn" style="background: #e4293a; color: white; border: none; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-weight: bold; font-family: inherit;">ملء الشاشة</button>
           <a id="flip-back" href="magazine.html">رجوع</a>
         </div>
@@ -184,7 +206,12 @@
           <p id="load-status">جاري التحميل...</p>
           <div id="load-progress">يرجى الانتظار، يتم تحضير الكتاب...</div>
         </div>
+        <button id="prev-page" class="nav-btn prev" title="الصفحة التالية">❮</button>
+        <button id="next-page" class="nav-btn next" title="الصفحة السابقة">❯</button>
         <div id="book"></div>
+      </div>
+      <div class="flip-bottom" style="padding: 10px; text-align: center; margin-bottom: 40px;">
+        <span id="page-num" style="font-size: 20px; font-weight: bold; color: #666; direction: ltr;">0 / 0</span>
       </div>
     </div>
   </main>
@@ -292,6 +319,12 @@
         pageFlipInstance.on('flip', (e) => {
           document.getElementById('page-num').textContent = `${e.data + 1} / ${totalPages}`;
         });
+
+        // تفعيل أزرار التنقل
+        document.getElementById('prev-page').onclick = () => pageFlipInstance.flipNext();
+        document.getElementById('next-page').onclick = () => pageFlipInstance.flipPrev();
+        document.getElementById('prev-page').style.display = 'flex';
+        document.getElementById('next-page').style.display = 'flex';
 
         // ننتظر حتى يكتمل بناء المجلة تماماً وتثبيتها في المتصفح
         const elapsed = Date.now() - startTime;
