@@ -4,7 +4,7 @@
 const GITHUB_BASE =
   "https://cdn.jsdelivr.net/gh/abdulrahmaneltahrawi-svg/aiss-storage@main/";
 
-const magazines = [
+let magazines = [
   {
     title: "مجلة السلامة العربية",
     date: "العدد 62 - مارس 2026",

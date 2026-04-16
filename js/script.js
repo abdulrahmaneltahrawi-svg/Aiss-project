@@ -1,28 +1,45 @@
 
- // ===== بناء الكروت =====
+// ===== بناء الكروت المعدل =====
 function createCardHTML(item, btnText = "عرض المجلة", index = 10) {
-  const src = item.link || "#";
+  // استخدام id المجلة من قاعدة البيانات، وإذا لم يوجد نعود للرابط الافتراضي
+  const id = item.id || 0;
+  
   // حماية في حال كانت الصورة مفقودة أو غير معرفة لمنع خطأ 404
   const imagePath = item.img && item.img.trim() !== "" ? item.img : "assets/magazine/placeholder.webp";
+  
   const isManual = btnText.includes("كتيب");
   const back = isManual ? "manuals.html" : "magazine.html";
-  const href = `flipbook.html?title=${encodeURIComponent((item.title || "") + " - " + (item.date || ""))}&src=${encodeURIComponent(src)}&back=${encodeURIComponent(back)}`;
+
+  // تمييز الرابط بناءً على وجود معرف من قاعدة البيانات أو استخدام البيانات الثابتة (m&m.js)
+  let href;
+  if (id && id !== 0) {
+    href = `flipbook.html?id=${id}&back=${encodeURIComponent(back)}`;
+  } else {
+    href = `flipbook.html?title=${encodeURIComponent(item.title || '')}&src=${encodeURIComponent(item.link || '')}&back=${encodeURIComponent(back)}`;
+  }
+
   // إعطاء أولوية تحميل عالية لأول 4 عناصر في الصفحة لسرعة الظهور
   const loadingAttr = index < 4 ? 'fetchpriority="high"' : 'loading="lazy"';
+  
   return `
         <div class="card1 is-loading">
-        <a href="${href}">
-            <img src="${imagePath}" alt="${item.title}" width="270" height="350" ${loadingAttr} decoding="async" onload="this.classList.add('loaded'); this.parentElement.classList.remove('is-loading');" onerror="if(this.src != 'assets/magazine/IMG_1325.webp'){this.src='assets/magazine/IMG_1325.webp';} this.classList.add('loaded'); this.parentElement.classList.remove('is-loading');"/>
+            <a href="${href}">
+                <img src="${imagePath}" 
+                     alt="${item.title || 'مجلة'}" 
+                     width="270" 
+                     height="350" 
+                     ${loadingAttr} 
+                     decoding="async" 
+                     onload="this.classList.add('loaded'); this.parentElement.classList.remove('is-loading');" 
+                     onerror="if(this.src != 'assets/magazine/IMG_1325.webp'){this.src='assets/magazine/IMG_1325.webp';} this.classList.add('loaded'); this.parentElement.classList.remove('is-loading');"/>
             </a>
             <div class="class-content1">
-                <h3>${item.title}</h3>
-                <p>${item.date}</p>
+                <h3>${item.title || 'بدون عنوان'}</h3>
+                <p>${item.date || ''}</p>
                 <a href="${href}" class="btn1">${btnText} ←</a>
             </div>
         </div>
-        
         `;
-    
 }
 
 // ===== وظيفة جلب وعرض المدونات من قاعدة البيانات =====
@@ -57,97 +74,78 @@ async function get_articles() {
   }
 }
 
-// المجلات - الصفحة الكاملة
-const myGrid = document.getElementById("magazines-grid");
-if (myGrid) {
+// ===== وظيفة جلب وعرض المجلات من قاعدة البيانات =====
+async function get_magazines() {
+  const homeGrid = document.getElementById("home-magazines-grid");
+  const fullGrid = document.getElementById("magazines-grid");
   const sortSelect = document.getElementById("magazines-sort");
-  const loadMoreBtn = document.getElementById("load-more-magazines");
-  let currentSortedMagazines = [];
-  let isFirstMagLoad = true;
-  let itemsPerPage = 10;
+  if (!homeGrid && !fullGrid) return;
 
-  function renderInitialPage() {
-    // استرجاع العدد الذي كان معروضاً سابقاً عند العودة
-    let countToRender = itemsPerPage;
-    if (isFirstMagLoad && (document.referrer.includes('flipbook.html') || document.referrer.includes('views.html'))) {
-      const savedCount = sessionStorage.getItem("count_magazine.html");
-      if (savedCount) countToRender = parseInt(savedCount);
-    }
+  try {
+    const response = await fetch("api/get_magazines.php");
+    const data = await response.json();
 
-    const toShow = currentSortedMagazines.slice(0, countToRender);
-    myGrid.innerHTML = toShow
-      .map((m, idx) => createCardHTML(m, "عرض المجلة", idx))
-      .join("");
+    if (data.success && data.magazines && data.magazines.length > 0) {
+      // تحويل البيانات القادمة من قاعدة البيانات لتناسب التنسيق المطلوب
+      const dbMags = data.magazines.map(m => ({
+        id: parseInt(m.id),
+        title: "مجلة السلامة العربية",
+        img: m.cover_image,
+        link: m.file_path,
+        date: m.title
+      }));
 
-    if (loadMoreBtn) {
-      if (currentSortedMagazines.length > countToRender) {
-        loadMoreBtn.style.display = "inline-block";
-      } else {
-        loadMoreBtn.style.display = "none";
-      }
-    }
+      // تحديث المتجر العالمي للمجلات لكي تظهر في البحث وفي الصفحة
+      magazines = [...dbMags, ...magazines]; 
+      const mags = magazines;
 
-    // استرجاع مكان النزول عند العودة من صفحة العرض
-    if (isFirstMagLoad && (document.referrer.includes('flipbook.html') || document.referrer.includes('views.html'))) {
-      const savedPos = sessionStorage.getItem("scroll_magazine.html");
-      if (savedPos) setTimeout(() => window.scrollTo({ top: parseInt(savedPos), behavior: 'instant' }), 250);
-      isFirstMagLoad = false;
-    }
-  }
-
-  function renderSorted(order) {
-    const withScore = magazinesWithScores.filter((x) => x.score !== null);
-    const withoutScore = magazinesWithScores
-      .filter((x) => x.score === null)
-      .slice()
-      .sort((a, b) => a.idx - b.idx);
-
-    withScore.sort((a, b) => {
-      if (order === "oldest") return a.score - b.score;
-      return b.score - a.score; // newest
-    });
-
-    currentSortedMagazines = [...withScore, ...withoutScore].map((x) => x.mag);
-    renderInitialPage();
-  }
-
-  const initialOrder = sortSelect ? sortSelect.value : "newest";
-  renderSorted(initialOrder);
-
-  if (sortSelect) {
-    sortSelect.addEventListener("change", () => renderSorted(sortSelect.value));
-  }
-
-  if (loadMoreBtn) {
-    loadMoreBtn.addEventListener("click", () => {
-      const currentCount = myGrid.children.length;
-      const nextItems = currentSortedMagazines.slice(
-        currentCount,
-        currentCount + itemsPerPage,
-      );
-
-      if (nextItems.length > 0) {
-        const newHtml = nextItems
-          .map((m, idx) => createCardHTML(m, "عرض المجلة", currentCount + idx))
+      // العرض في الصفحة الرئيسية (أحدث 4)
+      if (homeGrid) {
+        // الترتيب حسب ID لأن التاريخ غير متوفر في PHP
+        const newest = [...mags].sort((a, b) => b.id - a.id);
+        homeGrid.innerHTML = newest.slice(0, 4)
+          .map((m, idx) => createCardHTML(m, "عرض المجلة", idx))
           .join("");
-        myGrid.insertAdjacentHTML("beforeend", newHtml);
       }
 
-      if (myGrid.children.length >= currentSortedMagazines.length) {
-        loadMoreBtn.style.display = "none";
-      }
-    });
-  }
-}
+      // العرض في صفحة المجلات الكاملة
+      if (fullGrid) {
+        let itemsPerPage = 10;
+        let currentCount = itemsPerPage;
+        if (document.referrer.includes('flipbook.html')) {
+          const savedCount = sessionStorage.getItem("count_magazine.html");
+          if (savedCount) currentCount = parseInt(savedCount);
+        }
 
-// المجلات - الرئيسية (4 فقط)
-const homeGrid = document.getElementById("home-magazines-grid");
-if (homeGrid) {
-  // اعرض 4 مجلات فقط
-  homeGrid.innerHTML = magazines
-    .slice(0, 4)
-    .map((mag, idx) => createCardHTML(mag, "عرض المجلة", idx))
-    .join("");
+        const render = () => {
+          const order = sortSelect ? sortSelect.value : "newest";
+          let sorted = [...mags];
+          if (order === "newest") sorted.sort((a, b) => b.id - a.id);
+          else sorted.sort((a, b) => a.id - b.id);
+
+          fullGrid.innerHTML = sorted.slice(0, currentCount)
+            .map((m, idx) => createCardHTML(m, "عرض المجلة", idx))
+            .join("");
+          const loadMoreBtn = document.getElementById("load-more-magazines");
+          if (loadMoreBtn) loadMoreBtn.style.display = sorted.length > currentCount ? "inline-block" : "none";
+        };
+
+        if (sortSelect) sortSelect.addEventListener("change", render);
+        const loadMoreBtn = document.getElementById("load-more-magazines");
+        if (loadMoreBtn) {
+          loadMoreBtn.onclick = () => {
+            currentCount += itemsPerPage;
+            render();
+          };
+        }
+        render();
+        if (document.referrer.includes('flipbook.html')) {
+          const savedPos = sessionStorage.getItem("scroll_magazine.html");
+          if (savedPos) setTimeout(() => window.scrollTo({ top: parseInt(savedPos), behavior: 'instant' }), 250);
+        }
+      }
+    }
+  } catch (err) { console.error("Error fetching magazines:", err); }
 }
 
 // الكتيبات
@@ -250,6 +248,7 @@ async function loadLayout() {
     checkAuthStatus();
     // التحقق من وجود الدالة قبل استدعائها لمنع توقف الكود
     await get_articles();
+    await get_magazines();
     if (typeof loadRelatedPosts === "function") loadRelatedPosts();
   } catch (error) {
     console.error("فشل التحميل:", error);

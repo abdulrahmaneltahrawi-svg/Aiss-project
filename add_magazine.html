@@ -63,7 +63,7 @@
             <h3 style="color: #235287; margin-bottom: 20px;">القائمة</h3>
             <ul>
                 <li><a href="dashboard.html">الرجوع</a></li>
-                <li><a href="" class="active">إضافة مجلة</a></li>
+                <li><a href="#" class="active">إضافة مجلة</a></li>
             </ul>
         </aside>
         <main class="form-box">
@@ -82,7 +82,7 @@
                 </div>
                 <div class="form-group">
                     <label>ملف المجلةpdf:</label>
-                    <input type="file" id="inner_image" accept=".pdf">
+                    <input type="file" id="file" accept=".pdf">
                 </div>
             </div>
             
@@ -92,10 +92,51 @@
 
     <div id="footer-placeholder"></div>
     <script src="js/script.js"></script>
-    <script>
+  <script>
+    function saveArticle() {
+      const title = document.getElementById("title").value.trim();
+      const coverImage = document.getElementById("cover_image").files[0];
+      const pdfFile = document.getElementById("file").files[0];
 
+      if (!title || !coverImage || !pdfFile) {
+        alert("يرجى ملء جميع الحقول واختيار الملفات المطلوبة");
+        return;
+      }
 
-    </script>
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("cover_image", coverImage);
+      formData.append("file", pdfFile);
+
+      fetch("api/add_magazine.php", {
+        method: "POST",
+        body: formData,
+        credentials: "same-origin"
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message);
+        if (data.success) {
+          window.location.href = "dashboard.html";
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("حصل خطأ في الاتصال بالخادم");
+      });
+    }
+
+    // التحقق من الصلاحيات عند تحميل الصفحة
+    window.addEventListener('load', () => {
+        fetch('api/check_user_auth.php', { cache: 'no-store' })
+        .then(r => r.json())
+        .then(data => {
+            if(!data.authenticated || !data.user || data.user.can_add_article != 1){
+                window.location.href = 'index.html';
+            } 
+        });
+    });
+  </script>
     <script src="js/auth-toggle.js"></script>
 </body>
 </html>
