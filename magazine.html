@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="assets/icons/logo.webp" />
+  <title>المجلة-المعهد العربي لعلوم السلامة</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- تسريع الاتصال بسيرفر الملفات الخارجية -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <!--تعريف للخط-->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <!--قسم صفحة العرض-->
+
+  <div class="hero-section-m">
+    <img src="assets/imge/0004.jpg" alt="magazine-pic" loading="lazy" />
+    <div class="logo-text">
+      <p>المجلات</p>
+    </div>
+  </div>
+
+  <!--قسم المجلات-->
+
+  <div class="title0">
+    <p><span class="title0-color">اخر</span> مجلة السلامة العربية</p>
+  </div>
+
+  <div class="lastV">
+    <a
+      href="flipbook.html?title=مجلة السلامة العربية - العدد 62&src=https://cdn.jsdelivr.net/gh/abdulrahmaneltahrawi-svg/aiss-storage@main/pdfs/Issue-62-Interactive-Pages.pdf&back=magazine.html">
+      <img src="assets/imge/cover.jpg" alt="latest-magazine-cover" fetchpriority="high" decoding="sync" />
+    </a>
+  </div>
+
+  <!--قسم الكروت-->
+  <div class="title0">
+    <p> <span class="title0-color">اصدارات</span> مجلات السلامة العربية </p>
+  </div>
+
+  <div class="magazines-filter">
+    <label for="magazines-sort">ترتيب المجلات:</label>
+    <select id="magazines-sort">
+      <option value="newest" selected>من الأحدث للأقدم</option>
+      <option value="oldest">من الأقدم للأحدث</option>
+    </select>
+  </div>
+
+  <div id="magazines-grid" class="card-container1">
+  </div>
+  <div class="load-more-btn-container">
+    <button id="load-more-magazines" class="btn1" style="display: none;">عرض المزيد</button>
+  </div>
+
+
+  <!-- القسم الاخير-->
+
+  <div id="footer-placeholder"></div>
+  
+
+  <script src="js/manuals.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/auth-toggle.js"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="assets/icons/logo.webp" />
+  <title>عرض - المعهد العربي لعلوم السلامة</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* منع التمرير في الصفحة بالكامل */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden; 
+    }
+
+    .flip-top {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: #fff;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+      width: 95%;
+      max-width: 900px;
+      margin: 10px auto 0;
+      border-radius: 16px 16px 0 0;
+      flex-shrink: 0;
+    }
+    .flip-top h1 { font-size: 18px; color: black; font-weight: 900; }
+    .flip-top a {
+      display: inline-block;
+      padding: 8px 30px;
+      border-radius: 10px;
+      background: #e4293a;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    /* جعل الحاوية الرئيسية تأخذ كامل الارتفاع المتاح */
+    .page-content {
+      margin-top: 0 !important;
+      padding-bottom: 0 !important;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ضبط حاوية الـ PDF لتملأ باقي المساحة */
+    .pdf-viewer-container {
+      flex-grow: 1;
+      width: 95%;
+      max-width: 900px;
+      margin: 0 auto 10px !important;
+      height: auto !important;
+      border-radius: 0 0 16px 16px;
+    }
+  </style>
+</head>
+
+<body>
+  
+
+  <main class="page-content">
+      <div class="flip-top">
+        <h1 id="flip-title">جاري تحميل المجلة...</h1>
+        <div style="display: flex; gap: 15px; align-items: center;">
+          <a id="flip-back" href="magazine.html">رجوع</a>
+        </div>
+      </div>
+
+      <div class="pdf-viewer-container" style="margin-top: 0; border-radius: 0 0 16px 16px;">
+          <iframe id="pdf-frame" src="" width="100%" height="100%" style="border: none;"></iframe>
+      </div>
+  </main>
+
+ 
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const src = params.get("src");
+    let title = params.get("title");
+    
+    // إذا كان العنوان يحتوي على الكود المطلوب إخفاؤه
+    if (title && title.includes("io200002")) title = "مجلة السلامة";
+    
+    // تحديد رابط الرجوع: الأولوية للمعامل، ثم المرجع السابق، ثم صفحة المجلات كافتراضي
+    let back = params.get("back") || "magazine.html";
+    document.getElementById("flip-back").href = back;
+
+    function loadPDF(url) {
+        document.getElementById("pdf-frame").src = url;
+    }
+
+    if (id && id !== "0") {
+        fetch(`api/get_magazine.php?id=${id}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const mag = data.magazine;
+                    
+                    // التحقق من العنوان واستبداله في حال وجود الكود
+                    const displayTitle = (mag.title ) ? "مجلة السلامة العربية" : (mag.slug ? `${mag.title} (${mag.slug})` : mag.title);
+                    document.getElementById("flip-title").textContent = displayTitle;
+                    document.title = displayTitle + " - المعهد العربي لعلوم السلامة";
+
+                    // تحديث شريط العنوان ليحتوي على الـ slug ليكون الرابط معبراً
+                    if (mag.slug) {
+                        const numericId = String(id).split('-')[0];
+                        const newUrl = window.location.pathname + `?id=${numericId}-${mag.slug}`;
+                        window.history.replaceState(null, '', newUrl);
+                    }
+                    // البدء في معالجة الملف
+                    loadPDF(mag.file_path);
+                } else {
+                    document.getElementById("flip-title").textContent = "المجلة غير موجودة";
+
+                }
+            })
+            .catch(err => {
+                console.error("Fetch error:", err);
+                document.getElementById("flip-title").textContent = "فشل في الاتصال بالسيرفر";
+            });
+    } else if (src) {
+        // دعم الروابط المباشرة (مثل الكتيبات والأرشيف القديم)
+         if (title) {
+            document.getElementById("flip-title").textContent = title;
+            document.title = title + " - المعهد العربي لعلوم السلامة";
+        }
+        loadPDF(src);
+    } else {
+                document.querySelector('.loader').style.display = 'none';
+    }
+
+    
+
+
+</script>
+      <script src="js/manuals.js"></script>
+      <script src="js/script.js"></script>
+    <script src="js/auth-toggle.js"></script>
+</body>
+</html>

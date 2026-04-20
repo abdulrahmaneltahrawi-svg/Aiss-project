@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <link rel="icon" href="assets/icons/logo.webp" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>المدونات-المعهد العربي لعلوم السلامة</title>
+    <!--تعريف للخط-->
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div id="header-placeholder"></div>
+
+    <!--قسم صفحة العرض-->
+
+    <div class="hero-section-m">
+      <img src="assets/imge/0006.jpg" alt="blogs-pic" loading="lazy" />
+      <div class="logo-text"><p>المدونات</p></div>
+    </div>
+
+    <div class="title0">
+      <p>كتابات و مدونات</p>
+    </div>
+
+    <div class="blogs-filter">
+      <label for="blog-category">التصنيف:</label>
+      <select id="blog-category">
+        <option value="all">الكل</option>
+      </select>
+    </div>
+
+    <div id="blogs-grid" class="card-container1" style="min-height: 600px;"></div> <!-- حجز مساحة افتراضية للشبكة -->
+
+    <div class="load-more-btn-container">
+      <button id="load-more-blogs" class="btn1">عرض المزيد</button>
+    </div>
+
+    <script src="js/blogs.js"></script>
+    <script>
+
+          // ضمان وجود تصنيف لكل مدونة
+
+      const grid = document.getElementById("blogs-grid");
+      const categorySelect = document.getElementById("blog-category");
+      const params = new URLSearchParams(window.location.search);
+      let isFirstBlogLoad = true;
+      const initialCat = params.get("cat");
+      const PAGE_NAME = "blogs.html";
+      
+      let displayedBlogs = 0;
+      const blogsPerPage = 8;
+      let allBlogs = []; // لم نعد نستخدم myCards الثابتة
+      let currentFilteredBlogs = [];
+
+      function getCategory(item) {
+        if (item.source === 'db') {
+          if (item.type == 0) return "محتويات علمية";
+          if (item.type == 1) return "مقالات الخبراء";
+          if (item.type == 2) return "مقالات المجلة";
+        }
+        return item.category || "مقالات تجربه";
+      }
+//عرض الكروت عند الضغط على المزيد من الصفحات
+      async function loadMoreBlogs() {
+        const nextBatch = currentFilteredBlogs.slice(displayedBlogs, displayedBlogs + blogsPerPage); // Keep this line
+        const html = nextBatch.map((item, index) => `
+          <div class="card1">
+            <a href="views.html?id=${item.source === 'db' ? item.id + '-' + (item.title || "").trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g,'-').replace(/^-+|-+$/g,'') : (item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g,'-').replace(/^-+|-+$/g,'')}">
+              <img src="${item.image || item.cover_image || 'assets/magazine/placeholder.webp'}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='assets/magazine/placeholder.webp';">
+            </a>
+            <div class="class-content1">
+              <h3>${item.title}</h3>
+              <a href ="views.html?id=${item.source === 'db' ? item.id + '-' + (item.title || "").trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g,'-').replace(/^-+|-+$/g,'') : (item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}" class="btn1">عرض المدونة</a>
+              ${item.source === 'db' ? `<a href="edit_article.html?id=${item.id}" class="btn1 admin-only" style="background:#235287; color:white; display:none; margin-top:5px;">تعديل</a>` : ''}
+            </div>
+          </div>
+        `).join("");
+        grid.insertAdjacentHTML('beforeend', html);
+        displayedBlogs += nextBatch.length;
+        
+        // تحديث ظهور أزرار الإدارة بعد إضافة العناصر الجديدة
+        if (typeof checkAuthStatus === 'function') await checkAuthStatus();
+
+        const loadMoreBtn = document.getElementById("load-more-blogs");
+        if (loadMoreBtn) {
+          loadMoreBtn.style.display = (displayedBlogs < currentFilteredBlogs.length) ? "inline-block" : "none";
+        }
+      }
+
+      function initCategories() {
+        if (!categorySelect) return;
+        const cats = ["محتويات علمية", "مقالات الخبراء", "مقالات المجلة"];
+        cats.forEach((c) => {
+          const opt = document.createElement("option");
+          opt.value = c;
+          opt.textContent = c;
+          categorySelect.appendChild(opt);
+        });
+      }
+
+      async function applyFilter() {
+        const val = categorySelect ? categorySelect.value : "all";
+        currentFilteredBlogs = val === "all" ? allBlogs : allBlogs.filter((it) => getCategory(it) === val);
+        
+        grid.innerHTML = "";
+        displayedBlogs = 0;
+
+        // استرجاع العدد المحمل سابقاً عند العودة من صفحة العرض
+        let countToRender = blogsPerPage;
+        if (isFirstBlogLoad && document.referrer.includes('views.html')) {
+            const savedCount = sessionStorage.getItem(`count_${PAGE_NAME}`);
+            if (savedCount) countToRender = parseInt(savedCount);
+        }
+
+        //انشاء الكروت===================================================================================
+        const initialBatch = currentFilteredBlogs.slice(0, countToRender); // Keep this line
+        grid.innerHTML = initialBatch.map((item, index) => `
+          <div class="card1">
+            <a href="views.html?id=${item.source === 'db' ? item.id + '-' + (item.title || "").trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g,'-').replace(/^-+|-+$/g,'') : (item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g,'-').replace(/^-+|-+$/g,'')}">
+              <img src="${item.image || item.cover_image || 'assets/magazine/placeholder.webp'}" alt="${item.title || "صورة المدونة"}" width="350" height="200" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='assets/magazine/placeholder.webp';">
+            </a>
+            <div class="class-content1">
+              <h3>${item.title}</h3>
+              <a href ="views.html?id=${item.source === 'db' ? item.id + '-' + (item.title || "").trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g,'-').replace(/^-+|-+$/g,'') : (item.titlesubject || item.title).trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}" class="btn1">عرض المدونة</a>
+              ${item.source === 'db' ? `<a href="edit_article.html?id=${item.id}" class="btn1 admin-only" style="background:#235287; color:white; display:none; margin-top:5px;">تعديل</a>` : ''}
+            </div>
+          </div>
+        `).join("");
+        displayedBlogs = initialBatch.length;
+
+        const loadMoreBtn = document.getElementById("load-more-blogs");
+        if (loadMoreBtn) loadMoreBtn.style.display = (displayedBlogs < currentFilteredBlogs.length) ? "inline-block" : "none";
+
+        // تحديث ظهور أزرار الإدارة
+        if (typeof checkAuthStatus === 'function') await checkAuthStatus();
+
+        // استرجاع مكان النزول عند العودة من صفحة المقال
+        if (isFirstBlogLoad && document.referrer.includes('views.html')) {
+          const savedPos = sessionStorage.getItem(`scroll_${PAGE_NAME}`);
+          if (savedPos) setTimeout(() => window.scrollTo({ top: parseInt(savedPos), behavior: 'instant' }), 250);
+          isFirstBlogLoad = false;
+        }
+      }
+
+      // جلب البيانات من قاعدة البيانات
+      fetch('api/get_articles.php')
+        .then(res => res.json())
+        .then(dbData => {
+          if (dbData.success) {
+            const dbArticles = dbData.articles.map(a => ({...a, source: 'db'}));
+            allBlogs = [...dbArticles]; // نستخدم مقالات قاعدة البيانات فقط
+          }
+        })
+        .catch(err => console.error("Error fetching DB articles:", err))
+        .finally(() => {
+          // تنفيذ الفلترة بعد محاولة جلب البيانات (سواء نجحت أو فشلت)
+          initCategories();
+          if (initialCat && categorySelect) {
+            categorySelect.value = initialCat;
+          }
+          applyFilter();
+          if (categorySelect)
+            categorySelect.addEventListener("change", applyFilter);
+        });
+
+      document.getElementById("load-more-blogs").addEventListener("click", loadMoreBlogs);
+      
+    </script>
+    <!-- القسم الاخير-->
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/manuals.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/auth-toggle.js"></script>
+  </body>
+</html>
