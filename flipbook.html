@@ -39,7 +39,7 @@
       padding: 8px 30px;
       border-radius: 10px;
       background: #e4293a;
-      color: #fff;
+      color: black;
       font-weight: bold;
       text-decoration: none;
     }
@@ -97,7 +97,30 @@
     document.getElementById("flip-back").href = back;
 
     function loadPDF(url) {
-        document.getElementById("pdf-frame").src = url;
+        // تحويل الرابط إلى رابط مطلق إذا كان نسبياً لضمان وصول جوجل إليه
+        let absoluteUrl = url;
+        if (!url.startsWith('http')) {
+            const pathName = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+            absoluteUrl = window.location.origin + pathName + url;
+        }
+
+        // تحديد ما إذا كان الموقع يعمل محلياً (Localhost)
+        const isLocalHost = window.location.hostname === "localhost" || 
+                           window.location.hostname === "127.0.0.1" || 
+                           window.location.hostname.startsWith("192.");
+        
+        // تحديد ما إذا كان الرابط خارجياً (مثل روابط jsDelivr)
+        const isPublicUrl = url.startsWith('http');
+
+        // إذا كان الرابط محلياً وأنت تعمل على localhost، نعرض الملف مباشرة
+        // (ملاحظة: في الأيفون سيظهر الغلاف فقط محلياً، لكنه سيظهر على الأقل)
+        if (!isPublicUrl && isLocalHost) {
+            document.getElementById("pdf-frame").src = url;
+        } else {
+            // للروابط العامة أو عند رفع الموقع على استضافة حقيقية، نستخدم جوجل لحل مشكلة الأيفون
+            const googleViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(absoluteUrl)}&embedded=true`;
+            document.getElementById("pdf-frame").src = googleViewerUrl;
+        }
     }
 
     if (id && id !== "0") {
@@ -141,8 +164,6 @@
     }
 
     
-
-
 </script>
       <script src="js/manuals.js"></script>
       <script src="js/script.js"></script>

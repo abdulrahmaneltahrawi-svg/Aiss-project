@@ -7,6 +7,8 @@
     <title>كتيبات السلامة -المعهد العربي لعلوم السلامة</title>
     <link rel="stylesheet" href="style.css" />
     <!-- تسريع الاتصال بسيرفر الملفات الخارجية لتقليل وقت انتظار الصور -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <!--تعريف للخط-->
     <link
@@ -42,7 +44,7 @@
       <p>كتيبات السلامة</p>
     </div>
 
-    <div id="manuals-grid" class="card-container1"></div>
+    <div id="manuals-grid" class="card-container1" style="min-height: 800px;"></div>
     <div class="load-more-btn-container">
        <button id="load-more-manuals" class="btn1" style="display: none;">عرض المزيد</button>
     </div>
@@ -50,8 +52,8 @@
     <!-- القسم الاخير-->
 
     <div id="footer-placeholder"></div>
-    <script src="js/manuals.js"></script>
-        <script src="js/script.js"></script>
-    <script src="js/auth-toggle.js"></script>
+<script src="js/manuals.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/auth-toggle.js" defer></script>
   </body>
 </html>

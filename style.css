@@ -787,6 +787,7 @@ footer {
   text-align: right;
   line-height: 1.8;
   margin-top: 20px;
+  min-height: 200px; /* تقليل انزياح المحتوى السفلي */
 }
 
 #description-placeholder img {

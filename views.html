@@ -3,9 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="تفاصيل المقالات والأحداث العلمية في المعهد العربي لعلوم السلامة - قراءة متعمقة في مواضيع السلامة والصحة المهنية." />
     <link rel="icon" href="assets/icons/logo.webp" />
     <title>تفاصيل الكرت-المعهد العربي لعلوم السلامة</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=1.0.1" />
+
+    <!-- تسريع الوصول للخطوط والسيرفرات الخارجية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <!--تعريف للخط-->
     <link
       href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
@@ -21,7 +27,15 @@
 
     <div class="container0">
       <h1 id="title-placeholder"></h1>
-      <img id="image-placeholder" alt="" loading="lazy"/>
+      <div class="image-wrapper" style="min-height: 400px; background: #eee; border-radius: 8px; overflow: hidden; margin-bottom: 20px;">
+          <img id="image-placeholder" 
+               alt="جاري التحميل..." 
+               width="800" 
+               height="450" 
+               style="width: 100%; height: auto; display: block;"
+               fetchpriority="high"
+               decoding="async"/>
+      </div>
       <p id="description-placeholder"></p>
       <br />
 
@@ -52,10 +66,12 @@
       >
     </div>
 
-    <script src="js/blogs.js"></script>
-    <script src="js/events.js"></script>
-    <script src="js/codes.js"></script>
+    <script src="js/blogs.js" defer></script>
+    <script src="js/events.js" defer></script>
+    <script src="js/codes.js" defer></script>
     <script>
+      // سيتم تنفيذ الكود بعد تحميل DOM بفضل defer أو DOMContentLoaded
+      document.addEventListener("DOMContentLoaded", () => {
       const params = new URLSearchParams(window.location.search);
       const id = params.get("id");
       const source = params.get("source"); // التحقق من مصدر البيانات
@@ -232,11 +248,12 @@
       }
 
       loadDynamicContent();
+      });
     </script>
 
     <div id="footer-placeholder"></div>
 
-    <script src="js/script.js"></script>
-    <script src="js/auth-toggle.js"></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/auth-toggle.js" defer></script>
   </body>
 </html>

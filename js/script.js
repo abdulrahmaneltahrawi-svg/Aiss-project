@@ -170,7 +170,7 @@ async function get_magazines() {
         render();
         if (document.referrer.includes('flipbook.html')) {
           const savedPos = sessionStorage.getItem("scroll_magazine.html");
-          if (savedPos) setTimeout(() => window.scrollTo({ top: parseInt(savedPos), behavior: 'instant' }), 250);
+          if (savedPos) setTimeout(() => window.scrollTo({ top: parseInt(savedPos), behavior: 'auto' }), 250);
         }
       }
 }
@@ -197,7 +197,7 @@ if (manualsGrid) {
     // استرجاع مكان النزول
     if (isFirstManualLoad && (document.referrer.includes('flipbook.html') || document.referrer.includes('views.html'))) {
       const savedPos = sessionStorage.getItem("scroll_manuals.html");
-      if (savedPos) setTimeout(() => window.scrollTo({ top: parseInt(savedPos), behavior: 'instant' }), 250);
+      if (savedPos) setTimeout(() => window.scrollTo({ top: parseInt(savedPos), behavior: 'auto' }), 250);
       isFirstManualLoad = false;
     }
 
@@ -245,6 +245,12 @@ async function loadLayout() {
         if (headerRes.ok) {
           const headerData = await headerRes.text();
           headerPlaceholder.innerHTML = headerData;
+
+                    activateHeader();
+          updateCartBadgeCount();
+          markActiveNav();
+
+      
         } else {
           console.warn("Header file not found at expected paths.");
         }
@@ -268,10 +274,7 @@ async function loadLayout() {
       }
     }
 
-    // تفعيل وظائف الهيدر والفوتر فور حقن الـ HTML لضمان ظهورها
-    activateHeader();
-    updateCartBadgeCount();
-    markActiveNav();
+    // وظائف عامة لا تعتمد بالضرورة على وجود الهيدر
     initScrollToTop();
     checkAuthStatus();
 
@@ -431,10 +434,6 @@ function activateHeader() {
         menuToggle.setAttribute("aria-expanded", "false");
       }
     });
-  } else {
-    console.error(
-      "Error: menuToggle or headerNav not found in the DOM. Hamburger menu functionality will not be active.",
-    );
   }
 
   // إضافة سمات alt لأيقونات البحث وسلة التسوق بعد تحميل الهيدر
@@ -569,6 +568,14 @@ const saveCurrentPageState = () => {
 };
 
 // استخدام pagehide بدلاً من beforeunload لأنه أدق في الهواتف
+// الحدث الحديث الموصى به لحفظ البيانات عند مغادرة الصفحة أو إغلاقها
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") {
+    saveCurrentPageState();
+  }
+});
+
+// fallback للمتصفحات القديمة ولضمان الحفظ في كل الحالات
 window.addEventListener("pagehide", saveCurrentPageState);
 // حفظ إضافي عند تغيير وضوح الصفحة (مثلاً عند تصغير المتصفح)
 window.addEventListener("visibilitychange", () => {
