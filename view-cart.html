@@ -19,7 +19,10 @@
 
       <div class="cart-summary">
         <h3 id="cart-total"></h3>
-        <a href="checkout.html" class="cart-checkout-btn">إتمام الطلب</a>
+        <div class="cart-summary">
+  <h3 id="cart-total"></h3>
+  <a href="checkout.html" class="cart-checkout-btn" id="go-to-checkout">إتمام الطلب</a>
+</div>
       </div>
 
       <div class="empty-cart-container" id="empty-cart">
@@ -47,6 +50,14 @@
     </main>
 
     <script>
+      document.getElementById("go-to-checkout").addEventListener("click", function(e) {
+    // 1. حساب الإجمالي الحالي
+    const totalAmount = calcTotal(cart);
+    
+    // 2. تخزينه في LocalStorage باسم 'orderTotal'
+    localStorage.setItem("orderTotal", totalAmount);
+});
+
       let cart = JSON.parse(localStorage.getItem("myCart")) || [];
       const cartContainer = document.getElementById("cart-items");
       const emptyCartEl = document.getElementById("empty-cart");
