@@ -108,7 +108,7 @@ async function get_last_blog_only() {
                         <img src="${image}" alt="${title}" style="width: 100%; height: 270px; object-fit: cover;" loading="lazy">
                     </a>
                     <div class="class-content1" style="padding: 15px 10px;">
-                        <h3 style="font-size: 1.1rem; margin-bottom: 10px; min-height: 2.4em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                        <h3 style="font-size: 0.95rem; line-height: 1.3; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-weight: bold;">
                             ${title}
                         </h3>
                         <a href="${link}" class="btn1" style="display: block; text-align: center;">قراءة المدونة</a>
