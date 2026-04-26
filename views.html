@@ -27,7 +27,7 @@
 
     <div class="container0">
       <h1 id="title-placeholder"></h1>
-      <div class="image-wrapper" style="min-height: 400px; background: #eee; border-radius: 8px; overflow: hidden; margin-bottom: 20px;">
+      <div class="image-wrapper">
           <img id="image-placeholder" 
                alt="جاري التحميل..." 
                width="800" 
@@ -330,14 +330,18 @@
             relatedGrid.innerHTML = filtered.map(item => {
               const slug = (item.title || "").trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '');
               const link = `views.html?id=${item.id}-${slug}&source=db`;
-              return `
-                <div class="card1">
-                  <a href="${link}"><img src="${item.cover_image || 'assets/magazine/placeholder.webp'}" alt="${item.title}"></a>
-                  <div class="class-content1">
-                    <h3>${item.title}</h3>
-                    <a href="${link}" class="btn1">عرض المقال</a>
-                  </div>
-                </div>`;
+              // ابحث عن هذا الجزء داخل fetchRelatedByTag وحدث الـ img tag
+return `
+  <div class="card1">
+    <a href="${link}">
+      <img src="${item.cover_image || 'assets/magazine/placeholder.webp'}" 
+           alt="${item.title}" 
+           loading="lazy"> </a>
+    <div class="class-content1">
+      <h3>${item.title}</h3>
+      <a href="${link}" class="btn1">عرض المقال</a>
+    </div>
+  </div>`;
             }).join("");
           } else {
             relatedGrid.innerHTML = "<p>لا توجد مقالات مشابهة حالياً.</p>";
