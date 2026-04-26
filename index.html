@@ -73,7 +73,7 @@
 
     <section class="hero-slider">
       <div class="slider-wrapper">
-        <img src="assets/imge/heroImg.jpg" alt="hero1" class="slide active">
+        <img src="assets/imge/heroImg.jpg" alt="hero1" class="slide active" fetchpriority="high">
     <img src="assets/imge/safety-1.jpg" alt="hero2" class="slide">
     <img src="assets/imge/safety2.jpg" alt="hero3" class="slide">
       </div>
@@ -148,6 +148,7 @@
     <a href="blogs.html"><button>عرض المزيد</button></a>
     </div>
     </main>
+
 
     <!----------------------------------------------------------------------------------------------------------->
 
@@ -258,13 +259,17 @@ document.addEventListener("DOMContentLoaded", () => {
 async function get_articles() {
   const grid = document.getElementById("blogs-grid");
   if (!grid || window.location.pathname.includes("blogs.html")) return;
+  
+  grid.innerHTML = '<p style="text-align:center; width:100%;">جاري التحميل...</p>';
 
   try {
     const response = await fetch("api/get_articles.php");
     const data = await response.json();
+    
+    const articlesFromDB = data.articles || data.data || [];
 
-    if (data.success && data.articles && data.articles.length > 0) {
-      grid.innerHTML = data.articles
+    if (data.success && articlesFromDB.length > 0) {
+      grid.innerHTML = articlesFromDB
         .slice(0, 8)
         .map((item) => {
           const slug = (item.title || "")
@@ -288,11 +293,47 @@ async function get_articles() {
           </div>`;
         })
         .join("");
-      // تحديث ظهور أزرار الإدارة بعد التحميل
       checkAuthStatus();
+    } else {
+      showFallbackBlogs(grid);
     }
   } catch (error) {
     console.error("خطأ في جلب المدونات من قاعدة البيانات:", error);
+    showFallbackBlogs(grid);
+  }
+}
+
+/**
+ * عرض المدونات المحلية في حال فشل الـ API
+ */
+function showFallbackBlogs(container) {
+  const localBlogs = typeof myCards !== 'undefined' ? myCards : [];
+  if (localBlogs.length > 0) {
+    container.innerHTML = localBlogs
+      .slice(0, 8)
+      .map((item) => {
+        const title = item.titlesubject || item.title || "";
+        const slug = title
+          .trim()
+          .replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+        const link = `views.html?id=${slug}`;
+        const image = item.image || item.img || "assets/magazine/IMG_1325.webp";
+
+        return `
+        <div class="card1">
+            <a href="${link}">
+              <img src="${image}" alt="${title}" loading="lazy" style="width: 100%; height: 270px; object-fit: cover;">
+            </a>
+            <div class="class-content1">
+              <h3>${title}</h3>
+              <a href="${link}" class="btn1">عرض المدونة</a>
+            </div>
+        </div>`;
+      })
+      .join("");
+  } else {
+    container.innerHTML = '<p style="text-align:center; width:100%;">لا توجد مدونات حالياً.</p>';
   }
 }
 

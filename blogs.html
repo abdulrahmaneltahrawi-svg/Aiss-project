@@ -68,12 +68,13 @@
       </select>
     </div>
 
-    <div id="blogs-grid" class="card-container1" style="min-height: 600px;"></div> <!-- حجز مساحة افتراضية للشبكة -->
-
-    <div class="load-more-btn-container">
-      <button id="load-more-blogs" class="btn1">عرض المزيد</button>
+    <div id="blogs-grid" class="card-container1" style="min-height: 600px;">
+      <p style="text-align:center; width:100%; padding:50px;">جاري تحميل المدونات...</p>
     </div>
 
+    <div class="load-more-btn-container">
+      <button id="load-more-blogs" class="btn1" style="display: none;">عرض المزيد</button>
+    </div>
 
     <script>
           
@@ -207,7 +208,11 @@ fetch(fetchUrl)
     document.getElementById("load-more-blogs")?.addEventListener("click", loadMoreBlogs);
     applyFilter();
   })
-  .catch(err => { console.error("Fetch Error:", err); applyFilter(); });
+  .catch(err => { 
+    console.error("Fetch Error:", err); 
+    grid.innerHTML = ""; // مسح رسالة التحميل
+    applyFilter(); // الاعتماد على myCards من ملف js/blogs.js في حال فشل السيرفر
+  });
 
 async function deleteArticle(id) {
     if (!confirm("هل أنت متأكد من حذف هذا المقال نهائياً؟")) return;
