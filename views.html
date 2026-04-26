@@ -21,6 +21,22 @@
     <!--كود اخذ الملفات -->
   </head>
   <body>
+    <style>
+  .image-wrapper {
+    display: flex;          /* تفعيل نظام الفليكس */
+    justify-content: center; /* التوسط أفقيًا */
+    align-items: center;     /* التوسط رأسيًا (إذا كان للحاوية ارتفاع) */
+    width: 100%;            /* التأكد من أنها تأخذ كامل العرض */
+    overflow: hidden;       /* لمنع خروج الصورة عن الحواف */
+}
+
+#image-placeholder {
+    max-width: 1200px; 
+    width: 100%; 
+    height: auto; 
+    display: block;
+}
+    </style>
     <div id="header-placeholder"></div>
 
     <!--كود اخذ البيانات-->
@@ -32,7 +48,7 @@
                alt="جاري التحميل..." 
                width="800" 
                height="450" 
-               style="width: 100%; height: auto; display: block;"
+               style="width: 100%; height: auto; display: block;max-width: 1200px; "
                fetchpriority="high"
                decoding="async"/>
       </div>

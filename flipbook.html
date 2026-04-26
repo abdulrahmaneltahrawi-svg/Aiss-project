@@ -154,37 +154,7 @@ function loadPDF(url) {
   }
 }
 
-      if (id && id !== "0") {
-        fetch(`./api/get_magazine.php?id=${id}`)
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.success) {
-              const mag = data.magazine;
-
-              const displayTitle = mag.title || "مجلة السلامة العربية";
-              document.getElementById("flip-title").textContent = displayTitle;
-              document.title = displayTitle + " - المعهد العربي لعلوم السلامة";
-
-              if (mag.slug) {
-                const numericId = String(id).split("-")[0];
-                const newUrl =
-                  window.location.pathname + `?id=${numericId}-${mag.slug}`;
-                window.history.replaceState(null, "", newUrl);
-              }
-
-              // إرسال المسار للدالة
-              loadPDF(mag.file_path);
-            } else {
-              document.getElementById("flip-title").textContent =
-                "المجلة غير موجودة";
-            }
-          })
-          .catch((err) => {
-            console.error("Fetch error:", err);
-            document.getElementById("flip-title").textContent =
-              "فشل في الاتصال بالسيرفر";
-          });
-      }
+     
       // داخل صفحة flipbook.html في جزء السكريبت
       if (id && id !== "0") {
         let apiUrl =
