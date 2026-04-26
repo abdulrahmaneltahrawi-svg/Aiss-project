@@ -15,37 +15,6 @@
       href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <style>
-/* هذا السطر سيجبر العنصر المحيط بالشبكة على أخذ كامل العرض */
-#manuals-grid {
-    width: 100% !important;
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-    display: grid !important;
-    justify-content: center !important;
-}
-
-/* استهداف الأب المباشر لـ manuals-grid وإلغاء أي قيود عليه */
-div:has(> #manuals-grid) {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    flex-basis: 100% !important;
-    flex-grow: 1 !important;
-}
-
-/* للتأكد من أن الصف (Row) أو الحاوية الأكبر لا تمنع التوسط */
-.card-container1 {
-    width: 100% !important;
-    justify-content: center !important;
-}  
-      @media (max-width: 600px) {
-        #manuals-grid {
-          grid-template-columns: 1fr;
-          padding: 20px 10px;
-        }
-      }
-    </style>
   </head>
  
   <body>
