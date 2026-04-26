@@ -126,25 +126,33 @@
       if (backBtn) {
         backBtn.href = back;
       }
+function loadPDF(url) {
+  if (!url) return;
 
-      function loadPDF(url) {
-        if (!url) return;
+  // 1. تنظيف المسار والتأكد أنه يبدأ من جذر المشروع (Aiss-project)
+  // إذا كان الرابط يبدأ بـ ./ نوزعه ليكون مساراً كاملاً من الجذر
+  let cleanPath = url.startsWith('./') ? url.substring(2) : (url.startsWith('/') ? url.substring(1) : url);
+  
+  // 2. بناء الرابط الكامل للملف (بدءاً من جذر الهوست)
+  // هذا سيمنع المكتبة من البحث داخل مجلد js/web/
+  const fullPdfUrl = window.location.origin + "/Aiss-project/" + cleanPath;
 
-        // تحويل المسار ليكون صحيحاً (نسبي للمجلد الحالي)
-        let absoluteUrl = (url.startsWith('http') || url.startsWith('./')) ? url : "./" + (url.startsWith("/") ? url.substring(1) : url);
+  const iframe = document.getElementById("pdf-frame");
+  if (iframe) {
+    // 3. تمرير الرابط الكامل للمكتبة
+    // تأكد أن المسار هنا يطابق مكان وجود viewer.html في جهازك (js/web/viewer.html)
+    const viewerUrl = `js/web/viewer.html?file=${encodeURIComponent(fullPdfUrl)}`;
+    
+    iframe.src = viewerUrl;
+  }
 
-        const iframe = document.getElementById("pdf-frame");
-        if (iframe) {
-          iframe.src = absoluteUrl;
-        }
-
-        // تحديث زر "فتح الملف كامل" ليظهر الرابط الصحيح
-        const downloadBtn = document.getElementById("download-pdf");
-        if (downloadBtn) {
-            downloadBtn.href = absoluteUrl;
-            downloadBtn.style.display = "inline-block";
-        }
-      }
+  // تحديث زر التحميل
+  const downloadBtn = document.getElementById("download-pdf");
+  if (downloadBtn) {
+      downloadBtn.href = fullPdfUrl;
+      downloadBtn.style.display = "inline-block";
+  }
+}
 
       if (id && id !== "0") {
         fetch(`./api/get_magazine.php?id=${id}`)
