@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Stripe Checkout</title>
+</head>
+<body>
+
+  <h2>اختبار Stripe Checkout</h2>
+
+  <input type="number" id="order_id" placeholder="رقم الطلب"><br><br>
+
+  <button onclick="pay()">الدفع</button>
+
+  <pre id="result"></pre>
+
+  <script>
+    function pay() {
+      const orderId = document.getElementById("order_id").value.trim();
+
+      const formData = new FormData();
+      formData.append("order_id", orderId);
+
+      fetch("api/create_stripe_checkout.php", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("result").textContent =
+          JSON.stringify(data, null, 2);
+
+        if (data.success && data.checkout_url) {
+          window.location.href = data.checkout_url;
+        }
+      })
+      .catch(err => {
+        document.getElementById("result").textContent = "Error: " + err;
+      });
+    }
+  </script>
+
+</body>
+</html>

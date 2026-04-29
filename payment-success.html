@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تم الدفع بنجاح</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .payment-result {
+      max-width: 720px;
+      margin: 80px auto;
+      background: #fff;
+      padding: 35px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      font-family: Tajawal, Arial, sans-serif;
+    }
+
+    .payment-result h1 {
+      color: #198754;
+      margin-bottom: 15px;
+    }
+
+    .payment-result p {
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .order-box {
+      margin-top: 25px;
+      background: #f7f9fc;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: right;
+    }
+
+    .order-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 12px 0;
+      font-size: 16px;
+    }
+
+    .order-row:last-child {
+      border-bottom: 0;
+    }
+
+    .order-row strong {
+      color: #235287;
+    }
+
+    .status-paid {
+      color: #198754;
+      font-weight: bold;
+    }
+
+    .status-pending {
+      color: #e4293a;
+      font-weight: bold;
+    }
+
+    .payment-result a {
+      display: inline-block;
+      margin-top: 25px;
+      background: #e4293a;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <div class="payment-result">
+    <h1>تم الدفع بنجاح ✅</h1>
+    <p>شكرًا لك، تم استلام طلب الشهادة بنجاح.</p>
+    <p>سيتم مراجعة الطلب والتواصل معك عبر البريد الإلكتروني.</p>
+
+    <div id="order-details" class="order-box">
+      جاري تحميل تفاصيل الطلب...
+    </div>
+
+    <a href="index.html">العودة للرئيسية</a>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get("order_id");
+    const detailsBox = document.getElementById("order-details");
+
+    async function loadOrderDetails() {
+      if (!orderId) {
+        detailsBox.innerHTML = "رقم الطلب غير موجود.";
+        return;
+      }
+
+      try {
+        const response = await fetch(`api/get_certificate_order.php?order_id=${orderId}`);
+        const data = await response.json();
+
+        if (!data.success || !data.order) {
+          detailsBox.innerHTML = "تعذر تحميل تفاصيل الطلب.";
+          return;
+        }
+
+        const order = data.order;
+
+        detailsBox.innerHTML = `
+          <div class="order-row">
+            <strong>رقم الطلب</strong>
+            <span>${order.id}</span>
+          </div>
+
+          <div class="order-row">
+            <strong>اسم العميل</strong>
+            <span>${order.first_name} ${order.last_name}</span>
+          </div>
+
+          <div class="order-row">
+            <strong>البريد الإلكتروني</strong>
+            <span>${order.email}</span>
+          </div>
+
+          <div class="order-row">
+            <strong>نوع الشهادة</strong>
+            <span>${order.certificate_name}</span>
+          </div>
+
+          <div class="order-row">
+            <strong>المبلغ</strong>
+            <span>${order.amount} AED</span>
+          </div>
+
+          <div class="order-row">
+            <strong>حالة الدفع</strong>
+            <span class="${order.payment_status === 'paid' ? 'status-paid' : 'status-pending'}">
+              ${order.payment_status === 'paid' ? 'مدفوع' : 'قيد الانتظار'}
+            </span>
+          </div>
+
+          <div class="order-row">
+            <strong>وقت الدفع</strong>
+            <span>${order.paid_at || "لم يتم التأكيد بعد"}</span>
+          </div>
+        `;
+      } catch (error) {
+        console.error(error);
+        detailsBox.innerHTML = "حدث خطأ أثناء تحميل تفاصيل الطلب.";
+      }
+    }
+
+    loadOrderDetails();
+  </script>
+
+  <script src="js/script.js"></script>
+  <script src="js/auth-toggle.js"></script>
+</body>
+</html>
