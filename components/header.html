@@ -1,12 +1,17 @@
 <header>
 <a href="index.html"><img src="assets/icons/headerLogo.webp" alt="logo" loading="lazy" /></a>
     
-    <!--===قائمة البرجر===-->
-    <button class="menu-toggle" id="menu-toggle" aria-label="فتح القائمة" aria-expanded="false">
-      ☰
+
+
+
+    <!--===زر تسجيل الدخول===-->
+    <button class="btn-cont" id="openModel">
+        <img src="assets/icons/login.webp" alt="btn-logo" loading="lazy" />
+        <span>اشتراك/ دخول</span>
     </button>
 
-    <!--===زر البحث===-->
+
+        <!--===زر البحث===-->
     <div class="search-container">
         <div id="search-btn1" class="search-img">
             <img src="assets/icons/loupe.webp" alt="search" loading="lazy" />
@@ -15,7 +20,7 @@
         <ul id="search-suggestions" class="search-suggestions"></ul>
     </div>
 
-    <!--===زر البحث===-->
+    <!--===زر السلة===-->
     <a href="view-cart.html" aria-label="سلة المشتريات">
       <div class="shop-img" style="position: relative;">
         <img src="assets/icons/shopping-cart.webp" alt="cart" loading="lazy" />
@@ -23,11 +28,36 @@
       </div>
     </a>
 
-    <!--===زر تسجيل الدخول===-->
-    <button class="btn-cont" id="openModel">
-        <img src="assets/icons/login.webp" alt="btn-logo" loading="lazy" />
-        <span>اشتراك/ دخول</span>
-    </button>
+
+    
+   <!-- زر القائمة (البرجر) -->
+<button class="menu-toggle" id="menu-toggle" aria-label="فتح القائمة" aria-expanded="false">
+    ☰
+</button>
+
+<!-- القائمة الرئيسية -->
+<nav class="header-nav" id="header-nav">
+    <ul>
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="magazine.html">المجلات</a></li>
+        
+        <!-- قائمة منسدلة للمدونات -->
+        <li class="has-submenu">
+            <a href="blogs.html" aria-haspopup="true">المدونات</a>
+            <ul class="submenu">
+                <li><a href="blogs.html?cat=محتويات علمية">محتويات علمية</a></li>
+                <li><a href="blogs.html?cat=مقالات الخبراء">مقالات الخبراء</a></li>
+                <li><a href="blogs.html?cat=مقالات المجلة">مقالات المجلة</a></li>
+            </ul>
+        </li>
+        
+        <li><a href="manuals.html">كتيبات السلامة</a></li>
+        <li><a href="cods.html">الأكواد والمعايير</a></li>
+        <li><a href="event.html">الفعليات</a></li>
+        <li><a href="store.html">المتجر</a></li>
+    </ul>
+</nav>
+
 
     <!--===صفحة زر تسجيل الدخول===-->
     <form class="model-overlay" id="loginModel">
@@ -102,24 +132,4 @@
         </div>
     </form>
 
-    <!--===القائمة===-->
-    <nav class="header-nav" id="header-nav">
-      <ul>
-          <li><a href="index.html">الرئيسية</a></li>
-          <li><a href="magazine.html">المجلات</a></li>
-          <li class="has-submenu">
-            <a href="blogs.html" aria-haspopup="true">المدونات</a>
-            <ul class="submenu">
-              <li><a href="blogs.html?cat=%D9%85%D8%AD%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%20%D8%B9%D9%84%D9%85%D9%8A%D8%A9">محتويات علمية</a></li>
-              <li><a href="blogs.html?cat=%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AE%D8%A8%D8%B1%D8%A7%D8%A1">مقالات الخبراء</a></li>
-              <li><a href="blogs.html?cat=%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AC%D9%84%D8%A9">مقالات المجلة</a></li>
-            </ul>
-          </li>
-          <li><a href="manuals.html">كتيبات السلامة</a></li>
-          <li><a href="cods.html">الأكواد والمعايير</a></li>
-          <li><a href="event.html">الأحداث</a></li>
-          <li><a href="store.html">المتجر</a></li>
-      </ul>
-    </nav>
-    
 </header>
