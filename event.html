@@ -14,13 +14,121 @@
   </head>
   <body>
     <style>
+      /* Container Settings */
+      /* مخفي تماماً في الحالة العادية */
+      .competition-section {
+        display: none;
+      }
+
+      /* يظهر فقط عندما نضيف هذا الكلاس */
+      .competition-section.active {
+        display: block;
+        
+      }
+
+/* Intro Card */
+.comp-intro-card {
+  text-align: center;
+  background: #ffffff;
+  /* تقليل البادينج من الأعلى والأسفل */
+  padding: 20px 40px; 
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  border-top: 5px solid #e4293a;
+  
+  /* تحديد عرض أقصى وتوسيط الكارد لمنعه من التمدد العرضي الطويل */
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+
+  
+}
+
+      .comp-main-title {
+        color: #235287; /* لون المعهد الكحلي */
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+      }
+
+      .comp-text-highlight {
+        font-size: 1.15rem;
+        line-height: 1.8;
+        color: #636e72;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+/* Details Grid */
+.comp-details-grid {
+  display: grid;
+  /* تغيير 200px إلى 300px لضمان عدم صغر الكاردات بشكل يسبب التصاق النص */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  /* أهم خطوة: تحديد عرض أقصى للشبكة وتوسيطها مثل الكارد العلوي */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px; /* مسافة أمان جانبية للشاشات الصغيرة */
+}
+
+      .comp-card {
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        border: 1px solid #f1f2f6;
+        transition: all 0.3s ease;
+        
+      }
+
+      .comp-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+      }
+
+      .comp-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      .goals-card h3 {
+        color: #e4293a;
+      }
+      .awards-card {
+        background-color: #235287;
+        color: #fff;
+      }
+      .awards-card h3 {
+        color: #d4af37;
+      } /* لون ذهبي للجوائز */
+
+      .comp-card p {
+        font-size: 1rem;
+        line-height: 1.7;
+        text-align: justify;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .comp-main-title {
+          font-size: 1.8rem;
+        }
+        .comp-details-grid {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
     <div id="header-placeholder"></div>
+    
     <!--قسم صفحة العرض-->
-
     <div class="hero-section-m">
       <img src="assets/imge/0006.jpg" alt="hero-logo" loading="lazy" />
-      <div class="logo-text"><p>فعليات</p></div>
+      <div class="logo-text"><p>فعاليات</p></div>
     </div>
 
     <!-- شريط الأحداث المتحرك -->
@@ -33,8 +141,36 @@
 
     <!--قسم الكروت-->
     <div class="title0">
-      <p>الفعليات</p>
+      <p>الفعاليات</p>
     </div>
+
+    <!-- القسم يظهر فقط عند اختيار المسابقات -->
+    <section id="arabic-competition-section" class="competition-section">
+      <div class="comp-intro-card">
+        <h1 class="comp-main-title">مسابقة السلامة العربية</h1>
+        <p class="comp-text-highlight">
+          تُعد مسابقة السلامة العربية، التي ينظمها المعهد العربي لعلوم السلامة، إحدى أبرز المبادرات العلمية العربية المتخصصة في مجال علوم السلامة والصحة المهنية، حيث تُقام للعام الخامس على التوالي على مستوى الوطن العربي، استمرارًا لرسالة المعهد في دعم البحث العلمي وتعزيز ثقافة السلامة والابتكار.
+        </p>
+      </div>
+
+      <div class="comp-details-grid">
+        <div class="comp-card goals-card">
+          <div class="card-icon">🎯</div>
+          <h3>أهداف المسابقة</h3>
+          <p>
+            تهدف المسابقة إلى توفير منصة علمية تجمع الباحثين والمبتكرين والمهتمين بعلوم السلامة من مختلف الدول العربية، لعرض أبحاثهم وأفكارهم ومشروعاتهم المتميزة، بما يسهم في تطوير حلول مبتكرة وممارسات فعّالة تعزز مستويات السلامة في بيئات العمل والمجتمع. كما تسعى إلى إثراء المحتوى العلمي العربي، وتشجيع الشباب والباحثين على الإبداع والتنافس العلمي، وتبادل الخبرات والمعارف بما يخدم مستقبل السلامة والتنمية المهنية في الوطن العربي.
+          </p>
+        </div>
+
+        <div class="comp-card awards-card">
+          <div class="card-icon">🏆</div>
+          <h3>جوائز قيمة وتقدير</h3>
+          <p>
+            وتمنح المسابقة جوائز قيمة، تقديرًا للأبحاث والابتكارات المتميزة التي تقدم قيمة علمية وعملية حقيقية في مجالات علوم السلامة المختلفة، تأكيدًا على أهمية دعم العقول العربية المبدعة وتحفيزها على صناعة مستقبل أكثر أمانًا واستدامة.
+          </p>
+        </div>
+      </div>
+    </section>
 
     <div id="events-grid" class="card-container1"></div>
 
@@ -43,50 +179,76 @@
     </div>
 
     <script src="js/events.js"></script>
+
     <script>
       const Egrid = document.getElementById("events-grid");
       const loadMoreBtn = document.getElementById("load-more-events");
-      const LOCAL_EVENTS = typeof events !== "undefined" ? events : [];
+      const pageTitle = document.getElementById("page-category-title");
+      
+      const ALL_EVENTS = typeof events !== "undefined" ? events : [];
+      let filteredEvents = [];
       let displayedEventsCount = 0;
       const eventsPerPage = 8;
       const PAGE_NAME = "event.html";
 
-      function renderNextEvents() {
-        const nextChunk = LOCAL_EVENTS.slice(displayedEventsCount, displayedEventsCount + eventsPerPage);
-        const html = nextChunk.map(item => `
-          <div class="card1">
+      function getCategoryFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('cat');
+      }
+
+      // --- الدالة المسؤولة عن إظهار/إخفاء قسم نبذة المسابقة ---
+      function handleCompetitionVisibility(category) {
+        const compSection = document.getElementById('arabic-competition-section');
+        if (!compSection) return;
+
+        if (category === 'مسابقة') {
+            compSection.classList.add('active'); // إظهار النص
+        } else {
+            compSection.classList.remove('active'); // إخفاء النص في أي قسم آخر
+        }
+      }
+
+      function createCardHTML(item) {
+        const slug = item.title.trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        return `
+          <div class="card1" data-aos="fade-up">
             <img src="${item.image}" alt="${item.title}" loading="lazy">
             <div class="class-content1">
               <h3>${item.title}</h3>
-              <a href="views.html?id=${item.title.trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}&source=events" class="btn1">عرض التفاصيل</a>
+              <a href="views.html?id=${slug}&source=events" class="btn1">عرض التفاصيل</a>
             </div>
           </div>
-        `).join("");
-        Egrid.insertAdjacentHTML('beforeend', html);
-        displayedEventsCount += nextChunk.length;
-        if (loadMoreBtn) loadMoreBtn.style.display = (displayedEventsCount < LOCAL_EVENTS.length) ? "inline-block" : "none";
+        `;
       }
 
-      function initTicker() {
-        const tickerContent = document.getElementById("ticker-content");
-        if (!tickerContent || !LOCAL_EVENTS.length) return;
-
-        // أخذ أحدث 5 أحداث
-        const latest = LOCAL_EVENTS.slice(0, 5);
-        const tickerHTML = latest.map(item => `
-          <a href="views.html?id=${item.title.trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}&source=events" class="ticker-event">
-            ${item.title}
-          </a>
-        `).join("");
-
-        // تكرار المحتوى لضمان حركة مستمرة وسلسة
-        tickerContent.innerHTML = tickerHTML + tickerHTML + tickerHTML;
+      function renderNextEvents() {
+        const nextChunk = filteredEvents.slice(displayedEventsCount, displayedEventsCount + eventsPerPage);
+        const html = nextChunk.map(item => createCardHTML(item)).join("");
+        Egrid.insertAdjacentHTML('beforeend', html);
+        
+        displayedEventsCount += nextChunk.length;
+        if (loadMoreBtn) loadMoreBtn.style.display = (displayedEventsCount < filteredEvents.length) ? "inline-block" : "none";
+        
+        if (typeof AOS !== "undefined") AOS.refresh();
       }
 
       function initEvents() {
         if (!Egrid) return;
-        if (!LOCAL_EVENTS.length) {
-          Egrid.innerHTML = '<p style="text-align:center; padding:20px;">لا توجد أحداث متاحة حالياً.</p>';
+
+        const category = getCategoryFromURL();
+        
+        // استدعاء دالة الإخفاء والإظهار بناءً على التصنيف المجلوب من الرابط
+        handleCompetitionVisibility(category);
+
+        if (category) {
+            filteredEvents = ALL_EVENTS.filter(ev => ev.category === category);
+            if (pageTitle) pageTitle.innerText = "فعاليات: " + category;
+        } else {
+            filteredEvents = ALL_EVENTS;
+        }
+
+        if (filteredEvents.length === 0) {
+          Egrid.innerHTML = '<p style="text-align:center; padding:20px; width:100%;">لا توجد أحداث متاحة حالياً في هذا التصنيف.</p>';
           return;
         }
 
@@ -96,38 +258,40 @@
           if (savedCount) countToRender = parseInt(savedCount);
         }
 
-        displayedEventsCount = 0;
-        const initialBatch = LOCAL_EVENTS.slice(0, countToRender);
-        Egrid.innerHTML = initialBatch.map(item => `
-            <div class="card1">
-              <img src="${item.image}" alt="${item.title}" loading="lazy">
-              <div class="class-content1">
-                <h3>${item.title}</h3>
-                <a href="views.html?id=${item.title.trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')}&source=events" class="btn1">عرض التفاصيل</a>
-              </div>
-            </div>
-        `).join("");
+        const initialBatch = filteredEvents.slice(0, countToRender);
+        Egrid.innerHTML = initialBatch.map(item => createCardHTML(item)).join("");
         displayedEventsCount = initialBatch.length;
-        if (loadMoreBtn) loadMoreBtn.style.display = (displayedEventsCount < LOCAL_EVENTS.length) ? "inline-block" : "none";
+        
+        if (loadMoreBtn) loadMoreBtn.style.display = (displayedEventsCount < filteredEvents.length) ? "inline-block" : "none";
 
-        // استرجاع مكان النزول
-        if (document.referrer.includes('views.html')) {
-          const savedPos = sessionStorage.getItem(`scroll_${PAGE_NAME}`);
-          if (savedPos) setTimeout(() => window.scrollTo({ top: parseInt(savedPos), behavior: 'instant' }), 250);
+        if (typeof AOS !== "undefined") {
+            AOS.init({ duration: 800, once: true });
         }
       }
 
-      initTicker();
+      function initTicker() {
+        const tickerContent = document.getElementById("ticker-content");
+        if (!tickerContent || !ALL_EVENTS.length) return;
+
+        const latest = ALL_EVENTS.slice(0, 5);
+        const tickerHTML = latest.map(item => {
+          const slug = item.title.trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+          return `<a href="views.html?id=${slug}&source=events" class="ticker-event">${item.title}</a>`;
+        }).join("");
+
+        tickerContent.innerHTML = tickerHTML + tickerHTML;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+          initTicker();
+          initEvents();
+      });
+
       loadMoreBtn?.addEventListener("click", renderNextEvents);
-      document.addEventListener("DOMContentLoaded", initEvents);
     </script>
 
-    <!--قسم سياسة الخصوصية-->
-
-    <!-- القسم الاخير-->
-
     <div id="footer-placeholder"></div>
-        <script src="js/script.js"defer></script>
-    <script src="js/auth-toggle.js"defer></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/auth-toggle.js" defer></script>
   </body>
 </html>

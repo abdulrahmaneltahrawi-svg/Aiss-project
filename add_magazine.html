@@ -129,7 +129,7 @@
         console.error(err);
         alert("حصل خطأ في الاتصال بالخادم");
       });
-    }
+    } // إغلاق دالة saveArticle بشكل صحيح
 
     // التحقق من الصلاحيات عند تحميل الصفحة
     window.addEventListener('load', () => {
@@ -139,8 +139,9 @@
             if(!data.authenticated || !data.user || data.user.can_add_article != 1){
                 window.location.href = 'index.html';
             } 
-        });
-    });
+        })
+        .catch(err => console.error("Auth check failed:", err));
+    }); // إغلاق الـ EventListener بشكل صحيح
   </script>
     <script src="js/auth-toggle.js"></script>
 </body>

@@ -34,34 +34,23 @@ header {
   z-index: 9999;
 }
 
+/* تحسين المنيو الأساسي */
 .header-nav ul {
   display: flex;
   list-style: none;
   font-size: 13px;
   font-weight: bold;
+  align-items: center; /* لضمان محاذاة العناصر عمودياً */
 }
 
-.header-nav ul li {
-  margin-right: 10px;
-}
-
-.header-nav ul li a {
-  padding: 6px 10px;
-}
-
-.header-nav ul li a:hover,
-.header-nav ul li a.active {
-  color: #e4293a;
-}
-
-/* منيو المدونات (submenu) */
+/* منيو المدونات (submenu) - التصحيح هنا */
 .header-nav .has-submenu {
   position: relative;
 }
 
 .header-nav .submenu {
   position: absolute;
-  top: 100%;
+  top: 100%; /* لتبدأ المنيو مباشرة تحت الرابط */
   right: 0;
   min-width: 190px;
   background: #fff;
@@ -70,27 +59,47 @@ header {
   padding: 8px;
   display: none;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-  margin: 5px;
+  z-index: 9999; /* ضروري جداً لكي تظهر فوق الـ Section الذي يلي الهيدر */
 }
 
 .header-nav .submenu li {
   margin-right: 0;
+  width: 100%; /* لتأخذ القائمة الفرعية العرض كاملاً */
 }
 
 .header-nav .submenu a {
   display: block;
   padding: 10px 12px;
   border-radius: 12px;
-  background: rgba(0, 0, 0, 0.03);
+  margin-bottom: 8px; /* قللنا المسافة من 20px إلى 8px لمنع التداخل الضخم */
+  white-space: nowrap; /* لمنع انكسار السطر داخل المنيو */
+}
+
+/* إزالة المارجن من آخر عنصر في القائمة الفرعية */
+.header-nav .submenu li:last-child a {
+  margin-bottom: 0;
 }
 
 .header-nav .submenu a:hover {
-  background: rgba(228, 41, 58, 0.1);
   color: #e4293a;
 }
 
+/* إظهار المنيو عند الهوفر مع تأثير خفيف */
 .header-nav .has-submenu:hover .submenu {
   display: block;
+  animation: fadeInDown 0.3s ease; /* إضافة حركة ظهور ناعمة */
+}
+
+/* أنيميشن الـ Fade Up اللي تبغاه للمنيو */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* تصميم صفحة تسجيل الدخول*/
@@ -239,10 +248,48 @@ header button:hover {
   box-shadow: 0 0 5px;
 }
 
+.btn-cont{
+  margin-left: 350px;
+}
+
 .btn-cont img {
   margin-bottom: -2px;
   margin-left: -2px;
   width: 15px;
+}
+
+/* تنسيق الحاوية لتكون في المنتصف تماماً */
+.center-user-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* هذا السطر هو الذي يضمن التوسط الحسابي الدقيق */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+
+
+/* تنسيقات الأزرار */
+.dash-btn {
+    padding: 5px 12px;
+    background: #235287;
+    color: white !important;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logout-btn {
+    padding: 5px 12px;
+    border: 2px solid #e4293a;
+    background: white;
+    color: #e4293a;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 /*زر البحث*/
@@ -255,7 +302,8 @@ header button:hover {
 }
 
 .search-img img {
-  width: 25px;
+  width: 29px;
+  margin-left: 250px;
 }
 
 .search-img img:hover {
@@ -270,7 +318,7 @@ header button:hover {
   display: block;
   position: absolute;
   top: calc(100% + 8px);
-  left: 50%;
+  left: 100%;
   transform: translateX(-50%);
   width: 250px;
   padding: 10px 15px;
@@ -314,7 +362,7 @@ header button:hover {
 }
 /*زر التسوق*/
 .shop-img img {
-  width: 27px;
+  width: 40px;
 }
 
 .shop-img img:hover {
@@ -1257,8 +1305,9 @@ textarea {
 }
 
 .header-nav ul li a:hover {
-    background-color: #f5f5f5;
+  
     color: #e4293a; /* لون المعهد */
+    transform: translatex(-10px);
 }
 
       .aboutUs-container {

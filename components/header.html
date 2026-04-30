@@ -23,7 +23,7 @@
     <!--===زر السلة===-->
     <a href="view-cart.html" aria-label="سلة المشتريات">
       <div class="shop-img" style="position: relative;">
-        <img src="assets/icons/shopping-cart.webp" alt="cart" loading="lazy" />
+        <img src="assets/icons/quality.png" alt="cart" loading="lazy" />
         <span id="cart-count" class="cart-badge">0</span>
       </div>
     </a>
@@ -53,8 +53,26 @@
         
         <li><a href="manuals.html">كتيبات السلامة</a></li>
         <li><a href="cods.html">الأكواد والمعايير</a></li>
-        <li><a href="event.html">الفعليات</a></li>
+        <!-- القائمة المنسدلة الجديدة للفعاليات -->
+<li class="has-submenu">
+    <a href="event.html" aria-haspopup="true">الفعاليات</a>
+    <ul class="submenu">
+        <li><a href="event.html?cat=مسابقة">مسابقات السلامة</a></li>
+        <li><a href="event.html?cat=مؤتمرات">مؤتمرات السلامة</a></li>
+    </ul>
+</li>
+<li class="has-submenu">
+    <a href="accredited.html" aria-haspopup="true">الإعتمادية</a>
+    <ul class="submenu">
+        <li><a href="accredited.html?cat=برامج">برامج معتمدة</a></li>
+        <li><a href="accredited.html?cat=مراكز">مراكز معتمدة</a></li>
+        <li><a href="accredited.html?cat=خبراء">خبراء معتمدين</a></li>
+    </ul>
+</li>
+
+        <li><a href="companies.html">الشركاء</a></li>
         <li><a href="store.html">المتجر</a></li>
+        
     </ul>
 </nav>
 

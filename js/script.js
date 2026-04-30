@@ -233,9 +233,11 @@ async function checkAuthStatus() {
                 .user-logged-in button, .user-logged-in a { padding: 5px 10px !important; font-size: 14px !important; }
               }
             </style>
-            <span style="font-size: 15px; font-weight: bold; color: #060606; white-space: nowrap;">مرحبا ${data.user.name}</span>
-            ${isAdmin ? '<a href="dashboard.html" style="padding: 5px 10px; font-size: 14px; background: #235287; color: white; border-radius: 8px; text-decoration: none; font-weight: bold;">لوحة التحكم</a>' : ""}
-            <button id="logout-btn" style="padding: 5px 10px; font-size: 14px; border: 2px solid #e4293a; background: white; color: ; border-radius: 8px; cursor: pointer; font-weight: bold;">خروج</button>
+<div class="center-user-nav">
+    <span style="font-size: 15px; font-weight: bold; color: #060606; white-space: nowrap;">مرحبا ${data.user.name}</span>
+    ${isAdmin ? '<a href="dashboard.html" class="dash-btn">لوحة التحكم</a>' : ""}
+    <button id="logout-btn" class="logout-btn">خروج</button>
+</div>
           </div>`;
       }
 
