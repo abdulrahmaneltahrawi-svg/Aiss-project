@@ -33,7 +33,27 @@ header {
   background-color: white;
   z-index: 9999;
 }
+.header-nav {
+    position: fixed; /* أو absolute حسب تصميمك */
+    top: 70px;      /* مسافة تحت الهيدر */
+    left: 0;
+    width: 280px;   /* العرض الحالي للقائمة */
+    background: #fff;
+    
+    /* الحل الجوهري هنا */
+    max-height: calc(100vh - 100px); /* يخلي طولها طول الشاشة ناقص مسافة الهيدر */
+    overflow-y: auto;               /* يظهر سكرول لو العناصر خرجت بره */
+    padding-bottom: 20px;           /* مسافة أمان في الآخر */
+}
 
+/* تحسين شكل السكرول بار عشان ما يشوهش التصميم */
+.header-nav::-webkit-scrollbar {
+    width: 5px;
+}
+.header-nav::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
 /* تحسين المنيو الأساسي */
 .header-nav ul {
   display: flex;
@@ -249,7 +269,7 @@ header button:hover {
 }
 
 .btn-cont{
-  margin-left: 350px;
+  margin-left: 100px;
 }
 
 .btn-cont img {
