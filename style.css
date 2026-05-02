@@ -292,6 +292,12 @@ header button:hover {
     font-weight: bold;
 }
 
+.header-companies {
+    display: flex;
+    align-items: center; /* يخلي العناصر كلها في نص الارتفاع */
+    gap: 30px; /* مسافة بين البحث والسلة والقائمة */
+}
+
 /*زر البحث*/
 .search-container {
   position: relative;
@@ -317,16 +323,23 @@ header button:hover {
 .show-search {
   display: block;
   position: absolute;
-  top: calc(100% + 8px);
-  left: 100%;
-  transform: translateX(-50%);
-  width: 250px;
+  top: calc(5%); /* مسافة كافية تحت الأيقونة */
+  
+  /* التعديل الجوهري هنا */
+  left: auto;   /* إلغاء القيمة القديمة */
+  right: 0;     /* يخلي حافة الانبوت اليمين ماشية مع حافة الأيقونة اليمين، فيفتح لليسار */
+  
+  width: 280px; /* العرض اللي تحبه */
   padding: 10px 15px;
   border-radius: 25px;
   border: 1px solid #ddd;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   z-index: 100;
   background: #fff;
+  margin-right: 50px;
+  
+  /* نلغي الـ transform لأنه ملوش لازمة مع right: 0 */
+  transform: none; 
 }
 
 .search-suggestions {
@@ -1268,7 +1281,7 @@ textarea {
 .header-nav {
     display: none; 
     position: absolute;
-    top: 70px; /* اضبط المسافة حسب ارتفاع الهيدر عندك */
+    top: 90px; /* اضبط المسافة حسب ارتفاع الهيدر عندك */
     right: 20px;
     background: #fff;
     border: 1px solid #ddd;
