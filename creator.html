@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <link rel="icon" type="image/webp" href="assets/icons/logo.webp" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>المدونات-المعهد العربي لعلوم السلامة</title>
+    <!--تعريف للخط-->
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <style>
+/* تنسيق الحاوية الرئيسية */
+.org-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px; /* زيادة الفراغ بين الصفوف ليتناسب مع الحجم الجديد */
+    padding: 30px;
+    direction: rtl;
+}
+
+/* تنسيق الصفوف */
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 80px; /* زيادة الفراغ بين البطاقات في الصف السفلي */
+    width: 100%;
+}
+
+/* --- تنسيق البطاقة الجديد (تغيير الحجم والأنيميشن) --- */
+.card {
+    position: relative;
+    width: 280px; /* زيادة عرض البطاقة */
+    height: 380px; /* زيادة طول البطاقة */
+    text-align: center;
+    background: #fff;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    
+    /* الأنيميشن الرئيسي عند مرور الماوس */
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* تأثير حركة ناعم */
+    overflow: hidden; /* لحماية الصورة من الخروج عن الحدود */
+}
+
+/* تأثير الأنيميشن عند مرور الماوس على البطاقة */
+.card:hover {
+    transform: translateY(-15px); /* رفع البطاقة للأعلى */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15); /* زيادة الظل */
+}
+
+/* تنسيق الصورة (أكبر وتأثير زووم) */
+.card img {
+    width: 180px; /* زيادة حجم الصورة دائرية */
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    
+    /* تأثير أنيميشن للصورة عند مرور الماوس على البطاقة */
+    transition: transform 0.4s ease;
+}
+
+.card:hover img {
+    transform: scale(1.05); /* زووم بسيط جداً للصورة داخل البطاقة */
+}
+
+/* تنسيق الاسم/الوظيفة */
+.card h3 {
+    margin: 15px 0;
+    font-size: 1.4rem; /* تكبير الخط */
+    font-weight: bold;
+    color: #333;
+}
+
+/* تنسيق زر الـ + للـ CV */
+.cv-btn {
+    display: inline-block;
+    width: 35px; /* تكبير الزر */
+    height: 35px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 50%;
+    line-height: 35px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: background-color 0.3s, transform 0.3s;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%); /* للمحافظة على توسيط الزر */
+}
+
+.cv-btn:hover {
+    background-color: #0056b3;
+    transform: translateX(-50%) scale(1.2); /* تكبير الزر فقط عند الهوفر */
+}
+
+/* خلفية النافذة (تغطي الشاشة كاملة) */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6); /* خلفية شبه شفافة */
+    backdrop-filter: blur(5px); /* تأثير تغبيش للخلفية */
+    animation: fadeIn 0.3s ease;
+}
+
+/* محتوى النافذة الأبيض */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 20px;
+    width: 50%;
+    max-width: 700px;
+    position: relative;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+    animation: slideUp 0.4s ease;
+    direction: rtl;
+}
+
+.close-btn {
+    position: absolute;
+    top: 30px;
+    left: 30px;      /* يثبته جهة اليسار */
+    right: auto;     /* يضمن إلغاء أي تموضع من اليمين */
+    font-size: 35px;  /* كبرناه شوي عشان الطلب السابق */
+    font-weight: bold;
+    cursor: pointer;
+    color: #888;
+    transition: 0.3s;
+    line-height: 1;
+    z-index: 1001;   /* عشان يضمن الظهور فوق أي عنصر آخر */
+}
+
+.close-btn:hover {
+    color: #ff0000;
+    transform: scale(1.1);
+}
+@media (max-width:600px) {
+    .row {
+    display: flex;
+    justify-content: center;
+    gap: 5px; /* زيادة الفراغ بين البطاقات في الصف السفلي */
+    width: 130%;
+}
+
+}
+
+
+/* أنيميشن الظهور */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+    </style>
+    <div id="header-placeholder"></div>
+
+      <!--قسم صفحة العرض-->
+
+  <div class="hero-section-m">
+    <img src="assets/imge/banar.jpg" alt="store-pic" loading="lazy" />
+    <div class="logo-text">
+      <p>المجلس التأسيسي</p>
+    </div>
+  </div>
+
+  <div class="title0">
+    <p>اللجنة التأسيسية</p>
+  </div>
+
+  <div class="org-container">
+    <div class="row main-leader">
+        <div class="card">
+            <img src="assets/creator/WhatsApp Image 2026-04-30 at 5.29.46 PM (2).jpeg" alt="قائد">
+            <div class="info">
+                <h3>رئيس المعهد:د/عمار مغربي</h3>
+                <a href="assets/creator/Dr Ammar's CV _ -2022.pdf" class="cv-btn">+</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row subordinates">
+        <div class="card">
+            <img src="assets/creator/WhatsApp Image 2026-04-30 at 5.29.44 PM.jpeg" alt="النائب">
+            <div class="info">
+                <h3>الرئيس التنفيذي:د/محمد كمال</h3>
+                <a href="assets/creator/M. Kamal CV 1-10-2014.pdf" class="cv-btn">+</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="assets/creator/WhatsApp Image 2026-04-30 at 5.29.45 PM.jpeg" alt="الذراع الأيسر">
+            <div class="info">
+                <h3>نائب الرئيس:د/مصطفى الخضري</h3>
+                <a href="assets/creator/1-دبى مصطفى .pdf" class="cv-btn">+</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="cvModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div id="cvDetails">
+            <h2>السيرة الذاتية</h2>
+            <hr>
+            <div id="modalBody">
+                </div>
+        </div>
+    </div>
+</div>
+
+
+
+   <script>
+    // بيانات تجريبية لكل شخص (تقدر تربطها بـ JSON لاحقاً)
+const modal = document.getElementById("cvModal");
+const modalBody = document.getElementById("modalBody");
+const closeBtn = document.querySelector(".close-btn");
+
+document.querySelectorAll('.cv-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault(); // منع المتصفح من فتح الـ PDF في صفحة جديدة
+        
+        const pdfUrl = this.getAttribute('href'); // جلب رابط الـ PDF من الـ href
+        const personName = this.closest('.card').querySelector('h3').innerText; // جلب الاسم للعرض كعنوان
+        
+        // وضع الـ PDF داخل iframe ليظهر داخل النافذة
+        modalBody.innerHTML = `
+            <h3 style="margin-bottom:15px; color:#007bff;">${personName}</h3>
+            <iframe src="${pdfUrl}" width="100%" height="500px" style="border:none; border-radius:10px;"></iframe>
+        `;
+        
+        modal.style.display = "block";
+    });
+});
+
+// إغلاق النافذة
+closeBtn.onclick = () => {
+    modal.style.display = "none";
+    modalBody.innerHTML = ""; // تفريغ المحتوى عند الإغلاق لتجنب استمرار تحميل الملف
+};
+
+window.onclick = (event) => {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        modalBody.innerHTML = "";
+    }
+};
+   </script>
+
+    <!-- القسم الاخير-->
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/script.js"></script>
+    <script src="js/auth-toggle.js"></script>
+  </body>
+</html>
