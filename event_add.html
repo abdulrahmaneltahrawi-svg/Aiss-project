@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <link rel="icon" href="assets/icons/logo.webp" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>الأحداث-المعهد العربي لعلوم السلامة</title>
+    <!--تعريف للخط-->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style>
+        /* الحاوية الرئيسية */
+.events-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    direction: rtl; /* للغة العربية */
+    margin-top: 200px;
+}
+
+/* التنسيق الأساسي للبطاقة */
+.event-card {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+/* 1. توحيد حاوية الصور في جميع الأحجام */
+.event-image {
+    width: 100%;
+    height: 300px; /* يمكنك تغيير هذا الرقم ليكون الارتفاع الموحد لكل الصور */
+    overflow: hidden;
+    position: relative;
+}
+
+/* 2. ضمان أن الصورة تملأ الحاوية بالكامل دون تشويه */
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* هذا السطر هو الأهم لتوحيد الشكل */
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+/* 3. حذف التخصيصات القديمة للارتفاعات المختلفة */
+/* قم بحذف هذه الأسطر من كودك القديم:
+.size-large .event-image { height: 400px; }
+.size-medium .event-image { height: 300px; }
+.size-small .event-image { height: 200px; }
+*/
+
+/* 4. تعديل بسيط للموبايل لضمان تناسق العرض */
+@media (max-width: 600px) {
+    .event-image {
+        height: 250px; /* ارتفاع أصغر قليلاً للموبايل ليناسب الشاشة */
+    }
+}
+
+/* تأثير اختياري: تكبير الصورة عند تمرير الماوس */
+.event-card:hover .event-image img {
+    transform: scale(1.1);
+}
+
+/* أحجام مختلفة للبطاقات */
+.size-large { flex: 1 1 calc(60% - 20px); }
+.size-medium { flex: 1 1 calc(35% - 20px); }
+.size-small { flex: 1 1 calc(25% - 20px); }
+
+/* التحكم في ارتفاع الصور لخلق التباين */
+.size-large .event-image { height: 400px; }
+.size-medium .event-image { height: 300px; }
+.size-small .event-image { height: 200px; }
+
+/* تنسيق النصوص */
+.event-info {
+    padding: 15px;
+}
+
+.event-date {
+    color: #e63946; /* لون أحمر مميز */
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.event-info h3 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    color: #1d3557;
+}
+
+/* Responsive: للموبايل */
+@media (max-width: 768px) {
+    .size-large, .size-medium, .size-small {
+        flex: 1 1 100%;
+    }
+}
+    </style>
+
+    <div id="header-placeholder"></div>
+
+    <section class="events-gallery">
+    <h2 class="section-title">سجل المشاركات والفعاليات</h2>
+    
+    <div class="events-container">
+        <article class="event-card size-large">
+            <div class="event-image">
+                <img src="assets/event_add/Picture24.jpg" alt="زيارة برشلونة">
+            </div>
+            <div class="event-info">
+                <span class="event-date">يناير 2026</span>
+                <h3>زيارة الجمعية الثقافية والرياضية لرجال الإطفاء - برشلونة</h3>
+                <p>تشرف د. محمد كمال ود. الخضري بزيارة المقر لتعزيز سبل التعاون الدولي.</p>
+            </div>
+        </article>
+
+        <article class="event-card size-medium">
+            <div class="event-image">
+                <img src="assets/event_add/Picture25.jpg" alt="الدفاع المدني">
+            </div>
+            <div class="event-info">
+                <span class="event-date">مارس 2024</span>
+                <h3>معرض اليوم العالمي للدفاع المدني - السعودية</h3>
+                <p>مشاركة المعهد تحت رعاية سمو الأمير سعود بن بندر في "الظهران إكسبو".</p>
+            </div>
+        </article>
+
+        <article class="event-card size-small">
+            <div class="event-image">
+                <img src="assets/event_add/Picture26.jpg" alt="ملتقى الكويت">
+            </div>
+            <div class="event-info">
+                <span class="event-date">مارس 2024</span>
+                <h3>ملتقى السلامة المرورية الأول - الكويت</h3>
+                <p>تمثيل المعهد بواسطة المهندس عبد الله حمود الغريب.</p>
+            </div>
+        </article>
+
+        <article class="event-card size-large">
+    <div class="event-image">
+        <img src="assets/event_add/Picture30.jpg" alt="ساس إكسبو سوريا">
+    </div>
+    <div class="event-info">
+        <span class="event-date">يوليو 2023</span>
+        <h3>المعرض الدولي الثاني للأمن والسلامة (ساس إكسبو) - دمشق</h3>
+        <p>مشاركة المعهد كراعي ماسي ممثلاً بالمهندسة إسراء حمدان وشركة EMBS.</p>
+    </div>
+</article>
+
+<article class="event-card size-medium">
+    <div class="event-image">
+        <img src="assets/event_add/Picture27.jpg" alt="معرض عمان">
+    </div>
+    <div class="event-info">
+        <span class="event-date">أكتوبر 2023</span>
+        <h3>معرض عُمان للحرائق والسلامة والأمن - مسقط</h3>
+        <p>مشاركة فاعلة للمعهد في مركز عُمان للمؤتمرات والمعارض.</p>
+    </div>
+</article>
+
+
+<article class="event-card size-large">
+    <div class="event-image">
+        <img src="assets/event_add/Picture34.jpg" alt="نقابة المهندسين المصرية">
+    </div>
+    <div class="event-info">
+        <span class="event-date">يوليو 2023</span>
+        <h3>تكريم نقيب المهندسين المصريين - القاهرة</h3>
+        <p>تقديم درع السلامة العربي للمهندس طارق النبراوي تقديراً لجهوده في تطوير علوم السلامة.</p>
+    </div>
+</article>
+
+        </div>
+</section>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll('.event-card');
+    
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+            }
+        });
+    }, observerOptions);
+
+    cards.forEach(card => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(20px)";
+        card.style.transition = "all 0.6s ease-out";
+        observer.observe(card);
+    });
+});
+    </script>
+
+
+    <script src="js/events.js"></script>
+
+
+
+    <div id="footer-placeholder"></div>
+    <script src="js/script.js" defer></script>
+    <script src="js/auth-toggle.js" defer></script>
+  </body>
+</html>

@@ -1,507 +1,173 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <link rel="icon" type="image/webp" href="assets/icons/logo.webp" />
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>المدونات-المعهد العربي لعلوم السلامة</title>
-    <!--تعريف للخط-->
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-
-<style>
+    <title>شركاء المعهد العربي لعلوم السلامة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <style>
         :root {
             --primary-color: #2c3e50;
             --accent-color: #2980b9;
-            --bg-color: #f8f9fa;
-            --text-color: #333;
-            --border-color: #e0e0e0;
+            --bg-color: #f4f7f6;
+            --map-fill: #e0e0e0;
+            --map-hover: #3498db;
+            --map-active: #1a5276;
         }
 
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--bg-color); margin: 0; padding: 0; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
 
-        .card {
+
+        /* حاوية الخريطة */
+        .map-section {
+            max-width: 1000px;
+            margin: 20px auto;
+            margin-top: 150px;
             background: white;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .logo-container {
-            height: 300px;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .logo-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-
-        .content {
             padding: 20px;
-            flex-grow: 1;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
 
-        .country-tag {
-            background: #e1f5fe;
-            color: #0288d1;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 10px;
+        .map-svg { width: 100%; height: auto; filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.1)); }
+
+        /* استايل الدول الجغرافي */
+        .st0 { fill: var(--map-fill); stroke: #ffffff; stroke-width: 0.7; cursor: pointer; transition: 0.3s; }
+        .st0:hover { fill: var(--map-hover); transform: translateY(-2px); }
+        .active-country { fill: var(--map-active) !important; stroke: #fff; stroke-width: 1.5; }
+
+        .controls { text-align: center; margin-top: 15px; }
+        .btn-all { padding: 10px 25px; background: var(--accent-color); color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+
+        /* شبكة البطاقات */
+        .partners-grid {
+            max-width: 1200px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
         }
 
-        .card h3 {
-            margin: 0 0 10px 0;
-            font-size: 18px;
-            color: var(--primary-color);
-            line-height: 1.4;
-        }
-
-        .card p {
-            margin: 0;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #666;
-        }
-
-        .footer-info {
-            background: #f1f1f1;
-            padding: 10px 20px;
-            font-size: 12px;
-            border-top: 1px solid #eee;
-            color: #888;
-            text-align: left;
-        }
-
-        @media (max-width: 600px) {
-            .container { grid-template-columns: 1fr; }
-        }
+        .card { background: white; border-radius: 12px; border: 1px solid #ddd; overflow: hidden; transition: 0.4s; display: flex; flex-direction: column; }
+        .card.hidden { display: none; }
+        
+        .logo-box { height: 160px; display: flex; align-items: center; justify-content: center; background: #fff; padding: 15px; border-bottom: 1px solid #eee; }
+        .logo-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        
+        .info { padding: 15px; }
+        .tag { background: #e1f5fe; color: #0288d1; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: bold; }
+        h3 { font-size: 16px; margin: 10px 0 5px 0; color: var(--primary-color); }
+        p { font-size: 13px; color: #666; margin: 0; line-height: 1.4; }
     </style>
+</head>
+<body>
 
-  <body>
-    <div id="header-placeholder"></div>
+<div id="header-placeholder"></div>
 
-      <!--قسم صفحة العرض-->
-
-  <div class="hero-section-m">
-    <img src="assets/imge/0005.jpg" alt="store-pic" loading="lazy" />
-    <div class="logo-text">
-      <p>الشركاء</p>
+<div class="map-section">
+    <svg class="map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+        <path id="MA" class="st0" d="M100,180 L180,180 L170,230 L90,230 Z" onclick="filterCards('morocco', 'MA')"><title>المغرب</title></path>
+        <path id="TN" class="st0" d="M280,150 L310,150 L310,180 L280,180 Z" onclick="filterCards('tunisia', 'TN')"><title>تونس</title></path>
+        <path id="DZ" class="st0" d="M190,180 L270,180 L270,260 L190,260 Z" onclick="filterCards('algeria', 'DZ')"><title>الجزائر</title></path>
+        <path id="LY" class="st0" d="M320,180 L420,180 L420,270 L320,270 Z" onclick="filterCards('libya', 'LY')"><title>ليبيا</title></path>
+        <path id="EG" class="st0" d="M430,180 L520,180 L520,280 L430,280 Z" onclick="filterCards('egypt', 'EG')"><title>مصر</title></path>
+        <path id="SD" class="st0" d="M430,290 L520,290 L520,380 L430,380 Z" onclick="filterCards('sudan', 'SD')"><title>السودان</title></path>
+        <path id="PS" class="st0" d="M530,150 L540,150 L540,175 L530,175 Z"  onclick="filterCards('palestine', 'PS')"><title>فلسطين</title></path>
+        <path id="JO" class="st0" d="M545,160 L570,160 L570,185 L545,185 Z" onclick="filterCards('jordan', 'JO')"><title>الأردن</title></path>
+        <path id="SA" class="st0" d="M550,200 L680,200 L700,320 L580,350 Z" onclick="filterCards('saudi', 'SA')"><title>السعودية</title></path>
+        <path id="IQ" class="st0" d="M580,140 L650,140 L650,190 L580,190 Z" onclick="filterCards('iraq', 'IQ')"><title>العراق</title></path>
+        <path id="YE" class="st0" d="M600,360 L700,360 L720,410 L600,410 Z" onclick="filterCards('yemen', 'YE')"><title>اليمن</title></path>
+        <path id="OM" class="st0" d="M710,300 L780,300 L800,380 L710,380 Z" onclick="filterCards('oman', 'OM')"><title>سلطنة عُمان</title></path>
+        <path id="KW" class="st0" d="M660,180 L680,180 L680,195 L660,195 Z" onclick="filterCards('kuwait', 'KW')"><title>الكويت</title></path>
+    </svg>
+    <div class="controls">
+        <button class="btn-all" onclick="filterCards('all', '')">إظهار كافة الدول والشركاء</button>
     </div>
-  </div>
+</div>
 
-  <div class="title0">
-    <p>شراكات المعهد العربي</p>
-  </div>
-
-  <div class="container">
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture1.png" alt="algzer"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">الجزائر</span>
-            <h3>مؤسسة التميز للإدارة والسلامة</h3>
-            <p>مؤسسة خاصة معتمدة تضم 15 تخصصاً إدارياً ومهنياً ومكتب دراسات معتمد من وزارة البيئة.</p>
-        </div>
+<div class="partners-grid" id="grid">
     </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture2.png" alt="palastine"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">فلسطين - غزة</span>
-            <h3>نقابة المهندسين</h3>
-            <p>تأسست عام 1976م لتنظيم العمل الهندسي وإيجاد الجسم النقابي الممثل للمهندسين.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture3.jpg" alt="saudi"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">المملكة العربية السعودية</span>
-            <h3>الجمعية السعودية للسلامة والإطفاء (SASF)</h3>
-            <p>جمعية علمية تحت إشراف جامعة الملك فهد للبترول والمعادن تعنى بنشر الوعي وتقديم الاستشارات.</p>
-        </div>
-    </div>
-
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture4.png" alt="Libya"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">ليبيا - بنغازي</span>
-            <h3>شركة الكفاءات للتعليم والتدريب</h3>
-            <p>تقدم دورات مهنية متخصصة بالتعاون مع كلية التقنية الهندسية - بنغازي.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture5.png" alt="Jordan"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">الأردن - عمّان</span>
-            <h3>نقابة المهندسين الأردنيين</h3>
-            <p>تأسست عام 1948، تهدف لقيادة العمل الهندسي بأفضل الممارسات وريادة المهندس الأردني عالمياً.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture6.png" alt="Palestine"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">فلسطين - غزة</span>
-            <h3>جمعية الملاحين البحريين الفلسطينيين</h3>
-            <p>جمعية أهلية تأسست عام 2004، تعنى بتطوير الكادر البحري وحماية البيئة البحرية وتنمية قطاع الصيد.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture7.jpg" alt="IUG"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">فلسطين - غزة</span>
-            <h3>مركز إدارة الأزمات والكوارث (الجامعة الإسلامية)</h3>
-            <p>مؤسسة أكاديمية تسعى للنهوض بالمستوى العلمي ومواكبة التطور التكنولوجي في إطار القيم الإسلامية.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture8.jpg" alt="Palestine"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">فلسطين - غزة</span>
-            <h3>نقابة أطباء الأسنان</h3>
-            <p>تأسست عام 1952، وتعد من أقدم النقابات المهنية، ويمثل مركز القدس الجسم النقابي في الضفة الغربية.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture9.jpg" alt="Human Rights"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">فلسطين - غزة/رام الله</span>
-            <h3>جمعية مركز الديمقراطية وحقوق العاملين</h3>
-            <p>منظمة مستقلة تأسست عام 1993، تهدف لبناء مجتمع ديمقراطي وضمان حقوق العمال والعدالة الاجتماعية.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture10.png" alt="Egypt"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">جمهورية مصر العربية</span>
-            <h3>نقابة المهندسين المصرية</h3>
-            <p>أنشئت عام 1946، وهي الهيئة الممثلة للمهندسين والاستشاري الأول للدولة في مجال تخصصها.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture11.png" alt="PPU"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">فلسطين - الخليل</span>
-            <h3>جامعة بوليتكنيك فلسطين</h3>
-            <p>تأسست عام 1978، تسخر التكنولوجيا لخدمة العملية التعليمية التطبيقية بما يواكب الاتجاهات الحديثة.</p>
-        </div>
-    </div>
-
-
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture12.png" alt="OAPEC"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">دولة الكويت</span>
-            <h3>منظمة الأقطار العربية المصدرة للبترول (OAPEC)</h3>
-            <p>منظمة إقليمية دولية تأسست عام 1968 لتعزيز التعاون العربي في استخراج وتأمين وصول النفط للأسواق العالمية.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture13.jpg" alt="Egypt"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">جمهورية مصر العربية</span>
-            <h3>أجيبسك لخدمات الحفر والهندسة والسلامة</h3>
-            <p>مؤسسة متخصصة في تقديم الخدمات الهندسية والفنية وحلول السلامة في قطاع الحفر.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture14.jpg" alt="Palestine"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">فلسطين</span>
-            <h3>نقابة العاملين في الزراعة والفلاحة</h3>
-            <p>جسم نقابي يعنى بحقوق المزارعين وتطوير القطاع الزراعي في فلسطين.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture15.jpg" alt="Jordan"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">المملكة الأردنية الهاشمية</span>
-            <h3>أكاديمية نبض الأردن للسلامة والصحة المهنية</h3>
-            <p>مركز تدريبي متخصص في رفع الكفاءات المهنية ومعايير الصحة والسلامة الدولية.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture16.jpg" alt="Iraq"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">جمهورية العراق</span>
-            <h3>شركة مستقبل البصرة للتدريب</h3>
-            <p>تعنى بتدريب وتطوير الكوادر البشرية في مجالات النفط والإدارة بمدينة البصرة.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture17.jpg" alt="Syria"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">الجمهورية العربية السورية</span>
-            <h3>شركة EMBS</h3>
-            <p>شركة متخصصة في الخدمات الهندسية والاستشارية والحلول الإدارية.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture18.jpg" alt="Palestine"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">فلسطين</span>
-            <h3>الاتحاد العالمي للسلامة والصحة المهنية</h3>
-            <p>منظمة تسعى لنشر ثقافة السلامة المهنية وتطبيق المعايير العالمية في بيئة العمل.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture19.jpg" alt="Sudan"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">جمهورية السودان</span>
-            <h3>مركز مستر سيفتي للتدريب والاستشارات</h3>
-            <p>مركز رائد في السودان لتقديم الحلول التدريبية في مجالات الوقاية والسلامة.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture20.jpg" alt="Yemen"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">الجمهورية اليمنية</span>
-            <h3>مركز سجما للدراسات والاستشارات</h3>
-            <p>يقدم خدمات بحثية واستشارية متخصصة لدعم المؤسسات في اليمن.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture21.jpg" alt="Yemen"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">الجمهورية اليمنية</span>
-            <h3>كلية علوم الطوارئ الصحية والتقنية</h3>
-            <p>مؤسسة تعليمية أكاديمية تخرج كوادر طبية وتقنية متخصصة في الإسعاف والطوارئ.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture22.jpg" alt="Yemen"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">الجمهورية اليمنية</span>
-            <h3>جلوبال أوبتيموس برايم للدراسات والاستشارات (GOP)</h3>
-            <p>مركز متخصص في الدراسات المهنية والاستشارات البيئية وتطوير النظم الإدارية.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture23.jpg" alt="Morocco"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">المملكة المغربية</span>
-            <h3>المركز المغربي للسلامة والصحة المهنية</h3>
-            <p>يعنى بتطوير استراتيجيات الوقاية من حوادث الشغل والأمراض المهنية بالمغرب.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture24.jpg" alt="Jordan"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">المملكة الأردنية الهاشمية</span>
-            <h3>الجمعية الأردنية للإسعاف</h3>
-            <p>منظمة غير ربحية متخصصة في التدريب على الإسعافات الأولية والاستجابة للطوارئ.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture25.jpg" alt="Iraq"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">جمهورية العراق - أربيل</span>
-            <h3>الاتحاد الدولي لرجال وسيدات الأعمال</h3>
-            <p>منصة لتعزيز الاستثمار وتوطيد العلاقات التجارية بين رواد الأعمال محلياً ودولياً.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture26.jpg" alt="Jordan"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">المملكة الأردنية الهاشمية</span>
-            <h3>شركة جرينوفيا للتدريب والتدقيق والفحص</h3>
-            <p>شركة متخصصة في خدمات التفتيش والتدقيق الصناعي وبرامج التدريب الفنية.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture27.jpg" alt="Jordan"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">المملكة الأردنية الهاشمية</span>
-            <h3>أكاديمية كريستال للاستشارات والتدريب</h3>
-            <p>تقدم حلولاً تدريبية واستشارية لتطوير الأداء المؤسسي والموارد البشرية.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture28.jpg" alt="Oman"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">سلطنة عمان</span>
-            <h3>مركز جارتير للتدريب والتطوير</h3>
-            <p>يسهم في تنمية المهارات المهنية والقيادية بما يتوافق مع رؤية السلطنة للتطوير.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture29.jpg" alt="Saudi Arabia"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">المملكة العربية السعودية</span>
-            <h3>مجتمع مواهب السلامة والصحة المهنية والبيئة</h3>
-            <p>شبكة مهنية سعودية تجمع المختصين لتبادل الخبرات وتطوير قطاع السلامة والبيئة.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture30.jpg" alt="Tunisia"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">الجمهورية التونسية</span>
-            <h3>الجمعية التونسية لمفتقدي الشغل</h3>
-            <p>منظمة تعنى بالدفاع عن حقوق العاطلين عن العمل وتوفير برامج إعادة التأهيل.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture31.jpg" alt="Palestine"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">فلسطين</span>
-            <h3>البورد الأوروبي للتدريب وإعداد القادة</h3>
-            <p>مؤسسة تدريبية تهدف لنقل الخبرات الدولية في القيادة والإدارة إلى الكادر الفلسطيني.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="logo-container">
-            <div class="logo-placeholder"><img src="assets/logos/Picture32.jpg" alt="Palestine"></div>
-        </div>
-        <div class="content">
-            <span class="country-tag">فلسطين</span>
-            <h3>الجمعية العربية لخبراء الإدارة</h3>
-            <p>تضم نخبة من الاستشاريين لتطوير الأنظمة الإدارية ونشر الفكر الإداري الحديث.</p>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-    </div>
-
-
-
-
-   
-
-    <!-- القسم الاخير-->
 
     <div id="footer-placeholder"></div>
 
-    <script src="js/script.js"></script>
-    <script src="js/auth-toggle.js"></script>
-  </body>
+<script>
+    // قاعدة البيانات لجميع الشركات الـ 33
+    const partners = [
+        {name: "مؤسسة التميز للإدارة والسلامة", country: "algeria", countryAr: "الجزائر", img: "Picture1.png", desc: "مؤسسة خاصة معتمدة تضم 15 تخصصاً إدارياً."},
+        {name: "نقابة المهندسين - غزة", country: "palestine", countryAr: "فلسطين", img: "Picture2.png", desc: "تنظيم العمل الهندسي الفلسطيني منذ 1976."},
+        {name: "الجمعية السعودية للسلامة والإطفاء", country: "saudi", countryAr: "السعودية", img: "Picture3.jpg", desc: "تحت إشراف جامعة الملك فهد للبترول والمعادن."},
+        {name: "شركة الكفاءات للتعليم والتدريب", country: "libya", countryAr: "ليبيا", img: "Picture4.png", desc: "تعاون مع كلية التقنية الهندسية - بنغازي."},
+        {name: "نقابة المهندسين الأردنيين", country: "jordan", countryAr: "الأردن", img: "Picture5.png", desc: "قيادة العمل الهندسي وتطوير مهارات المهندسين."},
+        {name: "جمعية الملاحين البحريين", country: "palestine", countryAr: "فلسطين", img: "Picture6.png", desc: "تطوير الكادر البحري وحماية البيئة."},
+        {name: "مركز إدارة الأزمات والكوارث", country: "palestine", countryAr: "فلسطين", img: "Picture7.jpg", desc: "الجامعة الإسلامية - غزة."},
+        {name: "نقابة أطباء الأسنان", country: "palestine", countryAr: "فلسطين", img: "Picture8.jpg", desc: "من أقدم النقابات المهنية في فلسطين."},
+        {name: "مركز الديمقراطية وحقوق العاملين", country: "palestine", countryAr: "فلسطين", img: "Picture9.jpg", desc: "ضمان حقوق العمال والعدالة الاجتماعية."},
+        {name: "نقابة المهندسين المصرية", country: "egypt", countryAr: "مصر", img: "Picture10.png", desc: "بيت المهندس المصري والاستشاري الأول للدولة."},
+        {name: "جامعة بوليتكنيك فلسطين", country: "palestine", countryAr: "فلسطين", img: "Picture11.png", desc: "خدمة العملية التعليمية التقنية في الخليل."},
+        {name: "منظمة OAPEC", country: "kuwait", countryAr: "الكويت", img: "Picture12.png", desc: "منظمة الأقطار العربية المصدرة للبترول."},
+        {name: "أجيبسك لخدمات الحفر", country: "egypt", countryAr: "مصر", img: "Picture13.jpg", desc: "حلول السلامة في قطاع الحفر والنفط."},
+        {name: "نقابة العاملين في الزراعة", country: "palestine", countryAr: "فلسطين", img: "Picture14.jpg", desc: "تطوير القطاع الزراعي الفلسطيني."},
+        {name: "أكاديمية نبض الأردن", country: "jordan", countryAr: "الأردن", img: "Picture15.jpg", desc: "رفع الكفاءات المهنية في السلامة والصحة."},
+        {name: "شركة مستقبل البصرة", country: "iraq", countryAr: "العراق", img: "Picture16.jpg", desc: "تدريب وتطوير كوادر النفط في البصرة."},
+        {name: "شركة EMBS", country: "syria", countryAr: "سوريا", img: "Picture17.jpg", desc: "خدمات هندسية وحلول إدارية استشارية."},
+        {name: "الاتحاد العالمي للسلامة", country: "palestine", countryAr: "فلسطين", img: "Picture18.jpg", desc: "تطبيق المعايير العالمية في بيئة العمل."},
+        {name: "مركز مستر سيفتي", country: "sudan", countryAr: "السودان", img: "Picture19.jpg", desc: "حلول تدريبية في الوقاية والسلامة بالسودان."},
+        {name: "مركز سجما للدراسات", country: "yemen", countryAr: "اليمن", img: "Picture20.jpg", desc: "دعم المؤسسات اليمنية بالدراسات والاستشارات."},
+        {name: "كلية علوم الطوارئ", country: "yemen", countryAr: "اليمن", img: "Picture21.jpg", desc: "تخريج كوادر طبية وتقنية في الإسعاف."},
+        {name: "جلوبال أوبتيموس برايم", country: "yemen", countryAr: "اليمن", img: "Picture22.jpg", desc: "دراسات مهنية واستشارات بيئية."},
+        {name: "المركز المغربي للسلامة", country: "morocco", countryAr: "المغرب", img: "Picture23.jpg", desc: "الوقاية من حوادث الشغل والأمراض المهنية."},
+        {name: "الجمعية الأردنية للإسعاف", country: "jordan", countryAr: "الأردن", img: "Picture24.jpg", desc: "التدريب على الإسعافات والاستجابة للطوارئ."},
+        {name: "الاتحاد الدولي لرجال الأعمال", country: "iraq", countryAr: "العراق", img: "Picture25.jpg", desc: "تعزيز الاستثمار في أربيل."},
+        {name: "شركة جرينوفيا", country: "jordan", countryAr: "الأردن", img: "Picture26.jpg", desc: "التفتيش والتدقيق الصناعي."},
+        {name: "أكاديمية كريستال", country: "jordan", countryAr: "الأردن", img: "Picture27.jpg", desc: "تطوير الأداء المؤسسي والموارد البشرية."},
+        {name: "مركز جارتير", country: "oman", countryAr: "عُمان", img: "Picture28.jpg", desc: "تنمية المهارات القيادية والمهنية."},
+        {name: "مجتمع مواهب HSE", country: "saudi", countryAr: "السعودية", img: "Picture29.jpg", desc: "تبادل الخبرات في قطاع السلامة والبيئة."},
+        {name: "الجمعية التونسية لمفتقدي الشغل", country: "tunisia", countryAr: "تونس", img: "Picture30.jpg", desc: "الدفاع عن حقوق العاطلين وإعادة التأهيل."},
+        {name: "البورد الأوروبي", country: "palestine", countryAr: "فلسطين", img: "Picture31.jpg", desc: "إعداد القادة ونقل الخبرات الدولية."},
+        {name: "الجمعية العربية لخبراء الإدارة", country: "palestine", countryAr: "فلسطين", img: "Picture32.jpg", desc: "تطوير الأنظمة الإدارية ونشر الفكر الحديث."}
+    ];
+
+    const grid = document.getElementById('grid');
+
+    // إنشاء البطاقات عند التحميل
+    function init() {
+        partners.forEach(p => {
+            const card = document.createElement('div');
+            card.className = `card ${p.country}`;
+            card.innerHTML = `
+                <div class="logo-box"><img src="assets/logos/${p.img}" alt="${p.name}"></div>
+                <div class="info">
+                    <span class="tag">${p.countryAr}</span>
+                    <h3>${p.name}</h3>
+                    <p>${p.desc}</p>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function filterCards(country, pathId) {
+        // تحديث ألوان الخريطة
+        document.querySelectorAll('.st0').forEach(path => path.classList.remove('active-country'));
+        if(pathId) document.getElementById(pathId).classList.add('active-country');
+
+        // فلترة البطاقات
+        document.querySelectorAll('.card').forEach(card => {
+            if (country === 'all' || card.classList.contains(country)) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+    }
+
+    init();
+</script>
+
+<script src="js/script.js"></script>
+
+</body>
 </html>

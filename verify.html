@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>تست التحقق من شهادة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #result {
+            margin-top: 24px;
+            display: none;
+        }
+
+        .card {
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .success-card {
+            background: #d1fae5;
+            border: 1px solid #34d399;
+        }
+
+        .error-card {
+            background: #fee2e2;
+            border: 1px solid #f87171;
+        }
+
+        .card h3 {
+            margin: 0 0 14px;
+            font-size: 18px;
+        }
+
+        .success-card h3 {
+            color: #065f46;
+        }
+
+        .error-card h3 {
+            color: #991b1b;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+
+        .row:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            color: #6b7280;
+        }
+
+        .value {
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .active {
+            background: #bbf7d0;
+            color: #065f46;
+        }
+
+        .expired {
+            background: #fde68a;
+            color: #92400e;
+        }
+
+        .revoked {
+            background: #fecaca;
+            color: #991b1b;
+        }
+
+        .pdf-btn {
+            display: block;
+            margin-top: 14px;
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .pdf-btn:hover {
+            background: #1d4ed8;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>التحقق من شهادة</h2>
+
+    <label>كود الشهادة</label>
+    <input type="text" id="code" placeholder="AISSFC25070050">
+
+    <button onclick="verify()">تحقق</button>
+
+    <div id="result"></div>
+
+    <script>
+        async function verify() {
+            const code = document.getElementById("code").value.trim();
+            const resultDiv = document.getElementById("result");
+
+            if (!code) {
+                resultDiv.style.display = "block";
+                resultDiv.innerHTML = '<div class="card error-card"><h3>⚠️ يرجى إدخال كود الشهادة</h3></div>';
+                return;
+            }
+
+            resultDiv.style.display = "block";
+            resultDiv.innerHTML = '<p style="text-align:center;color:#6b7280">جاري التحقق...</p>';
+
+            try {
+                const base = window.location.pathname.replace(/\/[^\/]*$/, '').replace(/\/api$/, '');
+                const res = await fetch(base + `/api/verify.php?code=${encodeURIComponent(code)}`, {
+                    // const res = await fetch(`http://localhost/aiss/api/verify.php?code=${encodeURIComponent(code)}`, {
+                    credentials: "include"
+                });
+                const data = await res.json();
+
+                if (!data.success) {
+                    resultDiv.innerHTML = `<div class="card error-card"><h3>❌ ${data.message}</h3></div>`;
+                    return;
+                }
+
+                const badgeClass = data.status === "active" ? "active" : data.status === "expired" ? "expired" : "revoked";
+                const icon = data.valid ? "✅" : "❌";
+
+                resultDiv.innerHTML = `
+                    <div class="card success-card">
+                        <h3>${icon} ${data.valid ? "شهادة معتمدة" : "الشهادة غير سارية"}</h3>
+                        <div class="row">
+                            <span class="label">نوع الشهادة</span>
+                            <span class="value">${data.type}</span>
+                        </div>
+                        <div class="row">
+                            <span class="label">الاسم</span>
+                            <span class="value">${data.holder_name}</span>
+                        </div>
+                        <div class="row">
+                            <span class="label">كود الشهادة</span>
+                            <span class="value">${data.code}</span>
+                        </div>
+                        <div class="row">
+                            <span class="label">تاريخ الإصدار</span>
+                            <span class="value">${data.issue_date}</span>
+                        </div>
+                        <div class="row">
+                            <span class="label">تاريخ الانتهاء</span>
+                            <span class="value">${data.expiry_date ?? "غير محدد"}</span>
+                        </div>
+                        <div class="row">
+                            <span class="label">الحالة</span>
+                            <span class="value"><span class="badge ${badgeClass}">${data.status_label}</span></span>
+                        </div>
+                        <a class="pdf-btn" href="${data.file_url}" target="_blank">📄 عرض الشهادة PDF</a>
+                    </div>
+                `;
+            } catch (err) {
+                resultDiv.innerHTML = `<div class="card error-card"><h3>خطأ: ${err.message}</h3></div>`;
+            }
+        }
+
+        // إرسال بالضغط على Enter
+        document.getElementById("code").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") verify();
+        });
+    </script>
+</body>
+
+</html>

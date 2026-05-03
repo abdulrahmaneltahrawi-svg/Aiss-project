@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>تست إضافة شهادة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0 14px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 14px;
+            border-radius: 6px;
+            display: none;
+            white-space: pre-wrap;
+            font-size: 14px;
+        }
+
+        .success {
+            background: #d1fae5;
+            border: 1px solid #34d399;
+            color: #065f46;
+        }
+
+        .error {
+            background: #fee2e2;
+            border: 1px solid #f87171;
+            color: #991b1b;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>تست إضافة شهادة</h2>
+
+    <label>كود الشهادة</label>
+    <input type="text" id="code" placeholder="AISSFC2510001">
+
+    <label>نوع الشهادة</label>
+    <select id="type">
+        <option value="خبير معتمد">خبير معتمد</option>
+        <option value="مركز معتمد">مركز معتمد</option>
+        <option value="برنامج معتمد">برنامج معتمد</option>
+    </select>
+
+    <label>اسم الحاصل على الشهادة</label>
+    <input type="text" id="holder_name" placeholder="أحمد محمد">
+
+    <label>تاريخ الإصدار</label>
+    <input type="date" id="issue_date">
+
+    <label>تاريخ الانتهاء (اختياري)</label>
+    <input type="date" id="expiry_date">
+
+    <label>الحالة</label>
+    <select id="status">
+        <option value="active">سارية</option>
+        <option value="expired">منتهية الصلاحية</option>
+        <option value="revoked">ملغاة</option>
+    </select>
+
+    <label>ملف الشهادة (PDF)</label>
+    <input type="file" id="pdf" accept=".pdf">
+
+    <button onclick="submit()">إضافة الشهادة</button>
+
+    <div id="result"></div>
+
+    <script>
+        async function submit() {
+            const formData = new FormData();
+            formData.append("code", document.getElementById("code").value);
+            formData.append("type", document.getElementById("type").value);
+            formData.append("holder_name", document.getElementById("holder_name").value);
+            formData.append("issue_date", document.getElementById("issue_date").value);
+            formData.append("expiry_date", document.getElementById("expiry_date").value);
+            formData.append("status", document.getElementById("status").value);
+
+            const pdfFile = document.getElementById("pdf").files[0];
+            if (pdfFile) formData.append("pdf", pdfFile);
+
+            const resultDiv = document.getElementById("result");
+            resultDiv.style.display = "none";
+
+            try {
+                // ← غيّر الرابط ده لرابط السيرفر بتاعك
+                const base = window.location.pathname.replace(/\/[^\/]*$/, '').replace(/\/api$/, '');
+                const res = await fetch(base + "/api/add_certificate.php", {
+                    // const res = await fetch(window.location.origin + "/api/add_certificate.php", {
+
+                    method: "POST",
+                    credentials: "include",
+                    body: formData
+                });
+                const data = await res.json();
+
+                resultDiv.style.display = "block";
+                resultDiv.className = data.success ? "success" : "error";
+                resultDiv.textContent = JSON.stringify(data, null, 2);
+            } catch (err) {
+                resultDiv.style.display = "block";
+                resultDiv.className = "error";
+                resultDiv.textContent = "خطأ: " + err.message;
+            }
+        }
+    </script>
+</body>
+
+</html>
