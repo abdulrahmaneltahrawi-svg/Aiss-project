@@ -67,7 +67,7 @@ const events = [
             
             <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 10px; opacity: 0.8;">تصفح الملف</span>
-                <span style="font-size: 15px; font-weight: bold;">دليل المسابقة</span>
+                <span style="font-size: 15px; font-weight: bold;">الدليل التشغيلي </span>
             </div>
         </a>
 
@@ -155,7 +155,7 @@ const events = [
 
         <strong>للاطلاع على محاضرات المؤتمر، تابع قناة المعهد العربي لعلوم السلامة على اليوتيوب:</strong> 
         <li>
-        <a href="https://youtube.com/@fsic-kq9sp?si=RcpSR0iGw1_SVhTB">https://youtube.com/@fsic-kq9sp?si=RcpSR0iGw1_SVhTB</a>
+        <a href="https://youtube.com/@aiss-6016?si=OcTWx6d9Unfys-2W">https://youtube.com/@aiss-6016?si=OcTWx6d9Unfys-2W</a>
         </li>
       </div>
 
@@ -176,7 +176,7 @@ const events = [
             
             <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 10px; opacity: 0.8;">تصفح الملف</span>
-                <span style="font-size: 15px; font-weight: bold;">أجندة الفعالية</span>
+                <span style="font-size: 15px; font-weight: bold;">أجندة المؤتمر</span>
             </div>
         </a>
 
@@ -192,7 +192,7 @@ const events = [
             
             <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 10px; opacity: 0.8;">تصفح الآن</span>
-                <span style="font-size: 15px; font-weight: bold;">كتيب المسابقة</span>
+                <span style="font-size: 15px; font-weight: bold;">كتيب المؤتمر</span>
             </div>
         </a>
     </div>
@@ -274,7 +274,7 @@ const events = [
             
             <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 10px; opacity: 0.8;">تصفح الملف</span>
-                <span style="font-size: 15px; font-weight: bold;">دليل المسابقة</span>
+                <span style="font-size: 15px; font-weight: bold;">الدليل التشغيلي</span>
             </div>
         </a>
 
@@ -354,14 +354,14 @@ const events = [
         <strong>محاور المؤتمر:</strong>
         <ul>
           <li>المحور الأول: “تطبيقات هندسية في سلامة العمليات التصنيعية”</li>
-          <li>لمحور الثاني: “الممارسات العملية الفضلى في إدارة السلامة”</li>
+          <li>المحور الثاني: “الممارسات العملية الفضلى في إدارة السلامة”</li>
           <li>المحور الثالث: “القيادة والريادة في السلامة”</li>
         </ul>
         <br>
 
         <strong>للاطلاع على محاضرات المؤتمر، تابع قناة المعهد العربي لعلوم السلامة على اليوتيوب:</strong> 
         <li>
-        <a href="https://youtube.com/@fsic-kq9sp?si=RcpSR0iGw1_SVhTB">https://youtube.com/@fsic-kq9sp?si=RcpSR0iGw1_SVhTB</a>
+        <a href="https://youtube.com/@aiss-6016?si=OcTWx6d9Unfys-2W">https://youtube.com/@aiss-6016?si=OcTWx6d9Unfys-2W</a>
         </li>
       </div>
 
@@ -383,7 +383,7 @@ const events = [
             
             <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 10px; opacity: 0.8;">تصفح الملف</span>
-                <span style="font-size: 15px; font-weight: bold;">أجندة الفعالية</span>
+                <span style="font-size: 15px; font-weight: bold;">أجندة المؤتمر</span>
             </div>
         </a>
 
@@ -399,7 +399,7 @@ const events = [
             
             <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 10px; opacity: 0.8;">تصفح الآن</span>
-                <span style="font-size: 15px; font-weight: bold;">كتيب المسابقة</span>
+                <span style="font-size: 15px; font-weight: bold;">كتيب المؤتمر</span>
             </div>
         </a>
     </div>
@@ -482,7 +482,7 @@ const events = [
         <br>
         <strong>للاطلاع على محاضرات المؤتمر، تابع قناة المعهد العربي لعلوم السلامة على اليوتيوب:</strong>
         <li>
-        <a href="https://youtube.com/@fsic-kq9sp?si=RcpSR0iGw1_SVhTB">https://youtube.com/@fsic-kq9sp?si=RcpSR0iGw1_SVhTB</a>
+        <a href="https://youtube.com/@aiss-6016?si=OcTWx6d9Unfys-2W">https://youtube.com/@aiss-6016?si=OcTWx6d9Unfys-2W</a>
         </li>
 
       </div>
@@ -505,7 +505,7 @@ const events = [
             
             <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 10px; opacity: 0.8;">تصفح الملف</span>
-                <span style="font-size: 15px; font-weight: bold;">أجندة الفعالية</span>
+                <span style="font-size: 15px; font-weight: bold;">أجندة المؤتمر</span>
             </div>
         </a>
 
@@ -521,7 +521,7 @@ const events = [
             
             <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 10px; opacity: 0.8;">تصفح الآن</span>
-                <span style="font-size: 15px; font-weight: bold;">كتيب المسابقة</span>
+                <span style="font-size: 15px; font-weight: bold;">كتيب المؤتمر</span>
             </div>
         </a>
     </div>
@@ -604,7 +604,7 @@ const events = [
             
             <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 10px; opacity: 0.8;">تصفح الملف</span>
-                <span style="font-size: 15px; font-weight: bold;">دليل المسابقة</span>
+                <span style="font-size: 15px; font-weight: bold;">الدليل التشغيلي</span>
             </div>
         </a>
 
@@ -687,7 +687,7 @@ const events = [
             
             <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 10px; opacity: 0.8;">تصفح الملف</span>
-                <span style="font-size: 15px; font-weight: bold;">دليل المسابقة</span>
+                <span style="font-size: 15px; font-weight: bold;">الدليل التشغيلي</span>
             </div>
         </a>
     `,
@@ -749,9 +749,6 @@ const events = [
                 <p style="line-height: 1.6; font-weight: 600; color: #8d1621;">
                     تحديات تطبيق الأكواد وأنظمة السلامة على المباني
                 </p>
-                <p style="line-height: 1.6; font-weight: 600; color: #8d1621;">
-                    تحديات تطبيق الأكواد وأنظمة السلامة على المباني
-                </p>
             </div>
         </div>
    
@@ -771,8 +768,8 @@ const events = [
         <br>
         <strong>للاطلاع على محاضرات المؤتمر، تابع قناة المعهد العربي لعلوم السلامة على اليوتيوب:</strong>
         <li>
-            <a href="https://youtube.com/@fsic-kq9sp?si=RcpSR0iGw1_SVhTB"
-              >https://youtube.com/@fsic-kq9sp?si=RcpSR0iGw1_SVhTB</a>
+            <a href="https://youtube.com/@aiss-6016?si=OcTWx6d9Unfys-2W"
+              >https://youtube.com/@aiss-6016?si=OcTWx6d9Unfys-2W</a>
           </li>
 
       </div>
@@ -795,7 +792,7 @@ const events = [
             
             <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 10px; opacity: 0.8;">تصفح الملف</span>
-                <span style="font-size: 15px; font-weight: bold;">أجندة الفعالية</span>
+                <span style="font-size: 15px; font-weight: bold;">أجندة المؤتمر</span>
             </div>
         </a>
 
@@ -811,7 +808,7 @@ const events = [
             
             <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 10px; opacity: 0.8;">تصفح الآن</span>
-                <span style="font-size: 15px; font-weight: bold;">كتيب المسابقة</span>
+                <span style="font-size: 15px; font-weight: bold;">كتيب المؤتمر</span>
             </div>
         </a>
     </div>
@@ -923,7 +920,7 @@ const events = [
             
             <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 10px; opacity: 0.8;">تصفح الملف</span>
-                <span style="font-size: 15px; font-weight: bold;">أجندة الفعالية</span>
+                <span style="font-size: 15px; font-weight: bold;">أجندة المؤتمر</span>
             </div>
         </a>
     </div>
