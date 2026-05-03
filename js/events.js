@@ -820,9 +820,9 @@ const events = [
 
       {
     id: 1,
-    title: "مؤتمر السلامة الأول “عن بعد”",
+    title: "مؤتمر السلامة العربي الأول", // اجعله مطابقاً تماماً لما يرسله الرابط
     image: "assets/events/photo/event (5).webp",
-    category: "مؤتمرات", // يجب أن تطابق كلمة ?cat=مؤتمرات
+    category: "مؤتمرات",
     description: `
       <style>
         .full-topic li a:hover{
