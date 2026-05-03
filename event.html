@@ -222,79 +222,52 @@
       }
 
       function renderNextEvents() {
-    // تحديد المجموعة التالية من المصفوفة المفلترة
-    const nextChunk = filteredEvents.slice(displayedEventsCount, displayedEventsCount + eventsPerPage);
-    
-    // تحويل البيانات إلى HTML
-    const html = nextChunk.map(item => createCardHTML(item)).join("");
-    
-    // إضافة الكروت إلى الشبكة
-    Egrid.insertAdjacentHTML('beforeend', html);
-    
-    // تحديث عدد الكروت المعروضة حالياً
-    displayedEventsCount += nextChunk.length;
-    
-    // إظهار أو إخفاء زر "عرض المزيد" بناءً على المتبقي
-    if (loadMoreBtn) {
-        loadMoreBtn.style.display = (displayedEventsCount < filteredEvents.length) ? "inline-block" : "none";
-    }
-    
-    // إعادة تشغيل أنيميشن AOS إذا كان مستخدماً
-    if (typeof AOS !== "undefined") {
-        AOS.refresh();
-    }
-}
-
-function initEvents() {
-    if (!Egrid) return;
-
-    let category = getCategoryFromURL(); 
-    
-    if (category) {
-        // فك التشفير وتنظيف النص من أي علامات زائدة
-        category = decodeURIComponent(category).replace(/["“”'‘’]/g, '').trim();
-    }
-
-    // إظهار/إخفاء قسم "نبذة المسابقة" الأحمر
-    handleCompetitionVisibility(category);
-
-    if (category) {
-        filteredEvents = ALL_EVENTS.filter(ev => {
-            const cleanCategory = ev.category ? ev.category.trim() : "";
-            const cleanTitle = ev.title ? ev.title.trim() : "";
-
-            // --- منطق الفصل الحاسم ---
-            
-            // إذا كان الرابط يطلب "مسابقة" محددة، اعرض فقط ما نوعه "مسابقة"
-            if (category === "مسابقة" || category === "مسابقات السلامة") {
-                return cleanCategory === "مسابقة"; 
-            }
-
-            // للخيارات الفرعية الأخرى (مثل مؤتمر محدد بالاسم)
-            return cleanTitle.includes(category) || cleanCategory === category;
-        });
+        const nextChunk = filteredEvents.slice(displayedEventsCount, displayedEventsCount + eventsPerPage);
+        const html = nextChunk.map(item => createCardHTML(item)).join("");
+        Egrid.insertAdjacentHTML('beforeend', html);
         
-        // تحديث عنوان الصفحة
-        const sectionTitle = document.querySelector(".title0 p");
-        if (sectionTitle) sectionTitle.innerText = category;
-    } else {
-        // إذا دخل المستخدم صفحة الفعاليات مباشرة بدون اختيار (عرض الكل)
-        filteredEvents = ALL_EVENTS;
-    }
+        displayedEventsCount += nextChunk.length;
+        if (loadMoreBtn) loadMoreBtn.style.display = (displayedEventsCount < filteredEvents.length) ? "inline-block" : "none";
+        
+        if (typeof AOS !== "undefined") AOS.refresh();
+      }
 
-    // --- خطوة التنظيف الضرورية ---
-    Egrid.innerHTML = ""; // مسح الكروت القديمة (المؤتمرات والمسابقات المختلطة)
-    displayedEventsCount = 0; // إعادة عداد "عرض المزيد" للصفر
+      function initEvents() {
+        if (!Egrid) return;
 
-    if (filteredEvents.length === 0) {
-        Egrid.innerHTML = `<p style="text-align:center; padding:20px; width:100%;">لا توجد نتائج لـ "${category}" حالياً.</p>`;
-        if (loadMoreBtn) loadMoreBtn.style.display = "none";
-        return;
-    }
+        const category = getCategoryFromURL();
+        
+        // استدعاء دالة الإخفاء والإظهار بناءً على التصنيف المجلوب من الرابط
+        handleCompetitionVisibility(category);
 
-    // رندر النتائج الجديدة المفلترة فقط
-    renderNextEvents();
+if (category) {
+    filteredEvents = ALL_EVENTS.filter(ev => ev.category === category);
+} else {
+    // بدلاً من ALL_EVENTS، اجعلها تعرض المسابقات فقط كافتراضي
+    filteredEvents = ALL_EVENTS.filter(ev => ev.category === "مسابقة");
 }
+
+        if (filteredEvents.length === 0) {
+          Egrid.innerHTML = '<p style="text-align:center; padding:20px; width:100%;">لا توجد أحداث متاحة حالياً في هذا التصنيف.</p>';
+          return;
+        }
+
+        let countToRender = eventsPerPage;
+        if (document.referrer.includes('views.html')) {
+          const savedCount = sessionStorage.getItem(`count_${PAGE_NAME}`);
+          if (savedCount) countToRender = parseInt(savedCount);
+        }
+
+        const initialBatch = filteredEvents.slice(0, countToRender);
+        Egrid.innerHTML = initialBatch.map(item => createCardHTML(item)).join("");
+        displayedEventsCount = initialBatch.length;
+        
+        if (loadMoreBtn) loadMoreBtn.style.display = (displayedEventsCount < filteredEvents.length) ? "inline-block" : "none";
+
+        if (typeof AOS !== "undefined") {
+            AOS.init({ duration: 800, once: true });
+        }
+      }
 
       function initTicker() {
         const tickerContent = document.getElementById("ticker-content");

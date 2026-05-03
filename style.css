@@ -1306,7 +1306,7 @@ textarea {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     border-radius: 8px;
     padding: 10px;
-    min-width: 500px;
+    min-width: 700px;
     z-index: 9999;
 }
 
