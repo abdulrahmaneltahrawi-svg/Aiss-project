@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>شركاء المعهد العربي لعلوم السلامة</title>
+    <link rel="icon" type="image/webp" href="assets/icons/logo.webp" />
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
     <style>
@@ -21,22 +22,54 @@
 
 
         /* حاوية الخريطة */
-        .map-section {
+       .map-section {
             max-width: 1000px;
             margin: 20px auto;
             margin-top: 150px;
-            background: white;
+            
+            /* -- بداية التعديل -- */
+            /* لون خلفية أساسي أبيض */
+            background-color: white; 
+            
+            /* إنشاء الخطوط الطولية والعرضية باستخدام التدرجات */
+            background-image: 
+                linear-gradient(#e0e0e0 1px, transparent 1px), /* خطوط عرضية */
+                linear-gradient(90deg, #e0e0e0 1px, transparent 1px); /* خطوط طولية */
+            
+            /* تحديد حجم المربع الواحد في الشبكة (مثلاً 50 بكسل) */
+            background-size: 50px 50px; 
+            /* -- نهاية التعديل -- */
+
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative; /* لضمان ثبات العناصر بداخلها */
         }
 
         .map-svg { width: 100%; height: auto; filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.1)); }
 
+         .map-svg image:hover{
+            cursor: pointer;
+            
+         }
+
         /* استايل الدول الجغرافي */
-        .st0 { fill: var(--map-fill); stroke: #ffffff; stroke-width: 0.7; cursor: pointer; transition: 0.3s; }
-        .st0:hover { fill: var(--map-hover); transform: translateY(-2px); }
-        .active-country { fill: var(--map-active) !important; stroke: #fff; stroke-width: 1.5; }
+.st0 {
+    fill: #e0e0e0; /* لون رمادي فاتح مثل الصورة */
+    transition: fill 0.3s ease, transform 0.2s;
+    cursor: pointer;
+    stroke: #fff; /* حدود بيضاء بسيطة للفصل بين الدول */
+    stroke-width: 2;
+}
+
+.st0:hover {
+    fill: #2196F3; /* يتغير اللون عند تمرير الماوس */
+    transform: scale(1.02); /* تكبير بسيط */
+}
+
+.st0.active {
+    fill: #0d47a1; /* لون الدولة المختارة */
+}
 
         .controls { text-align: center; margin-top: 15px; }
         .btn-all { padding: 10px 25px; background: var(--accent-color); color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
@@ -68,21 +101,92 @@
 <div id="header-placeholder"></div>
 
 <div class="map-section">
+    
     <svg class="map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-        <path id="MA" class="st0" d="M100,180 L180,180 L170,230 L90,230 Z" onclick="filterCards('morocco', 'MA')"><title>المغرب</title></path>
-        <path id="TN" class="st0" d="M280,150 L310,150 L310,180 L280,180 Z" onclick="filterCards('tunisia', 'TN')"><title>تونس</title></path>
-        <path id="DZ" class="st0" d="M190,180 L270,180 L270,260 L190,260 Z" onclick="filterCards('algeria', 'DZ')"><title>الجزائر</title></path>
-        <path id="LY" class="st0" d="M320,180 L420,180 L420,270 L320,270 Z" onclick="filterCards('libya', 'LY')"><title>ليبيا</title></path>
-        <path id="EG" class="st0" d="M430,180 L520,180 L520,280 L430,280 Z" onclick="filterCards('egypt', 'EG')"><title>مصر</title></path>
-        <path id="SD" class="st0" d="M430,290 L520,290 L520,380 L430,380 Z" onclick="filterCards('sudan', 'SD')"><title>السودان</title></path>
-        <path id="PS" class="st0" d="M530,150 L540,150 L540,175 L530,175 Z"  onclick="filterCards('palestine', 'PS')"><title>فلسطين</title></path>
-        <path id="JO" class="st0" d="M545,160 L570,160 L570,185 L545,185 Z" onclick="filterCards('jordan', 'JO')"><title>الأردن</title></path>
-        <path id="SA" class="st0" d="M550,200 L680,200 L700,320 L580,350 Z" onclick="filterCards('saudi', 'SA')"><title>السعودية</title></path>
-        <path id="IQ" class="st0" d="M580,140 L650,140 L650,190 L580,190 Z" onclick="filterCards('iraq', 'IQ')"><title>العراق</title></path>
-        <path id="YE" class="st0" d="M600,360 L700,360 L720,410 L600,410 Z" onclick="filterCards('yemen', 'YE')"><title>اليمن</title></path>
-        <path id="OM" class="st0" d="M710,300 L780,300 L800,380 L710,380 Z" onclick="filterCards('oman', 'OM')"><title>سلطنة عُمان</title></path>
-        <path id="KW" class="st0" d="M660,180 L680,180 L680,195 L660,195 Z" onclick="filterCards('kuwait', 'KW')"><title>الكويت</title></path>
-    </svg>
+    <image id="MA" href="assets/flags/التسلسل التاريخي لتعاقب الدول على حكم المغرب.jpg" 
+           x="80" y="180" width="100" height="70" 
+           onclick="filterCards('morocco', 'MA')" style="cursor:pointer;" />
+
+    <image id="DZ" href="assets/flags/Drapeau de la Tunisie — Wikipédia.jpg" 
+           x="190" y="170" width="100" height="70" 
+           onclick="filterCards('algeria', 'DZ')" style="cursor:pointer;" />
+
+    <image id="TN" href="assets/flags/Algeria 🇩🇿.jpg" 
+           x="300" y="150" width="80" height="60" 
+           onclick="filterCards('tunisia', 'TN')" style="cursor:pointer;" />
+           
+    <image id="LY" 
+       href="assets/flags/Libya Large Flag.jpg" 
+       x="400" y="200" 
+       width="100" height="70" 
+       onclick="filterCards('libya', 'LY')" 
+       style="cursor:pointer;" />
+
+       <image id="EG" 
+       href="assets/flags/egypt.jpg" 
+       x="510" y="210" 
+       width="100" height="70" 
+       onclick="filterCards('egypt', 'EG')" 
+       style="cursor:pointer;" />
+
+       <image id="SD" 
+       href="assets/flags/sudan.jpg" 
+       x="530" y="320" 
+       width="100" height="70" 
+       onclick="filterCards('sudan', 'SD')" 
+       style="cursor:pointer;" />
+
+       <image id="IQ" 
+       href="assets/flags/علم العراق.jpg" 
+       x="680" y="150" 
+       width="100" height="50" 
+       onclick="filterCards('iraq', 'IQ')" 
+       style="cursor:pointer;" />
+
+       <image id="JO" 
+       href="assets/flags/Jordan Maps & Facts.jpg" 
+       x="640" y="230" 
+       width="80" height="60" 
+       onclick="filterCards('jordan', 'JO')" 
+       style="cursor:pointer;" />
+
+       <image id="PS" 
+       href="assets/flags/معنى ألوان علم فلسطين.jpg" 
+       x="615" y="170" 
+       width="70" height="55" 
+       onclick="filterCards('palestine', 'PS')" 
+       style="cursor:pointer;" />
+
+       <image id="KW" 
+       href="assets/flags/download (2).jpg" 
+       x="740" y="210" 
+       width="70" height="55" 
+       onclick="filterCards('kuwait', 'KW')" 
+       style="cursor:pointer;" />
+
+       <image id="SA" 
+       href="assets/flags/Saudi Arabia (1).jpg" 
+       x="650" y="300" 
+       width="140" height="100" 
+       onclick="filterCards('saudi-arabia', 'SA')" 
+       style="cursor:pointer;" />
+
+       <image id="YE" 
+       href="assets/flags/علم اليمن - ويكيبيديا.jpg" 
+       x="700" y="420" 
+       width="100" height="70" 
+       onclick="filterCards('yemen', 'YE')" 
+       style="cursor:pointer;" />
+
+       <image id="OM" 
+       href="assets/flags/download (3).jpg" 
+       x="820" y="380" 
+       width="100" height="70" 
+       onclick="filterCards('oman', 'OM')" 
+       style="cursor:pointer;" />
+</svg>
+    
+
     <div class="controls">
         <button class="btn-all" onclick="filterCards('all', '')">إظهار كافة الدول والشركاء</button>
     </div>
