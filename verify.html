@@ -38,6 +38,7 @@
         }
         .checking {
             background: #e4293a;
+            color: white;
             
             padding: 14px;
             border: none;
@@ -48,6 +49,9 @@
             font-weight: bold;
             transition: background 0.3s;
         }   
+        .checking:hover {
+            background: #ce2634;
+        }
         #result {
             margin-top: 24px;
             display: none;
@@ -132,19 +136,27 @@
             display: block;
             margin-bottom: 5px;
         }
+        .verify{
+            background-color: #fff;
+            padding: 100px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
     </style>
 </head>
 
 <body>
     <div id="header-placeholder"></div>
 
-    
+    <div class="verify">
     <h2>التحقق من شهادة</h2>
 
     <label>كود الشهادة</label>
     <input type="text" id="code" placeholder="AISSFC25070050">
 
     <button class="checking" onclick="verify()">تحقق</button>
+    </div>
 
     <div id="result"></div>
     
