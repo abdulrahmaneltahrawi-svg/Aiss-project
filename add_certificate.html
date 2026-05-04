@@ -3,69 +3,95 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>تست إضافة شهادة</title>
+    <title>إضافة شهادة - المعهد العربي لعلوم السلامة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 500px;
-            margin: 40px auto;
-            padding: 20px;
+            font-family: 'Tajawal', sans-serif;
+            max-width: 600px; /* Increased max-width */
+            margin: 80px auto; /* Adjusted margin for consistency */
+            padding: 35px; /* Increased padding for card effect */
+            background-color: #fff; /* White background for the card */
+            border-radius: 20px; /* Rounded corners for card effect */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Shadow for card effect */
+            color: #333; /* Default text color */
         }
-
+        h2 {
+            color: #235287; /* AISS Blue */
+            text-align: center;
+            margin-bottom: 25px; /* Adjusted margin */
+            font-weight: 800; /* Bolder font */
+        }
         input,
         select {
             width: 100%;
-            padding: 8px;
-            margin: 6px 0 14px;
+            padding: 12px 15px; /* Increased padding */
+            margin: 8px 0 16px; /* Adjusted margin */
             box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border: 1px solid #ddd; /* Lighter border */
+            border-radius: 8px; /* More rounded corners */
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s;
         }
-
+        input:focus, select:focus {
+            border-color: #235287; /* AISS Blue on focus */
+        }
         button {
-            background: #2563eb;
+            background: #e4293a; /* AISS Red */
             color: white;
-            padding: 10px 24px;
+            padding: 14px; /* Increased padding */
             border: none;
-            border-radius: 4px;
+            border-radius: 8px; /* More rounded corners */
             cursor: pointer;
             width: 100%;
             font-size: 16px;
+            font-weight: bold; /* Bolder font */
+            transition: background 0.3s;
         }
-
         button:hover {
-            background: #1d4ed8;
+            background: #b71c1c; /* Darker AISS Red on hover */
         }
-
         #result {
-            margin-top: 20px;
-            padding: 14px;
-            border-radius: 6px;
+            margin-top: 24px; /* Adjusted margin */
+            padding: 20px; /* Increased padding */
+            border-radius: 12px; /* More rounded corners */
             display: none;
             white-space: pre-wrap;
             font-size: 14px;
+            font-weight: 500; /* Added font-weight */
+            line-height: 1.6; /* Added line-height */
         }
-
         .success {
-            background: #d1fae5;
-            border: 1px solid #34d399;
-            color: #065f46;
+            background: #d1fae5; /* Lighter green */
+            border: 1px solid #34d399; /* Green border */
+            color: #065f46; /* Darker green text */
         }
-
         .error {
-            background: #fee2e2;
-            border: 1px solid #f87171;
-            color: #991b1b;
+            background: #fee2e2; /* Lighter red */
+            border: 1px solid #f87171; /* Red border */
+            color: #991b1b; /* Darker red text */
         }
-
         label {
             font-weight: bold;
             font-size: 14px;
+            color: #555; /* Darker grey for labels */
+            display: block; /* Ensure label takes full width */
+            margin-bottom: 5px; /* Spacing below label */
+        }
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            body {
+                margin-top: 100px; /* Adjust top margin for mobile header */
+                padding: 20px; /* Reduce padding on smaller screens */
+                border-radius: 15px; /* Slightly less rounded */
+            }
         }
     </style>
 </head>
 
 <body>
+    
     <h2>تست إضافة شهادة</h2>
 
     <label>كود الشهادة</label>
