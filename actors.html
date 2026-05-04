@@ -105,6 +105,11 @@
             text-align: left;
         }
 
+        /* إخفاء الكروت عند التصفية */
+        .card.hidden {
+            display: none;
+        }
+
         @media (max-width: 600px) {
             .container { grid-template-columns: 1fr; }
         }
@@ -126,11 +131,30 @@
     <p>ممثلين المعهد العربي</p>
   </div>
 
-
+  <!-- إضافة نظام التصفية -->
+  <div class="blogs-filter">
+    <label for="country-filter">تصنيف حسب الدولة:</label>
+    <select id="country-filter" onchange="filterActors()">
+      <option value="all">كل الدول</option>
+      <option value="الأردن">الأردن</option>
+      <option value="تونس">تونس</option>
+      <option value="فلسطين">فلسطين</option>
+      <option value="مصر">مصر</option>
+      <option value="لبنان">لبنان</option>
+      <option value="اليمن">اليمن</option>
+      <option value="سوريا">سوريا</option>
+      <option value="المغرب">المغرب</option>
+      <option value="السعودية">السعودية</option>
+      <option value="البحرين">البحرين</option>
+      <option value="عمان">عمان</option>
+    </select>
+  </div>
 
   <div class="container">
 
-   <div class="card">
+   <!-- إضافة attribute data-country لكل كرت لسهولة التصفية -->
+
+   <div class="card" data-country="الأردن">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture1.jpg" alt="actor"></div>
     </div>
@@ -146,7 +170,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="الأردن">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture2.jpg" alt="actor"></div>
     </div>
@@ -162,7 +186,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="الأردن">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture3.jpg" alt="actor"></div>
     </div>
@@ -178,7 +202,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="تونس">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture4.jpg" alt="actor"></div>
     </div>
@@ -193,7 +217,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="تونس">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture5.jpg" alt="actor"></div>
     </div>
@@ -204,7 +228,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="فلسطين">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture6.jpg" alt="actor"></div>
     </div>
@@ -219,7 +243,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="فلسطين">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture7.jpg" alt="actor"></div>
     </div>
@@ -230,7 +254,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="فلسطين">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture8.jpg" alt="actor"></div>
     </div>
@@ -241,7 +265,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="مصر">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture9.jpg" alt="actor"></div>
     </div>
@@ -256,7 +280,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="مصر">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture10.jpg" alt="actor"></div>
     </div>
@@ -267,7 +291,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="مصر">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture11.jpg" alt="actor"></div>
     </div>
@@ -278,7 +302,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="مصر">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture12.jpg" alt="actor"></div>
     </div>
@@ -289,7 +313,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="لبنان">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture13.jpg" alt="actor"></div>
     </div>
@@ -304,7 +328,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="لبنان">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture14.jpg" alt="actor"></div>
     </div>
@@ -315,7 +339,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="لبنان">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture15.jpg" alt="actor"></div>
     </div>
@@ -326,7 +350,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="اليمن">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture16.jpg" alt="actor"></div>
     </div>
@@ -337,7 +361,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="سوريا">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture17.jpg" alt="actor"></div>
     </div>
@@ -348,7 +372,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="سوريا">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture18.jpg" alt="actor"></div>
     </div>
@@ -359,7 +383,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="المغرب">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture19.jpg" alt="actor"></div>
     </div>
@@ -370,7 +394,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="السعودية">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture20.jpg" alt="actor"></div>
     </div>
@@ -381,7 +405,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="البحرين">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture21.jpg" alt="actor"></div>
     </div>
@@ -392,7 +416,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" data-country="عمان">
     <div class="logo-container">
         <div class="logo-placeholder"><img src="assets/Actors/Picture22.jpg" alt="actor"></div>
     </div>
@@ -410,7 +434,21 @@
 
     </div>
 
+    <script>
+        function filterActors() {
+            const selectedCountry = document.getElementById('country-filter').value;
+            const cards = document.querySelectorAll('.container .card');
 
+            cards.forEach(card => {
+                const cardCountry = card.getAttribute('data-country');
+                if (selectedCountry === 'all' || cardCountry === selectedCountry) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+    </script>
    
 
     <!-- القسم الاخير-->
