@@ -36,7 +36,7 @@
         input:focus {
             border-color: #235287;
         }
-        button {
+        .checking {
             background: #e4293a;
             
             padding: 14px;
@@ -137,12 +137,14 @@
 
 <body>
     <div id="header-placeholder"></div>
+
+    
     <h2>التحقق من شهادة</h2>
 
     <label>كود الشهادة</label>
     <input type="text" id="code" placeholder="AISSFC25070050">
 
-    <button onclick="verify()">تحقق</button>
+    <button class="checking" onclick="verify()">تحقق</button>
 
     <div id="result"></div>
     
