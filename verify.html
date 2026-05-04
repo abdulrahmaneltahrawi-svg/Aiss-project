@@ -2,20 +2,14 @@
 <html lang="ar" dir="rtl">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>التحقق من الشهادات - المعهد العربي لعلوم السلامة</title>
+    <link rel="icon" href="assets/icons/logo.webp" />
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: #f4f7f6;
-            max-width: 600px;
-            margin: 80px auto;
-            padding: 20px;
-            color: #333;
-            margin-top:300px ;
-        }
+
         h2 {
             color: #235287;
             text-align: center;
@@ -136,12 +130,23 @@
             display: block;
             margin-bottom: 5px;
         }
-        .verify{
-            background-color: #fff;
-            padding: 100px 20px;
-            border-radius: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
+.verify {
+    background-color: #fff;
+    padding: 100px 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 500px;
+    /* التعديل هنا */
+    margin: 150px auto; /* 150px من الأعلى والأسفل و auto من الجوانب للتوسيط */
+    display: block; /* لضمان عمل المارجن التلقائي */
+}
+
+@media (max-width: 768px) {
+    .verify {
+        max-width: 350px;
+    }
+}
         
     </style>
 </head>
@@ -159,7 +164,7 @@
     </div>
 
     <div id="result"></div>
-    
+    <div id="footer-placeholder"></div>
 
     <script src="js/script.js"></script>
 
